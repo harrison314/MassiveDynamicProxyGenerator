@@ -35,8 +35,8 @@ namespace MassiveDynamicProxyGenerator.TypedDecorator
 
         protected override void ImplementFields(TypeBuilder typeBuilder, Type interfaceType)
         {
-            this.interceptorField = this.typeBuilder.DefineField("interceptor", typeof(ICallableInterceptor), FieldAttributes.Private);
-            this.parentField = this.typeBuilder.DefineField("parent", interfaceType, FieldAttributes.Private);
+            this.interceptorField = this.TypeBuilder.DefineField("interceptor", typeof(ICallableInterceptor), FieldAttributes.Private);
+            this.parentField = this.TypeBuilder.DefineField("parent", interfaceType, FieldAttributes.Private);
 
             base.ImplementFields(typeBuilder, interfaceType);
         }
@@ -180,7 +180,7 @@ namespace MassiveDynamicProxyGenerator.TypedDecorator
         {
             MethodInfo methodInfo = interfaceProperity.GetGetMethod();
             Type[] parameters = methodInfo.GetParameters().Select(t => t.ParameterType).ToArray();
-            MethodBuilder processMethod = this.ImplementParentCallMethod(this.typeBuilder, interfaceType, methodInfo);
+            MethodBuilder processMethod = this.ImplementParentCallMethod(this.TypeBuilder, interfaceType, methodInfo);
 
             this.GenerateMethod(methodInfo, parameters, interfaceType, il, new GenerateUnion(processMethod));
         }
@@ -189,7 +189,7 @@ namespace MassiveDynamicProxyGenerator.TypedDecorator
         {
             MethodInfo methodInfo = interfaceProperity.GetSetMethod();
             Type[] parameters = methodInfo.GetParameters().Select(t => t.ParameterType).ToArray();
-            MethodBuilder processMethod = this.ImplementParentCallMethod(this.typeBuilder, interfaceType, methodInfo);
+            MethodBuilder processMethod = this.ImplementParentCallMethod(this.TypeBuilder, interfaceType, methodInfo);
 
             this.GenerateMethod(methodInfo, parameters, interfaceType, il, new GenerateUnion(processMethod));
         }

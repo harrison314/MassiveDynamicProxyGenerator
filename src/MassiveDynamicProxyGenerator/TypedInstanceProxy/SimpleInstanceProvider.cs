@@ -21,13 +21,18 @@ namespace MassiveDynamicProxyGenerator.TypedInstanceProxy
             this.instance = instance;
         }
 
-        public void Dispose()
-        {
-        }
-
         public object GetInstance()
         {
             return this.instance;
+        }
+
+        public void Dispose()
+        {
+            this.Dispose(true);
+        }
+
+        protected virtual void Dispose(bool disposing)
+        {
         }
     }
 }

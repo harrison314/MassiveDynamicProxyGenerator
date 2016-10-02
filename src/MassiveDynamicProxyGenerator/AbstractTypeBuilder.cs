@@ -10,7 +10,7 @@ namespace MassiveDynamicProxyGenerator
 {
     internal abstract class AbstractTypeBuilder<T>
     {
-        protected TypeBuilder typeBuilder;
+        private readonly TypeBuilder typeBuilder;
         private readonly HashSet<Type> implementInterfaces;
         private bool isMembersImplements;
 
@@ -19,6 +19,14 @@ namespace MassiveDynamicProxyGenerator
             get
             {
                 return this.implementInterfaces;
+            }
+        }
+
+        protected TypeBuilder TypeBuilder
+        {
+            get
+            {
+                return this.typeBuilder;
             }
         }
 
@@ -57,8 +65,8 @@ namespace MassiveDynamicProxyGenerator
 
             if (!this.isMembersImplements)
             {
-                this.ImplementFields(this.typeBuilder, interfaceType);
-                this.ImplementsConstructor(this.typeBuilder, interfaceType);
+                this.ImplementFields(this.TypeBuilder, interfaceType);
+                this.ImplementsConstructor(this.TypeBuilder, interfaceType);
                 this.isMembersImplements = true;
             }
 
@@ -181,13 +189,13 @@ namespace MassiveDynamicProxyGenerator
             {
                 if (!methodInfo.IsSpecialName)
                 {
-                    this.ImplementMethod(this.typeBuilder, interfaceType, methodInfo, default(T));
+                    this.ImplementMethod(this.TypeBuilder, interfaceType, methodInfo, default(T));
                 }
             }
 
             foreach (PropertyInfo properityInfo in interfaceType.GetProperties(BindingFlags.Public | BindingFlags.Instance))
             {
-                this.ImplementedProperity(this.typeBuilder, interfaceType, properityInfo, default(T));
+                this.ImplementedProperity(this.TypeBuilder, interfaceType, properityInfo, default(T));
             }
         }
     }

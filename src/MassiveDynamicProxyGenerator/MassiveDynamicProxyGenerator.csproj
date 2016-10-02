@@ -21,6 +21,7 @@
     <ErrorReport>prompt</ErrorReport>
     <WarningLevel>4</WarningLevel>
     <CodeAnalysisRuleSet>MassiveDynamicProxyGenerator.ruleset</CodeAnalysisRuleSet>
+    <RunCodeAnalysis>true</RunCodeAnalysis>
   </PropertyGroup>
   <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Release|AnyCPU' ">
     <DebugType>pdbonly</DebugType>
@@ -45,6 +46,7 @@
     <Compile Include="AbstractTypeBuilder.cs" />
     <Compile Include="DefaultInstances.cs" />
     <Compile Include="DynamicProxy\DynamicInvocation.cs" />
+    <Compile Include="GlobalSuppressions.cs" />
     <Compile Include="GuidTypeNameCreator.cs" />
     <Compile Include="ICallableInterceptor.cs" />
     <Compile Include="ICallableInvocation.cs" />

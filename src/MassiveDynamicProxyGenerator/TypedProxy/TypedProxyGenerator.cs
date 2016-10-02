@@ -29,7 +29,7 @@ namespace MassiveDynamicProxyGenerator.TypedProxy
 
         protected override void ImplementFields(TypeBuilder typeBuilder, Type interfaceType)
         {
-            this.interceptorField = this.typeBuilder.DefineField("interceptor", typeof(IInterceptor), FieldAttributes.Private);
+            this.interceptorField = this.TypeBuilder.DefineField("interceptor", typeof(IInterceptor), FieldAttributes.Private);
             base.ImplementFields(typeBuilder, interfaceType);
         }
 
