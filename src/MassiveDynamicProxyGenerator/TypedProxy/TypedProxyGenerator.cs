@@ -1,0 +1,184 @@
+﻿using System;
+using System.Collections.Generic;
+using System.Linq;
+using System.Reflection;
+using System.Reflection.Emit;
+using System.Text;
+using System.Threading.Tasks;
+using MassiveDynamicProxyGenerator.Utils;
+
+namespace MassiveDynamicProxyGenerator.TypedProxy
+{
+    internal class TypedProxyGenerator : AbstractTypeBuilder<object>
+    {
+        private readonly InvocationDescriptor descriptor;
+        private readonly bool implementProperty;
+        private FieldBuilder interceptorField;
+
+        public TypedProxyGenerator(TypeBuilder typeBuilder, bool implementProperty)
+            : base(typeBuilder)
+        {
+            if (typeBuilder == null)
+            {
+                throw new ArgumentNullException(nameof(typeBuilder));
+            }
+
+            this.implementProperty = implementProperty;
+            this.descriptor = InvocationDescriptor.Create<TypedProxyInvocation>();
+        }
+
+        protected override void ImplementFields(TypeBuilder typeBuilder, Type interfaceType)
+        {
+            this.interceptorField = this.typeBuilder.DefineField("interceptor", typeof(IInterceptor), FieldAttributes.Private);
+            base.ImplementFields(typeBuilder, interfaceType);
+        }
+
+        protected override void ImplementsConstructor(TypeBuilder typeBuilder, Type interfaceType)
+        {
+            ConstructorBuilder constructorBuilder = typeBuilder.DefineConstructor(
+                MethodAttributes.Public |
+                MethodAttributes.HideBySig |
+                MethodAttributes.SpecialName |
+                MethodAttributes.RTSpecialName,
+                CallingConventions.Standard,
+                new Type[] { typeof(IInterceptor) });
+
+            ILGenerator il = constructorBuilder.GetILGenerator();
+            ConstructorInfo conObj = typeof(object).GetConstructor(new Type[0]);
+            il.Emit(OpCodes.Ldarg_0);
+            il.Emit(OpCodes.Call, conObj);
+            il.Emit(OpCodes.Nop);
+            il.Emit(OpCodes.Nop);
+            il.Emit(OpCodes.Ldarg_0);
+            il.Emit(OpCodes.Ldarg_1);
+            il.Emit(OpCodes.Stfld, this.interceptorField);
+            il.Emit(OpCodes.Ret);
+        }
+
+        protected override void GenerateMethod(MethodInfo interfaceMethod, Type[] parameters, Type interfaceType, ILGenerator il, object context)
+        {
+            LocalBuilder invocationVar = il.DeclareLocal(this.descriptor.Type);
+            il.Emit(OpCodes.Newobj, this.descriptor.Constructor);
+            il.Emit(OpCodes.Stloc, invocationVar);
+
+            // invocation.Arguments = new object[params.Lenght];
+            il.Emit(OpCodes.Ldloc, invocationVar);
+            il.Emit(OpCodes.Ldc_I4, parameters.Length);
+            il.Emit(OpCodes.Newarr, typeof(object));
+
+            for (int i = 0; i < parameters.Length; i++)
+            {
+                il.Emit(OpCodes.Dup);
+                il.Emit(OpCodes.Ldc_I4, i);
+                il.Emit(OpCodes.Ldarg, i + 1);
+                if (parameters[i].IsValueType)
+                {
+                    il.Emit(OpCodes.Box, parameters[i]);
+                }
+
+                il.Emit(OpCodes.Stelem_Ref);
+            }
+
+            il.Emit(OpCodes.Callvirt, this.descriptor.Arguments.SetMethod);
+
+            // invocation.MethodName = "AnyMethod";
+            il.Emit(OpCodes.Nop);
+            il.Emit(OpCodes.Ldloc, invocationVar);
+            il.Emit(OpCodes.Ldstr, interfaceMethod.Name);
+            il.Emit(OpCodes.Callvirt, this.descriptor.MethodName.SetMethod);
+
+            MethodInfo getTypeFromhandle = typeof(Type).GetMethod(nameof(Type.GetTypeFromHandle), BindingFlags.Static | BindingFlags.Public);
+
+            // invocation.OriginalType = typeof(interfaceType);
+            il.Emit(OpCodes.Nop);
+            il.Emit(OpCodes.Ldloc, invocationVar);
+            il.Emit(OpCodes.Ldtoken, interfaceType);
+            il.Emit(OpCodes.Call, getTypeFromhandle);
+            il.Emit(OpCodes.Callvirt, this.descriptor.OriginalType.SetMethod);
+
+            // invocation.ArgumentTypes = new Type[] { typeof(....), .... };
+            il.Emit(OpCodes.Nop);
+            il.Emit(OpCodes.Ldloc, invocationVar);
+            il.Emit(OpCodes.Ldc_I4, parameters.Length);
+            il.Emit(OpCodes.Newarr, typeof(Type));
+
+            for (int i = 0; i < parameters.Length; i++)
+            {
+                il.Emit(OpCodes.Dup);
+                il.Emit(OpCodes.Ldc_I4, i);
+                il.Emit(OpCodes.Ldtoken, parameters[i]);
+                il.Emit(OpCodes.Call, getTypeFromhandle);
+                il.Emit(OpCodes.Stelem_Ref);
+            }
+
+            il.Emit(OpCodes.Callvirt, this.descriptor.ArgumentTypes.SetMethod);
+
+            // invocation.ReturnType = typeof(method.ReturnType);
+            il.Emit(OpCodes.Nop);
+            il.Emit(OpCodes.Ldloc, invocationVar);
+            il.Emit(OpCodes.Ldtoken, interfaceMethod.ReturnType);
+            il.Emit(OpCodes.Call, getTypeFromhandle);
+            il.Emit(OpCodes.Callvirt, this.descriptor.ReturnType.SetMethod);
+
+            // volanie interceptora
+            il.Emit(OpCodes.Nop);
+            il.Emit(OpCodes.Ldarg_0);
+            il.Emit(OpCodes.Ldfld, this.interceptorField);
+            il.Emit(OpCodes.Ldloc, invocationVar);
+            il.Emit(OpCodes.Ldc_I4_0); // da na stack false
+            il.Emit(OpCodes.Callvirt, typeof(IInterceptor).GetMethod(nameof(IInterceptor.Intercept)));
+
+            if (interfaceMethod.ReturnType == typeof(void))
+            {
+                il.Emit(OpCodes.Nop);
+                il.Emit(OpCodes.Ret);
+            }
+            else
+            {
+                il.Emit(OpCodes.Nop);
+                il.Emit(OpCodes.Ldloc, invocationVar);
+                il.Emit(OpCodes.Callvirt, this.descriptor.ReturnValue.GetMethod);
+                if (interfaceMethod.ReturnType.IsValueType)
+                {
+                    il.Emit(OpCodes.Unbox_Any, interfaceMethod.ReturnType);
+                }
+                else
+                {
+                    il.Emit(OpCodes.Castclass, interfaceMethod.ReturnType);
+                }
+
+                il.Emit(OpCodes.Ret);
+            }
+        }
+
+        protected override void GenerateGetProperty(PropertyInfo interfaceProperity, Type interfaceType, ILGenerator il, object context)
+        {
+            if (this.implementProperty)
+            {
+                MethodInfo methodInfo = interfaceProperity.GetGetMethod();
+                Type[] parameters = methodInfo.GetParameters().Select(t => t.ParameterType).ToArray();
+
+                this.GenerateMethod(methodInfo, parameters, interfaceType, il, context);
+            }
+            else
+            {
+                base.GenerateGetProperty(interfaceProperity, interfaceType, il, context);
+            }
+        }
+
+        protected override void GenerateSetProperty(PropertyInfo interfaceProperity, Type interfaceType, ILGenerator il, object context)
+        {
+            if (this.implementProperty)
+            {
+                MethodInfo methodInfo = interfaceProperity.GetSetMethod();
+                Type[] parameters = methodInfo.GetParameters().Select(t => t.ParameterType).ToArray();
+
+                this.GenerateMethod(methodInfo, parameters, interfaceType, il, context);
+            }
+            else
+            {
+                base.GenerateSetProperty(interfaceProperity, interfaceType, il, context);
+            }
+        }
+    }
+}
