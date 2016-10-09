@@ -73,8 +73,11 @@
     <Compile Include="Utils\EmitExtensions.cs" />
     <Compile Include="TypedProxy\InvocationDescriptor.cs" />
     <Compile Include="Utils\GeneratedTypeList.cs" />
+    <Compile Include="Utils\ITypeRquest.cs" />
     <Compile Include="Utils\KoreanAlphabet.cs" />
+    <Compile Include="Utils\MultyTypeRquest.cs" />
     <Compile Include="Utils\RusianAplhabet.cs" />
+    <Compile Include="Utils\SettingsUtils.cs" />
     <Compile Include="Utils\TypedDecoratorType.cs" />
     <Compile Include="Utils\TypeRquest.cs" />
   </ItemGroup>

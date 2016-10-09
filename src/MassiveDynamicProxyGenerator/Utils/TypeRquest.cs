@@ -6,12 +6,12 @@ using System.Threading.Tasks;
 
 namespace MassiveDynamicProxyGenerator.Utils
 {
-    internal sealed class TypeRquest : IEquatable<TypeRquest>
+    internal class TypeRquest : IEquatable<TypeRquest>, ITypeRquest
     {
         private readonly TypedDecoratorType decoratorType;
         private readonly Type interfaceType;
 
-        public TypedDecoratorType DecoratorType
+        public virtual TypedDecoratorType DecoratorType
         {
             get
             {
@@ -19,11 +19,11 @@ namespace MassiveDynamicProxyGenerator.Utils
             }
         }
 
-        public Type InterfaceType
+        public virtual Type[] InterfaceTypes
         {
             get
             {
-                return this.interfaceType;
+                return new Type[] { this.interfaceType };
             }
         }
 

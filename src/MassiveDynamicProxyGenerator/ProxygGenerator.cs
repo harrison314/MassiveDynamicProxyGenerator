@@ -62,6 +62,15 @@ namespace MassiveDynamicProxyGenerator
             }
         }
 
+        public ProxygGenerator(Action<ProxygGeneratorSettings> configure)
+            : this(SettingsUtils.Apply(configure, new ProxygGeneratorSettings()))
+        {
+            if (configure == null)
+            {
+                throw new ArgumentNullException(nameof(configure));
+            }
+        }
+
         public T GenerateProxy<T>(IInterceptor interceptor)
             where T : class
         {
@@ -125,6 +134,13 @@ namespace MassiveDynamicProxyGenerator
 
             interfaceTypes[interfaceTypes.Length - 1] = typeof(T);
 
+            Type proxyType = this.GenerateType(interfaceTypes);
+
+            return (T)this.CreateTypedProxyInstance(proxyType, interceptor);
+        }
+
+        private Type GenerateType(Type[] interfaceTypes)
+        {
             TypeBuilder typeBuilder = this.CreateEmptyType(interfaceTypes);
             TypedProxyGenerator generator = new TypedProxyGenerator(typeBuilder, true);
 
@@ -139,8 +155,7 @@ namespace MassiveDynamicProxyGenerator
             }
 
             Type proxyType = typeBuilder.CreateType();
-
-            return (T)this.CreateTypedProxyInstance(proxyType, interceptor);
+            return proxyType;
         }
 
         public object GenerateProxy(IInterceptor interceptor, params Type[] additionalTypes)
@@ -155,20 +170,7 @@ namespace MassiveDynamicProxyGenerator
                 throw new ArgumentOutOfRangeException(nameof(additionalTypes)); // TODO: doplnit lepsiu spravu
             }
 
-            TypeBuilder typeBuilder = this.CreateEmptyType(additionalTypes);
-            TypedProxyGenerator generator = new TypedProxyGenerator(typeBuilder, true);
-
-            for (int i = 0; i < additionalTypes.Length; i++)
-            {
-                generator.CheckType(additionalTypes[i]);
-            }
-
-            for (int i = 0; i < additionalTypes.Length; i++)
-            {
-                generator.ImplementInterface(additionalTypes[i]);
-            }
-
-            Type proxyType = typeBuilder.CreateType();
+            Type proxyType = this.GenerateType(additionalTypes);
 
             return this.CreateTypedProxyInstance(proxyType, interceptor);
         }
@@ -185,20 +187,15 @@ namespace MassiveDynamicProxyGenerator
                 throw new ArgumentNullException(nameof(interceptor));
             }
 
-            TypeBuilder typeBuilder = this.CreateEmptyType(interfaceType);
-            TypedProxyGenerator generator = new TypedProxyGenerator(typeBuilder, true);
-
+            Type[] interfaceTypes = new Type[additionalTypes.Length + 1];
             for (int i = 0; i < additionalTypes.Length; i++)
             {
-                generator.CheckType(additionalTypes[i]);
+                interfaceTypes[i] = additionalTypes[i];
             }
 
-            for (int i = 0; i < additionalTypes.Length; i++)
-            {
-                generator.ImplementInterface(additionalTypes[i]);
-            }
+            interfaceTypes[interfaceTypes.Length - 1] = interfaceType;
 
-            Type proxyType = typeBuilder.CreateType();
+            Type proxyType = this.GenerateType(interfaceTypes);
 
             return this.CreateTypedProxyInstance(proxyType, interceptor);
         }
