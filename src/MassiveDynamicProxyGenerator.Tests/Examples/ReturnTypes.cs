@@ -15,6 +15,7 @@ namespace MassiveDynamicProxyGenerator.Tests.Examples
         public ReturnTypes(IInterceptor interceptorParam)
         {
             this.interceptor = interceptorParam;
+            this.parent = null;
         }
 
         public StringBuilder CreateSb(string arg)

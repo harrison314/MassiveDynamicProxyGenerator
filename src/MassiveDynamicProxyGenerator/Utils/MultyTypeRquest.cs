@@ -30,7 +30,10 @@ namespace MassiveDynamicProxyGenerator.Utils
 
         public MultyTypeRquest(Type[] interfaceTypes, TypedDecoratorType decoraorType)
         {
-            if (interfaceTypes == null) throw new ArgumentNullException(nameof(interfaceTypes));
+            if (interfaceTypes == null)
+            {
+                throw new ArgumentNullException(nameof(interfaceTypes));
+            }
 
             Type[] types = (Type[])interfaceTypes.Clone();
             Array.Sort<Type>(types, (a, b) => a.AssemblyQualifiedName.CompareTo(b.AssemblyQualifiedName));
