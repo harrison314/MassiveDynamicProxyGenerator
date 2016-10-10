@@ -16,6 +16,19 @@ Fertures:
 The following platforms are supported:
 * .Net 4.0 and up.
 
+## Getting started
+
+_In progress._
+
+## A Quick Example
+
+_In progress._
+
+## Inscribe to
+
+Inscribe to _Lucia_ extraordinary woman, a wonderful person and an intelligent doctor.
+
+
 ## License
 
 **The MIT License (MIT)**
