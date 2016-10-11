@@ -5,7 +5,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using Moq;
-using Should;
+using Shouldly;
 using MassiveDynamicProxyGenerator.Tests.TestInterfaces;
 
 namespace MassiveDynamicProxyGenerator.Tests

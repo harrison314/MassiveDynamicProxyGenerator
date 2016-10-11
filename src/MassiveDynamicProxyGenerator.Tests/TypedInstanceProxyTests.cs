@@ -6,7 +6,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using Moq;
-using Should;
+using Shouldly;
 
 namespace MassiveDynamicProxyGenerator.Tests
 {
@@ -28,8 +28,8 @@ namespace MassiveDynamicProxyGenerator.Tests
             ProxygGenerator generator = new ProxygGenerator();
 
             IReturnTypes instance = generator.GenerateInstanceProxy<IReturnTypes>(instaceprovoder.Object);
-            instance.GetLenght("789").ShouldEqual(789);
-            instance.GetLenght("456").ShouldEqual(456);
+            instance.GetLenght("789").ShouldBe(789);
+            instance.GetLenght("456").ShouldBe(456);
 
             instaceprovoder.VerifyAll();
             realMock.VerifyAll();
@@ -56,7 +56,7 @@ namespace MassiveDynamicProxyGenerator.Tests
             ProxygGenerator generator = new ProxygGenerator();
 
             IReturnTypes instance = generator.GenerateInstanceProxy<IReturnTypes>(instaceprovoder.Object);
-            instance.GetStruct().UsLong.ShouldEqual(458L);
+            instance.GetStruct().UsLong.ShouldBe(458L);
 
             instaceprovoder.VerifyAll();
             realMock.VerifyAll();

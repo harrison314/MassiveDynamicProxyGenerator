@@ -5,7 +5,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using Moq;
-using Should;
+using Shouldly;
 using MassiveDynamicProxyGenerator.Tests.TestInterfaces;
 
 namespace MassiveDynamicProxyGenerator.Tests
@@ -85,7 +85,7 @@ namespace MassiveDynamicProxyGenerator.Tests
             instance.ShouldNotBeNull();
 
             int a = instance.GetLenght("Test");
-            a.ShouldEqual(13);
+            a.ShouldBe(13);
         }
 
         [TestMethod]
@@ -106,7 +106,7 @@ namespace MassiveDynamicProxyGenerator.Tests
 
             StringBuilder sb = instance.CreateSb("Test");
             sb.ShouldNotBeNull();
-            sb.ToString().ShouldEqual("Nanana");
+            sb.ToString().ShouldBe("Nanana");
         }
 
         [TestMethod]
@@ -128,7 +128,7 @@ namespace MassiveDynamicProxyGenerator.Tests
             instance.ShouldNotBeNull();
 
             MyStruct structa = instance.GetStruct();
-            structa.Address.ShouldEqual(456852);
+            structa.Address.ShouldBe(456852);
         }
 
         [TestMethod]

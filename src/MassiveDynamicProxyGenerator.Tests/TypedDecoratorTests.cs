@@ -5,7 +5,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using Moq;
-using Should;
+using Shouldly;
 using MassiveDynamicProxyGenerator.Tests.TestInterfaces;
 
 namespace MassiveDynamicProxyGenerator.Tests
@@ -53,7 +53,7 @@ namespace MassiveDynamicProxyGenerator.Tests
 
             instance.ShouldNotBeNull();
 
-            instance.GetLenght("any string").ShouldEqual(default(int));
+            instance.GetLenght("any string").ShouldBe(default(int));
 
             parent.VerifyAll();
             interceptor.VerifyAll();
@@ -103,7 +103,7 @@ namespace MassiveDynamicProxyGenerator.Tests
                 .Callback<ICallableInvocation>(invocation =>
                 {
                     invocation.Process();
-                    invocation.ReturnValue.ShouldEqual(retValue);
+                    invocation.ReturnValue.ShouldBe(retValue);
                     invocation.ReturnValue = newReturnValue;
                 });
 
@@ -112,7 +112,7 @@ namespace MassiveDynamicProxyGenerator.Tests
 
             instance.ShouldNotBeNull();
 
-            instance.GetLenght("any").ShouldEqual(newReturnValue);
+            instance.GetLenght("any").ShouldBe(newReturnValue);
 
             parent.VerifyAll();
             interceptor.VerifyAll();
@@ -141,7 +141,7 @@ namespace MassiveDynamicProxyGenerator.Tests
 
             instance.ShouldNotBeNull();
 
-            instance.GetLenght("any").ShouldEqual(retValue);
+            instance.GetLenght("any").ShouldBe(retValue);
 
             parent.VerifyAll();
             interceptor.VerifyAll();
