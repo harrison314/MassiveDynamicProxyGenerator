@@ -24,7 +24,7 @@ _In progress._
 
 _In progress._
 
-## Inscribe to
+## Inscribtion
 
 Inscribe to _Lucia_ extraordinary woman, a wonderful person and an intelligent doctor.
 
