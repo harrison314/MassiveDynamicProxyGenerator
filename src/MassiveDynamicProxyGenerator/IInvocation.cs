@@ -7,13 +7,16 @@ using System.Threading.Tasks;
 
 namespace MassiveDynamicProxyGenerator
 {
+    /// <summary>
+    /// Interface representes invocation iformations.
+    /// </summary>
     public interface IInvocation
     {
         /// <summary>
-        /// Vráti návratovú hodnotu zavolanej metódy.
+        /// Gets or sets the return value of intercept method.
         /// </summary>
         /// <value>
-        /// Návratová hodnota zavolanej metódy.
+        /// The return value of intercept method.
         /// </value>
         object ReturnValue
         {
@@ -22,40 +25,64 @@ namespace MassiveDynamicProxyGenerator
         }
 
         /// <summary>
-        /// Vráti pole argumentov olanej metódy.
+        /// Gets the arguments of intercept method.
         /// </summary>
         /// <value>
-        /// Pole argumentov olanej metódy.
+        /// The arguments of intercept method.
         /// </value>
         object[] Arguments
         {
             get;
         }
 
+        /// <summary>
+        /// Gets the type of the origin interface.
+        /// </summary>
+        /// <value>
+        /// The type of the origin interface.
+        /// </value>
         Type OriginalType
         {
             get;
         }
 
+        /// <summary>
+        /// Gets the name of the intercept method.
+        /// </summary>
+        /// <value>
+        /// The name of the tntercept method.
+        /// </value>
         string MethodName
         {
             get;
         }
 
+        /// <summary>
+        /// Gets the types of arguments.
+        /// </summary>
+        /// <value>
+        /// The argument types of arguments.
+        /// </value>
         Type[] ArgumentTypes
         {
             get;
         }
 
+        /// <summary>
+        /// Gets the type of the return.
+        /// </summary>
+        /// <value>
+        /// The type of the return.
+        /// </value>
         Type ReturnType
         {
             get;
         }
 
         /// <summary>
-        /// Vráti <see cref="MethodBase"/> ako reprezentáciu práve interceptovanej metódy.
+        /// Gets the <see cref="MethodBase"/> as representation of intecept method.
         /// </summary>
-        /// <returns><see cref="MethodBase"/> interceptovanej metódy.</returns>
+        /// <returns>The <see cref="MethodBase"/> of intercept method.</returns>
         MethodBase GetConcreteMethod();
     }
 }

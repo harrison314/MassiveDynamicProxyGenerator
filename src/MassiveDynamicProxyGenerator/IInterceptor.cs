@@ -7,18 +7,18 @@ using System.Threading.Tasks;
 namespace MassiveDynamicProxyGenerator
 {
     /// <summary>
-    /// Rozhranie pre interceptor používaný Simple injectorom.
+    /// Interface for interceptor.
     /// </summary>
     /// <remarks>
-    /// Inšpirované http://simpleinjector.readthedocs.org/en/latest/advanced.html#interception
+    /// See http://simpleinjector.readthedocs.org/en/latest/advanced.html#interception
     /// </remarks>
     public interface IInterceptor
     {
         /// <summary>
-        /// Interceptuje- každé volanie metódy.
+        /// Intercept call of method.
         /// </summary>
-        /// <param name="invocation">Informácie o volaní.</param>
-        /// <param name="isDynamicInterception">if set to <c>true</c> [is dynamic interception].</param>
+        /// <param name="invocation">Invocation informations.</param>
+        /// <param name="isDynamicInterception">if set to <c>true</c> is invocation in dynamic object.</param>
         void Intercept(IInvocation invocation, bool isDynamicInterception);
     }
 }

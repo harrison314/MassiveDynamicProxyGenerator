@@ -11,6 +11,9 @@ using MassiveDynamicProxyGenerator.TypedProxy;
 
 namespace MassiveDynamicProxyGenerator
 {
+    /// <summary>
+    /// Dynamic proxy generator.
+    /// </summary>
     public class ProxygGenerator
     {
         private static int assemblyCount = 1;
@@ -20,6 +23,9 @@ namespace MassiveDynamicProxyGenerator
         private AssemblyBuilder assemblyBuilder;
         private ModuleBuilder moduleBuilder;
 
+        /// <summary>
+        /// Initializes a new instance of the <see cref="ProxygGenerator"/> class.
+        /// </summary>
         public ProxygGenerator()
         {
             this.assemblyBuilder = null;
@@ -30,6 +36,12 @@ namespace MassiveDynamicProxyGenerator
             this.generatedTypeList = DefaultInstances.TypedList;
         }
 
+        /// <summary>
+        /// Initializes a new instance of the <see cref="ProxygGenerator"/> class.
+        /// </summary>
+        /// <param name="settings">The settings.</param>
+        /// <exception cref="ArgumentNullException">settings</exception>
+        /// <seealso cref="ProxygGeneratorSettings"/>
         public ProxygGenerator(ProxygGeneratorSettings settings)
         {
             if (settings == null)
@@ -62,6 +74,11 @@ namespace MassiveDynamicProxyGenerator
             }
         }
 
+        /// <summary>
+        /// Initializes a new instance of the <see cref="ProxygGenerator"/> class.
+        /// </summary>
+        /// <param name="configure">The configure action.</param>
+        /// <exception cref="ArgumentNullException">configure</exception>
         public ProxygGenerator(Action<ProxygGeneratorSettings> configure)
             : this(SettingsUtils.Apply(configure, new ProxygGeneratorSettings()))
         {
@@ -71,12 +88,27 @@ namespace MassiveDynamicProxyGenerator
             }
         }
 
+        /// <summary>
+        /// Generates the proxy instance with interceptor.
+        /// </summary>
+        /// <typeparam name="T">Type of inteface for generate proxy.</typeparam>
+        /// <param name="interceptor">The interceptor.</param>
+        /// <returns>Instance of <typeparamref name="T"/> implament as proxy generator.</returns>
+        /// <exception cref="ArgumentNullException">interceptor</exception>
         public T GenerateProxy<T>(IInterceptor interceptor)
             where T : class
         {
             return this.GenerateProxy<T>(interceptor, false);
         }
 
+        /// <summary>
+        /// Generates the proxy instance with interceptor.
+        /// </summary>
+        /// <typeparam name="T">Type of inteface for generate proxy.</typeparam>
+        /// <param name="interceptor">The interceptor.</param>
+        /// <param name="containsProperies">if set to <c>true</c> contains properies to interception.</param>
+        /// <returns>Instance of <typeparamref name="T"/> implament as proxy generator.</returns>
+        /// <exception cref="ArgumentNullException">interceptor</exception>
         public T GenerateProxy<T>(IInterceptor interceptor, bool containsProperies)
             where T : class
         {
@@ -94,11 +126,34 @@ namespace MassiveDynamicProxyGenerator
             return (T)this.CreateTypedProxyInstance(proxyType, interceptor);
         }
 
+        /// <summary>
+        /// Generates the proxy instance with interceptor.
+        /// </summary>
+        /// <param name="interfaceType">Type of the interface fo implementation proxy.</param>
+        /// <param name="interceptor">The interceptor.</param>
+        /// <returns>Instance of implementator of type <paramref name="interfaceType"/>.</returns>
+        /// <exception cref="ArgumentNullException">
+        /// interfaceType
+        /// or
+        /// interceptor
+        /// </exception>
         public object GenerateProxy(Type interfaceType, IInterceptor interceptor)
         {
             return this.GenerateProxy(interfaceType, interceptor);
         }
 
+        /// <summary>
+        /// Generates the proxy instance with interceptor.
+        /// </summary>
+        /// <param name="interfaceType">Type of the interface fo implementation proxy.</param>
+        /// <param name="interceptor">The interceptor.</param>
+        /// <param name="containsProperies">if set to <c>true</c> contains properies to interception.</param>
+        /// <returns>Instance of implementator of type <paramref name="interfaceType"/>.</returns>
+        /// <exception cref="ArgumentNullException">
+        /// interfaceType
+        /// or
+        /// interceptor
+        /// </exception>
         public object GenerateProxy(Type interfaceType, IInterceptor interceptor, bool containsProperies)
         {
             if (interfaceType == null)
@@ -118,6 +173,14 @@ namespace MassiveDynamicProxyGenerator
             return this.CreateTypedProxyInstance(proxyType, interceptor);
         }
 
+        /// <summary>
+        /// Generates the proxy with multiple interfaces implementation.
+        /// </summary>
+        /// <typeparam name="T">Type of base interface.</typeparam>
+        /// <param name="interceptor">The interceptor.</param>
+        /// <param name="additionalTypes">The additional interface types.</param>
+        /// <returns>Instance of prxy class generatet with multiple interfaces.</returns>
+        /// <exception cref="ArgumentNullException">interceptor</exception>
         public T GenerateProxy<T>(IInterceptor interceptor, params Type[] additionalTypes)
             where T : class
         {
@@ -139,6 +202,13 @@ namespace MassiveDynamicProxyGenerator
             return (T)this.CreateTypedProxyInstance(proxyType, interceptor);
         }
 
+        /// <summary>
+        /// Generates the proxy with multiple interfaces implementation.
+        /// </summary>
+        /// <param name="interceptor">The interceptor.</param>
+        /// <param name="additionalTypes">The additional interface types.</param>
+        /// <returns>Instance of prxy class generatet with multiple interfaces.</returns>
+        /// <exception cref="ArgumentNullException">interceptor</exception>
         public object GenerateProxy(IInterceptor interceptor, params Type[] additionalTypes)
         {
             if (interceptor == null)
@@ -156,6 +226,16 @@ namespace MassiveDynamicProxyGenerator
             return this.CreateTypedProxyInstance(proxyType, interceptor);
         }
 
+        /// <summary>
+        /// Generates the proxy with multiple interfaces implementation.
+        /// </summary>
+        /// <param name="interfaceType">Type of the interface for decorator.</param>
+        /// <param name="interceptor">The interceptor.</param>
+        /// <param name="additionalTypes">The additional interface types.</param>
+        /// <returns>
+        /// Instance of prxy class generatet with multiple interfaces.
+        /// </returns>
+        /// <exception cref="ArgumentNullException">interceptor</exception>
         public object GenerateProxy(Type interfaceType, IInterceptor interceptor, params Type[] additionalTypes)
         {
             if (interfaceType == null)
@@ -182,6 +262,13 @@ namespace MassiveDynamicProxyGenerator
             return this.CreateTypedProxyInstance(proxyType, interceptor);
         }
 
+        /// <summary>
+        /// Generates the instance proxy.
+        /// </summary>
+        /// <typeparam name="T">Type of proxy.</typeparam>
+        /// <param name="instanceProvider">The instance provider.</param>
+        /// <returns>Instance of proxy class with instance provider.</returns>
+        /// <exception cref="ArgumentNullException">instanceProvider</exception>
         public T GenerateInstanceProxy<T>(IInstanceProvicer instanceProvider)
             where T : class
         {
@@ -199,6 +286,18 @@ namespace MassiveDynamicProxyGenerator
             return (T)this.CreateGenerateInstanceProxy(proxyType, instanceProvider);
         }
 
+        /// <summary>
+        /// Generates the decorator.
+        /// </summary>
+        /// <typeparam name="T">Type of decorator.</typeparam>
+        /// <param name="interceptor">The interceptor.</param>
+        /// <param name="parent">The parent.</param>
+        /// <returns>Instance of decorator.</returns>
+        /// <exception cref="ArgumentNullException">
+        /// interceptor
+        /// or
+        /// parent
+        /// </exception>
         public T GenerateDecorator<T>(ICallableInterceptor interceptor, T parent)
           where T : class
         {
@@ -220,6 +319,11 @@ namespace MassiveDynamicProxyGenerator
             return (T)this.CreateDecoratorInstance(interceptor, parent, interfaceType, proxyType);
         }
 
+        /// <summary>
+        /// Saves the assembly with file name for testing.
+        /// </summary>
+        /// <param name="fileName">Name of the file.</param>
+        /// <exception cref="ArgumentNullException">fileName</exception>
         internal void Save(string fileName)
         {
             if (fileName == null)

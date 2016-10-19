@@ -5,12 +5,19 @@ using MassiveDynamicProxyGenerator.Utils;
 
 namespace MassiveDynamicProxyGenerator
 {
+    /// <summary>
+    /// Type name creator using korean alphabet.
+    /// </summary>
+    /// <seealso cref="MassiveDynamicProxyGenerator.ITypeNameCreator" />
     public class KoreanTypeNameCreator : ITypeNameCreator
     {
         private readonly int defaultTypeLenght;
         private readonly Random rand;
         private int counter;
 
+        /// <summary>
+        /// Initializes a new instance of the <see cref="KoreanTypeNameCreator"/> class.
+        /// </summary>
         public KoreanTypeNameCreator()
         {
             this.defaultTypeLenght = 7;
@@ -18,6 +25,10 @@ namespace MassiveDynamicProxyGenerator
             this.rand = new Random(DateTime.Now.Millisecond);
         }
 
+        /// <summary>
+        /// Initializes a new instance of the <see cref="KoreanTypeNameCreator"/> class.
+        /// </summary>
+        /// <param name="defaultTypeLenght">The default type lenght.</param>
         public KoreanTypeNameCreator(int defaultTypeLenght)
         {
             // TODO: vynimka
@@ -26,6 +37,12 @@ namespace MassiveDynamicProxyGenerator
             this.rand = new Random(DateTime.Now.Millisecond);
         }
 
+        /// <summary>
+        /// Creates the name of the method.
+        /// </summary>
+        /// <returns>
+        /// A new name of the method.
+        /// </returns>
         public string CreateMethodName()
         {
             int count = Interlocked.Increment(ref this.counter);
@@ -41,6 +58,16 @@ namespace MassiveDynamicProxyGenerator
             return sb.ToString();
         }
 
+        /// <summary>
+        /// Creates the name of the method.
+        /// </summary>
+        /// <param name="prefix">The name prefix.</param>
+        /// <param name="lenght">The lenght of name.</param>
+        /// <returns>
+        /// A new name of the method.
+        /// </returns>
+        /// <exception cref="ArgumentNullException">prefix</exception>
+        /// <exception cref="ArgumentOutOfRangeException">lenght - lenght</exception>
         public string CreateMethodName(string prefix, int lenght)
         {
             if (prefix == null)
@@ -67,6 +94,12 @@ namespace MassiveDynamicProxyGenerator
             return sb.ToString();
         }
 
+        /// <summary>
+        /// Creates the name of the type.
+        /// </summary>
+        /// <returns>
+        /// A new name of the type.
+        /// </returns>
         public string CreateTypeName()
         {
             int count = Interlocked.Increment(ref this.counter);
@@ -82,6 +115,16 @@ namespace MassiveDynamicProxyGenerator
             return sb.ToString();
         }
 
+        /// <summary>
+        /// Creates the name of the type.
+        /// </summary>
+        /// <param name="prefix">The name prefix.</param>
+        /// <param name="lenght">The lenght of name.</param>
+        /// <returns>
+        /// A new name of the type.
+        /// </returns>
+        /// <exception cref="ArgumentNullException">prefix</exception>
+        /// <exception cref="ArgumentOutOfRangeException">lenght - lenght</exception>
         public string CreateTypeName(string prefix, int lenght)
         {
             if (prefix == null)

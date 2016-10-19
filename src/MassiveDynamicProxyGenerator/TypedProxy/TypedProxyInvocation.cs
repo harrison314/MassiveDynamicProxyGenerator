@@ -8,6 +8,10 @@ using System.Threading.Tasks;
 
 namespace MassiveDynamicProxyGenerator.TypedProxy
 {
+    /// <summary>
+    /// Typed proxy invocation.
+    /// </summary>
+    /// <seealso cref="MassiveDynamicProxyGenerator.IInvocation" />
     public class TypedProxyInvocation : IInvocation
     {
         private bool isReturnValueInitialized;
@@ -18,6 +22,12 @@ namespace MassiveDynamicProxyGenerator.TypedProxy
         private Type returnType;
         private object returnValue;
 
+        /// <summary>
+        /// Gets or sets the arguments of intercept method.
+        /// </summary>
+        /// <value>
+        /// The arguments of intercept method.
+        /// </value>
         public object[] Arguments
         {
             get
@@ -31,6 +41,12 @@ namespace MassiveDynamicProxyGenerator.TypedProxy
             }
         }
 
+        /// <summary>
+        /// Gets or sets the types of arguments.
+        /// </summary>
+        /// <value>
+        /// The argument types of arguments.
+        /// </value>
         public Type[] ArgumentTypes
         {
             get
@@ -44,6 +60,12 @@ namespace MassiveDynamicProxyGenerator.TypedProxy
             }
         }
 
+        /// <summary>
+        /// Gets or sets the name of the intercept method.
+        /// </summary>
+        /// <value>
+        /// The name of the tntercept method.
+        /// </value>
         public string MethodName
         {
             get
@@ -57,6 +79,12 @@ namespace MassiveDynamicProxyGenerator.TypedProxy
             }
         }
 
+        /// <summary>
+        /// Gets or sets the type of the origin interface.
+        /// </summary>
+        /// <value>
+        /// The type of the origin interface.
+        /// </value>
         public Type OriginalType
         {
             get
@@ -70,6 +98,12 @@ namespace MassiveDynamicProxyGenerator.TypedProxy
             }
         }
 
+        /// <summary>
+        /// Gets or sets the return value of intercept method.
+        /// </summary>
+        /// <value>
+        /// The return value of intercept method.
+        /// </value>
         public object ReturnValue
         {
             get
@@ -95,6 +129,12 @@ namespace MassiveDynamicProxyGenerator.TypedProxy
             }
         }
 
+        /// <summary>
+        /// Gets or sets the type of the return.
+        /// </summary>
+        /// <value>
+        /// The type of the return.
+        /// </value>
         public Type ReturnType
         {
             get
@@ -108,15 +148,25 @@ namespace MassiveDynamicProxyGenerator.TypedProxy
             }
         }
 
+        /// <summary>
+        /// Initializes a new instance of the <see cref="TypedProxyInvocation"/> class.
+        /// </summary>
         public TypedProxyInvocation()
         {
             this.returnValue = null;
             this.isReturnValueInitialized = false;
         }
 
+        /// <summary>
+        /// Gets the <see cref="MethodBase" /> as representation of intecept method.
+        /// </summary>
+        /// <returns>
+        /// The <see cref="MethodBase" /> of intercept method.
+        /// </returns>
         public MethodBase GetConcreteMethod()
         {
             MethodInfo info = this.originalType.GetMethod(this.methodName, this.argumentTypes);
+
             return info;
         }
     }

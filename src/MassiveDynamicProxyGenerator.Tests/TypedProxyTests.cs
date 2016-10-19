@@ -147,7 +147,7 @@ namespace MassiveDynamicProxyGenerator.Tests
         }
 
         [TestMethod]
-         [ExpectedException(typeof(NotImplementedException))]
+        [ExpectedException(typeof(NotImplementedException))]
         public void GenerateProxy_WithoutProperty_ThrowNotImplement()
         {
             Mock<IInterceptor> interceptor = new Mock<IInterceptor>(MockBehavior.Strict);
