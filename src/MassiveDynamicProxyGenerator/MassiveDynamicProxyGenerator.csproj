@@ -45,6 +45,7 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="AbstractTypeBuilder.cs" />
+    <Compile Include="CallableInterceptorAdapter.cs" />
     <Compile Include="DefaultInstances.cs" />
     <Compile Include="DynamicProxy\DynamicInvocation.cs" />
     <Compile Include="GlobalSuppressions.cs" />
@@ -54,6 +55,7 @@
     <Compile Include="IInstanceProvicer.cs" />
     <Compile Include="IInterceptor.cs" />
     <Compile Include="IInvocation.cs" />
+    <Compile Include="InterceptorAdapter.cs" />
     <Compile Include="ITypeNameCreator.cs" />
     <Compile Include="KoreanTypeNameCreator.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
