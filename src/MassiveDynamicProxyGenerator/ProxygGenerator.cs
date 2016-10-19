@@ -180,13 +180,22 @@ namespace MassiveDynamicProxyGenerator
         /// <param name="interceptor">The interceptor.</param>
         /// <param name="additionalTypes">The additional interface types.</param>
         /// <returns>Instance of prxy class generatet with multiple interfaces.</returns>
-        /// <exception cref="ArgumentNullException">interceptor</exception>
+        /// <exception cref="ArgumentNullException">
+        /// interceptor
+        /// or
+        /// additionalTypes
+        /// </exception>
         public T GenerateProxy<T>(IInterceptor interceptor, params Type[] additionalTypes)
             where T : class
         {
             if (interceptor == null)
             {
                 throw new ArgumentNullException(nameof(interceptor));
+            }
+
+            if (additionalTypes == null)
+            {
+                throw new ArgumentNullException(nameof(additionalTypes));
             }
 
             Type[] interfaceTypes = new Type[additionalTypes.Length + 1];
@@ -207,13 +216,25 @@ namespace MassiveDynamicProxyGenerator
         /// </summary>
         /// <param name="interceptor">The interceptor.</param>
         /// <param name="additionalTypes">The additional interface types.</param>
-        /// <returns>Instance of prxy class generatet with multiple interfaces.</returns>
-        /// <exception cref="ArgumentNullException">interceptor</exception>
+        /// <returns>
+        /// Instance of prxy class generatet with multiple interfaces.
+        /// </returns>
+        /// <exception cref="ArgumentNullException">
+        /// interceptor
+        /// or
+        /// additionalTypes
+        /// </exception>
+        /// <exception cref="ArgumentOutOfRangeException">additionalTypes</exception>
         public object GenerateProxy(IInterceptor interceptor, params Type[] additionalTypes)
         {
             if (interceptor == null)
             {
                 throw new ArgumentNullException(nameof(interceptor));
+            }
+
+            if (additionalTypes == null)
+            {
+                throw new ArgumentNullException(nameof(additionalTypes));
             }
 
             if (additionalTypes.Length < 1)
@@ -256,7 +277,6 @@ namespace MassiveDynamicProxyGenerator
 
             interfaceTypes[interfaceTypes.Length - 1] = interfaceType;
 
-            // Type proxyType = this.GenerateType(interfaceTypes);
             Type proxyType = this.generatedTypeList.EnshureType(interfaceTypes, TypedDecoratorType.TypedProxy, this.GenerateType);   // this.GenerateType(interfaceTypes);
 
             return this.CreateTypedProxyInstance(proxyType, interceptor);
