@@ -7,8 +7,17 @@ using System.Linq.Expressions;
 
 namespace MassiveDynamicProxyGenerator.Utils
 {
+    /// <summary>
+    /// Settings utils.
+    /// </summary>
     internal static class SettingsUtils
     {
+        /// <summary>
+        /// Applies the specified action to settings instance.
+        /// </summary>
+        /// <typeparam name="T">Type of settings.</typeparam>
+        /// <param name="action">The action.</param>
+        /// <returns>The settings.</returns>
         public static T Apply<T>(Action<T> action)
             where T : new()
         {
@@ -18,6 +27,15 @@ namespace MassiveDynamicProxyGenerator.Utils
             return instance;
         }
 
+        /// <summary>
+        /// Applies the specified action to settings instance.
+        /// </summary>
+        /// <typeparam name="T">Type of settings.</typeparam>
+        /// <param name="action">The action.</param>
+        /// <param name="instance">The default instance.</param>
+        /// <returns>
+        /// The settings.
+        /// </returns>
         public static T Apply<T>(Action<T> action, T instance)
         {
             action.Invoke(instance);

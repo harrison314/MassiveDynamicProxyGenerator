@@ -8,22 +8,40 @@ using System.Threading.Tasks;
 
 namespace MassiveDynamicProxyGenerator.TypedInstanceProxy
 {
+    /// <summary>
+    /// Generator for instanced proxy.
+    /// </summary>
+    /// <seealso cref="AbstractTypeBuilder{Object}" />
     internal class TypedInstanceProxyGenerator : AbstractTypeBuilder<object>
     {
         private readonly InstanceProvicerDescriptor descriptor;
         private FieldBuilder instanceProvicerField;
 
+        /// <summary>
+        /// Initializes a new instance of the <see cref="TypedInstanceProxyGenerator"/> class.
+        /// </summary>
+        /// <param name="typeBuilder">The type builder.</param>
         public TypedInstanceProxyGenerator(TypeBuilder typeBuilder)
             : base(typeBuilder)
         {
             this.descriptor = new InstanceProvicerDescriptor();
         }
 
+        /// <summary>
+        /// Implements the fields.
+        /// </summary>
+        /// <param name="typeBuilder">The type builder.</param>
+        /// <param name="interfaceType">Type of the interface.</param>
         protected override void ImplementFields(TypeBuilder typeBuilder, Type interfaceType)
         {
             this.instanceProvicerField = typeBuilder.DefineField("instanceProvicer", typeof(IInstanceProvicer), FieldAttributes.Private);
         }
 
+        /// <summary>
+        /// Implementses the constructor.
+        /// </summary>
+        /// <param name="typeBuilder">The type builder.</param>
+        /// <param name="interfaceType">Type of the interface.</param>
         protected override void ImplementsConstructor(TypeBuilder typeBuilder, Type interfaceType)
         {
             ConstructorBuilder constructorBuilder = typeBuilder.DefineConstructor(
@@ -46,6 +64,13 @@ namespace MassiveDynamicProxyGenerator.TypedInstanceProxy
             il.Emit(OpCodes.Ret);
         }
 
+        /// <summary>
+        /// Generates the get property.
+        /// </summary>
+        /// <param name="interfaceProperity">The interface properity.</param>
+        /// <param name="interfaceType">Type of the interface.</param>
+        /// <param name="il">The il.</param>
+        /// <param name="context">The context.</param>
         protected override void GenerateGetProperty(PropertyInfo interfaceProperity, Type interfaceType, ILGenerator il, object context)
         {
             il.Emit(OpCodes.Ldarg_0);
@@ -56,6 +81,13 @@ namespace MassiveDynamicProxyGenerator.TypedInstanceProxy
             il.Emit(OpCodes.Ret);
         }
 
+        /// <summary>
+        /// Generates the set property.
+        /// </summary>
+        /// <param name="interfaceProperity">The interface properity.</param>
+        /// <param name="interfaceType">Type of the interface.</param>
+        /// <param name="il">The il.</param>
+        /// <param name="context">The context.</param>
         protected override void GenerateSetProperty(PropertyInfo interfaceProperity, Type interfaceType, ILGenerator il, object context)
         {
             il.Emit(OpCodes.Ldarg_0);
@@ -67,6 +99,14 @@ namespace MassiveDynamicProxyGenerator.TypedInstanceProxy
             il.Emit(OpCodes.Ret);
         }
 
+        /// <summary>
+        /// Generates the method.
+        /// </summary>
+        /// <param name="interfaceMethod">The interface method.</param>
+        /// <param name="parameters">The parameters.</param>
+        /// <param name="interfaceType">Type of the interface.</param>
+        /// <param name="il">The il.</param>
+        /// <param name="context">The context.</param>
         protected override void GenerateMethod(MethodInfo interfaceMethod, Type[] parameters, Type interfaceType, ILGenerator il, object context)
         {
             LocalBuilder realObject = il.DeclareLocal(interfaceType);

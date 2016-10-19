@@ -2,6 +2,9 @@
 
 namespace MassiveDynamicProxyGenerator
 {
+    /// <summary>
+    /// Container for default instances.
+    /// </summary>
     internal static class DefaultInstances
     {
         private static object syncRoot = new object();
@@ -9,6 +12,12 @@ namespace MassiveDynamicProxyGenerator
         private static ITypeNameCreator typeNameCreator = null;
         private static GeneratedTypeList typedList = null;
 
+        /// <summary>
+        /// Gets the type name creator.
+        /// </summary>
+        /// <value>
+        /// The type name creator.
+        /// </value>
         public static ITypeNameCreator TypeNameCreator
         {
             get
@@ -28,6 +37,12 @@ namespace MassiveDynamicProxyGenerator
             }
         }
 
+        /// <summary>
+        /// Gets the typed list - cache.
+        /// </summary>
+        /// <value>
+        /// The typed list.
+        /// </value>
         public static GeneratedTypeList TypedList
         {
             get

@@ -9,12 +9,22 @@ using MassiveDynamicProxyGenerator.Utils;
 
 namespace MassiveDynamicProxyGenerator.TypedProxy
 {
+    /// <summary>
+    /// Generator fo proxy.
+    /// </summary>
+    /// <seealso cref="AbstractTypeBuilder{Object}" />
     internal class TypedProxyGenerator : AbstractTypeBuilder<object>
     {
         private readonly InvocationDescriptor descriptor;
         private readonly bool implementProperty;
         private FieldBuilder interceptorField;
 
+        /// <summary>
+        /// Initializes a new instance of the <see cref="TypedProxyGenerator"/> class.
+        /// </summary>
+        /// <param name="typeBuilder">The type builder.</param>
+        /// <param name="implementProperty">if set to <c>true</c> [implement property].</param>
+        /// <exception cref="ArgumentNullException">typeBuilder</exception>
         public TypedProxyGenerator(TypeBuilder typeBuilder, bool implementProperty)
             : base(typeBuilder)
         {
@@ -27,12 +37,22 @@ namespace MassiveDynamicProxyGenerator.TypedProxy
             this.descriptor = InvocationDescriptor.Create<TypedProxyInvocation>();
         }
 
+        /// <summary>
+        /// Implements the fields.
+        /// </summary>
+        /// <param name="typeBuilder">The type builder.</param>
+        /// <param name="interfaceType">Type of the interface.</param>
         protected override void ImplementFields(TypeBuilder typeBuilder, Type interfaceType)
         {
             this.interceptorField = this.TypeBuilder.DefineField("interceptor", typeof(IInterceptor), FieldAttributes.Private);
             base.ImplementFields(typeBuilder, interfaceType);
         }
 
+        /// <summary>
+        /// Implementses the constructor.
+        /// </summary>
+        /// <param name="typeBuilder">The type builder.</param>
+        /// <param name="interfaceType">Type of the interface.</param>
         protected override void ImplementsConstructor(TypeBuilder typeBuilder, Type interfaceType)
         {
             ConstructorBuilder constructorBuilder = typeBuilder.DefineConstructor(
@@ -55,6 +75,14 @@ namespace MassiveDynamicProxyGenerator.TypedProxy
             il.Emit(OpCodes.Ret);
         }
 
+        /// <summary>
+        /// Generates the method.
+        /// </summary>
+        /// <param name="interfaceMethod">The interface method.</param>
+        /// <param name="parameters">The parameters.</param>
+        /// <param name="interfaceType">Type of the interface.</param>
+        /// <param name="il">The il.</param>
+        /// <param name="context">The context.</param>
         protected override void GenerateMethod(MethodInfo interfaceMethod, Type[] parameters, Type interfaceType, ILGenerator il, object context)
         {
             LocalBuilder invocationVar = il.DeclareLocal(this.descriptor.Type);
@@ -151,6 +179,13 @@ namespace MassiveDynamicProxyGenerator.TypedProxy
             }
         }
 
+        /// <summary>
+        /// Generates the get property.
+        /// </summary>
+        /// <param name="interfaceProperity">The interface properity.</param>
+        /// <param name="interfaceType">Type of the interface.</param>
+        /// <param name="il">The il.</param>
+        /// <param name="context">The context.</param>
         protected override void GenerateGetProperty(PropertyInfo interfaceProperity, Type interfaceType, ILGenerator il, object context)
         {
             if (this.implementProperty)
@@ -166,6 +201,13 @@ namespace MassiveDynamicProxyGenerator.TypedProxy
             }
         }
 
+        /// <summary>
+        /// Generates the set property.
+        /// </summary>
+        /// <param name="interfaceProperity">The interface properity.</param>
+        /// <param name="interfaceType">Type of the interface.</param>
+        /// <param name="il">The il.</param>
+        /// <param name="context">The context.</param>
         protected override void GenerateSetProperty(PropertyInfo interfaceProperity, Type interfaceType, ILGenerator il, object context)
         {
             if (this.implementProperty)

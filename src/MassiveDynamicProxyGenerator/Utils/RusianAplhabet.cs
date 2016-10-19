@@ -6,6 +6,9 @@ using System.Threading.Tasks;
 
 namespace MassiveDynamicProxyGenerator.Utils
 {
+    /// <summary>
+    /// Class representes rusian alphabet.
+    /// </summary>
     internal static class RusianAplhabet
     {
         private static char[] alphabet;
@@ -16,6 +19,11 @@ namespace MassiveDynamicProxyGenerator.Utils
             alphabet = sourse.ToCharArray();
         }
 
+        /// <summary>
+        /// Generates the string.
+        /// </summary>
+        /// <param name="numberRepresentation">The number representation.</param>
+        /// <returns>String representation of number.</returns>
         public static string GenerateString(int numberRepresentation)
         {
             int z = alphabet.Length;
@@ -45,6 +53,12 @@ namespace MassiveDynamicProxyGenerator.Utils
             return new string(characters.ToArray());
         }
 
+        /// <summary>
+        /// Generates the random.
+        /// </summary>
+        /// <param name="randomSourse">The random sourse.</param>
+        /// <param name="lenght">The lenght.</param>
+        /// <returns>String representation of number.</returns>
         public static string GenerateRandom(Random randomSourse, int lenght)
         {
             char[] array = new char[lenght];

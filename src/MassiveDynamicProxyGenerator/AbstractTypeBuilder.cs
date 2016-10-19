@@ -8,12 +8,22 @@ using System.Threading.Tasks;
 
 namespace MassiveDynamicProxyGenerator
 {
+    /// <summary>
+    /// Base type builder.
+    /// </summary>
+    /// <typeparam name="T">Type of context.</typeparam>
     internal abstract class AbstractTypeBuilder<T>
     {
         private readonly TypeBuilder typeBuilder;
         private readonly HashSet<Type> implementInterfaces;
         private bool isMembersImplements;
 
+        /// <summary>
+        /// Gets the implement interfaces.
+        /// </summary>
+        /// <value>
+        /// The implement interfaces.
+        /// </value>
         public IEnumerable<Type> ImplementInterfaces
         {
             get
@@ -22,6 +32,12 @@ namespace MassiveDynamicProxyGenerator
             }
         }
 
+        /// <summary>
+        /// Gets the type builder.
+        /// </summary>
+        /// <value>
+        /// The type builder.
+        /// </value>
         protected TypeBuilder TypeBuilder
         {
             get
@@ -30,6 +46,11 @@ namespace MassiveDynamicProxyGenerator
             }
         }
 
+        /// <summary>
+        /// Initializes a new instance of the <see cref="AbstractTypeBuilder{T}"/> class.
+        /// </summary>
+        /// <param name="typeBuilder">The type builder.</param>
+        /// <exception cref="ArgumentNullException">typeBuilder</exception>
         public AbstractTypeBuilder(TypeBuilder typeBuilder)
         {
             if (typeBuilder == null)
@@ -42,6 +63,12 @@ namespace MassiveDynamicProxyGenerator
             this.implementInterfaces = new HashSet<Type>();
         }
 
+        /// <summary>
+        /// Checks the type.
+        /// </summary>
+        /// <param name="interfaceType">Type of the interface.</param>
+        /// <exception cref="ArgumentNullException">interfaceType</exception>
+        /// <exception cref="InvalidOperationException">Type is not interface.</exception>
         public virtual void CheckType(Type interfaceType)
         {
             if (interfaceType == null)
@@ -56,6 +83,11 @@ namespace MassiveDynamicProxyGenerator
             }
         }
 
+        /// <summary>
+        /// Implements the interface.
+        /// </summary>
+        /// <param name="interfaceType">Type of the interface.</param>
+        /// <exception cref="ArgumentNullException">interfaceType</exception>
         public void ImplementInterface(Type interfaceType)
         {
             if (interfaceType == null)
@@ -84,10 +116,20 @@ namespace MassiveDynamicProxyGenerator
             }
         }
 
+        /// <summary>
+        /// Implements the fields.
+        /// </summary>
+        /// <param name="typeBuilder">The type builder.</param>
+        /// <param name="interfaceType">Type of the interface.</param>
         protected virtual void ImplementFields(TypeBuilder typeBuilder, Type interfaceType)
         {
         }
 
+        /// <summary>
+        /// Implementses the constructor.
+        /// </summary>
+        /// <param name="typeBuilder">The type builder.</param>
+        /// <param name="interfaceType">Type of the interface.</param>
         protected virtual void ImplementsConstructor(TypeBuilder typeBuilder, Type interfaceType)
         {
             ConstructorBuilder constructorBuilder = typeBuilder.DefineConstructor(
@@ -107,6 +149,13 @@ namespace MassiveDynamicProxyGenerator
             il.Emit(OpCodes.Ret);
         }
 
+        /// <summary>
+        /// Implements the method.
+        /// </summary>
+        /// <param name="typeBuilder">The type builder.</param>
+        /// <param name="interfaceType">Type of the interface.</param>
+        /// <param name="interfaceMethod">The interface method.</param>
+        /// <param name="context">The context.</param>
         protected virtual void ImplementMethod(TypeBuilder typeBuilder, Type interfaceType, MethodInfo interfaceMethod, T context)
         {
             Type[] parameters = interfaceMethod.GetParameters().Select(t => t.ParameterType).ToArray();
@@ -122,6 +171,14 @@ namespace MassiveDynamicProxyGenerator
             this.GenerateMethod(interfaceMethod, parameters, interfaceType, il, context);
         }
 
+        /// <summary>
+        /// Generates the method.
+        /// </summary>
+        /// <param name="interfaceMethod">The interface method.</param>
+        /// <param name="parameters">The parameters.</param>
+        /// <param name="interfaceType">Type of the interface.</param>
+        /// <param name="il">The il.</param>
+        /// <param name="context">The context.</param>
         protected virtual void GenerateMethod(MethodInfo interfaceMethod, Type[] parameters, Type interfaceType, ILGenerator il, T context)
         {
             ConstructorInfo ci = typeof(NotImplementedException).GetConstructor(new Type[0]);
@@ -131,6 +188,13 @@ namespace MassiveDynamicProxyGenerator
             il.Emit(OpCodes.Throw);
         }
 
+        /// <summary>
+        /// Implementeds the properity.
+        /// </summary>
+        /// <param name="typeBuilder">The type builder.</param>
+        /// <param name="interfaceType">Type of the interface.</param>
+        /// <param name="interfaceProperity">The interface properity.</param>
+        /// <param name="context">The context.</param>
         protected virtual void ImplementedProperity(TypeBuilder typeBuilder, Type interfaceType, PropertyInfo interfaceProperity, T context)
         {
             PropertyBuilder properityBuilder = typeBuilder.DefineProperty(interfaceProperity.Name,
@@ -165,6 +229,13 @@ namespace MassiveDynamicProxyGenerator
             }
         }
 
+        /// <summary>
+        /// Generates the set property.
+        /// </summary>
+        /// <param name="interfaceProperity">The interface properity.</param>
+        /// <param name="interfaceType">Type of the interface.</param>
+        /// <param name="il">The il.</param>
+        /// <param name="context">The context.</param>
         protected virtual void GenerateSetProperty(PropertyInfo interfaceProperity, Type interfaceType, ILGenerator il, T context)
         {
             ConstructorInfo ci = typeof(NotImplementedException).GetConstructor(new Type[0]);
@@ -174,6 +245,13 @@ namespace MassiveDynamicProxyGenerator
             il.Emit(OpCodes.Throw);
         }
 
+        /// <summary>
+        /// Generates the get property.
+        /// </summary>
+        /// <param name="interfaceProperity">The interface properity.</param>
+        /// <param name="interfaceType">Type of the interface.</param>
+        /// <param name="il">The il.</param>
+        /// <param name="context">The context.</param>
         protected virtual void GenerateGetProperty(PropertyInfo interfaceProperity, Type interfaceType, ILGenerator il, T context)
         {
             ConstructorInfo ci = typeof(NotImplementedException).GetConstructor(new Type[0]);

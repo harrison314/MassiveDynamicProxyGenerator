@@ -8,8 +8,21 @@ using System.Threading.Tasks;
 
 namespace MassiveDynamicProxyGenerator.Utils
 {
+    /// <summary>
+    /// Emit extensions.
+    /// </summary>
     internal static class EmitExtensions
     {
+        /// <summary>
+        /// Emits the cast to reference.
+        /// </summary>
+        /// <param name="il">The IL generator.</param>
+        /// <param name="type">The type.</param>
+        /// <exception cref="ArgumentNullException">
+        /// il
+        /// or
+        /// type
+        /// </exception>
         [MethodImpl(MethodImplOptions.AggressiveInlining)]
         public static void EmitCastToReference(this ILGenerator il, Type type)
         {
@@ -35,6 +48,16 @@ namespace MassiveDynamicProxyGenerator.Utils
             }
         }
 
+        /// <summary>
+        /// Emits the box if needed.
+        /// </summary>
+        /// <param name="il">The IL genarator.</param>
+        /// <param name="type">The type.</param>
+        /// <exception cref="ArgumentNullException">
+        /// il
+        /// or
+        /// type
+        /// </exception>
         [MethodImpl(MethodImplOptions.AggressiveInlining)]
         public static void EmitBoxIfNeeded(this ILGenerator il, Type type)
         {
@@ -56,6 +79,12 @@ namespace MassiveDynamicProxyGenerator.Utils
             }
         }
 
+        /// <summary>
+        /// Emits the fast <see cref="int"/> value.
+        /// </summary>
+        /// <param name="il">The IL generator.</param>
+        /// <param name="value">The value.</param>
+        /// <exception cref="ArgumentNullException">il</exception>
         [MethodImpl(MethodImplOptions.AggressiveInlining)]
         public static void EmitFastInt(this ILGenerator il, int value)
         {

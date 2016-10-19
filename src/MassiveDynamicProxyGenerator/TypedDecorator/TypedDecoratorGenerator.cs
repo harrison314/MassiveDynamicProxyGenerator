@@ -8,6 +8,10 @@ using System.Threading.Tasks;
 
 namespace MassiveDynamicProxyGenerator.TypedDecorator
 {
+    /// <summary>
+    /// Generator for decorators.
+    /// </summary>
+    /// <seealso cref="AbstractTypeBuilder{GenerateUnion}" />
     internal class TypedDecoratorGenerator : AbstractTypeBuilder<GenerateUnion>
     {
         private readonly ITypeNameCreator typeNameGenerator;
@@ -18,6 +22,12 @@ namespace MassiveDynamicProxyGenerator.TypedDecorator
         private FieldBuilder interceptorField;
         private FieldBuilder parentField;
 
+        /// <summary>
+        /// Initializes a new instance of the <see cref="TypedDecoratorGenerator"/> class.
+        /// </summary>
+        /// <param name="typeBuilder">The type builder.</param>
+        /// <param name="typeNameGenerator">The type name generator.</param>
+        /// <exception cref="ArgumentNullException">typeNameGenerator</exception>
         public TypedDecoratorGenerator(TypeBuilder typeBuilder, ITypeNameCreator typeNameGenerator)
             : base(typeBuilder)
         {
@@ -33,6 +43,11 @@ namespace MassiveDynamicProxyGenerator.TypedDecorator
             this.actionType = typeof(Action<ICallableInvocation>);
         }
 
+        /// <summary>
+        /// Implements the fields.
+        /// </summary>
+        /// <param name="typeBuilder">The type builder.</param>
+        /// <param name="interfaceType">Type of the interface.</param>
         protected override void ImplementFields(TypeBuilder typeBuilder, Type interfaceType)
         {
             this.interceptorField = this.TypeBuilder.DefineField("interceptor", typeof(ICallableInterceptor), FieldAttributes.Private);
@@ -41,6 +56,11 @@ namespace MassiveDynamicProxyGenerator.TypedDecorator
             base.ImplementFields(typeBuilder, interfaceType);
         }
 
+        /// <summary>
+        /// Implementses the constructor.
+        /// </summary>
+        /// <param name="typeBuilder">The type builder.</param>
+        /// <param name="interfaceType">Type of the interface.</param>
         protected override void ImplementsConstructor(TypeBuilder typeBuilder, Type interfaceType)
         {
             ConstructorBuilder constructorBuilder = typeBuilder.DefineConstructor(
@@ -70,12 +90,27 @@ namespace MassiveDynamicProxyGenerator.TypedDecorator
             il.Emit(OpCodes.Ret);
         }
 
+        /// <summary>
+        /// Implements the method.
+        /// </summary>
+        /// <param name="typeBuilder">The type builder.</param>
+        /// <param name="interfaceType">Type of the interface.</param>
+        /// <param name="interfaceMethod">The interface method.</param>
+        /// <param name="context">The context.</param>
         protected override void ImplementMethod(TypeBuilder typeBuilder, Type interfaceType, MethodInfo interfaceMethod, GenerateUnion context)
         {
             MethodBuilder processMethod = this.ImplementParentCallMethod(typeBuilder, interfaceType, interfaceMethod);
             base.ImplementMethod(typeBuilder, interfaceType, interfaceMethod, new GenerateUnion(processMethod));
         }
 
+        /// <summary>
+        /// Generates the method.
+        /// </summary>
+        /// <param name="interfaceMethod">The interface method.</param>
+        /// <param name="parameters">The parameters.</param>
+        /// <param name="interfaceType">Type of the interface.</param>
+        /// <param name="il">The il.</param>
+        /// <param name="context">The context.</param>
         protected override void GenerateMethod(MethodInfo interfaceMethod, Type[] parameters, Type interfaceType, ILGenerator il, GenerateUnion context)
         {
             LocalBuilder invocationVar = il.DeclareLocal(this.callableInvocationDescriptor.Type);
@@ -176,6 +211,13 @@ namespace MassiveDynamicProxyGenerator.TypedDecorator
             }
         }
 
+        /// <summary>
+        /// Generates the get property.
+        /// </summary>
+        /// <param name="interfaceProperity">The interface properity.</param>
+        /// <param name="interfaceType">Type of the interface.</param>
+        /// <param name="il">The il.</param>
+        /// <param name="context">The context.</param>
         protected override void GenerateGetProperty(PropertyInfo interfaceProperity, Type interfaceType, ILGenerator il, GenerateUnion context)
         {
             MethodInfo methodInfo = interfaceProperity.GetGetMethod();
@@ -185,6 +227,13 @@ namespace MassiveDynamicProxyGenerator.TypedDecorator
             this.GenerateMethod(methodInfo, parameters, interfaceType, il, new GenerateUnion(processMethod));
         }
 
+        /// <summary>
+        /// Generates the set property.
+        /// </summary>
+        /// <param name="interfaceProperity">The interface properity.</param>
+        /// <param name="interfaceType">Type of the interface.</param>
+        /// <param name="il">The il.</param>
+        /// <param name="context">The context.</param>
         protected override void GenerateSetProperty(PropertyInfo interfaceProperity, Type interfaceType, ILGenerator il, GenerateUnion context)
         {
             MethodInfo methodInfo = interfaceProperity.GetSetMethod();
