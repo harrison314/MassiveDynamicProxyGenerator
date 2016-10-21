@@ -24,6 +24,74 @@ _In progress._
 
 _In progress._
 
+### Generate decorator 
+
+```cs
+ ProxygGenerator generator = new ProxygGenerator();
+ Calculator realInstance = new Calculator();
+ ICallableInterceptor interceptor = new CallableInterceptorAdapter((invocation) =>
+ {
+     Console.WriteLine(" Log: Call method {0}", invocation.MethodName);
+     try
+     {
+         invocation.Process();
+         Console.WriteLine(" Log: return: {0}", invocation.ReturnValue ?? "null");
+     }
+     catch(Exception ex)
+     {
+         Console.WriteLine(" Log: Exception message: {0}", ex.Message);
+         throw;
+     }
+ });
+
+
+ ICalculator decorator = generator.GenerateDecorator<ICalculator>(interceptor, realInstance);
+
+ Console.WriteLine("Before call Add with 2013 and 6");
+ int result = decorator.Add(2013, 6);
+ Console.WriteLine("Result is {0}", result);
+```
+
+### Generate proxy
+
+```cs
+IInterceptor jsonRpcInterceptor = new InterceptorAdapter((invocation, isDynamic) =>
+{
+    Guid requestId = Guid.NewGuid();
+    var rcpBody = new
+    {
+        jsonrpc = "2.0",
+        method = invocation.MethodName,
+        @params = invocation.Arguments,
+        id = requestId.ToString()
+    };
+
+    string serialized = Newtonsoft.Json.JsonConvert.SerializeObject(rcpBody);
+
+    //simulate sending and recrive
+
+    Console.WriteLine(" Sending Rpc: {0}", serialized);
+    string recText = $"{{\"jsonrpc\": \"2.0\", \"result\": 19, \"id\": \"{requestId.ToString()}\"}}";
+    Console.WriteLine(" Rec Rpc: {0}", recText);
+
+    Newtonsoft.Json.Linq.JObject response = Newtonsoft.Json.JsonConvert.DeserializeObject< Newtonsoft.Json.Linq.JObject>(recText);
+    invocation.ReturnValue = response["result"].ToObject(invocation.ReturnType);
+});
+
+ProxygGenerator generator = new ProxygGenerator();
+
+ICalculator calcilator = generator.GenerateProxy<ICalculator>(jsonRpcInterceptor);
+
+int resultModulo = calcilator.Modulo(15, 4);
+
+Console.WriteLine("Modulo 15 and 4 is {0}", resultModulo);
+
+int result = calcilator.Product(8, 486);
+
+Console.WriteLine("product 8 and 486 is {0}", resultModulo);
+```
+
+
 ## Inscribtion
 
 Inscribe to _Lucia_ extraordinary woman, a wonderful person and an intelligent doctor.
