@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using MassiveDynamicProxyGenerator;
+using MassiveDynamicProxyGenerator.TypedInstanceProxy;
 
 namespace ProxyGeneratrorSamples.Net40
 {
@@ -12,12 +13,15 @@ namespace ProxyGeneratrorSamples.Net40
         {
             ExampleLoggInterceptor();
             DynamicProxyAsJsonRpc2();
+            InstanceProxyExample();
 
             Console.ReadLine();
         }
 
         private static void ExampleLoggInterceptor()
         {
+            Console.WriteLine(".... GenerateDecorator for logging ...\n");
+
             ProxygGenerator generator = new ProxygGenerator();
 
             Calculator realInstance = new Calculator();
@@ -29,7 +33,7 @@ namespace ProxyGeneratrorSamples.Net40
                     invocation.Process();
                     Console.WriteLine(" Log: return: {0}", invocation.ReturnValue ?? "null");
                 }
-                catch(Exception ex)
+                catch (Exception ex)
                 {
                     Console.WriteLine(" Log: Exception message: {0}", ex.Message);
                     throw;
@@ -61,6 +65,8 @@ namespace ProxyGeneratrorSamples.Net40
 
         private static void DynamicProxyAsJsonRpc2()
         {
+            Console.WriteLine(".... GenerateProxy for remote JSON RPC2 ...\n");
+
             IInterceptor jsonRpcInterceptor = new InterceptorAdapter((invocation, isDynamic) =>
             {
                 Guid requestId = Guid.NewGuid();
@@ -80,7 +86,7 @@ namespace ProxyGeneratrorSamples.Net40
                 string recText = $"{{\"jsonrpc\": \"2.0\", \"result\": 19, \"id\": \"{requestId.ToString()}\"}}";
                 Console.WriteLine(" Rec Rpc: {0}", recText);
 
-                Newtonsoft.Json.Linq.JObject response = Newtonsoft.Json.JsonConvert.DeserializeObject< Newtonsoft.Json.Linq.JObject>(recText);
+                Newtonsoft.Json.Linq.JObject response = Newtonsoft.Json.JsonConvert.DeserializeObject<Newtonsoft.Json.Linq.JObject>(recText);
                 invocation.ReturnValue = response["result"].ToObject(invocation.ReturnType);
             });
 
@@ -92,12 +98,36 @@ namespace ProxyGeneratrorSamples.Net40
 
             Console.WriteLine("Modulo 15 and 4 is {0}", resultModulo);
 
-            int result = calcilator.Product(8, 486);
+            int resultProduct = calcilator.Product(8, 486);
 
-            Console.WriteLine("product 8 and 486 is {0}", resultModulo);
+            Console.WriteLine("Product 8 and 486 is {0}", resultProduct);
             Console.WriteLine();
             Console.WriteLine();
+        }
 
+        private static void InstanceProxyExample()
+        {
+            Console.WriteLine(".... GenerateDecorator lazy initialize object ...\n");
+
+            IInstanceProvicer instanceProvider = new LazyInstanceProvider<ICalculator>(
+                () =>
+                {
+                    Console.WriteLine(" Log: Create Calculator.");
+                    return new Calculator();
+                }, false);
+
+            ProxygGenerator generator = new ProxygGenerator();
+            ICalculator  calculator = generator.GenerateInstanceProxy<ICalculator>(instanceProvider);
+
+            Console.WriteLine("Before call Add with 2013 and 6");
+            int result = calculator.Add(2013, 6);
+            Console.WriteLine("Result is {0}", result);
+
+            Console.WriteLine("Before call Product with 2013 and 6");
+            int result2 = calculator.Product(2013, 6);
+            Console.WriteLine("Result is {0}", result2);
+            Console.WriteLine();
+            Console.WriteLine();
         }
     }
 }

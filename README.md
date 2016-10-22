@@ -86,11 +86,31 @@ int resultModulo = calcilator.Modulo(15, 4);
 
 Console.WriteLine("Modulo 15 and 4 is {0}", resultModulo);
 
-int result = calcilator.Product(8, 486);
+int resultProduct = calcilator.Product(8, 486);
 
-Console.WriteLine("product 8 and 486 is {0}", resultModulo);
+Console.WriteLine("Product 8 and 486 is {0}", resultProduct);
 ```
+### Generate instance proxy
 
+```cs
+IInstanceProvicer instanceProvider = new LazyInstanceProvider<ICalculator>(
+    () =>
+    {
+        Console.WriteLine(" Log: Create Calculator.");
+        return new Calculator();
+    }, false);
+
+ProxygGenerator generator = new ProxygGenerator();
+ICalculator  calculator = generator.GenerateInstanceProxy<ICalculator>(instanceProvider);
+
+Console.WriteLine("Before call Add with 2013 and 6");
+int result = calculator.Add(2013, 6);
+Console.WriteLine("Result is {0}", result);
+
+Console.WriteLine("Before call Product with 2013 and 6");
+int result2 = calculator.Product(2013, 6);
+Console.WriteLine("Result is {0}", result2);
+```
 
 ## Inscribtion
 
