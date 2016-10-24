@@ -2,6 +2,8 @@
 using System.Collections.Generic;
 using System.Dynamic;
 using System.Linq;
+using System.Reflection;
+using System.Runtime.CompilerServices;
 using System.Text;
 using System.Threading.Tasks;
 
@@ -11,8 +13,10 @@ namespace MassiveDynamicProxyGenerator.DynamicProxy
     /// proxy object for dynmaic interception.
     /// </summary>
     /// <seealso cref="System.Dynamic.DynamicObject" />
-    public class DynamicProxyObject : DynamicObject
+    internal class DynamicProxyObject : DynamicObject
     {
+        private static readonly FieldInfo CallSiteBinderCache = typeof(CallSiteBinder).GetField("Cache", BindingFlags.NonPublic | BindingFlags.Instance);
+
         private readonly IInterceptor interceptor;
 
         /// <summary>
@@ -44,13 +48,31 @@ namespace MassiveDynamicProxyGenerator.DynamicProxy
             DynamicInvocation invocation = new DynamicInvocation();
             invocation.Arguments = args;
             invocation.MethodName = binder.Name;
+            base.TryInvokeMember(binder, args, out result);
             invocation.ReturnType = binder.ReturnType;
+            invocation.ReturnType = BindingType(binder);
 
             this.interceptor.Intercept(invocation, true);
 
             result = invocation.ReturnValue;
 
             return true;
+        }
+
+        private static Type BindingType(CallSiteBinder binder)
+        {
+            IDictionary<Type, object> cache = (IDictionary<Type, object>)CallSiteBinderCache.GetValue(binder);
+            Type ftype = cache.Select(t => t.Key).FirstOrDefault(t =>
+            t != null
+            && t.IsGenericType
+            && t.GetGenericTypeDefinition() == typeof(Func<,,>));
+            if (ftype == null)
+            {
+                return null;
+            }
+
+            Type[] genargs = ftype.GetGenericArguments();
+            return genargs[2];
         }
     }
 }

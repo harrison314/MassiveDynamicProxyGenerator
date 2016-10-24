@@ -12,7 +12,7 @@ namespace MassiveDynamicProxyGenerator.DynamicProxy
     /// Class representes dynamic invocation.
     /// </summary>
     /// <seealso cref="MassiveDynamicProxyGenerator.IInvocation" />
-    public class DynamicInvocation : IInvocation
+    internal class DynamicInvocation : IInvocation
     {
         private object[] arguments;
         private Type[] argumentTypes;

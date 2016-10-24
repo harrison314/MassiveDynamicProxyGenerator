@@ -8,6 +8,7 @@ using MassiveDynamicProxyGenerator.Utils;
 using MassiveDynamicProxyGenerator.TypedDecorator;
 using MassiveDynamicProxyGenerator.TypedInstanceProxy;
 using MassiveDynamicProxyGenerator.TypedProxy;
+using MassiveDynamicProxyGenerator.DynamicProxy;
 
 namespace MassiveDynamicProxyGenerator
 {
@@ -338,6 +339,24 @@ namespace MassiveDynamicProxyGenerator
 
             return (T)this.CreateDecoratorInstance(interceptor, parent, interfaceType, proxyType);
         }
+
+        ///// <summary>
+        ///// Generate <c>dynamic</c> object proxy with inteceptor.
+        ///// </summary>
+        ///// <param name="interceptor">The interceptor.</param>
+        ///// <returns>Dynamic proxy object.</returns>
+        ///// <exception cref="System.ArgumentNullException">interceptor</exception>
+        //public dynamic GenerateDynamicObjectProxy(IInterceptor interceptor)
+        //{
+        //    if (interceptor == null)
+        //    {
+        //        throw new ArgumentNullException(nameof(interceptor));
+        //    }
+        //
+        //    DynamicProxyObject dynamicObject = new DynamicProxyObject(interceptor);
+        //
+        //    return dynamicObject;
+        //}
 
         /// <summary>
         /// Saves the assembly with file name for testing.
