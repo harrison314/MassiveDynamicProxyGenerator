@@ -15,6 +15,7 @@ namespace ProxyGeneratrorSamples.Net40
             DynamicProxyAsJsonRpc2();
             InstanceProxyExample();
 
+            Console.WriteLine("Press ENTER to exit...");
             Console.ReadLine();
         }
 

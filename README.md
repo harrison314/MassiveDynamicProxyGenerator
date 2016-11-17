@@ -114,7 +114,7 @@ Console.WriteLine("Result is {0}", result2);
 
 ## Inscribtion
 
-Inscribe to _Lucia L._ extraordinary woman, a wonderful person and an intelligent doctor.
+Inscribe to _Lucia L._ extraordinary woman, a wonderful person and an intelligent medical doctor.
 
 
 ## License
