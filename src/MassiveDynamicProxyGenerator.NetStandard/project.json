@@ -5,7 +5,8 @@
     "xmlDoc": true,
     "compile": {
       "include": [ "**/*.cs", "../MassiveDynamicProxyGenerator/**/*.cs" ]
-    }
+    },
+    "outputName": "MassiveDynamicProxyGenerator"
 
   },
   "dependencies": {

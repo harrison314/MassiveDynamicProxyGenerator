@@ -151,7 +151,6 @@ namespace MassiveDynamicProxyGenerator.Tests
         {
             Mock<IInterceptor> interceptor = new Mock<IInterceptor>(MockBehavior.Strict);
 
-
             ProxygGenerator generator = new ProxygGenerator();
 
             IGrapth instance = generator.GenerateProxy<IGrapth>(interceptor.Object);

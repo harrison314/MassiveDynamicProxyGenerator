@@ -41,7 +41,7 @@ namespace MassiveDynamicProxyGenerator.Tests
         }
 
         [TestMethod]
-        public void GenerateProxyMultiInterface_Object_CallMethods() //TODO: premenovat
+        public void GenerateProxyMultiInterface_Object_CallMethods()
         {
             Mock<IInterceptor> interceptor = new Mock<IInterceptor>(MockBehavior.Strict);
             interceptor.Setup(t => t.Intercept(It.Is<IInvocation>(q => q.Arguments.Length == 0 && q.MethodName == "EmptyMethod"), false))

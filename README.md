@@ -14,7 +14,7 @@ Fertures:
 * Decorator generator.
 
 The following platforms are supported:
-* .Net 4.0 and up.
+* .Net 4.0 and up, .Net Core 1.0.0
 
 ## Getting started
 

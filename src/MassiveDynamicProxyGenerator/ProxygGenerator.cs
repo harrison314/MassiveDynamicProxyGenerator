@@ -346,8 +346,8 @@ namespace MassiveDynamicProxyGenerator
         ///// <param name="interceptor">The interceptor.</param>
         ///// <returns>Dynamic proxy object.</returns>
         ///// <exception cref="System.ArgumentNullException">interceptor</exception>
-        //public dynamic GenerateDynamicObjectProxy(IInterceptor interceptor)
-        //{
+        // public dynamic GenerateDynamicObjectProxy(IInterceptor interceptor)
+        // {
         //    if (interceptor == null)
         //    {
         //        throw new ArgumentNullException(nameof(interceptor));
@@ -356,7 +356,7 @@ namespace MassiveDynamicProxyGenerator
         //    DynamicProxyObject dynamicObject = new DynamicProxyObject(interceptor);
         //
         //    return dynamicObject;
-        //}
+        // }
 
         /// <summary>
         /// Saves the assembly with file name for testing.
@@ -473,9 +473,11 @@ namespace MassiveDynamicProxyGenerator
             asmName.Name = this.assemblyName;
             asmName.Version = new Version(1, 0, 0, 0);
 
-            // TODO: pre debug
-            // AssemblyBuilder asmBuilder = Thread.GetDomain().DefineDynamicAssembly(asmName, AssemblyBuilderAccess.RunAndSave, @"C:\Users\harrison\Documents\Visual Studio 2015\Projects\MassiveDynamicProxyGenerator\MassiveDynamicProxyGenerator\bin\Debug");
-            // ModuleBuilder modBuilder = asmBuilder.DefineDynamicModule("DynamicProxyModule", "Testing.dll");
+            /*
+             TODO: pre debug
+             AssemblyBuilder asmBuilder = Thread.GetDomain().DefineDynamicAssembly(asmName, AssemblyBuilderAccess.RunAndSave, @"C:\Users\harrison\Documents\Visual Studio 2015\Projects\MassiveDynamicProxyGenerator\MassiveDynamicProxyGenerator\bin\Debug");
+             ModuleBuilder modBuilder = asmBuilder.DefineDynamicModule("DynamicProxyModule", "Testing.dll");
+            */
 
 #if COREFX
             AssemblyBuilder asmBuilder = AssemblyBuilder.DefineDynamicAssembly(asmName, AssemblyBuilderAccess.Run);

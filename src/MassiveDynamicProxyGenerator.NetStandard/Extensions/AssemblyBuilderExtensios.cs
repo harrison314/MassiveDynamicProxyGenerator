@@ -10,7 +10,7 @@ namespace MassiveDynamicProxyGenerator
     {
         public static void Save(this AssemblyBuilder typeBuilder, string fileName)
         {
-            throw new NotImplementedException("Net core dosnt support save assembly.");
+            throw new NotImplementedException(".Net Core does not support save assembly.");
         }
     }
 }

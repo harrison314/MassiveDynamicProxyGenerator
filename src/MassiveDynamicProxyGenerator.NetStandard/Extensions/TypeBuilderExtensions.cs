@@ -16,10 +16,5 @@ namespace MassiveDynamicProxyGenerator
             TypeInfo typeInfo = typeBuilder.CreateTypeInfo();
             return typeBuilder.AsType();
         }
-
-        public static void Save(this TypeBuilder typeBuilder, string fileName)
-        {
-            throw new NotImplementedException("Net core dosnt support save assembly.");
-        }
     }
 }
