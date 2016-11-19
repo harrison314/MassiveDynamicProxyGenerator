@@ -193,3 +193,4 @@ ModelManifest.xml
 /Help
 /src/.vs
 /src/MassiveDynamicProxyGenerator.NetStandard/project.lock.json
+/src/MassiveDynamicProxyGenerator.Tests.NetStandard/project.lock.json

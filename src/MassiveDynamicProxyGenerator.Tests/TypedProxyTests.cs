@@ -147,7 +147,6 @@ namespace MassiveDynamicProxyGenerator.Tests
         }
 
         [TestMethod]
-        [ExpectedException(typeof(NotImplementedException))]
         public void GenerateProxy_WithoutProperty_ThrowNotImplement()
         {
             Mock<IInterceptor> interceptor = new Mock<IInterceptor>(MockBehavior.Strict);
@@ -158,7 +157,10 @@ namespace MassiveDynamicProxyGenerator.Tests
             IGrapth instance = generator.GenerateProxy<IGrapth>(interceptor.Object);
             instance.ShouldNotBeNull();
 
-            instance.DisplayName = "New text";
+            ExceptionAssertion.SouldException<NotImplementedException>(() =>
+            {
+                instance.DisplayName = "New text";
+            });
         }
 
         [TestMethod]

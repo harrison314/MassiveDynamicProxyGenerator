@@ -1,0 +1,36 @@
+﻿{
+  "version": "1.0.0-*",
+  "testRunner": "mstest",
+  "buildOptions": {
+    "compile": {
+      "include": [ "**/*.cs", "../MassiveDynamicProxyGenerator.Tests/**/*.cs" ]
+    }
+  },
+
+  "dependencies": {
+    "NETStandard.Library": "1.6.0",
+    "MSTest.TestFramework": "1.0.0-preview",
+    "dotnet-test-mstest": "1.0.0-preview",
+    "Moq": "4.6.38-alpha",
+    "Shouldly": "2.8.2",
+    "MassiveDynamicProxyGenerator.NetStandard": {
+      "target": "project"
+    }
+  },
+
+  "frameworks": {
+    "netcoreapp1.0": {
+      "imports": [
+        "dnxcore50",
+        "portable-net45+win8"
+      ],
+
+      "dependencies": {
+        "Microsoft.NETCore.App": {
+          "version": "1.0.0",
+          "type": "platform"
+        }
+      }
+    }
+  }
+}

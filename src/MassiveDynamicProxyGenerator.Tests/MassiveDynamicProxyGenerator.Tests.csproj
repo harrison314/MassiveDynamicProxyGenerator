@@ -69,6 +69,7 @@
     <Compile Include="Examples\InvocationExample.cs" />
     <Compile Include="Examples\NonReturnExample.cs" />
     <Compile Include="Examples\ReturnTypes.cs" />
+    <Compile Include="TestExtensions\ExceptionAssertion.cs" />
     <Compile Include="TestExtensions\TypeAssertExtensions.cs" />
     <Compile Include="TestInterfaces\ICompositeInterface.cs" />
     <Compile Include="TestInterfaces\IGrapth.cs" />
