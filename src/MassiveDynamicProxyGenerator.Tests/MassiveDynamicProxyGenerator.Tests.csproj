@@ -74,6 +74,7 @@
     <Compile Include="TestInterfaces\IGrapth.cs" />
     <Compile Include="TestInterfaces\INonReturn.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="TestInterfaces\IPrototype.cs" />
     <Compile Include="TestInterfaces\IReturnTypes.cs" />
     <Compile Include="TestMultiProxy.cs" />
     <Compile Include="TypedDecoratorTests.cs" />

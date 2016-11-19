@@ -53,7 +53,7 @@ namespace MassiveDynamicProxyGenerator.Tests
                 cfg.UseLocalCache = true;
             });
 
-            IGrapth instance1 = genartor1.GenerateProxy<IGrapth>(instanceProviderMock.Object, typeof(IDisposable), typeof(ICloneable));
+            IGrapth instance1 = genartor1.GenerateProxy<IGrapth>(instanceProviderMock.Object, typeof(IDisposable), typeof(IPrototype));
             IDisposable instance2 = genartor2.GenerateProxy<IDisposable>(instanceProviderMock.Object, typeof(IDisposable), typeof(IGrapth));
 
             instance1.ShouldNotBeNull();
@@ -101,8 +101,8 @@ namespace MassiveDynamicProxyGenerator.Tests
                 cfg.UseLocalCache = false;
             });
 
-            IGrapth instance1 = genartor1.GenerateProxy<IGrapth>(instanceProviderMock.Object, typeof(IDisposable), typeof(ICloneable));
-            IDisposable instance2 = genartor2.GenerateProxy<IDisposable>(instanceProviderMock.Object, typeof(ICloneable), typeof(IGrapth));
+            IGrapth instance1 = genartor1.GenerateProxy<IGrapth>(instanceProviderMock.Object, typeof(IDisposable), typeof(IPrototype));
+            IDisposable instance2 = genartor2.GenerateProxy<IDisposable>(instanceProviderMock.Object, typeof(IPrototype), typeof(IGrapth));
 
             instance1.ShouldNotBeNull();
             instance2.ShouldNotBeNull();
