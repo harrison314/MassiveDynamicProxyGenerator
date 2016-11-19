@@ -48,6 +48,7 @@
     <Compile Include="CallableInterceptorAdapter.cs" />
     <Compile Include="DefaultInstances.cs" />
     <Compile Include="DynamicProxy\DynamicInvocation.cs" />
+    <Compile Include="FullFrameworkExtensions.cs" />
     <Compile Include="GlobalSuppressions.cs" />
     <Compile Include="GuidTypeNameCreator.cs" />
     <Compile Include="ICallableInterceptor.cs" />

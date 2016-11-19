@@ -393,8 +393,14 @@ namespace MassiveDynamicProxyGenerator
                 generator.ImplementInterface(interfaceTypes[i]);
             }
 
+#if COREFX
+            TypeInfo proxyType = typeBuilder.CreateTypeInfo();
+            return proxyType.AsType();
+#else
             Type proxyType = typeBuilder.CreateType();
             return proxyType;
+#endif
+
         }
 
         private Type BuildProxyType(Type interfaceType, bool containsProperies)
@@ -410,7 +416,7 @@ namespace MassiveDynamicProxyGenerator
 
         private object CreateTypedProxyInstance(Type proxyType, IInterceptor interceptor)
         {
-            ConstructorInfo constructor = proxyType.GetConstructor(new Type[] { typeof(IInterceptor) });
+            ConstructorInfo constructor = proxyType.GetTypeInfo().GetConstructor(new Type[] { typeof(IInterceptor) });
             ParameterExpression param = Expression.Parameter(typeof(IInterceptor), "interceptor");
             return Expression.Lambda<Func<IInterceptor, object>>(Expression.New(constructor, new Expression[] { param }), param).Compile().Invoke(interceptor);
         }
@@ -428,7 +434,7 @@ namespace MassiveDynamicProxyGenerator
 
         private object CreateGenerateInstanceProxy(Type proxyType, IInstanceProvicer instanceProvider)
         {
-            ConstructorInfo constructor = proxyType.GetConstructor(new Type[] { typeof(IInstanceProvicer) });
+            ConstructorInfo constructor = proxyType.GetTypeInfo().GetConstructor(new Type[] { typeof(IInstanceProvicer) });
             ParameterExpression param = Expression.Parameter(typeof(IInstanceProvicer), "instanceProvider");
             return Expression.Lambda<Func<IInstanceProvicer, object>>(Expression.New(constructor, new Expression[] { param }), param).Compile().Invoke(instanceProvider);
         }
@@ -447,7 +453,7 @@ namespace MassiveDynamicProxyGenerator
         private T CreateDecoratorInstance<T>(ICallableInterceptor interceptor, T parent, Type t, Type proxyType)
             where T : class
         {
-            ConstructorInfo constructor = proxyType.GetConstructor(new Type[] { typeof(ICallableInterceptor), t });
+            ConstructorInfo constructor = proxyType.GetTypeInfo().GetConstructor(new Type[] { typeof(ICallableInterceptor), t });
             ParameterExpression interceptorParam = Expression.Parameter(typeof(ICallableInterceptor), "interceptor");
             ParameterExpression parentParam = Expression.Parameter(typeof(T), "parent");
             return Expression.Lambda<Func<ICallableInterceptor, T, T>>(Expression.New(constructor, new Expression[] { interceptorParam, parentParam }), interceptorParam, parentParam)
@@ -470,7 +476,13 @@ namespace MassiveDynamicProxyGenerator
             // TODO: pre debug
             // AssemblyBuilder asmBuilder = Thread.GetDomain().DefineDynamicAssembly(asmName, AssemblyBuilderAccess.RunAndSave, @"C:\Users\harrison\Documents\Visual Studio 2015\Projects\MassiveDynamicProxyGenerator\MassiveDynamicProxyGenerator\bin\Debug");
             // ModuleBuilder modBuilder = asmBuilder.DefineDynamicModule("DynamicProxyModule", "Testing.dll");
+
+#if COREFX
+            AssemblyBuilder asmBuilder = AssemblyBuilder.DefineDynamicAssembly(asmName, AssemblyBuilderAccess.Run);
+#else
             AssemblyBuilder asmBuilder = Thread.GetDomain().DefineDynamicAssembly(asmName, AssemblyBuilderAccess.Run);
+#endif
+
             ModuleBuilder modBuilder = asmBuilder.DefineDynamicModule("DynamicProxyModule");
 
             this.assemblyBuilder = asmBuilder;

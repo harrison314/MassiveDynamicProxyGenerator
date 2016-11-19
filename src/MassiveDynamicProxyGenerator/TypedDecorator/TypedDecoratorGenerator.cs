@@ -72,7 +72,7 @@ namespace MassiveDynamicProxyGenerator.TypedDecorator
                 new Type[] { this.callableInterceptorDescriptor.Type, interfaceType });
 
             ILGenerator il = constructorBuilder.GetILGenerator();
-            ConstructorInfo conObj = typeof(object).GetConstructor(new Type[0]);
+            ConstructorInfo conObj = typeof(object).GetTypeInfo().GetConstructor(new Type[0]);
             il.Emit(OpCodes.Ldarg_0);
             il.Emit(OpCodes.Call, conObj);
             il.Emit(OpCodes.Nop);
@@ -116,7 +116,7 @@ namespace MassiveDynamicProxyGenerator.TypedDecorator
             LocalBuilder invocationVar = il.DeclareLocal(this.callableInvocationDescriptor.Type);
             il.Emit(OpCodes.Ldarg_0);
             il.Emit(OpCodes.Ldftn, context.ProcessMethod);
-            il.Emit(OpCodes.Newobj, this.actionType.GetConstructors().First());
+            il.Emit(OpCodes.Newobj, this.actionType.GetTypeInfo().GetConstructors().First());
 
             il.Emit(OpCodes.Newobj, this.callableInvocationDescriptor.Constructor);
             il.Emit(OpCodes.Stloc, invocationVar);
@@ -147,7 +147,7 @@ namespace MassiveDynamicProxyGenerator.TypedDecorator
             il.Emit(OpCodes.Ldstr, interfaceMethod.Name);
             il.Emit(OpCodes.Callvirt, this.callableInvocationDescriptor.MethodName.SetMethod);
 
-            MethodInfo getTypeFromhandle = typeof(Type).GetMethod(nameof(Type.GetTypeFromHandle), BindingFlags.Static | BindingFlags.Public);
+            MethodInfo getTypeFromhandle = typeof(Type).GetTypeInfo().GetMethod(nameof(Type.GetTypeFromHandle), BindingFlags.Static | BindingFlags.Public);
 
             // invocation.OriginalType = typeof(interfaceType);
             il.Emit(OpCodes.Nop);
@@ -272,7 +272,7 @@ namespace MassiveDynamicProxyGenerator.TypedDecorator
                     il.Emit(OpCodes.Ldc_I4, i); // TODO: refaktor
                     il.Emit(OpCodes.Ldelem_Ref);
 
-                    if (methodParameters[i].ParameterType.IsValueType)
+                    if (methodParameters[i].ParameterType.GetTypeInfo().IsValueType)
                     {
                         il.Emit(OpCodes.Unbox_Any, methodParameters[i].ParameterType);
                     }
@@ -284,7 +284,7 @@ namespace MassiveDynamicProxyGenerator.TypedDecorator
                 }
 
                 il.Emit(OpCodes.Callvirt, originalMethod);
-                if (originalMethod.ReturnType.IsValueType)
+                if (originalMethod.ReturnType.GetTypeInfo().IsValueType)
                 {
                     il.Emit(OpCodes.Box, originalMethod.ReturnType);
                 }
@@ -310,7 +310,7 @@ namespace MassiveDynamicProxyGenerator.TypedDecorator
                     il.Emit(OpCodes.Ldc_I4, i); // TODO: refaktor
                     il.Emit(OpCodes.Ldelem_Ref);
 
-                    if (methodParameters[i].ParameterType.IsValueType)
+                    if (methodParameters[i].ParameterType.GetTypeInfo().IsValueType)
                     {
                         il.Emit(OpCodes.Unbox_Any, methodParameters[i].ParameterType);
                     }

@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using System.Linq;
 using System.Reflection.Emit;
+using System.Reflection;
 using System.Runtime.CompilerServices;
 using System.Text;
 using System.Threading.Tasks;
@@ -38,7 +39,7 @@ namespace MassiveDynamicProxyGenerator.Utils
             }
 #endif
 
-            if (type.IsValueType)
+            if (type.GetTypeInfo().IsValueType)
             {
                 il.Emit(OpCodes.Unbox_Any, type);
             }
@@ -73,7 +74,7 @@ namespace MassiveDynamicProxyGenerator.Utils
             }
 #endif
 
-            if (type.IsValueType)
+            if (type.GetTypeInfo().IsValueType)
             {
                 il.Emit(OpCodes.Box, type);
             }

@@ -42,7 +42,7 @@ namespace MassiveDynamicProxyGenerator.TypedDecorator
         public CallableInterceptorDescriptor()
         {
             this.Type = typeof(ICallableInterceptor);
-            this.Intercept = this.Type.GetMethod(nameof(ICallableInterceptor.Intercept), new Type[] { typeof(ICallableInvocation) });
+            this.Intercept = this.Type.GetTypeInfo().GetMethod(nameof(ICallableInterceptor.Intercept), new Type[] { typeof(ICallableInvocation) });
         }
     }
 }

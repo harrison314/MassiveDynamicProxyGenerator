@@ -174,7 +174,7 @@ namespace MassiveDynamicProxyGenerator.TypedDecorator
         /// </returns>
         public MethodBase GetConcreteMethod()
         {
-            MethodInfo info = this.originalType.GetMethod(this.methodName, this.argumentTypes);
+            MethodInfo info = this.originalType.GetTypeInfo().GetMethod(this.methodName, this.argumentTypes);
 
             return info;
         }

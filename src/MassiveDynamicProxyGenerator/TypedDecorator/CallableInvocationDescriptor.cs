@@ -115,13 +115,14 @@ namespace MassiveDynamicProxyGenerator.TypedDecorator
         {
             Type type = typeof(CallableInvocation);
             this.Type = type;
-            this.ReturnValue = type.GetProperty(nameof(ICallableInvocation.ReturnValue));
-            this.Arguments = type.GetProperty(nameof(ICallableInvocation.Arguments));
-            this.ArgumentTypes = type.GetProperty(nameof(ICallableInvocation.ArgumentTypes));
-            this.MethodName = type.GetProperty(nameof(ICallableInvocation.MethodName));
-            this.OriginalType = type.GetProperty(nameof(ICallableInvocation.OriginalType));
-            this.ReturnType = type.GetProperty(nameof(ICallableInvocation.ReturnType));
-            this.Constructor = type.GetConstructor(new Type[] { typeof(Action<ICallableInvocation>) });
+            var typeInfo = type.GetTypeInfo();
+            this.ReturnValue = typeInfo.GetProperty(nameof(ICallableInvocation.ReturnValue));
+            this.Arguments = typeInfo.GetProperty(nameof(ICallableInvocation.Arguments));
+            this.ArgumentTypes = typeInfo.GetProperty(nameof(ICallableInvocation.ArgumentTypes));
+            this.MethodName = typeInfo.GetProperty(nameof(ICallableInvocation.MethodName));
+            this.OriginalType = typeInfo.GetProperty(nameof(ICallableInvocation.OriginalType));
+            this.ReturnType = typeInfo.GetProperty(nameof(ICallableInvocation.ReturnType));
+            this.Constructor = typeInfo.GetConstructor(new Type[] { typeof(Action<ICallableInvocation>) });
         }
     }
 }

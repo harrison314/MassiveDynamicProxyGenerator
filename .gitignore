@@ -191,3 +191,5 @@ _Pvt_Extensions/
 ModelManifest.xml
 /.vs/config
 /Help
+/src/.vs
+/src/MassiveDynamicProxyGenerator.NetStandard/project.lock.json

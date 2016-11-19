@@ -15,7 +15,7 @@ namespace MassiveDynamicProxyGenerator.DynamicProxy
     /// <seealso cref="System.Dynamic.DynamicObject" />
     internal class DynamicProxyObject : DynamicObject
     {
-        private static readonly FieldInfo CallSiteBinderCache = typeof(CallSiteBinder).GetField("Cache", BindingFlags.NonPublic | BindingFlags.Instance);
+        private static readonly FieldInfo CallSiteBinderCache = typeof(CallSiteBinder).GetTypeInfo().GetField("Cache", BindingFlags.NonPublic | BindingFlags.Instance);
 
         private readonly IInterceptor interceptor;
 
@@ -64,14 +64,14 @@ namespace MassiveDynamicProxyGenerator.DynamicProxy
             IDictionary<Type, object> cache = (IDictionary<Type, object>)CallSiteBinderCache.GetValue(binder);
             Type ftype = cache.Select(t => t.Key).FirstOrDefault(t =>
             t != null
-            && t.IsGenericType
-            && t.GetGenericTypeDefinition() == typeof(Func<,,>));
+            && t.GetTypeInfo().IsGenericType
+            && t.GetTypeInfo().GetGenericTypeDefinition() == typeof(Func<,,>));
             if (ftype == null)
             {
                 return null;
             }
 
-            Type[] genargs = ftype.GetGenericArguments();
+            Type[] genargs = ftype.GetTypeInfo().GetGenericArguments();
             return genargs[2];
         }
     }

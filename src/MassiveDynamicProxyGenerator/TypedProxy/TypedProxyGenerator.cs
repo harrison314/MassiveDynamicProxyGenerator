@@ -64,7 +64,7 @@ namespace MassiveDynamicProxyGenerator.TypedProxy
                 new Type[] { typeof(IInterceptor) });
 
             ILGenerator il = constructorBuilder.GetILGenerator();
-            ConstructorInfo conObj = typeof(object).GetConstructor(new Type[0]);
+            ConstructorInfo conObj = typeof(object).GetTypeInfo().GetConstructor(new Type[0]);
             il.Emit(OpCodes.Ldarg_0);
             il.Emit(OpCodes.Call, conObj);
             il.Emit(OpCodes.Nop);
@@ -99,7 +99,7 @@ namespace MassiveDynamicProxyGenerator.TypedProxy
                 il.Emit(OpCodes.Dup);
                 il.Emit(OpCodes.Ldc_I4, i);
                 il.Emit(OpCodes.Ldarg, i + 1);
-                if (parameters[i].IsValueType)
+                if (parameters[i].GetTypeInfo().IsValueType)
                 {
                     il.Emit(OpCodes.Box, parameters[i]);
                 }
@@ -115,7 +115,7 @@ namespace MassiveDynamicProxyGenerator.TypedProxy
             il.Emit(OpCodes.Ldstr, interfaceMethod.Name);
             il.Emit(OpCodes.Callvirt, this.descriptor.MethodName.SetMethod);
 
-            MethodInfo getTypeFromhandle = typeof(Type).GetMethod(nameof(Type.GetTypeFromHandle), BindingFlags.Static | BindingFlags.Public);
+            MethodInfo getTypeFromhandle = typeof(Type).GetTypeInfo().GetMethod(nameof(Type.GetTypeFromHandle), BindingFlags.Static | BindingFlags.Public);
 
             // invocation.OriginalType = typeof(interfaceType);
             il.Emit(OpCodes.Nop);
@@ -154,7 +154,7 @@ namespace MassiveDynamicProxyGenerator.TypedProxy
             il.Emit(OpCodes.Ldfld, this.interceptorField);
             il.Emit(OpCodes.Ldloc, invocationVar);
             il.Emit(OpCodes.Ldc_I4_0); // da na stack false
-            il.Emit(OpCodes.Callvirt, typeof(IInterceptor).GetMethod(nameof(IInterceptor.Intercept)));
+            il.Emit(OpCodes.Callvirt, typeof(IInterceptor).GetTypeInfo().GetMethod(nameof(IInterceptor.Intercept)));
 
             if (interfaceMethod.ReturnType == typeof(void))
             {
@@ -166,7 +166,7 @@ namespace MassiveDynamicProxyGenerator.TypedProxy
                 il.Emit(OpCodes.Nop);
                 il.Emit(OpCodes.Ldloc, invocationVar);
                 il.Emit(OpCodes.Callvirt, this.descriptor.ReturnValue.GetMethod);
-                if (interfaceMethod.ReturnType.IsValueType)
+                if (interfaceMethod.ReturnType.GetTypeInfo().IsValueType)
                 {
                     il.Emit(OpCodes.Unbox_Any, interfaceMethod.ReturnType);
                 }

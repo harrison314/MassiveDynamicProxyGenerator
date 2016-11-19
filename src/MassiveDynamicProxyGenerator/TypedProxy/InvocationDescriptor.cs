@@ -111,13 +111,14 @@ namespace MassiveDynamicProxyGenerator.TypedProxy
         private InvocationDescriptor(Type type)
         {
             this.Type = type;
-            this.ReturnValue = type.GetProperty(nameof(IInvocation.ReturnValue));
-            this.Arguments = type.GetProperty(nameof(IInvocation.Arguments));
-            this.ArgumentTypes = type.GetProperty(nameof(IInvocation.ArgumentTypes));
-            this.MethodName = type.GetProperty(nameof(IInvocation.MethodName));
-            this.OriginalType = type.GetProperty(nameof(IInvocation.OriginalType));
-            this.ReturnType = type.GetProperty(nameof(IInvocation.ReturnType));
-            this.Constructor = type.GetConstructor(new Type[0]);
+            var typeInfo = type.GetTypeInfo();
+            this.ReturnValue = typeInfo.GetProperty(nameof(IInvocation.ReturnValue));
+            this.Arguments = typeInfo.GetProperty(nameof(IInvocation.Arguments));
+            this.ArgumentTypes = typeInfo.GetProperty(nameof(IInvocation.ArgumentTypes));
+            this.MethodName = typeInfo.GetProperty(nameof(IInvocation.MethodName));
+            this.OriginalType = typeInfo.GetProperty(nameof(IInvocation.OriginalType));
+            this.ReturnType = typeInfo.GetProperty(nameof(IInvocation.ReturnType));
+            this.Constructor = typeInfo.GetConstructor(new Type[0]);
         }
 
         /// <summary>
@@ -147,13 +148,13 @@ namespace MassiveDynamicProxyGenerator.TypedProxy
                 throw new ArgumentNullException(nameof(type));
             }
 
-            if (!typeof(IInvocation).IsAssignableFrom(type))
+            if (!typeof(IInvocation).GetTypeInfo().IsAssignableFrom(type))
             {
                 string message = string.Format("Type {0} is not {1}", type.FullName, nameof(IInvocation));
                 throw new ArgumentNullException(message);
             }
 
-            if (type.GetConstructor(new Type[0]) == null)
+            if (type.GetTypeInfo().GetConstructor(new Type[0]) == null)
             {
                 string message = string.Format("Type {0} is must have nonparametric public constructor.", type.FullName);
                 throw new ArgumentNullException(message);

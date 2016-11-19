@@ -76,7 +76,7 @@ namespace MassiveDynamicProxyGenerator
                 throw new ArgumentNullException(nameof(interfaceType));
             }
 
-            if (!interfaceType.IsInterface)
+            if (!interfaceType.GetTypeInfo().IsInterface)
             {
                 string message = string.Format("Type {0} is not interface.", interfaceType.FullName);
                 throw new InvalidOperationException(message);
@@ -107,7 +107,7 @@ namespace MassiveDynamicProxyGenerator
                 this.ImplementSimpleInterface(interfaceType);
             }
 
-            foreach (Type secundaryInterfaceType in interfaceType.GetInterfaces())
+            foreach (Type secundaryInterfaceType in interfaceType.GetTypeInfo().GetInterfaces())
             {
                 if (this.implementInterfaces.Add(secundaryInterfaceType))
                 {
@@ -141,7 +141,7 @@ namespace MassiveDynamicProxyGenerator
                 new Type[] { });
 
             ILGenerator il = constructorBuilder.GetILGenerator();
-            ConstructorInfo conObj = typeof(object).GetConstructor(new Type[0]);
+            ConstructorInfo conObj = typeof(object).GetTypeInfo().GetConstructor(new Type[0]);
             il.Emit(OpCodes.Ldarg_0);
             il.Emit(OpCodes.Call, conObj);
             il.Emit(OpCodes.Nop);
@@ -181,7 +181,7 @@ namespace MassiveDynamicProxyGenerator
         /// <param name="context">The context.</param>
         protected virtual void GenerateMethod(MethodInfo interfaceMethod, Type[] parameters, Type interfaceType, ILGenerator il, T context)
         {
-            ConstructorInfo ci = typeof(NotImplementedException).GetConstructor(new Type[0]);
+            ConstructorInfo ci = typeof(NotImplementedException).GetTypeInfo().GetConstructor(new Type[0]);
 
             il.Emit(OpCodes.Nop);
             il.Emit(OpCodes.Newobj, ci);
@@ -238,7 +238,7 @@ namespace MassiveDynamicProxyGenerator
         /// <param name="context">The context.</param>
         protected virtual void GenerateSetProperty(PropertyInfo interfaceProperity, Type interfaceType, ILGenerator il, T context)
         {
-            ConstructorInfo ci = typeof(NotImplementedException).GetConstructor(new Type[0]);
+            ConstructorInfo ci = typeof(NotImplementedException).GetTypeInfo().GetConstructor(new Type[0]);
 
             il.Emit(OpCodes.Nop);
             il.Emit(OpCodes.Newobj, ci);
@@ -254,7 +254,7 @@ namespace MassiveDynamicProxyGenerator
         /// <param name="context">The context.</param>
         protected virtual void GenerateGetProperty(PropertyInfo interfaceProperity, Type interfaceType, ILGenerator il, T context)
         {
-            ConstructorInfo ci = typeof(NotImplementedException).GetConstructor(new Type[0]);
+            ConstructorInfo ci = typeof(NotImplementedException).GetTypeInfo().GetConstructor(new Type[0]);
 
             il.Emit(OpCodes.Nop);
             il.Emit(OpCodes.Newobj, ci);
@@ -263,7 +263,7 @@ namespace MassiveDynamicProxyGenerator
 
         private void ImplementSimpleInterface(Type interfaceType)
         {
-            foreach (MethodInfo methodInfo in interfaceType.GetMethods(BindingFlags.Public | BindingFlags.Instance))
+            foreach (MethodInfo methodInfo in interfaceType.GetTypeInfo().GetMethods(BindingFlags.Public | BindingFlags.Instance))
             {
                 if (!methodInfo.IsSpecialName)
                 {
@@ -271,7 +271,7 @@ namespace MassiveDynamicProxyGenerator
                 }
             }
 
-            foreach (PropertyInfo properityInfo in interfaceType.GetProperties(BindingFlags.Public | BindingFlags.Instance))
+            foreach (PropertyInfo properityInfo in interfaceType.GetTypeInfo().GetProperties(BindingFlags.Public | BindingFlags.Instance))
             {
                 this.ImplementedProperity(this.TypeBuilder, interfaceType, properityInfo, default(T));
             }
