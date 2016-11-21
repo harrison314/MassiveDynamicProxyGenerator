@@ -1,0 +1,122 @@
+<?xml version="1.0" encoding="utf-8"?>
+<Project ToolsVersion="14.0" DefaultTargets="Build" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <Import Project="$(MSBuildExtensionsPath)\$(MSBuildToolsVersion)\Microsoft.Common.props" Condition="Exists('$(MSBuildExtensionsPath)\$(MSBuildToolsVersion)\Microsoft.Common.props')" />
+  <PropertyGroup>
+    <Configuration Condition=" '$(Configuration)' == '' ">Debug</Configuration>
+    <Platform Condition=" '$(Platform)' == '' ">AnyCPU</Platform>
+    <ProjectGuid>{F748DA74-6DF9-4ED7-8221-D64DFA13DD3C}</ProjectGuid>
+    <OutputType>Library</OutputType>
+    <AppDesignerFolder>Properties</AppDesignerFolder>
+    <RootNamespace>MassiveDynamicProxyGenerator.NuGet</RootNamespace>
+    <AssemblyName>MassiveDynamicProxyGenerator.NuGet</AssemblyName>
+    <TargetFrameworkVersion>v4.6.1</TargetFrameworkVersion>
+    <FileAlignment>512</FileAlignment>
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|AnyCPU' ">
+    <DebugSymbols>true</DebugSymbols>
+    <DebugType>full</DebugType>
+    <Optimize>false</Optimize>
+    <OutputPath>bin\Debug\</OutputPath>
+    <DefineConstants>DEBUG;TRACE</DefineConstants>
+    <ErrorReport>prompt</ErrorReport>
+    <WarningLevel>4</WarningLevel>
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Release|AnyCPU' ">
+    <DebugType>pdbonly</DebugType>
+    <Optimize>true</Optimize>
+    <OutputPath>bin\Release\</OutputPath>
+    <DefineConstants>TRACE</DefineConstants>
+    <ErrorReport>prompt</ErrorReport>
+    <WarningLevel>4</WarningLevel>
+  </PropertyGroup>
+  <ItemGroup>
+    <Reference Include="System" />
+    <Reference Include="System.Core" />
+    <Reference Include="System.Xml.Linq" />
+    <Reference Include="System.Data.DataSetExtensions" />
+    <Reference Include="Microsoft.CSharp" />
+    <Reference Include="System.Data" />
+    <Reference Include="System.Net.Http" />
+    <Reference Include="System.Xml" />
+  </ItemGroup>
+  <ItemGroup>
+    <Compile Include="Properties\AssemblyInfo.cs" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="MassiveDynamicProxyGenerator.nuspec" />
+    <None Include="packages.config" />
+  </ItemGroup>
+  <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
+
+
+
+  <Target Name="BeforeBuild">
+    
+  </Target>
+  <Target Name="AfterBuild">
+    <Delete Files="$(OutputPath)$(AssemblyName).dll;$(OutputPath)$(AssemblyName).pdb" />
+
+    <ItemGroup>
+      <SourseProjectNetFull Include="..\MassiveDynamicProxyGenerator\MassiveDynamicProxyGenerator.csproj" />
+      <SourseProjectNetStd Include="..\MassiveDynamicProxyGenerator.NetStandard\MassiveDynamicProxyGenerator.NetStandard.xproj" />
+    </ItemGroup>
+    
+
+    <!--<MSBuild Projects="@(SourseProjectNetFull)" Properties="TargetFrameworkVersion=v45" />
+    <MSBuild Projects="@(SourseProjectNetFull)" Properties="TargetFrameworkVersion=v46" />
+    <MSBuild Projects="@(SourseProjectNetFull)" Properties="TargetFrameworkVersion=v461" />-->
+    
+    
+    <PropertyGroup>
+      <NugetFolder>$(OutputPath)nuget\</NugetFolder>
+      <NugetFolderNet45>$(NugetFolder)lib\net45\</NugetFolderNet45>
+      <NugetFolderNet46>$(NugetFolder)lib\net46\</NugetFolderNet46>
+      <NugetFolderNet461>$(NugetFolder)lib\net461\</NugetFolderNet461>
+      <NugetFolderNetCore>$(NugetFolder)lib\netstandard1.6\</NugetFolderNetCore>
+      <NuspecFile>$(NugetFolder)MassiveDynamicProxyGenerator.nuspec</NuspecFile>
+    </PropertyGroup>
+    <RemoveDir Directories="$(NugetFolder)" />
+    <MakeDir Directories="$(NugetFolder)" />
+    <MakeDir Directories="$(NugetFolder)lib" />
+    <MakeDir Directories="$(NugetFolderNet45)" />
+    <MakeDir Directories="$(NugetFolderNet46)" />
+    <MakeDir Directories="$(NugetFolderNet461)" />
+    <MakeDir Directories="$(NugetFolderNetCore)" />
+
+    <MSBuild Projects="@(SourseProjectNetStd)" />
+    <ItemGroup>
+      <FileNetCore Include="..\MassiveDynamicProxyGenerator.NetStandard\bin\$(Configuration)\netstandard1.6\MassiveDynamicProxyGenerator.dll" />
+      <FileNetCore Include="..\MassiveDynamicProxyGenerator.NetStandard\bin\$(Configuration)\netstandard1.6\MassiveDynamicProxyGenerator.xml" />
+    </ItemGroup>
+    <Copy SourceFiles="@(FileNetCore)" DestinationFiles="@(FileNetCore->'$(NugetFolderNetCore)%(RecursiveDir)%(Filename)%(Extension)')" />
+
+    <MSBuild Projects="@(SourseProjectNetFull)" Properties="TargetFrameworkVersion=v4.5" />
+    <ItemGroup>
+      <FileNet45 Include="..\MassiveDynamicProxyGenerator\bin\$(Configuration)\MassiveDynamicProxyGenerator.dll" />
+      <FileNet45 Include="..\MassiveDynamicProxyGenerator\bin\$(Configuration)\MassiveDynamicProxyGenerator.xml" />
+    </ItemGroup>
+    <Copy SourceFiles="@(FileNet45)" DestinationFiles="@(FileNet45->'$(NugetFolderNet45)%(RecursiveDir)%(Filename)%(Extension)')" />
+
+    <MSBuild Projects="@(SourseProjectNetFull)" Properties="TargetFrameworkVersion=v4.6" />
+    <ItemGroup>
+      <FileNet46 Include="..\MassiveDynamicProxyGenerator\bin\$(Configuration)\MassiveDynamicProxyGenerator.dll" />
+      <FileNet46 Include="..\MassiveDynamicProxyGenerator\bin\$(Configuration)\MassiveDynamicProxyGenerator.xml" />
+    </ItemGroup>
+    <Copy SourceFiles="@(FileNet46)" DestinationFiles="@(FileNet46->'$(NugetFolderNet46)%(RecursiveDir)%(Filename)%(Extension)')" />
+
+    <MSBuild Projects="@(SourseProjectNetFull)" Properties="TargetFrameworkVersion=v4.6.1" />
+    <ItemGroup>
+      <FileNet461 Include="..\MassiveDynamicProxyGenerator\bin\$(Configuration)\MassiveDynamicProxyGenerator.dll" />
+      <FileNet461 Include="..\MassiveDynamicProxyGenerator\bin\$(Configuration)\MassiveDynamicProxyGenerator.xml" />
+    </ItemGroup>
+    <Copy SourceFiles="@(FileNet461)" DestinationFiles="@(FileNet461->'$(NugetFolderNet461)%(RecursiveDir)%(Filename)%(Extension)')" />
+    
+    <Copy SourceFiles="MassiveDynamicProxyGenerator.nuspec" DestinationFolder="$(NugetFolder)" />
+   
+    <ItemGroup>
+      <NugetExe Include="..\packages\NuGet.CommandLine.*\tools\Nuget.exe" />
+    </ItemGroup>
+    <Error Condition="'@(NugetExe-&gt;Count())' != '1'" Text="Not only one version of nuget NuGet.CommandLine in package folder." />
+    <Exec Command="@(NugetExe) pack &quot;$(NuspecFile)&quot; -OutputDirectory $(OutputPath)" />
+  </Target>
+</Project>
