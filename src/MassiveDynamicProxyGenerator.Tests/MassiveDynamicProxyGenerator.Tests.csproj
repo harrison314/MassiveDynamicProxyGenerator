@@ -72,6 +72,7 @@
     <Compile Include="TestExtensions\ExceptionAssertion.cs" />
     <Compile Include="TestExtensions\TypeAssertExtensions.cs" />
     <Compile Include="TestInterfaces\ICompositeInterface.cs" />
+    <Compile Include="TestInterfaces\IGenericInterface.cs" />
     <Compile Include="TestInterfaces\IGrapth.cs" />
     <Compile Include="TestInterfaces\INonReturn.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />

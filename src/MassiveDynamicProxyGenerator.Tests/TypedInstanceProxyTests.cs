@@ -93,17 +93,49 @@ namespace MassiveDynamicProxyGenerator.Tests
             Mock<INonReturn> realMock = new Mock<INonReturn>(MockBehavior.Strict);
             realMock.Setup(t => t.MoreArguments("a", ex, sb, transform)).Verifiable();
 
-            Mock<IInstanceProvicer> instaceprovoder = new Mock<IInstanceProvicer>(MockBehavior.Strict);
-            instaceprovoder.Setup(t => t.GetInstance())
+            Mock<IInstanceProvicer> instaceProvoder = new Mock<IInstanceProvicer>(MockBehavior.Strict);
+            instaceProvoder.Setup(t => t.GetInstance())
                 .Returns(realMock.Object)
                 .Verifiable();
 
             ProxygGenerator generator = new ProxygGenerator();
 
-            INonReturn instance = generator.GenerateInstanceProxy<INonReturn>(instaceprovoder.Object);
+            INonReturn instance = generator.GenerateInstanceProxy<INonReturn>(instaceProvoder.Object);
             instance.MoreArguments("a", ex, sb, transform);
 
-            instaceprovoder.VerifyAll();
+            instaceProvoder.VerifyAll();
+            realMock.VerifyAll();
+        }
+
+        [TestMethod]
+        public void GenerateInstanceProxy_Generic_CreateInstance()
+        {
+            StringBuilder sbInstance = new StringBuilder();
+            Mock<IInterceptor> interceptor = new Mock<IInterceptor>(MockBehavior.Strict);
+            interceptor.Setup(t => t.Intercept(It.IsAny<IInvocation>(), false))
+                .Verifiable();
+
+            Mock<IGenericInterface<StringBuilder>> realMock = new Mock<IGenericInterface<StringBuilder>>(MockBehavior.Strict);
+            realMock.Setup(t => t.Get("any")).Returns(sbInstance).Verifiable();
+            realMock.Setup(t => t.PushNew("new", sbInstance)).Verifiable();
+            realMock.SetupGet(t => t.Value).Returns(sbInstance).Verifiable();
+            realMock.SetupSet(t => t.Value = It.IsNotNull<StringBuilder>()).Verifiable();
+
+            Mock<IInstanceProvicer> instaceProvoder = new Mock<IInstanceProvicer>(MockBehavior.Strict);
+            instaceProvoder.Setup(t => t.GetInstance())
+                .Returns(realMock.Object)
+                .Verifiable();
+
+            ProxygGenerator generator = new ProxygGenerator();
+
+            IGenericInterface<StringBuilder> instance = generator.GenerateInstanceProxy<IGenericInterface<StringBuilder>>(instaceProvoder.Object);
+            instance.ShouldNotBeNull();
+
+            instance.Get("any").ShouldBeSameAs(sbInstance);
+            instance.PushNew("new", sbInstance);
+            instance.Value = new StringBuilder(); ;
+            instance.Value.ShouldBeSameAs(sbInstance);
+
             realMock.VerifyAll();
         }
     }

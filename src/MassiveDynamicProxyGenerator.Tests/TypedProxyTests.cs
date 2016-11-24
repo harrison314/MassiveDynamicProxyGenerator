@@ -176,5 +176,24 @@ namespace MassiveDynamicProxyGenerator.Tests
 
             instance.DisplayName = "New text";
         }
+
+
+        [TestMethod]
+        public void GenerateProxy_Generic_CreateInstance()
+        {
+            Mock<IInterceptor> interceptor = new Mock<IInterceptor>(MockBehavior.Strict);
+            interceptor.Setup(t => t.Intercept(It.IsAny<IInvocation>(), false))
+                .Verifiable();
+
+            ProxygGenerator generator = new ProxygGenerator();
+
+            IGenericInterface<long> instance = generator.GenerateProxy<IGenericInterface<long>>(interceptor.Object, true);
+            instance.ShouldNotBeNull();
+
+            instance.Get("any name").ShouldBe(default(long));
+            instance.PushNew("new", 156L);
+            instance.Value = 45;
+            instance.Value.ShouldBe(default(long));
+        }
     }
 }

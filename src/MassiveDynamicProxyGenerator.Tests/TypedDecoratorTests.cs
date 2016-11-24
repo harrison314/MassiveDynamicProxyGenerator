@@ -146,5 +146,36 @@ namespace MassiveDynamicProxyGenerator.Tests
             parent.VerifyAll();
             interceptor.VerifyAll();
         }
+
+        [TestMethod]
+        public void GenerateDecorator_Generic_CreateInstance()
+        {
+            StringBuilder sbInstance = new StringBuilder();
+
+            Mock<IGenericInterface<StringBuilder>> realMock = new Mock<IGenericInterface<StringBuilder>>(MockBehavior.Strict);
+            realMock.Setup(t => t.Get("any")).Returns(sbInstance).Verifiable();
+            realMock.Setup(t => t.PushNew("new", sbInstance)).Verifiable();
+            realMock.SetupGet(t => t.Value).Returns(sbInstance).Verifiable();
+            realMock.SetupSet(t => t.Value = It.IsNotNull<StringBuilder>()).Verifiable();
+
+            Mock<ICallableInterceptor> interceptor = new Mock<ICallableInterceptor>(MockBehavior.Strict);
+            interceptor.Setup(t => t.Intercept(It.IsNotNull<ICallableInvocation>()))
+                .Callback<ICallableInvocation>(invocation =>
+                {
+                    invocation.Process();
+                });
+
+            ProxygGenerator generator = new ProxygGenerator();
+
+            IGenericInterface<StringBuilder> instance = generator.GenerateDecorator<IGenericInterface<StringBuilder>>(interceptor.Object, realMock.Object);
+            instance.ShouldNotBeNull();
+
+            instance.Get("any").ShouldBeSameAs(sbInstance);
+            instance.PushNew("new", sbInstance);
+            instance.Value = new StringBuilder(); ;
+            instance.Value.ShouldBeSameAs(sbInstance);
+
+            realMock.VerifyAll();
+        }
     }
 }
