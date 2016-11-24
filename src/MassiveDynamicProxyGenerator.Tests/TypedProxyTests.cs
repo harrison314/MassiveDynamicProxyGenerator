@@ -14,7 +14,7 @@ namespace MassiveDynamicProxyGenerator.Tests
     public class TypedProxyTests
     {
         [TestMethod]
-        public void TestNonParametric()
+        public void GenerateProxy_NonParametric_Succ()
         {
             Mock<IInterceptor> interceptor = new Mock<IInterceptor>(MockBehavior.Strict);
             interceptor.Setup(t => t.Intercept(It.Is<IInvocation>(q => q.Arguments.Length == 0 && q.MethodName == "EmptyMethod"), false))
@@ -31,7 +31,7 @@ namespace MassiveDynamicProxyGenerator.Tests
         }
 
         [TestMethod]
-        public void TestValueTypeParameter()
+        public void GenerateProxy_ValueTypeParameter_Succ()
         {
             Mock<IInterceptor> interceptor = new Mock<IInterceptor>(MockBehavior.Strict);
             interceptor.Setup(t => t.Intercept(It.Is<IInvocation>(q => q.Arguments.Length == 1 &&
@@ -50,7 +50,7 @@ namespace MassiveDynamicProxyGenerator.Tests
         }
 
         [TestMethod]
-        public void TestRefTypeParameter()
+        public void GenerateProxy_RefTypeParameter_Succ()
         {
             StringBuilder sbExcepted = new StringBuilder("klmn");
             Mock<IInterceptor> interceptor = new Mock<IInterceptor>(MockBehavior.Strict);
@@ -70,7 +70,7 @@ namespace MassiveDynamicProxyGenerator.Tests
         }
 
         [TestMethod]
-        public void TestReturnValueType()
+        public void GenerateProxy_ReturnValueType_Succ()
         {
             Mock<IInterceptor> interceptor = new Mock<IInterceptor>(MockBehavior.Strict);
             interceptor.Setup(t => t.Intercept(It.Is<IInvocation>(p => p.MethodName == "GetLenght"), false))
