@@ -7,6 +7,19 @@
     }
   },
 
+  "configurations": {
+    "Debug": {
+      "buildOptions": {
+        "define": [ "DEBUG" ]
+      }
+    },
+    "Release": {
+      "buildOptions": {
+        "define": [ "RELEASE" ]
+      }
+    }
+  },
+
   "dependencies": {
     "NETStandard.Library": "1.6.0",
     "MSTest.TestFramework": "1.0.0-preview",

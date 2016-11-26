@@ -7,8 +7,21 @@
       "include": [ "**/*.cs", "../MassiveDynamicProxyGenerator/**/*.cs" ]
     },
     "outputName": "MassiveDynamicProxyGenerator"
-
   },
+
+  "configurations": {
+    "Debug": {
+      "buildOptions": {
+        "define": [ "DEBUG" ]
+      }
+    },
+    "Release": {
+      "buildOptions": {
+        "define": [ "RELEASE" ]
+      }
+    }
+  },
+
   "dependencies": {
     "NETStandard.Library": "1.6.0",
     "System.Reflection.Emit": "4.3.0",
