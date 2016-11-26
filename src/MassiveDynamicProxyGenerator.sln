@@ -22,6 +22,8 @@ Project("{8BB2217D-0F2D-49D1-97BC-3654ED321F3B}") = "MassiveDynamicProxyGenerato
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "MassiveDynamicProxyGenerator.NuGet", "MassiveDynamicProxyGenerator.NuGet\MassiveDynamicProxyGenerator.NuGet.csproj", "{F748DA74-6DF9-4ED7-8221-D64DFA13DD3C}"
 EndProject
+Project("{8BB2217D-0F2D-49D1-97BC-3654ED321F3B}") = "SampleWebApplication", "Samples\SampleWebApplication\SampleWebApplication.xproj", "{4675F8DF-6D5B-43CF-B429-F53A4896322D}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -52,11 +54,16 @@ Global
 		{F748DA74-6DF9-4ED7-8221-D64DFA13DD3C}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{F748DA74-6DF9-4ED7-8221-D64DFA13DD3C}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{F748DA74-6DF9-4ED7-8221-D64DFA13DD3C}.Release|Any CPU.Build.0 = Release|Any CPU
+		{4675F8DF-6D5B-43CF-B429-F53A4896322D}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{4675F8DF-6D5B-43CF-B429-F53A4896322D}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{4675F8DF-6D5B-43CF-B429-F53A4896322D}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{4675F8DF-6D5B-43CF-B429-F53A4896322D}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
 	EndGlobalSection
 	GlobalSection(NestedProjects) = preSolution
 		{E7F2B2B2-318C-4F2B-BF76-086A230E59FA} = {7558D4C7-EEA6-4B86-8C46-B0639EEE79C8}
+		{4675F8DF-6D5B-43CF-B429-F53A4896322D} = {7558D4C7-EEA6-4B86-8C46-B0639EEE79C8}
 	EndGlobalSection
 EndGlobal

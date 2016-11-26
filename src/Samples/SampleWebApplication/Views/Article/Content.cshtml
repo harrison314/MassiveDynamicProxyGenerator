@@ -1,0 +1,57 @@
+﻿@model SampleWebApplication.Models.Article.ContentViewModel
+@using System.Text
+@{
+    ViewBag.Title = Model.Title;
+}
+
+<div class="row">
+    <div class="col-lg-10 col-md-10 col-sm-10 col-lg-offset-1 col-md-offset-1 col-sm-offset-1">
+        <h2>@ViewBag.Title</h2>
+        <a asp-action="Index" asp-controller="Article">Articles</a>
+        <br />
+    </div>
+</div>
+<div class="row">
+    <div class="col-lg-10 col-md-10 col-sm-10 col-lg-offset-1 col-md-offset-1 col-sm-offset-1">
+        <div class="panel panel-default">
+            <div class="panel-heading">
+                <a href="#" class="MakaleYazariAdi">@Model.Autor</a>
+              
+                <div class="clearfix"></div>
+            </div>
+            <div class="panel-body">
+                <div class="media">
+                    <div class="media-left">
+                        @Model.Title
+                    </div>
+                    <div class="media-body">
+                        <h4 class="media-heading">@Model.Title</h4>
+                         @RenderWithParagraphs(Model.Content)
+                        <div class="clearfix"></div>
+                        <div class="btn-group" role="group" id="BegeniButonlari">
+                            <button type="button" class="btn btn-default"><span class="glyphicon glyphicon-thumbs-up"></span></button>
+                            <button type="button" class="btn btn-default"><span class="glyphicon glyphicon-thumbs-down"></span></button>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+@functions {
+    public Microsoft.AspNetCore.Html.IHtmlContent RenderWithParagraphs(string content)
+    {
+        string[] lines = content.Split(Environment.NewLine.ToCharArray(), StringSplitOptions.RemoveEmptyEntries);
+        string html = lines.Aggregate(new StringBuilder(), (sb, line) =>
+        {
+            sb.Append("<p>");
+            sb.Append(HtmlEncoder.Encode(line));
+            sb.AppendLine("</p>");
+
+            return sb;
+        }).ToString();
+
+        return this.Html.Raw(html);
+    }
+}
