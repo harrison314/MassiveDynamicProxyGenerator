@@ -58,6 +58,7 @@
     <Compile Include="IInterceptor.cs" />
     <Compile Include="IInvocation.cs" />
     <Compile Include="InterceptorAdapter.cs" />
+    <Compile Include="IProxygGenerator.cs" />
     <Compile Include="ITypeNameCreator.cs" />
     <Compile Include="KoreanTypeNameCreator.cs" />
     <Compile Include="NullInterceptor.cs" />

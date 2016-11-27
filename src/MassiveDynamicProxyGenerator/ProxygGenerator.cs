@@ -15,7 +15,8 @@ namespace MassiveDynamicProxyGenerator
     /// <summary>
     /// Dynamic proxy generator.
     /// </summary>
-    public class ProxygGenerator
+    /// <seealso cref="MassiveDynamicProxyGenerator.IProxygGenerator" />
+    public class ProxygGenerator : IProxygGenerator
     {
         private static int assemblyCount = 1;
         private readonly string assemblyName;
