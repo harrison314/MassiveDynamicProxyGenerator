@@ -40,6 +40,7 @@ namespace SampleWebApplication.IocExtensions
         }
 
         public static IServiceCollection Decorate<TInterface, TServise>(this IServiceCollection services)
+            where TInterface : class
             where TServise : TInterface
 
         {
@@ -60,7 +61,7 @@ namespace SampleWebApplication.IocExtensions
                 ServiceDescriptor decoratedDescriptor = ServiceDescriptor.Describe(descriptor.ServiceType,
                 provider =>
                 {
-                    TServise instance = (TServise) GetInstanceFromDescriptor(provider, descriptor);
+                    TServise instance = (TServise)GetInstanceFromDescriptor(provider, descriptor);
                     ICallableInterceptor interceptor = (ICallableInterceptor)ActivatorUtilities.CreateInstance(provider, typeof(TInterceptor), interceptorParams);
                     return generator.GenerateDecorator<TServise>(interceptor, instance);
                 },
@@ -70,6 +71,45 @@ namespace SampleWebApplication.IocExtensions
 
                 services.Remove(descriptor);
             }
+
+            return services;
+        }
+
+        public static IServiceCollection AddProxy<TService>(this IServiceCollection services, IInterceptor interceptor)
+            where TService : class
+        {
+            if (interceptor == null)
+            {
+                throw new ArgumentNullException(nameof(interceptor));
+            }
+
+            ProxygGenerator generator = new ProxygGenerator();
+
+            services.AddTransient<TService>(t => generator.GenerateProxy<TService>(interceptor));
+
+            return services;
+        }
+
+        public static IServiceCollection AddProxy<TService>(this IServiceCollection services, Action<IInvocation> interceptor)
+            where TService : class
+        {
+            if (interceptor == null)
+            {
+                throw new ArgumentNullException(nameof(interceptor));
+            }
+
+            ProxygGenerator generator = new ProxygGenerator();
+            IInterceptor realInteceptor = new InterceptorAdapter((invocation, _) => interceptor(invocation));
+            services.AddTransient<TService>(t => generator.GenerateProxy<TService>(realInteceptor));
+
+            return services;
+        }
+
+        public static IServiceCollection AddProxy<TService>(this IServiceCollection services)
+            where TService : class
+        {
+            ProxygGenerator generator = new ProxygGenerator();
+            services.AddTransient<TService>(t => generator.GenerateProxy<TService>(NullInterceptor.Instance));
 
             return services;
         }
@@ -109,5 +149,4 @@ namespace SampleWebApplication.IocExtensions
             return descriptor.ImplementationFactory(provider);
         }
     }
-
 }

@@ -13,16 +13,20 @@ namespace SampleWebApplication.Controllers
     public class ArticleController : Controller
     {
         private readonly IArticleService articleServices;
+        private readonly INotificationServise notificationsService;
 
-        public ArticleController(IArticleService articleServices)
+        public ArticleController(IArticleService articleServices, INotificationServise notificationService)
         {
             this.articleServices = articleServices;
+            this.notificationsService = notificationService;
         }
 
         public IActionResult Index()
         {
             List<ArticleInfo> infos = this.articleServices.GetArticlesInfo();
             IndexViewModel model = new IndexViewModel(infos);
+            this.notificationsService.NotifyRead("ArticleMenu", null);
+
             return View(model);
         }
 
@@ -32,6 +36,8 @@ namespace SampleWebApplication.Controllers
             {
                 Article artcle = this.articleServices.ReadArticle(id);
                 ContentViewModel model = new ContentViewModel(artcle);
+                this.notificationsService.NotifyRead("Article", id);
+
                 return this.View(model);
             }
             catch (KeyNotFoundException)

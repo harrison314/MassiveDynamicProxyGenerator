@@ -57,7 +57,9 @@ namespace SampleWebApplication
 
             //services.Decorate<IArticleService, ArticleDecoratorService>();
 
-            services.Intercept<IArticleService, ChangeAutorInterceptor>("Ing interceptor");
+           // services.Intercept<IArticleService, ChangeAutorInterceptor>("Ing interceptor");
+
+            services.AddProxy<INotificationServise>();
 
             // Add framework services.
             services.AddApplicationInsightsTelemetry(Configuration);
