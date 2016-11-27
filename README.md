@@ -11,10 +11,11 @@ Fertures:
 * Dynamic proxy genrator, for intercept `dynamic` objects.
 * Proxy instance generator, for intercept.
 * Proxy instance generator, for control instancing real implementation (e.g. lazy loading).
-* Decorator generator.
+* Support .Net 4.0 (condition compilation)
+* Support return awaitable tasks in NullInterceptor (or create TaskInterceptor).
 
 The following platforms are supported:
-* .Net 4.0 and up, .Net Core 1.0.0
+* .Net 4.5, 4.6, 4.6.1 and up, .Net Core 1.0.0 (NetStandard 1.6)
 
 ## Getting started
 
@@ -143,3 +144,5 @@ HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER LIABILITY,
 WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING
 FROM, OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR
 OTHER DEALINGS IN THE SOFTWARE.
+
+Project started 14.8.2016.
