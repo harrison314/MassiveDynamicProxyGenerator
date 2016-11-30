@@ -19,7 +19,9 @@ namespace MassiveDynamicProxyGenerator
         /// </summary>
         /// <param name="type">The type.</param>
         /// <returns>The same type.</returns>
+#if !NET400
         [MethodImpl(MethodImplOptions.AggressiveInlining)]
+#endif
         public static Type GetTypeInfo(this Type type)
         {
             return type;

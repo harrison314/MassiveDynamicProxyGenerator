@@ -69,6 +69,7 @@
     
     <PropertyGroup>
       <NugetFolder>$(OutputPath)nuget\</NugetFolder>
+      <NugetFolderNet40>$(NugetFolder)lib\net40\</NugetFolderNet40>
       <NugetFolderNet45>$(NugetFolder)lib\net45\</NugetFolderNet45>
       <NugetFolderNet46>$(NugetFolder)lib\net46\</NugetFolderNet46>
       <NugetFolderNet461>$(NugetFolder)lib\net461\</NugetFolderNet461>
@@ -78,6 +79,7 @@
     <RemoveDir Directories="$(NugetFolder)" />
     <MakeDir Directories="$(NugetFolder)" />
     <MakeDir Directories="$(NugetFolder)lib" />
+    <MakeDir Directories="$(NugetFolderNet40)" />
     <MakeDir Directories="$(NugetFolderNet45)" />
     <MakeDir Directories="$(NugetFolderNet46)" />
     <MakeDir Directories="$(NugetFolderNet461)" />
@@ -90,6 +92,13 @@
     </ItemGroup>
     <Copy SourceFiles="@(FileNetCore)" DestinationFiles="@(FileNetCore->'$(NugetFolderNetCore)%(RecursiveDir)%(Filename)%(Extension)')" />
 
+    <MSBuild Projects="@(SourseProjectNetFull)" Properties="TargetFrameworkVersion=v4.0" />
+    <ItemGroup>
+      <FileNet40 Include="..\MassiveDynamicProxyGenerator\bin\$(Configuration)\MassiveDynamicProxyGenerator.dll" />
+      <FileNet40 Include="..\MassiveDynamicProxyGenerator\bin\$(Configuration)\MassiveDynamicProxyGenerator.xml" />
+    </ItemGroup>
+    <Copy SourceFiles="@(FileNet40)" DestinationFiles="@(FileNet40->'$(NugetFolderNet40)%(RecursiveDir)%(Filename)%(Extension)')" />
+    
     <MSBuild Projects="@(SourseProjectNetFull)" Properties="TargetFrameworkVersion=v4.5" />
     <ItemGroup>
       <FileNet45 Include="..\MassiveDynamicProxyGenerator\bin\$(Configuration)\MassiveDynamicProxyGenerator.dll" />

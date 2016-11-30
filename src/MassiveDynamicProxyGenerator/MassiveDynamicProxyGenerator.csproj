@@ -11,6 +11,7 @@
     <AssemblyName>MassiveDynamicProxyGenerator</AssemblyName>
     <TargetFrameworkVersion Condition="'$(TargetFrameworkVersion)' == ''">v4.6.1</TargetFrameworkVersion>
     <FileAlignment>512</FileAlignment>
+    <TargetFrameworkProfile />
   </PropertyGroup>
   <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|AnyCPU' ">
     <DebugSymbols>true</DebugSymbols>
@@ -23,16 +24,27 @@
     <CodeAnalysisRuleSet>MassiveDynamicProxyGenerator.ruleset</CodeAnalysisRuleSet>
     <RunCodeAnalysis>true</RunCodeAnalysis>
     <DocumentationFile>bin\Debug\MassiveDynamicProxyGenerator.XML</DocumentationFile>
+    <Prefer32Bit>false</Prefer32Bit>
   </PropertyGroup>
   <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Release|AnyCPU' ">
     <DebugType>pdbonly</DebugType>
     <Optimize>true</Optimize>
     <OutputPath>bin\Release\</OutputPath>
     <DefineConstants>
+      $(AddDefineConstants)
     </DefineConstants>
     <ErrorReport>prompt</ErrorReport>
     <WarningLevel>4</WarningLevel>
     <CodeAnalysisRuleSet>MassiveDynamicProxyGenerator.ruleset</CodeAnalysisRuleSet>
+    <Prefer32Bit>false</Prefer32Bit>
+  </PropertyGroup>
+  <PropertyGroup>
+    <CustomConstants Condition="'$(TargetFrameworkVersion)' == 'v4.0'">NET400</CustomConstants>
+    <CustomConstants Condition="'$(TargetFrameworkVersion)' == 'v4.5'">NET450</CustomConstants>
+    <CustomConstants Condition="'$(TargetFrameworkVersion)' == 'v4.6'">NET460</CustomConstants>
+    <CustomConstants Condition="'$(TargetFrameworkVersion)' == 'v4.6.1'">NET461</CustomConstants>
+    <DefineConstants Condition=" '$(DefineConstants)' != '' And '$(CustomConstants)' != '' ">$(DefineConstants);</DefineConstants>
+    <DefineConstants>$(DefineConstants)$(CustomConstants)</DefineConstants>
   </PropertyGroup>
   <ItemGroup>
     <Reference Include="System" />

@@ -139,13 +139,13 @@ namespace MassiveDynamicProxyGenerator.TypedDecorator
                 il.Emit(OpCodes.Stelem_Ref);
             }
 
-            il.Emit(OpCodes.Callvirt, this.callableInvocationDescriptor.Arguments.SetMethod);
+            il.Emit(OpCodes.Callvirt, this.callableInvocationDescriptor.Arguments.GetSetMethod());
 
             // invocation.MethodName = "AnyMethod";
             il.Emit(OpCodes.Nop);
             il.Emit(OpCodes.Ldloc, invocationVar);
             il.Emit(OpCodes.Ldstr, interfaceMethod.Name);
-            il.Emit(OpCodes.Callvirt, this.callableInvocationDescriptor.MethodName.SetMethod);
+            il.Emit(OpCodes.Callvirt, this.callableInvocationDescriptor.MethodName.GetSetMethod());
 
             MethodInfo getTypeFromhandle = typeof(Type).GetTypeInfo().GetMethod(nameof(Type.GetTypeFromHandle), BindingFlags.Static | BindingFlags.Public);
 
@@ -154,7 +154,7 @@ namespace MassiveDynamicProxyGenerator.TypedDecorator
             il.Emit(OpCodes.Ldloc, invocationVar);
             il.Emit(OpCodes.Ldtoken, interfaceType);
             il.Emit(OpCodes.Call, getTypeFromhandle);
-            il.Emit(OpCodes.Callvirt, this.callableInvocationDescriptor.OriginalType.SetMethod);
+            il.Emit(OpCodes.Callvirt, this.callableInvocationDescriptor.OriginalType.GetSetMethod());
 
             // invocation.ArgumentTypes = new Type[] { typeof(....), .... };
             il.Emit(OpCodes.Nop);
@@ -171,14 +171,14 @@ namespace MassiveDynamicProxyGenerator.TypedDecorator
                 il.Emit(OpCodes.Stelem_Ref);
             }
 
-            il.Emit(OpCodes.Callvirt, this.callableInvocationDescriptor.ArgumentTypes.SetMethod);
+            il.Emit(OpCodes.Callvirt, this.callableInvocationDescriptor.ArgumentTypes.GetSetMethod());
 
             // invocation.ReturnType = typeof(method.ReturnType);
             il.Emit(OpCodes.Nop);
             il.Emit(OpCodes.Ldloc, invocationVar);
             il.Emit(OpCodes.Ldtoken, interfaceMethod.ReturnType);
             il.Emit(OpCodes.Call, getTypeFromhandle);
-            il.Emit(OpCodes.Callvirt, this.callableInvocationDescriptor.ReturnType.SetMethod);
+            il.Emit(OpCodes.Callvirt, this.callableInvocationDescriptor.ReturnType.GetSetMethod());
 
             // volanie interceptora
             il.Emit(OpCodes.Nop);
@@ -197,7 +197,7 @@ namespace MassiveDynamicProxyGenerator.TypedDecorator
             {
                 il.Emit(OpCodes.Nop);
                 il.Emit(OpCodes.Ldloc, invocationVar);
-                il.Emit(OpCodes.Callvirt, this.callableInvocationDescriptor.ReturnValue.GetMethod);
+                il.Emit(OpCodes.Callvirt, this.callableInvocationDescriptor.ReturnValue.GetGetMethod());
                 if (interfaceMethod.ReturnType.GetTypeInfo().IsValueType)
                 {
                     il.Emit(OpCodes.Unbox_Any, interfaceMethod.ReturnType);
