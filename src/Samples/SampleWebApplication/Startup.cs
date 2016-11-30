@@ -12,7 +12,6 @@ using SampleWebApplication.IocExtensions;
 using SampleWebApplication.Services;
 using MassiveDynamicProxyGenerator;
 using SampleWebApplication.Services.Interceptors;
-using SampleWebApplication.IocExtensions;
 
 namespace SampleWebApplication
 {
