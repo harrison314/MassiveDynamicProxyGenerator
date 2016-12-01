@@ -70,6 +70,7 @@
     <Compile Include="Examples\NonReturnExample.cs" />
     <Compile Include="Examples\ReturnTypes.cs" />
     <Compile Include="NullAsyncInterceptorTests.cs" />
+    <Compile Include="NullInterceptorTests.cs" />
     <Compile Include="TestExtensions\ExceptionAssertion.cs" />
     <Compile Include="TestExtensions\TypeAssertExtensions.cs" />
     <Compile Include="TestInterfaces\IAsyncInterface.cs" />
