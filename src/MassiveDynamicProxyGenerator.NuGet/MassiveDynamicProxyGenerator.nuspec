@@ -23,6 +23,7 @@
     <tags>massive, dynamic, proxy, dynamic proxy, runtime, .net</tags>
     <releaseNotes></releaseNotes>
     <dependencies>
+      <group targetFramework=".NETFramework4.0" />
       <group targetFramework=".NETFramework4.5" />
       <group targetFramework=".NETFramework4.6" />
       <group targetFramework=".NETFramework4.6.1" />
