@@ -73,6 +73,7 @@
     <Compile Include="IProxygGenerator.cs" />
     <Compile Include="ITypeNameCreator.cs" />
     <Compile Include="KoreanTypeNameCreator.cs" />
+    <Compile Include="NullAsyncInterceptor.cs" />
     <Compile Include="NullInterceptor.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="ProxygGenerator.cs" />

@@ -69,8 +69,10 @@
     <Compile Include="Examples\InvocationExample.cs" />
     <Compile Include="Examples\NonReturnExample.cs" />
     <Compile Include="Examples\ReturnTypes.cs" />
+    <Compile Include="NullAsyncInterceptorTests.cs" />
     <Compile Include="TestExtensions\ExceptionAssertion.cs" />
     <Compile Include="TestExtensions\TypeAssertExtensions.cs" />
+    <Compile Include="TestInterfaces\IAsyncInterface.cs" />
     <Compile Include="TestInterfaces\ICompositeInterface.cs" />
     <Compile Include="TestInterfaces\IGenericInterface.cs" />
     <Compile Include="TestInterfaces\IGrapth.cs" />
