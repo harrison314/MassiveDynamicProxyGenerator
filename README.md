@@ -17,7 +17,11 @@ The following platforms are supported:
 
 ## Getting started
 
-_In progress._
+In package manager console:
+
+`Install-Package MassiveDynamicProxyGenerator`
+
+or add package to _project.json_ in .Net Core projects.
 
 ## A Quick Example
 
