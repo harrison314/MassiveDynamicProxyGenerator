@@ -8,14 +8,12 @@ Both classes and interfaces can be proxied, however only virtual members
 can be intercepted.
 
 Fertures:
-* Dynamic proxy genrator, for intercept `dynamic` objects.
 * Proxy instance generator, for intercept.
+* Decorator generator.
 * Proxy instance generator, for control instancing real implementation (e.g. lazy loading).
-* Support .Net 4.0 (condition compilation)
-* Support return awaitable tasks in NullInterceptor (or create TaskInterceptor).
 
 The following platforms are supported:
-* .Net 4.5, 4.6, 4.6.1 and up, .Net Core 1.0.0 (NetStandard 1.6)
+* .Net 4.0, 4.5, 4.6, 4.6.1 and .Net Core 1.0 (NetStandard 1.6)
 
 ## Getting started
 
