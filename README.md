@@ -25,7 +25,7 @@ or add package to _project.json_ in .Net Core projects.
 
 ## A Quick Example
 
-_In progress._
+Examples of use MassiveDynamicProxyGenerator.
 
 ### Generate decorator 
 
