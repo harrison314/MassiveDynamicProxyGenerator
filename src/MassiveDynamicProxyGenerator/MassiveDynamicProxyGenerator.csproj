@@ -37,6 +37,7 @@
     <WarningLevel>4</WarningLevel>
     <CodeAnalysisRuleSet>MassiveDynamicProxyGenerator.ruleset</CodeAnalysisRuleSet>
     <Prefer32Bit>false</Prefer32Bit>
+    <DocumentationFile>bin\Release\MassiveDynamicProxyGenerator.XML</DocumentationFile>
   </PropertyGroup>
   <PropertyGroup>
     <CustomConstants Condition="'$(TargetFrameworkVersion)' == 'v4.0'">NET400</CustomConstants>
