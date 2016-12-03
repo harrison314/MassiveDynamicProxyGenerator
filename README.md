@@ -1,4 +1,7 @@
 # MassiveDynamicProxyGenerator
+
+[![NuGet Status](http://img.shields.io/nuget/v/MassiveDynamicProxyGenerator.svg?style=flat)](https://www.nuget.org/packages/MassiveDynamicProxyGenerator/)
+
 _.Net library for generate proxy class instances_
 
 _Massive Dynamic Proxy Generator_ is  a library for generating lightweight
@@ -19,7 +22,7 @@ The following platforms are supported:
 
 In package manager console:
 
-`Install-Package MassiveDynamicProxyGenerator`
+`PM> Install-Package MassiveDynamicProxyGenerator`
 
 or add package to _project.json_ in .Net Core projects.
 
