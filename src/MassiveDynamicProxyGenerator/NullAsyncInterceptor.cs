@@ -13,6 +13,7 @@ namespace MassiveDynamicProxyGenerator
     /// <summary>
     /// Null interceptor usages in async await methods.
     /// Intercept method returns Tasks.
+    /// This interceptor is preferred in the .Net Framework 4.5 and more and .Net Core.
     /// </summary>
     /// <seealso cref="MassiveDynamicProxyGenerator.IInterceptor" />
     public class NullAsyncInterceptor : IInterceptor

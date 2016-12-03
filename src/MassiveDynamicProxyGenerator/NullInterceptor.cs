@@ -7,7 +7,8 @@ using System.Threading.Tasks;
 namespace MassiveDynamicProxyGenerator
 {
     /// <summary>
-    /// Null interceptor, returns default values;
+    /// Null interceptor, returns default values.
+    /// This interceptor is preferred in the .Net 4.0, in more framework vesions use <see cref="NullAsyncInterceptor"/>.
     /// </summary>
     /// <seealso cref="MassiveDynamicProxyGenerator.IInterceptor" />
     public class NullInterceptor : IInterceptor
@@ -50,7 +51,6 @@ namespace MassiveDynamicProxyGenerator
         /// <param name="isDynamicInterception">if set to <c>true</c> is invocation in dynamic object.</param>
         public void Intercept(IInvocation invocation, bool isDynamicInterception)
         {
-            // TODO: implement async calls
         }
     }
 }
