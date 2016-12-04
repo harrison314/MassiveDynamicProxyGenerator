@@ -6,6 +6,9 @@
 *.user
 *.sln.docstates
 
+# .Net Core files
+[Pp]roject.lock.json
+
 # Build results
 [Dd]ebug/
 [Dd]ebugPublic/
