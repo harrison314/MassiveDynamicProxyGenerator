@@ -14,6 +14,11 @@ namespace MassiveDynamicProxyGenerator.Tests
     public class TypedProxyTests
     {
         [TestMethod]
+        public void TTTT()
+        {
+            Assert.Fail("Moja strasna nocna mora");
+        }
+        [TestMethod]
         public void GenerateProxy_NonParametric_Succ()
         {
             Mock<IInterceptor> interceptor = new Mock<IInterceptor>(MockBehavior.Strict);
