@@ -59,6 +59,7 @@ namespace SampleWebApplication
            // services.Intercept<IArticleService, ChangeAutorInterceptor>("Ing interceptor");
 
             services.AddProxy<INotificationServise>();
+            services.ImplementCommonServiceProvider<ICommonServices>();
 
             // Add framework services.
             services.AddApplicationInsightsTelemetry(Configuration);
