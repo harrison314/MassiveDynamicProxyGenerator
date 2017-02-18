@@ -1,5 +1,7 @@
 # Build script
 
+# TODO: add --version-suffix
+
 Param(
   [Parameter(Mandatory=$False)]
   [string]$SrcRelativePath = "../src/",

@@ -30,6 +30,14 @@ or add package to _project.json_ in .Net Core projects.
 
 Examples of use MassiveDynamicProxyGenerator.
 
+### Use for generate proxy stub for JsonRpc client
+
+In samples folder in project __WcfForHipsters.WebServer__ is implement servise endpoint using api controller
+and transform JsonRpc call to method invocation using generic class __EndpointAdapter__.
+
+Client is in project __WcfForHipsters.Client__. Generic class __HipsterClientBase__ , like ClientBase class from Wcf,
+using MassiveDynamicProxyGenerator for generate proxy stub for JsonRpc client.
+
 ### Generate decorator 
 
 ```cs
