@@ -1,0 +1,4 @@
+﻿Humans
+
+
+Use JsonRpc call to api/ExampleServise with post. To servise WcfForHipsters.WebServer.Contract.IExampleServise.
