@@ -36,12 +36,21 @@ namespace WcfForHipsters.Client.WcfForHipsters
 
             if (response.StatusCode == 200)
             {
+                Newtonsoft.Json.Linq.JToken errorObject;
                 Newtonsoft.Json.Linq.JObject rpcResponse = Newtonsoft.Json.JsonConvert.DeserializeObject<Newtonsoft.Json.Linq.JObject>(response.Content);
-                invocation.ReturnValue = rpcResponse["result"].ToObject(invocation.ReturnType);
+                if (rpcResponse.TryGetValue("error", out errorObject))
+                {
+                    string fault = errorObject.ToObject<string>();
+                    throw new RpcFaultException(fault);
+                }
+
+                if (invocation.ReturnType != typeof(void))
+                {
+                    invocation.ReturnValue = rpcResponse["result"].ToObject(invocation.ReturnType);
+                }
             }
             else
             {
-                //TODO: better error handling
                 throw new RpcFaultException($"Service {invocation.MethodName} from {this.endpoint} return {response.StatusCode}");
             }
         }

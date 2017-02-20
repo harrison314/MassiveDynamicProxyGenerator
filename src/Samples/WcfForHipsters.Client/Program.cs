@@ -17,6 +17,7 @@ namespace WcfForHipsters.Client
 
             int sum = client.CalCulateAdd(14, 6, -1);
             Console.WriteLine("Sum is {0}", sum);
+            Console.WriteLine();
 
             CreateBookRequest createBook = new CreateBookRequest();
             createBook.MarkdawnText = "# Title\nAny text";
@@ -31,6 +32,19 @@ namespace WcfForHipsters.Client
             CreatBookResponse response = client.CreateBook(createBook);
 
             Console.WriteLine("Book creted with Id {0}", response.Id);
+            Console.WriteLine();
+
+            try
+            {
+                int nonExistSum = client.CalCulateAdd(1, 2, -500);
+                Console.WriteLine("Sum is {0}", nonExistSum);
+            }
+            catch (WcfForHipsters.RpcFaultException ex)
+            {
+                Console.WriteLine("Server exception: {0}", ex.Message);
+            }
+
+            Console.WriteLine();
         }
     }
 }

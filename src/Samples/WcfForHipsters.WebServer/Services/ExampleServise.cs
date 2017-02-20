@@ -20,6 +20,12 @@ namespace WcfForHipsters.WebServer.Services
         {
             this.logger.LogTrace("CalCulateAdd: a={0}, b={1}, c={2}", a, b, c);
 
+            if (c < -150)
+            {
+                this.logger.LogError("Parameter c is out of range.");
+                throw new ArgumentOutOfRangeException($"Parameter {nameof(c)} is out of range. Must by more as -150.");
+            }
+
             return a + b + c;
         }
 
