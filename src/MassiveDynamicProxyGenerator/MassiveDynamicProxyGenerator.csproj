@@ -60,6 +60,7 @@
   <ItemGroup>
     <Compile Include="AbstractTypeBuilder.cs" />
     <Compile Include="CallableInterceptorAdapter.cs" />
+    <Compile Include="CallableInterceptorAsyncAdapter.cs" />
     <Compile Include="DefaultInstances.cs" />
     <Compile Include="DynamicProxy\DynamicInvocation.cs" />
     <Compile Include="FullFrameworkExtensions.cs" />
