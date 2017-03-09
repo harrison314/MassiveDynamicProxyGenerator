@@ -68,7 +68,7 @@ namespace ProxyGeneratrorSamples.Net40
         {
             Console.WriteLine(".... GenerateProxy for remote JSON RPC2 ...\n");
 
-            IInterceptor jsonRpcInterceptor = new InterceptorAdapter((invocation, isDynamic) =>
+            IInterceptor jsonRpcInterceptor = new InterceptorAdapter((invocation) =>
             {
                 Guid requestId = Guid.NewGuid();
                 var rcpBody = new

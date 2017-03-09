@@ -12,14 +12,14 @@ namespace MassiveDynamicProxyGenerator
     /// <seealso cref="IInterceptor" />
     public class InterceptorAdapter : IInterceptor
     {
-        private readonly Action<IInvocation, bool> intercept;
+        private readonly Action<IInvocation> intercept;
 
         /// <summary>
         /// Initializes a new instance of the <see cref="InterceptorAdapter"/> class.
         /// </summary>
         /// <param name="intercept">The intercept action.</param>
         /// <exception cref="ArgumentNullException">intercept</exception>
-        public InterceptorAdapter(Action<IInvocation, bool> intercept)
+        public InterceptorAdapter(Action<IInvocation> intercept)
         {
             if (intercept == null)
             {
@@ -33,16 +33,15 @@ namespace MassiveDynamicProxyGenerator
         /// Intercept call of method.
         /// </summary>
         /// <param name="invocation">Invocation informations.</param>
-        /// <param name="isDynamicInterception">if set to <c>true</c> is invocation in dynamic object.</param>
         /// <exception cref="ArgumentNullException">invocation</exception>
-        public void Intercept(IInvocation invocation, bool isDynamicInterception)
+        public void Intercept(IInvocation invocation)
         {
             if (invocation == null)
             {
                 throw new ArgumentNullException(nameof(invocation));
             }
 
-            this.intercept.Invoke(invocation, isDynamicInterception);
+            this.intercept.Invoke(invocation);
         }
 
         /// <summary>

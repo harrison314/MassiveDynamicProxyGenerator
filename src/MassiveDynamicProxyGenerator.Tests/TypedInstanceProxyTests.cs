@@ -112,7 +112,7 @@ namespace MassiveDynamicProxyGenerator.Tests
         {
             StringBuilder sbInstance = new StringBuilder();
             Mock<IInterceptor> interceptor = new Mock<IInterceptor>(MockBehavior.Strict);
-            interceptor.Setup(t => t.Intercept(It.IsAny<IInvocation>(), false))
+            interceptor.Setup(t => t.Intercept(It.IsAny<IInvocation>()))
                 .Verifiable();
 
             Mock<IGenericInterface<StringBuilder>> realMock = new Mock<IGenericInterface<StringBuilder>>(MockBehavior.Strict);

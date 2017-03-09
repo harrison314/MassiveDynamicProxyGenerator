@@ -20,7 +20,7 @@ namespace WcfForHipsters.Client.WcfForHipsters
             this.endpoint = endpoint;
         }
 
-        public void Intercept(IInvocation invocation, bool isDynamicInterception)
+        public void Intercept(IInvocation invocation)
         {
             Guid requestId = Guid.NewGuid();
             var rcpBody = new

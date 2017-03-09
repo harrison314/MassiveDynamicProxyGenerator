@@ -21,7 +21,7 @@ namespace SampleWebApplication.IocExtensions
             this.serviceProvider = serviceProvider;
         }
 
-        public void Intercept(IInvocation invocation, bool isDynamicInterception)
+        public void Intercept(IInvocation invocation)
         {
             TypeInfo info = invocation.ReturnType.GetTypeInfo();
             if (info.IsInterface || info.IsClass)

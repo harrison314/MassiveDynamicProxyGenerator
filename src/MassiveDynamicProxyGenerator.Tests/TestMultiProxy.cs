@@ -20,9 +20,9 @@ namespace MassiveDynamicProxyGenerator.Tests
         public void GenerateProxyMultiInterface_Default_CallMethods() //TODO: premenovat
         {
             Mock<IInterceptor> interceptor = new Mock<IInterceptor>(MockBehavior.Strict);
-            interceptor.Setup(t => t.Intercept(It.Is<IInvocation>(q => q.Arguments.Length == 0 && q.MethodName == "EmptyMethod"), false))
+            interceptor.Setup(t => t.Intercept(It.Is<IInvocation>(q => q.Arguments.Length == 0 && q.MethodName == "EmptyMethod")))
                 .Verifiable();
-            interceptor.Setup(t => t.Intercept(It.Is<IInvocation>(q => q.Arguments.Length == 0 && q.MethodName == "Dispose"), false))
+            interceptor.Setup(t => t.Intercept(It.Is<IInvocation>(q => q.Arguments.Length == 0 && q.MethodName == "Dispose")))
                 .Verifiable();
 
             ProxygGenerator generator = new ProxygGenerator();
@@ -44,9 +44,9 @@ namespace MassiveDynamicProxyGenerator.Tests
         public void GenerateProxyMultiInterface_Object_CallMethods()
         {
             Mock<IInterceptor> interceptor = new Mock<IInterceptor>(MockBehavior.Strict);
-            interceptor.Setup(t => t.Intercept(It.Is<IInvocation>(q => q.Arguments.Length == 0 && q.MethodName == "EmptyMethod"), false))
+            interceptor.Setup(t => t.Intercept(It.Is<IInvocation>(q => q.Arguments.Length == 0 && q.MethodName == "EmptyMethod")))
                 .Verifiable();
-            interceptor.Setup(t => t.Intercept(It.Is<IInvocation>(q => q.Arguments.Length == 0 && q.MethodName == "Dispose"), false))
+            interceptor.Setup(t => t.Intercept(It.Is<IInvocation>(q => q.Arguments.Length == 0 && q.MethodName == "Dispose")))
                 .Verifiable();
 
             ProxygGenerator generator = new ProxygGenerator();
@@ -68,9 +68,9 @@ namespace MassiveDynamicProxyGenerator.Tests
         public void GenerateProxyMultiinterface_MultiInherence_CallMethods()
         {
             Mock<IInterceptor> interceptor = new Mock<IInterceptor>(MockBehavior.Strict);
-            interceptor.Setup(t => t.Intercept(It.Is<IInvocation>(q => q.Arguments.Length == 1 && q.MethodName == "AddChild"), false))
+            interceptor.Setup(t => t.Intercept(It.Is<IInvocation>(q => q.Arguments.Length == 1 && q.MethodName == "AddChild")))
                 .Verifiable();
-            interceptor.Setup(t => t.Intercept(It.Is<IInvocation>(q => q.Arguments.Length == 0 && q.MethodName == "Dispose"), false))
+            interceptor.Setup(t => t.Intercept(It.Is<IInvocation>(q => q.Arguments.Length == 0 && q.MethodName == "Dispose")))
                 .Verifiable();
 
             ProxygGenerator generator = new ProxygGenerator();

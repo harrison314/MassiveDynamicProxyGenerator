@@ -17,7 +17,7 @@ namespace MassiveDynamicProxyGenerator.Tests
         public void GenerateProxy_NonParametric_Succ()
         {
             Mock<IInterceptor> interceptor = new Mock<IInterceptor>(MockBehavior.Strict);
-            interceptor.Setup(t => t.Intercept(It.Is<IInvocation>(q => q.Arguments.Length == 0 && q.MethodName == "EmptyMethod"), false))
+            interceptor.Setup(t => t.Intercept(It.Is<IInvocation>(q => q.Arguments.Length == 0 && q.MethodName == "EmptyMethod")))
                 .Verifiable();
 
             ProxygGenerator generator = new ProxygGenerator();
@@ -36,7 +36,7 @@ namespace MassiveDynamicProxyGenerator.Tests
             Mock<IInterceptor> interceptor = new Mock<IInterceptor>(MockBehavior.Strict);
             interceptor.Setup(t => t.Intercept(It.Is<IInvocation>(q => q.Arguments.Length == 1 &&
             ((int)q.Arguments[0]) == 12
-            && q.MethodName == "OneArgument"), false))
+            && q.MethodName == "OneArgument")))
                 .Verifiable();
 
             ProxygGenerator generator = new ProxygGenerator();
@@ -56,7 +56,7 @@ namespace MassiveDynamicProxyGenerator.Tests
             Mock<IInterceptor> interceptor = new Mock<IInterceptor>(MockBehavior.Strict);
             interceptor.Setup(t => t.Intercept(It.Is<IInvocation>(q => q.Arguments.Length == 1 &&
             ((StringBuilder)q.Arguments[0]).Equals(sbExcepted)
-            && q.MethodName == "OneArgument"), false))
+            && q.MethodName == "OneArgument")))
                 .Verifiable();
 
             ProxygGenerator generator = new ProxygGenerator();
@@ -73,10 +73,10 @@ namespace MassiveDynamicProxyGenerator.Tests
         public void GenerateProxy_ReturnValueType_Succ()
         {
             Mock<IInterceptor> interceptor = new Mock<IInterceptor>(MockBehavior.Strict);
-            interceptor.Setup(t => t.Intercept(It.Is<IInvocation>(p => p.MethodName == "GetLenght"), false))
-                .Callback<IInvocation, bool>((aa, b) =>
+            interceptor.Setup(t => t.Intercept(It.Is<IInvocation>(p => p.MethodName == "GetLenght")))
+                .Callback<IInvocation>((invocation) =>
                 {
-                    aa.ReturnValue = 13;
+                    invocation.ReturnValue = 13;
                 })
                 .Verifiable();
             ProxygGenerator generator = new ProxygGenerator();
@@ -92,8 +92,8 @@ namespace MassiveDynamicProxyGenerator.Tests
         public void GenerateProxy_Call_CreateInstance()
         {
             Mock<IInterceptor> interceptor = new Mock<IInterceptor>(MockBehavior.Strict);
-            interceptor.Setup(t => t.Intercept(It.Is<IInvocation>(p => p.MethodName == "CreateSb"), false))
-                .Callback<IInvocation, bool>((a, b) =>
+            interceptor.Setup(t => t.Intercept(It.Is<IInvocation>(p => p.MethodName == "CreateSb")))
+                .Callback<IInvocation>((a) =>
                 {
                     a.ReturnValue = new StringBuilder("Nanana");
                 })
@@ -113,8 +113,8 @@ namespace MassiveDynamicProxyGenerator.Tests
         public void GenerateProxy_Call_RetStruct()
         {
             Mock<IInterceptor> interceptor = new Mock<IInterceptor>(MockBehavior.Strict);
-            interceptor.Setup(t => t.Intercept(It.Is<IInvocation>(p => p.MethodName == "GetStruct"), false))
-                .Callback<IInvocation, bool>((a, b) =>
+            interceptor.Setup(t => t.Intercept(It.Is<IInvocation>(p => p.MethodName == "GetStruct")))
+                .Callback<IInvocation>((a) =>
                 {
                     MyStruct initVal = MyStruct.InitializeDefault();
                     initVal.Address = 456852;
@@ -135,7 +135,7 @@ namespace MassiveDynamicProxyGenerator.Tests
         public void GenerateProxy_Call_RetVoid()
         {
             Mock<IInterceptor> interceptor = new Mock<IInterceptor>(MockBehavior.Strict);
-            interceptor.Setup(t => t.Intercept(It.Is<IInvocation>(p => p.MethodName == "GetVoid"), false))
+            interceptor.Setup(t => t.Intercept(It.Is<IInvocation>(p => p.MethodName == "GetVoid")))
                 .Verifiable();
 
             ProxygGenerator generator = new ProxygGenerator();
@@ -166,7 +166,7 @@ namespace MassiveDynamicProxyGenerator.Tests
         public void GenerateProxy_WithProperty_SetValue()
         {
             Mock<IInterceptor> interceptor = new Mock<IInterceptor>(MockBehavior.Strict);
-            interceptor.Setup(t => t.Intercept(It.IsAny<IInvocation>(), false))
+            interceptor.Setup(t => t.Intercept(It.IsAny<IInvocation>()))
                 .Verifiable();
 
             ProxygGenerator generator = new ProxygGenerator();
@@ -182,7 +182,7 @@ namespace MassiveDynamicProxyGenerator.Tests
         public void GenerateProxy_Generic_CreateInstance()
         {
             Mock<IInterceptor> interceptor = new Mock<IInterceptor>(MockBehavior.Strict);
-            interceptor.Setup(t => t.Intercept(It.IsAny<IInvocation>(), false))
+            interceptor.Setup(t => t.Intercept(It.IsAny<IInvocation>()))
                 .Verifiable();
 
             ProxygGenerator generator = new ProxygGenerator();

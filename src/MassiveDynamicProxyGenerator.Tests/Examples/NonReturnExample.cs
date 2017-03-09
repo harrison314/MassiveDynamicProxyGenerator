@@ -23,7 +23,7 @@ namespace MassiveDynamicProxyGenerator.Tests.Examples
             invocation.MethodName = "EmptyMethod";
             invocation.OriginalType = typeof(INonReturn);
 
-            this.interceptor.Intercept(invocation, false);
+            this.interceptor.Intercept(invocation);
         }
 
         public void MoreArguments(string a, Exception parentEx, StringBuilder builder, Func<Exception, string> transformation)
@@ -41,7 +41,7 @@ namespace MassiveDynamicProxyGenerator.Tests.Examples
             invocation.MethodName = "MoreArguments";
             invocation.OriginalType = typeof(INonReturn);
 
-            this.interceptor.Intercept(invocation, false);
+            this.interceptor.Intercept(invocation);
         }
 
         public void OneArgument(StringBuilder a)
@@ -56,7 +56,7 @@ namespace MassiveDynamicProxyGenerator.Tests.Examples
             invocation.MethodName = "OneArgument";
             invocation.OriginalType = typeof(INonReturn);
 
-            this.interceptor.Intercept(invocation, false);
+            this.interceptor.Intercept(invocation);
         }
 
         public void OneArgument(string a)
@@ -71,7 +71,7 @@ namespace MassiveDynamicProxyGenerator.Tests.Examples
             invocation.MethodName = "OneArgument";
             invocation.OriginalType = typeof(INonReturn);
 
-            this.interceptor.Intercept(invocation, false);
+            this.interceptor.Intercept(invocation);
         }
 
         public void OneArgument(int a)
@@ -86,7 +86,7 @@ namespace MassiveDynamicProxyGenerator.Tests.Examples
             invocation.MethodName = "OneArgument";
             invocation.OriginalType = typeof(INonReturn);
 
-            this.interceptor.Intercept(invocation, false);
+            this.interceptor.Intercept(invocation);
         }
 
         public void TwoArguments(int a, StringBuilder sb)
@@ -107,7 +107,7 @@ namespace MassiveDynamicProxyGenerator.Tests.Examples
                 typeof(StringBuilder)
             };
 
-            this.interceptor.Intercept(invocation, false);
+            this.interceptor.Intercept(invocation);
         }
 
         public void NotImplement()

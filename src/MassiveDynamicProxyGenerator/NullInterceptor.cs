@@ -48,8 +48,7 @@ namespace MassiveDynamicProxyGenerator
         /// Intercept call of method. Returns default value.
         /// </summary>
         /// <param name="invocation">Invocation informations.</param>
-        /// <param name="isDynamicInterception">if set to <c>true</c> is invocation in dynamic object.</param>
-        public void Intercept(IInvocation invocation, bool isDynamicInterception)
+        public void Intercept(IInvocation invocation)
         {
         }
     }

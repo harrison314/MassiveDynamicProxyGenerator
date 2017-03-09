@@ -34,7 +34,7 @@ namespace MassiveDynamicProxyGenerator.Tests.Examples
                 typeof(string),
             };
 
-            this.interceptor.Intercept(invocation, false);
+            this.interceptor.Intercept(invocation);
 
             return (StringBuilder)invocation.ReturnValue;
         }
@@ -56,7 +56,7 @@ namespace MassiveDynamicProxyGenerator.Tests.Examples
                 typeof(string),
             };
 
-            this.interceptor.Intercept(invocation, false);
+            this.interceptor.Intercept(invocation);
 
             return (int)invocation.ReturnValue;
         }
@@ -75,7 +75,7 @@ namespace MassiveDynamicProxyGenerator.Tests.Examples
             {
             };
 
-            this.interceptor.Intercept(invocation, false);
+            this.interceptor.Intercept(invocation);
         }
 
         public string AnyStr()

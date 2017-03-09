@@ -153,7 +153,6 @@ namespace MassiveDynamicProxyGenerator.TypedProxy
             il.Emit(OpCodes.Ldarg_0);
             il.Emit(OpCodes.Ldfld, this.interceptorField);
             il.Emit(OpCodes.Ldloc, invocationVar);
-            il.Emit(OpCodes.Ldc_I4_0); // da na stack false
             il.Emit(OpCodes.Callvirt, typeof(IInterceptor).GetTypeInfo().GetMethod(nameof(IInterceptor.Intercept)));
 
             if (interfaceMethod.ReturnType == typeof(void))
