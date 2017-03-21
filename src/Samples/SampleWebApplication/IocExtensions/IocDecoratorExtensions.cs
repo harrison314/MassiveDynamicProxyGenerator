@@ -99,7 +99,7 @@ namespace SampleWebApplication.IocExtensions
             }
 
             ProxygGenerator generator = new ProxygGenerator();
-            IInterceptor realInteceptor = new InterceptorAdapter((invocation, _) => interceptor(invocation));
+            IInterceptor realInteceptor = new InterceptorAdapter(invocation => interceptor(invocation));
             services.AddTransient<TService>(t => generator.GenerateProxy<TService>(realInteceptor));
 
             return services;

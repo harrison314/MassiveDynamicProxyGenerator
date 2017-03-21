@@ -1,4 +1,4 @@
-<Project Sdk="Microsoft.NET.Sdk.Web">
+﻿<Project Sdk="Microsoft.NET.Sdk.Web">
 
   <PropertyGroup>
     <Authors>harrison314</Authors>
@@ -15,10 +15,6 @@
     <None Update="wwwroot\**\*">
       <CopyToPublishDirectory>PreserveNewest</CopyToPublishDirectory>
     </None>
-  </ItemGroup>
-
-  <ItemGroup>
-    <ProjectReference Include="..\..\MassiveDynamicProxyGenerator.NetStandard\MassiveDynamicProxyGenerator.NetStandard.csproj" />
   </ItemGroup>
 
   <ItemGroup>
@@ -44,6 +40,10 @@
 
   <ItemGroup>
     <DotNetCliToolReference Include="BundlerMinifier.Core" Version="2.2.301" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <ProjectReference Include="..\..\MassiveDynamicProxyGenerator\MassiveDynamicProxyGenerator.csproj" />
   </ItemGroup>
 
 </Project>

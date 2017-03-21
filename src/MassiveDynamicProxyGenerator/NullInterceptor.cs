@@ -6,11 +6,19 @@ using System.Threading.Tasks;
 
 namespace MassiveDynamicProxyGenerator
 {
+
+#if NET40
+    /// <summary>
+    /// Null interceptor, returns default values.
+    /// </summary>
+    /// <seealso cref="MassiveDynamicProxyGenerator.IInterceptor" />
+#else
     /// <summary>
     /// Null interceptor, returns default values.
     /// This interceptor is preferred in the .Net 4.0, in more framework vesions use <see cref="NullAsyncInterceptor"/>.
     /// </summary>
     /// <seealso cref="MassiveDynamicProxyGenerator.IInterceptor" />
+#endif
     public class NullInterceptor : IInterceptor
     {
         private static NullInterceptor instance;
