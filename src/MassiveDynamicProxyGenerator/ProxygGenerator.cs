@@ -394,7 +394,7 @@ namespace MassiveDynamicProxyGenerator
                 generator.ImplementInterface(interfaceTypes[i]);
             }
 
-#if COREFX
+#if NETSTANDARD1_6
             TypeInfo proxyType = typeBuilder.CreateTypeInfo();
             return proxyType.AsType();
 #else
@@ -480,7 +480,7 @@ namespace MassiveDynamicProxyGenerator
              ModuleBuilder modBuilder = asmBuilder.DefineDynamicModule("DynamicProxyModule", "Testing.dll");
             */
 
-#if COREFX
+#if NETSTANDARD1_6
             AssemblyBuilder asmBuilder = AssemblyBuilder.DefineDynamicAssembly(asmName, AssemblyBuilderAccess.Run);
 #else
             AssemblyBuilder asmBuilder = Thread.GetDomain().DefineDynamicAssembly(asmName, AssemblyBuilderAccess.Run);

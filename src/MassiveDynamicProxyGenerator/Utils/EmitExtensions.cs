@@ -24,7 +24,7 @@ namespace MassiveDynamicProxyGenerator.Utils
         /// or
         /// type
         /// </exception>
-#if !NET400
+#if !NET40
         [MethodImpl(MethodImplOptions.AggressiveInlining)]
 #endif
         public static void EmitCastToReference(this ILGenerator il, Type type)
@@ -61,7 +61,7 @@ namespace MassiveDynamicProxyGenerator.Utils
         /// or
         /// type
         /// </exception>
-#if !NET400
+#if !NET40
         [MethodImpl(MethodImplOptions.AggressiveInlining)]
 #endif
         public static void EmitBoxIfNeeded(this ILGenerator il, Type type)
@@ -90,7 +90,7 @@ namespace MassiveDynamicProxyGenerator.Utils
         /// <param name="il">The IL generator.</param>
         /// <param name="value">The value.</param>
         /// <exception cref="ArgumentNullException">il</exception>
-#if !NET400
+#if !NET40
         [MethodImpl(MethodImplOptions.AggressiveInlining)]
 #endif
         public static void EmitFastInt(this ILGenerator il, int value)

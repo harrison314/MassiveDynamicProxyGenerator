@@ -7,7 +7,7 @@ using System.Threading.Tasks;
 
 namespace MassiveDynamicProxyGenerator
 {
-#if !COREFX
+#if !NETSTANDARD1_6
 
     /// <summary>
     /// Extensions for adapt .Net Core API to full framework.
@@ -19,7 +19,7 @@ namespace MassiveDynamicProxyGenerator
         /// </summary>
         /// <param name="type">The type.</param>
         /// <returns>The same type.</returns>
-#if !NET400
+#if !NET40
         [MethodImpl(MethodImplOptions.AggressiveInlining)]
 #endif
         public static Type GetTypeInfo(this Type type)

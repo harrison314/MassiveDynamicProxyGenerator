@@ -8,7 +8,7 @@ using System.Linq.Expressions;
 
 namespace MassiveDynamicProxyGenerator
 {
-#if !NET400
+#if !NET40
 
     /// <summary>
     /// Null interceptor usages in async await methods.
