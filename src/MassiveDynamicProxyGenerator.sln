@@ -18,11 +18,7 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "MassiveDynamicProxyGenerato
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "ProxyGeneratrorSamples.Net40", "Samples\ProxyGeneratrorSamples.Net40\ProxyGeneratrorSamples.Net40.csproj", "{E7F2B2B2-318C-4F2B-BF76-086A230E59FA}"
 EndProject
-Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "MassiveDynamicProxyGenerator.NetStandard", "MassiveDynamicProxyGenerator.NetStandard\MassiveDynamicProxyGenerator.NetStandard.csproj", "{74549118-8314-4442-A962-3A5CAAC77E1F}"
-EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "MassiveDynamicProxyGenerator.Tests.NetStandard", "MassiveDynamicProxyGenerator.Tests.NetStandard\MassiveDynamicProxyGenerator.Tests.NetStandard.csproj", "{D612DB67-6248-4353-8C8F-59CD04920EF7}"
-EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "MassiveDynamicProxyGenerator.NuGet", "MassiveDynamicProxyGenerator.NuGet\MassiveDynamicProxyGenerator.NuGet.csproj", "{F748DA74-6DF9-4ED7-8221-D64DFA13DD3C}"
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "SampleWebApplication", "Samples\SampleWebApplication\SampleWebApplication.csproj", "{4675F8DF-6D5B-43CF-B429-F53A4896322D}"
 EndProject
@@ -48,18 +44,10 @@ Global
 		{E7F2B2B2-318C-4F2B-BF76-086A230E59FA}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{E7F2B2B2-318C-4F2B-BF76-086A230E59FA}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{E7F2B2B2-318C-4F2B-BF76-086A230E59FA}.Release|Any CPU.Build.0 = Release|Any CPU
-		{74549118-8314-4442-A962-3A5CAAC77E1F}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
-		{74549118-8314-4442-A962-3A5CAAC77E1F}.Debug|Any CPU.Build.0 = Debug|Any CPU
-		{74549118-8314-4442-A962-3A5CAAC77E1F}.Release|Any CPU.ActiveCfg = Release|Any CPU
-		{74549118-8314-4442-A962-3A5CAAC77E1F}.Release|Any CPU.Build.0 = Release|Any CPU
 		{D612DB67-6248-4353-8C8F-59CD04920EF7}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
 		{D612DB67-6248-4353-8C8F-59CD04920EF7}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{D612DB67-6248-4353-8C8F-59CD04920EF7}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{D612DB67-6248-4353-8C8F-59CD04920EF7}.Release|Any CPU.Build.0 = Release|Any CPU
-		{F748DA74-6DF9-4ED7-8221-D64DFA13DD3C}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
-		{F748DA74-6DF9-4ED7-8221-D64DFA13DD3C}.Debug|Any CPU.Build.0 = Debug|Any CPU
-		{F748DA74-6DF9-4ED7-8221-D64DFA13DD3C}.Release|Any CPU.ActiveCfg = Release|Any CPU
-		{F748DA74-6DF9-4ED7-8221-D64DFA13DD3C}.Release|Any CPU.Build.0 = Release|Any CPU
 		{4675F8DF-6D5B-43CF-B429-F53A4896322D}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
 		{4675F8DF-6D5B-43CF-B429-F53A4896322D}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{4675F8DF-6D5B-43CF-B429-F53A4896322D}.Release|Any CPU.ActiveCfg = Release|Any CPU

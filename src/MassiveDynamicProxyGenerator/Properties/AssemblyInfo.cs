@@ -6,10 +6,10 @@ using System.Runtime.InteropServices;
 // set of attributes. Change these attribute values to modify the information
 // associated with an assembly.
 [assembly: AssemblyTitle("MassiveDynamicProxyGenerator")]
-[assembly: AssemblyDescription("MassiveDynamic - Dynamic proxy generator for .NET.")]
+[assembly: AssemblyDescription("Massive Dynamic Proxy Generator is  a library for generating lightweight\r\n      .NET proxies on the fly at runtime. Proxy objects allow calls to members\r\n      of an object to be intercepted without modifying the code of the class.\r\n      Both classes and interfaces can be proxied, however only virtual members\r\n      can be intercepted.")]
 [assembly: AssemblyConfiguration("")]
 [assembly: AssemblyCompany("harrison314")]
-[assembly: AssemblyProduct("MassiveDynamicProxyGenerator")]
+[assembly: AssemblyProduct("MassiveDynamic proxy generator")]
 [assembly: AssemblyCopyright("Copyright ©  2016")]
 [assembly: AssemblyTrademark("")]
 [assembly: AssemblyCulture("")]
