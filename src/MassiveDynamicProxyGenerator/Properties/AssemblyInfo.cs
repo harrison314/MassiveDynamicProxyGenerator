@@ -6,10 +6,10 @@ using System.Runtime.InteropServices;
 // set of attributes. Change these attribute values to modify the information
 // associated with an assembly.
 [assembly: AssemblyTitle("MassiveDynamicProxyGenerator")]
-[assembly: AssemblyDescription("Massive Dynamic Proxy Generator is  a library for generating lightweight\r\n      .NET proxies on the fly at runtime. Proxy objects allow calls to members\r\n      of an object to be intercepted without modifying the code of the class.\r\n      Both classes and interfaces can be proxied, however only virtual members\r\n      can be intercepted.")]
+[assembly: AssemblyDescription("Massive Dynamic Proxy Generator is  a library for generating lightweight\r\n.NET proxies on the fly at runtime. Proxy objects allow calls to members\r\nof an object to be intercepted without modifying the code of the class.\r\n      Both classes and interfaces can be proxied, however only virtual members\r\n      can be intercepted.")]
 [assembly: AssemblyConfiguration("")]
 [assembly: AssemblyCompany("harrison314")]
-[assembly: AssemblyProduct("MassiveDynamic proxy generator")]
+[assembly: AssemblyProduct("harrison314")]
 [assembly: AssemblyCopyright("Copyright ©  2016")]
 [assembly: AssemblyTrademark("")]
 [assembly: AssemblyCulture("")]
@@ -32,5 +32,5 @@ using System.Runtime.InteropServices;
 // You can specify all the values or you can default the Build and Revision Numbers
 // by using the '*' as shown below:
 // [assembly: AssemblyVersion("1.0.*")]
-[assembly: AssemblyVersion("1.0.0.1")]
-[assembly: AssemblyFileVersion("1.0.0.1")]
+[assembly: AssemblyVersion("1.1.0.0")]
+[assembly: AssemblyFileVersion("1.1.0.0")]
