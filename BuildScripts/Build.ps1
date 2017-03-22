@@ -8,11 +8,10 @@ Param(
   [switch]$RunTests 
 )
 
-$msBuild = Join-Path ${env:ProgramFiles(x86)} "MSBuild\14.0\Bin\amd64\MSBuild.exe"
+#$msBuild = Join-Path ${env:ProgramFiles(x86)} "MSBuild\14.0\Bin\amd64\MSBuild.exe"
 $lastLocation = (Get-Location).Path
 
 $srcPath = Join-Path  $lastLocation $SrcRelativePath
-$toolPath = Join-Path $lastLocation "Tools"
 $outPath = Join-Path $lastLocation "BuildOutput"
 
 # ----------------------------------------------------------------------------------------------------#
@@ -22,24 +21,6 @@ If (Test-Path $outPath){
 }
 New-Item $outPath -type directory
 
-If (-Not (Test-Path $toolPath)){
-	New-Item $toolPath -type directory
-}
-
-$nugetExe = (Join-path $toolPath "nuget.exe")
-If (-Not (Test-Path $nugetExe)){
-	Write-Host "Download Nuget.exe" -ForegroundColor Green
-	Invoke-WebRequest -Uri "https://dist.nuget.org/win-x86-commandline/latest/nuget.exe" -OutFile $nugetExe
-}
-
-Write-Host "Restore Nuget packages..." -ForegroundColor Green
-$slnPath = Join-Path $srcPath "MassiveDynamicProxyGenerator.sln"
-
-cd $srcPath
-foreach($p in (Get-ChildItem -Path $srcPath -Filter "*.csproj" -Recurse | Where-Object { $_.Attributes -ne "Directory"}))
-{
-	&$nugetExe restore "$($p.FullName)" -SolutionDirectory "$srcPath"
-}
 
 cd $lastLocation
 
@@ -54,12 +35,11 @@ foreach($p in (Get-ChildItem -Path $srcPath -Filter "project.json" -Recurse | Wh
 cd $lastLocation
 
 
-$slnPath =Join-Path $srcPath "MassiveDynamicProxyGenerator.NuGet/MassiveDynamicProxyGenerator.NuGet.csproj"
+$slnPath = Join-Path $srcPath "MassiveDynamicProxyGenerator"
 
-& "$msBuild" "$slnPath" "/t:Clean" "/p:Configuration=Release"
-& "$msBuild" "$slnPath" "/t:Build" "/p:Configuration=Release" "/p:RestorePackages=true"
-
-Copy-Item (Join-Path ${srcPath} "MassiveDynamicProxyGenerator.NuGet\bin\Release\MassiveDynamicProxyGenerator.*.nupkg") $outPath
+cd $slnPath
+& dotnet restore
+& dotnet pack -c Release -o "$outPath"
 
 If($RunTests){
 	Write-Host "Start .Net Core tests" -ForegroundColor Green
