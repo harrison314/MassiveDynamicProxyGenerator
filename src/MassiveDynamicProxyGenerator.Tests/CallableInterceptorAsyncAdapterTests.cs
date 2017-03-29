@@ -322,6 +322,39 @@ namespace MassiveDynamicProxyGenerator.Tests
 
         #endregion
 
+        #region Test supression call
+
+        [TestMethod]
+        public async Task CallableInterceptorAsyncAdapter_TaskGenericMethod_SupressParent()
+        {
+            object invocationMetaData = new object();
+            IGrapth graph = (new Mock<IGrapth>().Object);
+            Mock<IMethodWraper> methodWraper = new Mock<IMethodWraper>();
+            methodWraper.Setup(t => t.OnEnterInvoke(It.IsNotNull<ICallableInvocation>()))
+                .Callback<ICallableInvocation>(invocation =>
+                {
+                    invocation.MethodName.ShouldBe("ReadContextAsync");
+                    invocation.ReturnValue = Task.FromResult(graph);
+                }).Returns(invocationMetaData);
+
+            methodWraper.Setup(t => t.OnExitInvoke(It.IsNotNull<ICallableInvocation>(), invocationMetaData));
+
+            Mock<IAsyncInterface> asyncInterfaceMock = new Mock<IAsyncInterface>(MockBehavior.Strict);
+
+            ICallableInterceptor interceptor = new CallableInterceptorAsyncImpl(methodWraper.Object);
+
+            ProxygGenerator generator = new ProxygGenerator();
+
+            IAsyncInterface instance = generator.GenerateDecorator<IAsyncInterface>(interceptor, asyncInterfaceMock.Object);
+
+            IGrapth graphResult = await instance.ReadContextAsync();
+            graphResult.ShouldBe(graph);
+
+            methodWraper.VerifyAll();
+            asyncInterfaceMock.VerifyAll();
+        }
+        #endregion
+
         private async Task ThrowAsyncException()
         {
             await Task.Delay(50);
