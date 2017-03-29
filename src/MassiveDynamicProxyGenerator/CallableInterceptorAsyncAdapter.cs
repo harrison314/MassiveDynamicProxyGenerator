@@ -34,17 +34,18 @@ namespace MassiveDynamicProxyGenerator
         /// <param name="invocation">The invocation informations.</param>
         public void Intercept(ICallableInvocation invocation)
         {
-            T invocationData = this.OnEnterInvoke(invocation);
+            CallableInterceptorAsyncInvocation m = new CallableInterceptorAsyncInvocation(invocation);
+            T invocationData = this.OnEnterInvoke(m);
             try
             {
-                invocation.Process();
+                m.Process();
                 if (invocation.ReturnValue is Task)
                 {
-                    invocation.ReturnValue = this.Wrap(invocation.ReturnValue, invocation, invocationData);
+                    invocation.ReturnValue = this.Wrap(invocation.ReturnValue, m, invocationData);
                 }
                 else
                 {
-                    this.OnExitInvoke(invocation, invocationData);
+                    this.OnExitInvoke(m, invocationData);
                 }
             }
             catch (Exception ex)
