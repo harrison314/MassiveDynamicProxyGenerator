@@ -489,17 +489,6 @@ namespace MassiveDynamicProxyGenerator
             return proxyType;
         }
 
-        //private T CreateDecoratorInstance<T>(ICallableInterceptor interceptor, T parent, Type interfaceType, Type proxyType)
-        //    where T : class
-        //{
-        //    ConstructorInfo constructor = proxyType.GetTypeInfo().GetConstructor(new Type[] { typeof(ICallableInterceptor), interfaceType });
-        //    ParameterExpression interceptorParam = Expression.Parameter(typeof(ICallableInterceptor), "interceptor");
-        //    ParameterExpression parentParam = Expression.Parameter(typeof(T), "parent");
-        //    return Expression.Lambda<Func<ICallableInterceptor, T, T>>(Expression.New(constructor, new Expression[] { interceptorParam, parentParam }), interceptorParam, parentParam)
-        //        .Compile()
-        //        .Invoke(interceptor, parent);
-        //}
-
         private object CreateDecoratorInstance(ICallableInterceptor interceptor, object parent, Type interfaceType, Type proxyType)
         {
             ConstructorInfo constructor = proxyType.GetTypeInfo().GetConstructor(new Type[] { typeof(ICallableInterceptor), interfaceType });
