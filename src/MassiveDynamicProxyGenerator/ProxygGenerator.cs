@@ -141,7 +141,7 @@ namespace MassiveDynamicProxyGenerator
         /// </exception>
         public object GenerateProxy(Type interfaceType, IInterceptor interceptor)
         {
-            return this.GenerateProxy(interfaceType, interceptor);
+            return this.GenerateProxy(interfaceType, interceptor, true);
         }
 
         /// <summary>
