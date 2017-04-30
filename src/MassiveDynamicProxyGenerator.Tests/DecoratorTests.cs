@@ -11,10 +11,10 @@ using MassiveDynamicProxyGenerator.Tests.TestInterfaces;
 namespace MassiveDynamicProxyGenerator.Tests
 {
     [TestClass]
-    public class TypedDecoratorTests
+    public class DecoratorTests
     {
         [TestMethod]
-        public void GenerateGenericDecorator_CallParent_CallParent()
+        public void GenerateDecorator_CallParent_CallParent()
         {
             Mock<INonReturn> parent = new Mock<INonReturn>(MockBehavior.Strict);
             parent.Setup(t => t.EmptyMethod()).Verifiable();
@@ -22,12 +22,12 @@ namespace MassiveDynamicProxyGenerator.Tests
             Mock<ICallableInterceptor> interceptor = new Mock<ICallableInterceptor>(MockBehavior.Strict);
             interceptor.Setup(t => t.Intercept(It.Is<ICallableInvocation>(q => q.MethodName == nameof(INonReturn.EmptyMethod))))
                 .Callback<ICallableInvocation>(invocation =>
-              {
-                  invocation.Process();
-              });
+                {
+                    invocation.Process();
+                });
 
             ProxygGenerator generator = new ProxygGenerator();
-            INonReturn instance = generator.GenerateDecorator<INonReturn>(interceptor.Object, parent.Object);
+            INonReturn instance = (INonReturn)generator.GenerateDecorator(typeof(INonReturn), interceptor.Object, parent.Object);
 
             instance.ShouldNotBeNull();
 
@@ -38,7 +38,7 @@ namespace MassiveDynamicProxyGenerator.Tests
         }
 
         [TestMethod]
-        public void GenerateGenericDecorator_Nop_ReturnDefault()
+        public void GenerateDecorator_Nop_ReturnDefault()
         {
             Mock<IReturnTypes> parent = new Mock<IReturnTypes>(MockBehavior.Strict);
 
@@ -49,7 +49,7 @@ namespace MassiveDynamicProxyGenerator.Tests
                 });
 
             ProxygGenerator generator = new ProxygGenerator();
-            IReturnTypes instance = generator.GenerateDecorator<IReturnTypes>(interceptor.Object, parent.Object);
+            IReturnTypes instance = (IReturnTypes)generator.GenerateDecorator(typeof(IReturnTypes), interceptor.Object, parent.Object);
 
             instance.ShouldNotBeNull();
 
@@ -60,7 +60,7 @@ namespace MassiveDynamicProxyGenerator.Tests
         }
 
         [TestMethod]
-        public void GenerateGenericDecorator_Call_TransferParameters()
+        public void GenerateDecorator_Call_TransferParameters()
         {
             string arg1 = "some string";
             Exception arg2 = new InvalidTimeZoneException("Ivalid timezone");
@@ -78,7 +78,7 @@ namespace MassiveDynamicProxyGenerator.Tests
                 });
 
             ProxygGenerator generator = new ProxygGenerator();
-            INonReturn instance = generator.GenerateDecorator<INonReturn>(interceptor.Object, parent.Object);
+            INonReturn instance = (INonReturn)generator.GenerateDecorator(typeof(INonReturn), interceptor.Object, parent.Object);
 
             instance.ShouldNotBeNull();
 
@@ -89,7 +89,7 @@ namespace MassiveDynamicProxyGenerator.Tests
         }
 
         [TestMethod]
-        public void GenerateGenericDecorator_CallParent_RetValueChange()
+        public void GenerateDecorator_CallParent_RetValueChange()
         {
             const int retValue = 20;
             const int newReturnValue = 6;
@@ -108,7 +108,7 @@ namespace MassiveDynamicProxyGenerator.Tests
                 });
 
             ProxygGenerator generator = new ProxygGenerator();
-            IReturnTypes instance = generator.GenerateDecorator<IReturnTypes>(interceptor.Object, parent.Object);
+            IReturnTypes instance = (IReturnTypes)generator.GenerateDecorator(typeof(IReturnTypes), interceptor.Object, parent.Object);
 
             instance.ShouldNotBeNull();
 
@@ -119,7 +119,7 @@ namespace MassiveDynamicProxyGenerator.Tests
         }
 
         [TestMethod]
-        public void GenerateGenericDecorator_CallParent_ChangeParameter()
+        public void GenerateDecorator_CallParent_ChangeParameter()
         {
             const int retValue = 20;
             const string parameter = "lorem ipsun dental";
@@ -137,7 +137,7 @@ namespace MassiveDynamicProxyGenerator.Tests
                 });
 
             ProxygGenerator generator = new ProxygGenerator();
-            IReturnTypes instance = generator.GenerateDecorator<IReturnTypes>(interceptor.Object, parent.Object);
+            IReturnTypes instance = (IReturnTypes)generator.GenerateDecorator(typeof(IReturnTypes), interceptor.Object, parent.Object);
 
             instance.ShouldNotBeNull();
 
@@ -148,7 +148,7 @@ namespace MassiveDynamicProxyGenerator.Tests
         }
 
         [TestMethod]
-        public void GenerateGenericDecorator_Generic_CreateInstance()
+        public void GenerateDecorator_Generic_CreateInstance()
         {
             StringBuilder sbInstance = new StringBuilder();
 
@@ -167,7 +167,7 @@ namespace MassiveDynamicProxyGenerator.Tests
 
             ProxygGenerator generator = new ProxygGenerator();
 
-            IGenericInterface<StringBuilder> instance = generator.GenerateDecorator<IGenericInterface<StringBuilder>>(interceptor.Object, realMock.Object);
+            IGenericInterface<StringBuilder> instance = (IGenericInterface<StringBuilder>)generator.GenerateDecorator(typeof(IGenericInterface<StringBuilder>), interceptor.Object, realMock.Object);
             instance.ShouldNotBeNull();
 
             instance.Get("any").ShouldBeSameAs(sbInstance);

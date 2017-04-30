@@ -18,6 +18,15 @@ namespace MassiveDynamicProxyGenerator
             where T : class;
 
         /// <summary>
+        /// Generates the decorator.
+        /// </summary>
+        /// <param name="interfaceType">Type of the interface.</param>
+        /// <param name="interceptor">The interceptor.</param>
+        /// <param name="parent">The parent.</param>
+        /// <returns>Instance of decorator.</returns>
+        object GenerateDecorator(Type interfaceType, ICallableInterceptor interceptor, object parent);
+
+        /// <summary>
         /// Generates the instance proxy.
         /// </summary>
         /// <typeparam name="T">Type of proxy.</typeparam>

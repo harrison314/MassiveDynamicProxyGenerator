@@ -65,6 +65,7 @@
   <ItemGroup>
     <Compile Include="CacheTests.cs" />
     <Compile Include="CallableInterceptorAsyncAdapterTests.cs" />
+    <Compile Include="DecoratorTests.cs" />
     <Compile Include="DynamicObjectProxyTests.cs" />
     <Compile Include="Examples\Caller.cs" />
     <Compile Include="Examples\InvocationExample.cs" />

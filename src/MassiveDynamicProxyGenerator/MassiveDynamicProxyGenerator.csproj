@@ -2,7 +2,6 @@
 
   <PropertyGroup>
     <TargetFrameworks>netstandard1.6;net40;net45;net46;net461</TargetFrameworks>
-    <DefineConstants>$(DefineConstants);COREFX</DefineConstants>
     <GenerateDocumentationFile>true</GenerateDocumentationFile>
     <AssemblyName>MassiveDynamicProxyGenerator</AssemblyName>
     <PackageId>MassiveDynamicProxyGenerator</PackageId>

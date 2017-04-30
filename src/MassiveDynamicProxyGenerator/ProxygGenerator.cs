@@ -341,6 +341,44 @@ namespace MassiveDynamicProxyGenerator
             return (T)this.CreateDecoratorInstance(interceptor, parent, interfaceType, proxyType);
         }
 
+        /// <summary>
+        /// Generates the decorator.
+        /// </summary>
+        /// <param name="interfaceType">Type of the decorator.</param>
+        /// <param name="interceptor">The interceptor.</param>
+        /// <param name="parent">The parent object.</param>
+        /// <returns>Instance of decorator.</returns>
+        /// <exception cref="System.ArgumentNullException">
+        /// interceptor
+        /// or
+        /// interfaceType
+        /// or
+        /// parent
+        /// </exception>
+        public object GenerateDecorator(Type interfaceType, ICallableInterceptor interceptor,  object parent)
+        {
+            if (interceptor == null)
+            {
+                throw new ArgumentNullException(nameof(interceptor));
+            }
+
+            if (interfaceType == null)
+            {
+                throw new ArgumentNullException(nameof(interfaceType));
+            }
+
+            if (object.ReferenceEquals(parent, null))
+            {
+                throw new ArgumentNullException(nameof(parent));
+            }
+
+            Type proxyType = this.generatedTypeList.EnshureType(interfaceType,
+                TypedDecoratorType.TypedDecorator,
+                this.BuildDecoratorType);
+
+            return this.CreateDecoratorInstance(interceptor, parent, interfaceType, proxyType);
+        }
+
         ///// <summary>
         ///// Generate <c>dynamic</c> object proxy with inteceptor.
         ///// </summary>
@@ -451,13 +489,25 @@ namespace MassiveDynamicProxyGenerator
             return proxyType;
         }
 
-        private T CreateDecoratorInstance<T>(ICallableInterceptor interceptor, T parent, Type t, Type proxyType)
-            where T : class
+        //private T CreateDecoratorInstance<T>(ICallableInterceptor interceptor, T parent, Type interfaceType, Type proxyType)
+        //    where T : class
+        //{
+        //    ConstructorInfo constructor = proxyType.GetTypeInfo().GetConstructor(new Type[] { typeof(ICallableInterceptor), interfaceType });
+        //    ParameterExpression interceptorParam = Expression.Parameter(typeof(ICallableInterceptor), "interceptor");
+        //    ParameterExpression parentParam = Expression.Parameter(typeof(T), "parent");
+        //    return Expression.Lambda<Func<ICallableInterceptor, T, T>>(Expression.New(constructor, new Expression[] { interceptorParam, parentParam }), interceptorParam, parentParam)
+        //        .Compile()
+        //        .Invoke(interceptor, parent);
+        //}
+
+        private object CreateDecoratorInstance(ICallableInterceptor interceptor, object parent, Type interfaceType, Type proxyType)
         {
-            ConstructorInfo constructor = proxyType.GetTypeInfo().GetConstructor(new Type[] { typeof(ICallableInterceptor), t });
+            ConstructorInfo constructor = proxyType.GetTypeInfo().GetConstructor(new Type[] { typeof(ICallableInterceptor), interfaceType });
             ParameterExpression interceptorParam = Expression.Parameter(typeof(ICallableInterceptor), "interceptor");
-            ParameterExpression parentParam = Expression.Parameter(typeof(T), "parent");
-            return Expression.Lambda<Func<ICallableInterceptor, T, T>>(Expression.New(constructor, new Expression[] { interceptorParam, parentParam }), interceptorParam, parentParam)
+            ParameterExpression parentParam = Expression.Parameter(typeof(object), "parent");
+            Expression casterparent = Expression.ConvertChecked(parentParam, interfaceType);
+
+            return Expression.Lambda<Func<ICallableInterceptor, object, object>>(Expression.New(constructor, new Expression[] { interceptorParam, casterparent }), interceptorParam, parentParam)
                 .Compile()
                 .Invoke(interceptor, parent);
         }
