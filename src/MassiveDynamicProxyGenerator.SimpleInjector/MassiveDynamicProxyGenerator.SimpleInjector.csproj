@@ -23,6 +23,10 @@
   </PropertyGroup>
 
   <ItemGroup>
+    <None Include="Dangerous\DangerousContainerExtensions.Mock.cs" />
+  </ItemGroup>
+
+  <ItemGroup>
     <PackageReference Include="SimpleInjector" Version="4.0.3" />
   </ItemGroup>
 
