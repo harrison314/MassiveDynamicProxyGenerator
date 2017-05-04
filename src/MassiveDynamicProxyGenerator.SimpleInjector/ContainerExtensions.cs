@@ -1,8 +1,9 @@
 ﻿using System;
 using MassiveDynamicProxyGenerator;
 using MassiveDynamicProxyGenerator.SimpleInjector;
+using SimpleInjector;
 
-namespace SimpleInjector
+namespace MassiveDynamicProxyGenerator.SimpleInjector
 {
     /// <summary>
     /// Extensions for SimpleInjector <see cref="Container"/> using MassiveDynamicProxyGenerator.

@@ -13,13 +13,10 @@ namespace MassiveDynamicProxyGenerator.SimpleInjector
     internal static class FullFrameworkExtensions
     {
         /// <summary>
-        /// Gets same type.
+        /// Gets same type for NET Standard compatibility.
         /// </summary>
         /// <param name="type">The type.</param>
         /// <returns>The same type.</returns>
-//#if !NET40
-//        [MethodImpl(MethodImplOptions.AggressiveInlining)]
-//#endif
         public static Type GetTypeInfo(this Type type)
         {
             return type;
@@ -28,3 +25,7 @@ namespace MassiveDynamicProxyGenerator.SimpleInjector
 
 #endif
 }
+
+//#if !NET40
+//        [MethodImpl(MethodImplOptions.AggressiveInlining)]
+//#endif

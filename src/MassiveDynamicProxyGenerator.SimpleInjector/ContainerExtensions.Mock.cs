@@ -4,8 +4,9 @@ using System.Text;
 using MassiveDynamicProxyGenerator;
 using MassiveDynamicProxyGenerator.SimpleInjector;
 using System.Reflection;
+using SimpleInjector;
 
-namespace SimpleInjector
+namespace MassiveDynamicProxyGenerator.SimpleInjector
 {
     public static partial class ContainerExtensions
     {
@@ -60,7 +61,7 @@ namespace SimpleInjector
             {
                 container.ResolveUnregisteredType += (sender, arguments) =>
                 {
-                    if (TypeHelper.IsGenericConstructedOf(mockType, arguments.UnregisteredServiceType))
+                    if (!arguments.Handled && TypeHelper.IsGenericConstructedOf(mockType, arguments.UnregisteredServiceType))
                     {
 #if NET40
                         arguments.Register(() => generator.GenerateProxy(arguments.UnregisteredServiceType, new NullInterceptor()));

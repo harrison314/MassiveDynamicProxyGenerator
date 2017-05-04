@@ -57,6 +57,22 @@ namespace MassiveDynamicProxyGenerator.SimpleInjector.Tests
             container.GetInstance<IGenericService<IServiceProvider>>().ShouldNotBeNull();
         }
 
+        [TestMethod]
+        public void Mock_GenericService_NoOwerideRegistration()
+        {
+            Container container = this.CrateDefaultContaner();
+            container.Register<IGenericService<string>, StringGenericService>();
+            container.RegisterMock(typeof(IGenericService<>));
+
+            container.Verify();
+
+            IGenericService<int> service = container.GetInstance<IGenericService<int>>();
+
+            service.ShouldNotBeNull();
+            service.GetLast().ShouldBe(default(int));
+
+            container.GetInstance<IGenericService<string>>().ShouldBeOfType<StringGenericService>();
+        }
 
         private Container CrateDefaultContaner()
         {
