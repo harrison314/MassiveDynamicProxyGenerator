@@ -1,6 +1,6 @@
 ﻿<?xml version="1.0" encoding="utf-8"?>
-<RuleSet Name="Microsoft Managed Recommended Rules" Description="These rules focus on the most critical problems in your code, including potential security holes, application crashes, and other important logic and design errors. It is recommended to include this rule set in any custom rule set you create for your projects." ToolsVersion="14.0">
-  <Localization ResourceAssembly="Microsoft.VisualStudio.CodeAnalysis.RuleSets.Strings.dll" ResourceBaseName="Microsoft.VisualStudio.CodeAnalysis.RuleSets.Strings.Localized">
+<RuleSet Name="Microsoft Managed Recommended Rules" Description="These rules focus on the most critical problems in your code, including potential security holes, application crashes, and other important logic and design errors. It is recommended to include this rule set in any custom rule set you create for your projects." ToolsVersion="15.0">
+  <Localization ResourceAssembly="src\packages\StyleCop.Analyzers.1.0.0\analyzers\dotnet\cs\StyleCop.Analyzers.dll" ResourceBaseName="Microsoft.VisualStudio.CodeAnalysis.RuleSets.Strings.Localized">
     <Name Resource="MinimumRecommendedRules_Name" />
     <Description Resource="MinimumRecommendedRules_Description" />
   </Localization>
@@ -75,7 +75,9 @@
     <Rule Id="SA0000" Action="Warning" />
     <Rule Id="SA1116" Action="None" />
     <Rule Id="SA1200" Action="None" />
+    <Rule Id="SA1201" Action="Info" />
     <Rule Id="SA1210" Action="None" />
+    <Rule Id="SA1600" Action="Info" />
     <Rule Id="SA1633" Action="None" />
     <Rule Id="SA1652" Action="None" />
   </Rules>

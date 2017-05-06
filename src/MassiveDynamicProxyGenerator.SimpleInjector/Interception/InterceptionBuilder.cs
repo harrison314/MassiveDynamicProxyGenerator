@@ -7,7 +7,6 @@ namespace MassiveDynamicProxyGenerator.SimpleInjector.Interception
 {
     internal abstract class InterceptionBuilder
     {
-
         public Expression GeneratorSourse
         {
             get;

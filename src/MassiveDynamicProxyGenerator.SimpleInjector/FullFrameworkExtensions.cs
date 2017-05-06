@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using System.Text;
 using System.Reflection;
+using System.Runtime.CompilerServices;
 
 namespace MassiveDynamicProxyGenerator.SimpleInjector
 {
@@ -10,6 +11,9 @@ namespace MassiveDynamicProxyGenerator.SimpleInjector
     /// <summary>
     /// Extensions for adapt .Net Core API to full framework.
     /// </summary>
+#if !NET40 && !NET45
+    [MethodImpl(MethodImplOptions.AggressiveInlining)]
+#endif
     internal static class FullFrameworkExtensions
     {
         /// <summary>
@@ -25,7 +29,3 @@ namespace MassiveDynamicProxyGenerator.SimpleInjector
 
 #endif
 }
-
-//#if !NET40
-//        [MethodImpl(MethodImplOptions.AggressiveInlining)]
-//#endif

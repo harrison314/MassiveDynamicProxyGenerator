@@ -33,7 +33,7 @@ namespace MassiveDynamicProxyGenerator.SimpleInjector.Interception
 
         protected override bool ChecktypeToIntercept(Type typeToIntercept)
         {
-            return this.predicate(typeToIntercept)  && this.interceptorType != typeToIntercept;
+            return this.predicate(typeToIntercept) && this.interceptorType != typeToIntercept;
         }
     }
 }
