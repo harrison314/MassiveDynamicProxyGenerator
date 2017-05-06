@@ -16,6 +16,7 @@ namespace MassiveDynamicProxyGenerator
             {
                 return this.parent.ReturnValue;
             }
+
             set
             {
                 this.superssProcess = true;

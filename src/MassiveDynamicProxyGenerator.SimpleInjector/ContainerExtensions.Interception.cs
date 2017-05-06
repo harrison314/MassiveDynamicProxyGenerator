@@ -1,10 +1,10 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Text;
-using MassiveDynamicProxyGenerator;
-using MassiveDynamicProxyGenerator.SimpleInjector;
 using System.Linq.Expressions;
 using System.Reflection;
+using MassiveDynamicProxyGenerator;
+using MassiveDynamicProxyGenerator.SimpleInjector;
 using SimpleInjector;
 using MassiveDynamicProxyGenerator.SimpleInjector.Interception;
 
@@ -12,7 +12,6 @@ namespace MassiveDynamicProxyGenerator.SimpleInjector
 {
     public static partial class ContainerExtensions
     {
-
         /// <summary>
         /// Using interceptor to decorate all types that match the predicate.
         /// </summary>
@@ -34,7 +33,7 @@ namespace MassiveDynamicProxyGenerator.SimpleInjector
             }
 
             ProxygGenerator generator = new ProxygGenerator();
-            InterceptionBuilder builder = new InterceptionBuilder(predicate, generator, interceptorType);
+            InterceptionBuilder builder = new TypeInterceptionBuilder(predicate, generator, interceptorType);
             container.ExpressionBuilt += builder.ReguildExpresion;
         }
     }

@@ -1,9 +1,9 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Text;
+using System.Reflection;
 using MassiveDynamicProxyGenerator;
 using MassiveDynamicProxyGenerator.SimpleInjector;
-using System.Reflection;
 using SimpleInjector;
 
 namespace MassiveDynamicProxyGenerator.SimpleInjector
@@ -33,7 +33,6 @@ namespace MassiveDynamicProxyGenerator.SimpleInjector
             container.Register(typeof(TService), () => generator.GenerateProxy<TService>(new NullAsyncInterceptor()));
 #endif
         }
-
 
         /// <summary>
         /// Registers the mock for service <paramref name="mockType"/> (is posssible use open generic) to container.
@@ -73,7 +72,6 @@ namespace MassiveDynamicProxyGenerator.SimpleInjector
             }
             else
             {
-
 #if NET40
                 container.Register(mockType, () => generator.GenerateProxy(mockType, new NullInterceptor()));
 #else

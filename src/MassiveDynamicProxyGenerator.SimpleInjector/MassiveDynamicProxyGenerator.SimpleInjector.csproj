@@ -18,6 +18,10 @@
     <Description>TODO</Description>
   </PropertyGroup>
 
+  <PropertyGroup>
+    <CodeAnalysisRuleSet>..\..\MassiveDynamicProxyGenerator.ruleset</CodeAnalysisRuleSet>
+  </PropertyGroup>
+
   <PropertyGroup Condition="'$(Configuration)|$(TargetFramework)|$(Platform)'=='Debug|netstandard1.6|AnyCPU'">
     <DocumentationFile>bin\Debug\netstandard1.6\MassiveDynamicProxyGenerator.SimpleInjector.xml</DocumentationFile>
   </PropertyGroup>
@@ -28,6 +32,7 @@
 
   <ItemGroup>
     <PackageReference Include="SimpleInjector" Version="4.0.3" />
+    <PackageReference Include="StyleCop.Analyzers" Version="1.0.0" />
   </ItemGroup>
 
   <ItemGroup>

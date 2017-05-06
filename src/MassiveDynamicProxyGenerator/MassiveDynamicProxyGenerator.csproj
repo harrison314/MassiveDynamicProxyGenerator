@@ -26,6 +26,10 @@
 Add universal async ibterceptor CallableInterceptorAsyncAdapter as abstract class for handle error in async task.</PackageReleaseNotes>
   </PropertyGroup>
 
+  <PropertyGroup>
+    <CodeAnalysisRuleSet>..\..\MassiveDynamicProxyGenerator.ruleset</CodeAnalysisRuleSet>
+  </PropertyGroup>
+
 
   <ItemGroup Condition=" '$(TargetFramework)' == 'netstandard1.6' ">
     <PackageReference Include="System.Reflection.Emit" Version="4.3.0" />
@@ -50,6 +54,10 @@ Add universal async ibterceptor CallableInterceptorAsyncAdapter as abstract clas
   <ItemGroup Condition=" '$(TargetFramework)' == 'net461' ">
     <Reference Include="System" />
     <Reference Include="Microsoft.CSharp" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <PackageReference Include="StyleCop.Analyzers" Version="1.0.0" />
   </ItemGroup>
 
 </Project>

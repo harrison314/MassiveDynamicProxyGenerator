@@ -12,6 +12,5 @@ namespace MassiveDynamicProxyGenerator.SimpleInjector
     /// <seealso cref="ProxygGenerator"/>
     public static partial class ContainerExtensions
     {
-        
     }
 }

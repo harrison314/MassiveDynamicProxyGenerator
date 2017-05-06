@@ -5,34 +5,26 @@ using SimpleInjector;
 
 namespace MassiveDynamicProxyGenerator.SimpleInjector.Interception
 {
-    internal class InterceptionBuilder
+    internal abstract class InterceptionBuilder
     {
-        private readonly Predicate<Type> predicate;
-        private readonly Type interceptorType;
 
         public Expression GeneratorSourse
         {
             get;
-            set;
+            protected set;
         }
 
-        public InterceptionBuilder(Predicate<Type> predicate, ProxygGenerator generator, Type interceptorType)
+        public InterceptionBuilder(Predicate<Type> predicate, ProxygGenerator generator)
         {
-            this.predicate = predicate;
-
             this.GeneratorSourse = Expression.Constant(generator, typeof(ProxygGenerator));
-            this.interceptorType = interceptorType;
         }
 
         public void ReguildExpresion(object sender, ExpressionBuiltEventArgs buildArgs)
         {
-            if (this.predicate(buildArgs.RegisteredServiceType) && buildArgs.RegisteredServiceType.GetTypeInfo().IsInterface && buildArgs.RegisteredServiceType!= this.interceptorType)
+            if (buildArgs.RegisteredServiceType.GetTypeInfo().IsInterface && this.ChecktypeToIntercept(buildArgs.RegisteredServiceType))
             {
-
                 Container container = (Container)sender;
-                InstanceProducer producer = container.GetRegistration(this.interceptorType, false);
-                Expression interceptorSourse = (producer != null) ? producer.BuildExpression() : Expression.New(this.interceptorType);
-
+                Expression interceptorSourse = this.BuildInterceptionExpression(container, buildArgs.RegisteredServiceType);
 
                 System.Reflection.MethodInfo crateInterceptor = typeof(IProxygGenerator).GetTypeInfo()
                     .GetMethod(nameof(IProxygGenerator.GenerateDecorator), new[] { typeof(Type), typeof(ICallableInterceptor), typeof(object) });
@@ -49,6 +41,13 @@ namespace MassiveDynamicProxyGenerator.SimpleInjector.Interception
 
                 buildArgs.Expression = craetorExpression;
             }
+        }
+
+        protected abstract Expression BuildInterceptionExpression(Container container, Type typeToIntercept);
+
+        protected virtual bool ChecktypeToIntercept(Type typeToIntercept)
+        {
+            return true;
         }
     }
 }
