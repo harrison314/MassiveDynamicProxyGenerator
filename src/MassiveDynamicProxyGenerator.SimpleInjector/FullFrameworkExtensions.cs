@@ -12,7 +12,7 @@ namespace MassiveDynamicProxyGenerator.SimpleInjector
     /// Extensions for adapt .Net Core API to full framework.
     /// </summary>
 #if !NET40 && !NET45
-    //[MethodImpl(MethodImplOptions.AggressiveInlining)]
+    // [MethodImpl(MethodImplOptions.AggressiveInlining)]
 #endif
     internal static class FullFrameworkExtensions
     {

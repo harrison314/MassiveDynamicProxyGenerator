@@ -23,7 +23,7 @@ namespace MassiveDynamicProxyGenerator.SimpleInjector.Tests
             }));
 
 
-            container.RegisterInterceptedDecorator(typeof(CallableInterceptorAdapter), _ => true);
+            container.RegisterInterceptedDecorator(typeof(CallableInterceptorAdapter), t => !t.Name.StartsWith("IType"));
 
             container.Verify();
 
@@ -31,6 +31,9 @@ namespace MassiveDynamicProxyGenerator.SimpleInjector.Tests
             service.ShouldNotBeNull();
             service.ShouldNotBeOfType<MessageService>();
             service.GetCountOfMessagesInFront().ShouldBe(42);
+
+            container.GetInstance<ITypeB>().ShouldBeOfType<TypeB>();
+
         }
 
         [TestMethod]
@@ -47,7 +50,7 @@ namespace MassiveDynamicProxyGenerator.SimpleInjector.Tests
             });
 
 
-            container.RegisterInterceptedDecorator(adapter, _ => true);
+            container.RegisterInterceptedDecorator(adapter, t => !t.Name.StartsWith("IType"));
 
             container.Verify();
 
@@ -55,6 +58,9 @@ namespace MassiveDynamicProxyGenerator.SimpleInjector.Tests
             service.ShouldNotBeNull();
             service.ShouldNotBeOfType<MessageService>();
             service.GetCountOfMessagesInFront().ShouldBe(42);
+
+            container.GetInstance<ITypeB>().ShouldBeOfType<TypeB>();
+
         }
 
         [TestMethod]
@@ -73,7 +79,7 @@ namespace MassiveDynamicProxyGenerator.SimpleInjector.Tests
 
             Func<ICallableInterceptor> factory = () => adapter;
 
-            container.RegisterInterceptedDecorator(factory, _ => true);
+            container.RegisterInterceptedDecorator(factory, t => !t.Name.StartsWith("IType"));
 
             container.Verify();
 
@@ -81,6 +87,8 @@ namespace MassiveDynamicProxyGenerator.SimpleInjector.Tests
             service.ShouldNotBeNull();
             service.ShouldNotBeOfType<MessageService>();
             service.GetCountOfMessagesInFront().ShouldBe(42);
+
+            container.GetInstance<ITypeB>().ShouldBeOfType<TypeB>();
         }
 
 
@@ -88,7 +96,9 @@ namespace MassiveDynamicProxyGenerator.SimpleInjector.Tests
         {
             Container container = new Container();
             container.Register<IMessageService, MessageService>();
-
+            container.Register<ITypeA, TypeA>();
+            container.Register<ITypeB, TypeB>();
+            container.Register<ITypeC, TypeC>();
             return container;
         }
     }

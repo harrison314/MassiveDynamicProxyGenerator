@@ -26,7 +26,7 @@ namespace MassiveDynamicProxyGenerator.SimpleInjector.Interception
             return interceptorSourse;
         }
 
-        protected override bool ChecktypeToIntercept(Type typeToIntercept)
+        protected override bool CheckTypeToIntercept(Type typeToIntercept)
         {
             return this.predicate(typeToIntercept) && this.interceptorType != typeToIntercept;
         }

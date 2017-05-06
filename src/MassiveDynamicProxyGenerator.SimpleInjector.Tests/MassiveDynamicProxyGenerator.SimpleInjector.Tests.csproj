@@ -62,9 +62,15 @@
     <Compile Include="Services\IMessageService.cs" />
     <Compile Include="Services\IntGenericService.cs" />
     <Compile Include="Services\ITestMessager.cs" />
+    <Compile Include="Services\ITypeA.cs" />
+    <Compile Include="Services\ITypeB.cs" />
+    <Compile Include="Services\ITypeC.cs" />
     <Compile Include="Services\MessageService.cs" />
     <Compile Include="Services\StringGenericService.cs" />
     <Compile Include="Services\TestMessager.cs" />
+    <Compile Include="Services\TypeA.cs" />
+    <Compile Include="Services\TypeB.cs" />
+    <Compile Include="Services\TypeC.cs" />
   </ItemGroup>
   <ItemGroup>
     <None Include="packages.config" />

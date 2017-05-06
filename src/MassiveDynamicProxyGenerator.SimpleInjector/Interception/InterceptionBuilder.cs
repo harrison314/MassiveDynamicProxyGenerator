@@ -5,8 +5,14 @@ using SimpleInjector;
 
 namespace MassiveDynamicProxyGenerator.SimpleInjector.Interception
 {
+    /// <summary>
+    /// Builder for rebuild expression in SimpleInjector using for interception.
+    /// </summary>
     internal abstract class InterceptionBuilder
     {
+        protected static readonly MethodInfo CrateInterceptorMethod = typeof(IProxygGenerator).GetTypeInfo()
+                    .GetMethod(nameof(IProxygGenerator.GenerateDecorator), new[] { typeof(Type), typeof(ICallableInterceptor), typeof(object) });
+
         public Expression GeneratorSourse
         {
             get;
@@ -20,18 +26,15 @@ namespace MassiveDynamicProxyGenerator.SimpleInjector.Interception
 
         public void ReguildExpresion(object sender, ExpressionBuiltEventArgs buildArgs)
         {
-            if (buildArgs.RegisteredServiceType.GetTypeInfo().IsInterface && this.ChecktypeToIntercept(buildArgs.RegisteredServiceType))
+            if (buildArgs.RegisteredServiceType.GetTypeInfo().IsInterface && this.CheckTypeToIntercept(buildArgs.RegisteredServiceType))
             {
                 Container container = (Container)sender;
                 Expression interceptorSourse = this.BuildInterceptionExpression(container, buildArgs.RegisteredServiceType);
 
-                System.Reflection.MethodInfo crateInterceptor = typeof(IProxygGenerator).GetTypeInfo()
-                    .GetMethod(nameof(IProxygGenerator.GenerateDecorator), new[] { typeof(Type), typeof(ICallableInterceptor), typeof(object) });
-
                 Expression decoratorType = Expression.Constant(buildArgs.RegisteredServiceType, typeof(Type));
 
                 MethodCallExpression call = Expression.Call(this.GeneratorSourse,
-                    crateInterceptor,
+                    CrateInterceptorMethod,
                     decoratorType,
                     interceptorSourse,
                     buildArgs.Expression);
@@ -42,9 +45,20 @@ namespace MassiveDynamicProxyGenerator.SimpleInjector.Interception
             }
         }
 
+        /// <summary>
+        /// Builds the expression generated <see cref="ICallableInterceptor"/>.
+        /// </summary>
+        /// <param name="container">The container.</param>
+        /// <param name="typeToIntercept">The type to intercept.</param>
+        /// <returns>Expression generated <see cref="ICallableInterceptor"/></returns>
         protected abstract Expression BuildInterceptionExpression(Container container, Type typeToIntercept);
 
-        protected virtual bool ChecktypeToIntercept(Type typeToIntercept)
+        /// <summary>
+        /// Check type to intercept. If typeToIntercept by inteception then return true, otherwise false.
+        /// </summary>
+        /// <param name="typeToIntercept">The type to intercept.</param>
+        /// <returns>If typeToIntercept by inteception then return true, otherwise false.</returns>
+        protected virtual bool CheckTypeToIntercept(Type typeToIntercept)
         {
             return true;
         }

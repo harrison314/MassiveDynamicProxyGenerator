@@ -6,7 +6,6 @@ using System.Threading.Tasks;
 
 namespace MassiveDynamicProxyGenerator
 {
-
 #if NET40
     /// <summary>
     /// Null interceptor, returns default values.

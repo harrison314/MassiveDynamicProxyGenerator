@@ -11,10 +11,11 @@ namespace MassiveDynamicProxyGenerator.SimpleInjector.Interception
         private readonly Predicate<Type> predicate;
         private readonly ICallableInterceptor interceptor;
 
-        public InstanceInterceptionBuilder(Predicate<Type> predicate, ProxygGenerator generator, ICallableInterceptor interceptor) 
+        public InstanceInterceptionBuilder(Predicate<Type> predicate, ProxygGenerator generator, ICallableInterceptor interceptor)
             : base(generator)
         {
             this.interceptor = interceptor;
+            this.predicate = predicate;
         }
 
         protected override Expression BuildInterceptionExpression(Container container, Type typeToIntercept)
@@ -22,7 +23,7 @@ namespace MassiveDynamicProxyGenerator.SimpleInjector.Interception
             return Expression.Constant(this.interceptor, typeof(ICallableInterceptor));
         }
 
-        protected override bool ChecktypeToIntercept(Type typeToIntercept)
+        protected override bool CheckTypeToIntercept(Type typeToIntercept)
         {
             return this.predicate(typeToIntercept);
         }
