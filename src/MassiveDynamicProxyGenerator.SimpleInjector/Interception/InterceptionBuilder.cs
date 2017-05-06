@@ -13,7 +13,7 @@ namespace MassiveDynamicProxyGenerator.SimpleInjector.Interception
             protected set;
         }
 
-        public InterceptionBuilder(Predicate<Type> predicate, ProxygGenerator generator)
+        public InterceptionBuilder(ProxygGenerator generator)
         {
             this.GeneratorSourse = Expression.Constant(generator, typeof(ProxygGenerator));
         }
