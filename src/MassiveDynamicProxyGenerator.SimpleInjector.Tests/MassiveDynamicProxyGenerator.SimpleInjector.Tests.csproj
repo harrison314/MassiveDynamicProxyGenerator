@@ -58,6 +58,7 @@
     <Compile Include="InterceptedpDecoratorTests.cs" />
     <Compile Include="MockTests.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="ProxyTests.cs" />
     <Compile Include="Services\IGenericService.cs" />
     <Compile Include="Services\IMessageService.cs" />
     <Compile Include="Services\IntGenericService.cs" />

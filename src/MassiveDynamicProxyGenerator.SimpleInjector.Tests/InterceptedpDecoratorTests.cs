@@ -22,7 +22,6 @@ namespace MassiveDynamicProxyGenerator.SimpleInjector.Tests
                 }
             }));
 
-
             container.RegisterInterceptedDecorator(typeof(CallableInterceptorAdapter), t => !t.Name.StartsWith("IType"));
 
             container.Verify();
@@ -48,7 +47,6 @@ namespace MassiveDynamicProxyGenerator.SimpleInjector.Tests
                     invodcation.ReturnValue = 42;
                 }
             });
-
 
             container.RegisterInterceptedDecorator(adapter, t => !t.Name.StartsWith("IType"));
 
@@ -76,7 +74,6 @@ namespace MassiveDynamicProxyGenerator.SimpleInjector.Tests
                 }
             });
 
-
             Func<ICallableInterceptor> factory = () => adapter;
 
             container.RegisterInterceptedDecorator(factory, t => !t.Name.StartsWith("IType"));
@@ -99,6 +96,7 @@ namespace MassiveDynamicProxyGenerator.SimpleInjector.Tests
             container.Register<ITypeA, TypeA>();
             container.Register<ITypeB, TypeB>();
             container.Register<ITypeC, TypeC>();
+
             return container;
         }
     }
