@@ -89,6 +89,50 @@ namespace MassiveDynamicProxyGenerator.SimpleInjector.Tests
             container.GetInstance<IGenericService<int>>().GetLast().ShouldBe(42);
         }
 
+        [TestMethod]
+        public void Proxy_FactoryInterceptor_Sucess()
+        {
+            Container container = this.CrateDefaultContaner();
+            InterceptorAdapter adapter = new InterceptorAdapter(invodcation =>
+            {
+                if (invodcation.MethodName == nameof(IMessageService.GetCountOfMessagesInFront))
+                {
+                    invodcation.ReturnValue = 42;
+                }
+            });
+
+            Func<IInterceptor> factory = () => adapter;
+
+            container.RegisterProxy(typeof(IMessageService), factory);
+            container.Verify();
+
+            container.GetInstance<IMessageService>().ShouldNotBeNull();
+            container.GetInstance<IMessageService>().GetCountOfMessagesInFront().ShouldBe(42);
+        }
+
+        [TestMethod]
+        public void Proxy_OpenGenericFactoryInterceptor_Sucess()
+        {
+            Container container = this.CrateDefaultContaner();
+            InterceptorAdapter adapter = new InterceptorAdapter(invodcation =>
+            {
+                if (invodcation.MethodName == nameof(IGenericService<int>.GetLast))
+                {
+                    invodcation.ReturnValue = 42;
+                }
+            });
+
+            Func<IInterceptor> factory = () => adapter;
+
+            container.RegisterProxy(typeof(IGenericService<>), factory);
+            container.Verify();
+
+            container.GetInstance<IGenericService<int>>().ShouldNotBeNull();
+            container.GetInstance<IGenericService<string>>().ShouldNotBeNull();
+            container.GetInstance<IGenericService<Action<int>>>().ShouldNotBeNull();
+            container.GetInstance<IGenericService<int>>().GetLast().ShouldBe(42);
+        }
+
         private Container CrateDefaultContaner()
         {
             Container container = new Container();

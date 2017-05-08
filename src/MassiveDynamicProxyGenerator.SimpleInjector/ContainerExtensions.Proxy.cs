@@ -104,5 +104,48 @@ namespace MassiveDynamicProxyGenerator.SimpleInjector
                 container.ResolveUnregisteredType += builder.ResolveUnregisteredType;
             }
         }
+
+        /// <summary>
+        /// Registers the proxy crated using specific created by <paramref name="interceptorFactory"/>.
+        /// </summary>
+        /// <param name="container">The container.</param>
+        /// <param name="serviseType">Type of the servise. Must by interface.</param>
+        /// <param name="interceptorFactory">The interceptor factory.</param>
+        /// <exception cref="System.ArgumentNullException">
+        /// serviseType
+        /// or
+        /// interceptorFactory
+        /// </exception>
+        /// <exception cref="System.ArgumentException">serviseType</exception>
+        public static void RegisterProxy(this Container container, Type serviseType, Func<IInterceptor> interceptorFactory)
+        {
+            if (serviseType == null)
+            {
+                throw new ArgumentNullException(nameof(serviseType));
+            }
+
+            if (interceptorFactory == null)
+            {
+                throw new ArgumentNullException(nameof(interceptorFactory));
+            }
+
+            if (!TypeHelper.IsPublicInterface(serviseType))
+            {
+                throw new ArgumentException($"The type parameter {nameof(serviseType)} {serviseType.FullName} must by public interface.");
+            }
+
+            ProxygGenerator generator = new ProxygGenerator();
+
+            if (TypeHelper.IsOpenGeneric(serviseType))
+            {
+                InterceptedProxyBulder builder = new OpenFuncInterceptedProxyBulder(generator, serviseType, interceptorFactory);
+                container.ResolveUnregisteredType += builder.ResolveUnregisteredType;
+            }
+            else
+            {
+                InterceptedProxyBulder builder = new FuncInterceptedProxyBulder(generator, serviseType, interceptorFactory);
+                container.ResolveUnregisteredType += builder.ResolveUnregisteredType;
+            }
+        }
     }
 }
