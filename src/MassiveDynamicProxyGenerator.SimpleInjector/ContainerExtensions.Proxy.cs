@@ -57,8 +57,15 @@ namespace MassiveDynamicProxyGenerator.SimpleInjector
             }
             else
             {
-                InterceptedProxyBulder builder = new TypeInterceptedProxyBuilder(generator, serviseType, interceptorType);
-                container.ResolveUnregisteredType += builder.ResolveUnregisteredType;
+                Registration registration = new Registrations.ProxyWithTypeInterceptorRegistration(container.Options.DefaultLifestyle,
+                    container,
+                    serviseType,
+                    interceptorType,
+                    generator);
+
+                container.AddRegistration(serviseType, registration);
+                //InterceptedProxyBulder builder = new TypeInterceptedProxyBuilder(generator, serviseType, interceptorType);
+                //container.ResolveUnregisteredType += builder.ResolveUnregisteredType;
             }
         }
 
@@ -100,8 +107,15 @@ namespace MassiveDynamicProxyGenerator.SimpleInjector
             }
             else
             {
-                InterceptedProxyBulder builder = new InstanceInterceptedProxyBuilder(generator, serviseType, interceptor);
-                container.ResolveUnregisteredType += builder.ResolveUnregisteredType;
+                Registration registration = new Registrations.ProxyWithInstanceInterceptorRegistration(container.Options.DefaultLifestyle,
+                    container,
+                    serviseType,
+                    interceptor,
+                    generator);
+
+                container.AddRegistration(serviseType, registration);
+                //InterceptedProxyBulder builder = new InstanceInterceptedProxyBuilder(generator, serviseType, interceptor);
+                //container.ResolveUnregisteredType += builder.ResolveUnregisteredType;
             }
         }
 
@@ -143,8 +157,16 @@ namespace MassiveDynamicProxyGenerator.SimpleInjector
             }
             else
             {
-                InterceptedProxyBulder builder = new FuncInterceptedProxyBulder(generator, serviseType, interceptorFactory);
-                container.ResolveUnregisteredType += builder.ResolveUnregisteredType;
+                Registration registration = new Registrations.ProxyWithFactoryInterceptorRegistration(container.Options.DefaultLifestyle,
+                    container,
+                    serviseType,
+                    interceptorFactory,
+                    generator);
+
+                container.AddRegistration(serviseType, registration);
+
+                //InterceptedProxyBulder builder = new FuncInterceptedProxyBulder(generator, serviseType, interceptorFactory);
+                //container.ResolveUnregisteredType += builder.ResolveUnregisteredType;
             }
         }
     }
