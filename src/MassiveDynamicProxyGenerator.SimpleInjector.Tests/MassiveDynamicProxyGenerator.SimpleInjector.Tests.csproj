@@ -55,6 +55,7 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="DangerousMockTests.cs" />
+    <Compile Include="InstanceProxyTests.cs" />
     <Compile Include="InterceptedpDecoratorTests.cs" />
     <Compile Include="MockTests.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
@@ -66,7 +67,9 @@
     <Compile Include="Services\ITypeA.cs" />
     <Compile Include="Services\ITypeB.cs" />
     <Compile Include="Services\ITypeC.cs" />
+    <Compile Include="Services\MessageDependentIInstanceProvicer.cs" />
     <Compile Include="Services\MessageService.cs" />
+    <Compile Include="Services\MessageServiceInstanceProvider.cs" />
     <Compile Include="Services\StringGenericService.cs" />
     <Compile Include="Services\TestMessager.cs" />
     <Compile Include="Services\TypeA.cs" />
