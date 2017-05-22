@@ -309,6 +309,36 @@ namespace MassiveDynamicProxyGenerator
         }
 
         /// <summary>
+        /// Generates the instance proxy.
+        /// </summary>
+        /// <param name="proxyType">Type of proxy.</param>
+        /// <param name="instanceProvider">The instance provider.</param>
+        /// <returns>Instance of proxy class with instance provider.</returns>
+        /// <exception cref="ArgumentNullException">
+        /// proxyType
+        /// or
+        /// instanceProvider
+        /// </exception>
+        public object GenerateInstanceProxy(Type proxyType, IInstanceProvicer instanceProvider)
+        {
+            if (proxyType == null)
+            {
+                throw new ArgumentNullException(nameof(proxyType));
+            }
+
+            if (instanceProvider == null)
+            {
+                throw new ArgumentNullException(nameof(instanceProvider));
+            }
+
+            Type instanceProxyType = this.generatedTypeList.EnshureType(proxyType,
+                TypedDecoratorType.TypedInstancedProxy,
+                this.BuildInstanceProxyType);
+
+            return this.CreateGenerateInstanceProxy(instanceProxyType, instanceProvider);
+        }
+
+        /// <summary>
         /// Generates the decorator.
         /// </summary>
         /// <typeparam name="T">Type of decorator.</typeparam>
@@ -355,7 +385,7 @@ namespace MassiveDynamicProxyGenerator
         /// or
         /// parent
         /// </exception>
-        public object GenerateDecorator(Type interfaceType, ICallableInterceptor interceptor,  object parent)
+        public object GenerateDecorator(Type interfaceType, ICallableInterceptor interceptor, object parent)
         {
             if (interceptor == null)
             {

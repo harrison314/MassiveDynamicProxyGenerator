@@ -36,6 +36,14 @@ namespace MassiveDynamicProxyGenerator
             where T : class;
 
         /// <summary>
+        /// Generates the instance proxy.
+        /// </summary>
+        /// <param name="proxyType">Type of proxy.</param>
+        /// <param name="instanceProvider">The instance provider.</param>
+        /// <returns>Instance of proxy class with instance provider.</returns>
+        object GenerateInstanceProxy(Type proxyType, IInstanceProvicer instanceProvider);
+
+        /// <summary>
         /// Generates the proxy instance with interceptor.
         /// </summary>
         /// <param name="interfaceType">Type of the interface fo implementation proxy.</param>
