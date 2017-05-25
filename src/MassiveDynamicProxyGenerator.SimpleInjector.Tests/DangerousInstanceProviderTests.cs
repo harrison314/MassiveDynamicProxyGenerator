@@ -53,7 +53,7 @@ namespace MassiveDynamicProxyGenerator.SimpleInjector.Tests
         public void InstanceProvider_TypedIoc_Sucess()
         {
             Container container = this.CrateDefaultContaner();
-            //container.Register<MessageDependentIInstanceProvicer>();
+            container.Register<MessageDependentIInstanceProvicer>(Lifestyle.Scoped);
             container.RegisterInstanceProxy(typeof(IMessageService), typeof(MessageDependentIInstanceProvicer), Lifestyle.Scoped);
 
             container.Verify();
@@ -71,7 +71,7 @@ namespace MassiveDynamicProxyGenerator.SimpleInjector.Tests
         public void InstanceProvider_TypedIocGeneric_Sucess()
         {
             Container container = this.CrateDefaultContaner();
-            container.Register<MessageDependentIInstanceProvicer>(Lifestyle.Singleton);
+            container.Register<MessageDependentIInstanceProvicer>(Lifestyle.Scoped);
             container.RegisterInstanceProxy<IMessageService, MessageDependentIInstanceProvicer>(Lifestyle.Scoped);
 
             container.Verify();
@@ -82,6 +82,22 @@ namespace MassiveDynamicProxyGenerator.SimpleInjector.Tests
                 messageService.ShouldNotBeNull();
 
                 messageService.GetCountOfMessagesInFront().ShouldBe(12);
+            }
+        }
+
+        [TestMethod]
+        public void InstanceProvider_TypedNewOpenGeneric_Sucess()
+        {
+            Container container = this.CrateDefaultContaner();
+            container.Register(typeof(GenericInstanceProducer<>), typeof(GenericInstanceProducer<>), Lifestyle.Scoped);
+            container.RegisterInstanceProxy(typeof(IGenericService<>), typeof(GenericInstanceProducer<>), Lifestyle.Scoped);
+
+            container.Verify();
+
+            using (ThreadScopedLifestyle.BeginScope(container))
+            {
+                IGenericService<string> service = container.GetInstance<IGenericService<string>>();
+                service.ShouldNotBeNull();
             }
         }
 

@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Linq.Expressions;
+using System.Linq;
 using System.Reflection;
 using System.Text;
 using SimpleInjector;
@@ -35,7 +36,7 @@ namespace MassiveDynamicProxyGenerator.SimpleInjector.Registrations
 
         public override Expression BuildExpression()
         {
-            InstanceProducer producer = this.Container.GetRegistration(this.instanceProviderType, false);
+            InstanceProducer producer = this.Container.GetCurrentRegistrations().LastOrDefault(t=>t.ServiceType == this.instanceProviderType);
             Expression interceptorSourse = (producer != null) ? producer.BuildExpression() : Expression.New(this.instanceProviderType);
 
             Expression generator = Expression.Constant(this.generator, typeof(ProxygGenerator));
