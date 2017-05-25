@@ -54,6 +54,7 @@
     <Reference Include="System.Core" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="DangerousInstanceProviderTests.cs" />
     <Compile Include="DangerousMockTests.cs" />
     <Compile Include="InstanceProxyTests.cs" />
     <Compile Include="InterceptedpDecoratorTests.cs" />

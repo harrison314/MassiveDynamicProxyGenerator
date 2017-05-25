@@ -14,70 +14,25 @@ namespace MassiveDynamicProxyGenerator.SimpleInjector.Tests
     [TestClass]
     public class InstanceProxyTests
     {
-
-        [TestMethod]
-        public void InstanceProvider_TypedNew_Sucess()
-        {
-            Container container = this.CrateDefaultContaner();
-            container.RegisterInstanceProxy(typeof(IMessageService), typeof(MessageServiceInstanceProvider));
-
-            container.Verify();
-
-            IMessageService messageService = container.GetInstance<IMessageService>();
-            messageService.ShouldNotBeNull();
-
-            messageService.GetCountOfMessagesInFront().ShouldBe(12);
-        }
-
-        [TestMethod]
-        public void InstanceProvider_TypedNewGeneric_Sucess()
-        {
-            Container container = this.CrateDefaultContaner();
-            container.RegisterInstanceProxy<IMessageService, MessageServiceInstanceProvider>();
-
-            container.Verify();
-
-            IMessageService messageService = container.GetInstance<IMessageService>();
-            messageService.ShouldNotBeNull();
-
-            messageService.GetCountOfMessagesInFront().ShouldBe(12);
-        }
-
-        [TestMethod]
-        public void InstanceProvider_TypedIoc_Sucess()
-        {
-            Container container = this.CrateDefaultContaner();
-            container.Register<MessageDependentIInstanceProvicer>();
-            container.RegisterInstanceProxy(typeof(IMessageService), typeof(MessageDependentIInstanceProvicer));
-
-            container.Verify();
-
-            IMessageService messageService = container.GetInstance<IMessageService>();
-            messageService.ShouldNotBeNull();
-
-            messageService.GetCountOfMessagesInFront().ShouldBe(12);
-        }
-
-        [TestMethod]
-        public void InstanceProvider_TypedIocGeneric_Sucess()
-        {
-            Container container = this.CrateDefaultContaner();
-            container.Register<MessageDependentIInstanceProvicer>();
-            container.RegisterInstanceProxy<IMessageService, MessageDependentIInstanceProvicer>();
-
-            container.Verify();
-
-            IMessageService messageService = container.GetInstance<IMessageService>();
-            messageService.ShouldNotBeNull();
-
-            messageService.GetCountOfMessagesInFront().ShouldBe(12);
-        }
-
         [TestMethod]
         public void InstanceProvider_InstanceNew_Sucess()
         {
             Container container = this.CrateDefaultContaner();
             container.RegisterInstanceProxy(typeof(IMessageService), new MessageServiceInstanceProvider());
+
+            container.Verify();
+
+            IMessageService messageService = container.GetInstance<IMessageService>();
+            messageService.ShouldNotBeNull();
+
+            messageService.GetCountOfMessagesInFront().ShouldBe(12);
+        }
+
+        [TestMethod]
+        public void InstanceProvider_InstanceNewWithLifestyle_Sucess()
+        {
+            Container container = this.CrateDefaultContaner();
+            container.RegisterInstanceProxy(typeof(IMessageService), new MessageServiceInstanceProvider(), Lifestyle.Transient);
 
             container.Verify();
 
@@ -102,10 +57,38 @@ namespace MassiveDynamicProxyGenerator.SimpleInjector.Tests
         }
 
         [TestMethod]
+        public void InstanceProvider_InstanceNewGenericWithLifeStyle_Sucess()
+        {
+            Container container = this.CrateDefaultContaner();
+            container.RegisterInstanceProxy<IMessageService>(new MessageServiceInstanceProvider(), Lifestyle.Singleton);
+
+            container.Verify();
+
+            IMessageService messageService = container.GetInstance<IMessageService>();
+            messageService.ShouldNotBeNull();
+
+            messageService.GetCountOfMessagesInFront().ShouldBe(12);
+        }
+
+        [TestMethod]
         public void InstanceProvider_InstanceFuncNew_Sucess()
         {
             Container container = this.CrateDefaultContaner();
-            container.RegisterInstanceProxy(typeof(IMessageService), ()=> new MessageService());
+            container.RegisterInstanceProxy(typeof(IMessageService), () => new MessageService());
+
+            container.Verify();
+
+            IMessageService messageService = container.GetInstance<IMessageService>();
+            messageService.ShouldNotBeNull();
+
+            messageService.GetCountOfMessagesInFront().ShouldBe(12);
+        }
+
+        [TestMethod]
+        public void InstanceProvider_InstanceFuncNewWithLifeStyle_Sucess()
+        {
+            Container container = this.CrateDefaultContaner();
+            container.RegisterInstanceProxy(typeof(IMessageService), () => new MessageService(), Lifestyle.Singleton);
 
             container.Verify();
 
@@ -129,10 +112,23 @@ namespace MassiveDynamicProxyGenerator.SimpleInjector.Tests
             messageService.GetCountOfMessagesInFront().ShouldBe(12);
         }
 
+        [TestMethod]
+        public void InstanceProvider_InstanceFuncNewGenericWithLifeStyle_Sucess()
+        {
+            Container container = this.CrateDefaultContaner();
+            container.RegisterInstanceProxy<IMessageService>(() => new MessageService(), Lifestyle.Singleton);
+
+            container.Verify();
+
+            IMessageService messageService = container.GetInstance<IMessageService>();
+            messageService.ShouldNotBeNull();
+
+            messageService.GetCountOfMessagesInFront().ShouldBe(12);
+        }
+
         private Container CrateDefaultContaner()
         {
             Container container = new Container();
-            //container.Register<IMessageService, MessageService>();
             container.Register<ITypeA, TypeA>();
             container.Register<ITypeB, TypeB>();
             container.Register<ITypeC, TypeC>();
