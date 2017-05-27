@@ -3,21 +3,45 @@ using System.Collections.Generic;
 using System.Text;
 using System.Reflection;
 using SimpleInjector;
+using MassiveDynamicProxyGenerator.SimpleInjector.InstanceProxy;
 
 namespace MassiveDynamicProxyGenerator.SimpleInjector.Dangerous
 {
     public static partial class DangerousContainerExtensions
     {
-        public static void RegisterInstanceProxy(this Container container, Type serviceType, Type instancePoxyType, Lifestyle lifeStyle)
+        /// <summary>
+        /// Registers the dangerous instance proxy with non-transient lifestyle.
+        /// </summary>
+        /// <param name="container">The container.</param>
+        /// <param name="serviceType">Type of the service, accept open generic.</param>
+        /// <param name="instanceProviderType">Type of the instance provider, accept open generic. Must by assignable to <see cref="IInstanceProvicer"/>.</param>
+        /// <param name="lifeStyle">The life style for registration.</param>
+        /// <exception cref="System.ArgumentNullException">
+        /// serviceType
+        /// or
+        /// instanceProviderType
+        /// or
+        /// lifeStyle
+        /// </exception>
+        /// <exception cref="System.ArgumentException">
+        /// Parameter serviceType is not public interface.
+        /// or
+        /// Parameter instanceProviderType assignable to IInstanceProvicer.
+        /// or
+        /// ArgumentsserviceType and instanceProviderType must by both concerete types or open generic types.
+        /// or
+        /// Arguments serviceType and instanceProviderType must have the same count of generic arguments.
+        /// </exception>
+        public static void RegisterInstanceProxy(this Container container, Type serviceType, Type instanceProviderType, Lifestyle lifeStyle)
         {
             if (serviceType == null)
             {
                 throw new ArgumentNullException(nameof(serviceType));
             }
 
-            if (instancePoxyType == null)
+            if (instanceProviderType == null)
             {
-                throw new ArgumentNullException(nameof(instancePoxyType));
+                throw new ArgumentNullException(nameof(instanceProviderType));
             }
 
             if (lifeStyle == null)
@@ -30,38 +54,45 @@ namespace MassiveDynamicProxyGenerator.SimpleInjector.Dangerous
                 throw new ArgumentException($"Parameter {nameof(serviceType)} is not public interface.", nameof(serviceType));
             }
 
-            if (!typeof(IInstanceProvicer).GetTypeInfo().IsAssignableFrom(instancePoxyType))
+            if (!typeof(IInstanceProvicer).GetTypeInfo().IsAssignableFrom(instanceProviderType))
             {
-                throw new ArgumentException($"Type '{instancePoxyType.AssemblyQualifiedName}' is not assignable to '{typeof(IInstanceProvicer).AssemblyQualifiedName}'.", nameof(instancePoxyType));
+                throw new ArgumentException($"Type '{instanceProviderType.AssemblyQualifiedName}' is not assignable to '{typeof(IInstanceProvicer).AssemblyQualifiedName}'.", nameof(instanceProviderType));
             }
 
             bool isServiceTypeOpenGeneric = TypeHelper.IsOpenGeneric(serviceType);
-            bool isInstanceProviderOpenGeneric = TypeHelper.IsOpenGeneric(instancePoxyType);
+            bool isInstanceProviderOpenGeneric = TypeHelper.IsOpenGeneric(instanceProviderType);
 
             if (isServiceTypeOpenGeneric == true && isInstanceProviderOpenGeneric == false)
             {
-                throw new ArgumentException($"Arguments {nameof(serviceType)} and {nameof(instancePoxyType)} must by both concerete types or open generic types. Argument {nameof(serviceType)} is open generic type and {nameof(instancePoxyType)} is not open generic type.");
+                throw new ArgumentException($"Arguments {nameof(serviceType)} and {nameof(instanceProviderType)} must by both concerete types or open generic types. Argument {nameof(serviceType)} is open generic type and {nameof(instanceProviderType)} is not open generic type.");
             }
 
             if (isServiceTypeOpenGeneric == false && isInstanceProviderOpenGeneric == true)
             {
-                throw new ArgumentException($"Arguments {nameof(serviceType)} and {nameof(instancePoxyType)} must by both concerete types or open generic types. Argument {nameof(instancePoxyType)} is open generic type and {nameof(serviceType)} is not open generic type.");
+                throw new ArgumentException($"Arguments {nameof(serviceType)} and {nameof(instanceProviderType)} must by both concerete types or open generic types. Argument {nameof(instanceProviderType)} is open generic type and {nameof(serviceType)} is not open generic type.");
             }
 
             ProxygGenerator generator = new ProxygGenerator();
 
-            // TODO: open generic types
-
             if (isServiceTypeOpenGeneric)
             {
-                throw new NotImplementedException();
+                int serviceTypeOpenGenericParamCount = serviceType.GetTypeInfo().GetGenericArguments().Length;
+                int instancePoxyaOpenGenericPramCount = instanceProviderType.GetTypeInfo().GetGenericArguments().Length;
+
+                if (serviceTypeOpenGenericParamCount != instancePoxyaOpenGenericPramCount)
+                {
+                    throw new ArgumentException($"Arguments {nameof(serviceType)} and {nameof(instanceProviderType)} must have the same count of generic arguments. The {nameof(serviceType)} is '{serviceType.FullName}' and {nameof(instanceProviderType)} is '{instanceProviderType.FullName}'.");
+                }
+
+                OpenInstanceProxyBuildProxy builder = new OpenInstanceProxyBuildProxy(generator, serviceType, instanceProviderType);
+                container.ResolveUnregisteredType += builder.ResolveUnregisteredType;
             }
             else
             {
                 Registration registration = new Registrations.InstanceProxyWithTypeRegistration(container.Options.DefaultLifestyle,
                     container,
                     serviceType,
-                    instancePoxyType,
+                    instanceProviderType,
                     generator);
 
                 container.AddRegistration(serviceType, registration);

@@ -8,32 +8,41 @@ using SimpleInjector;
 
 namespace MassiveDynamicProxyGenerator.SimpleInjector.InstanceProxy
 {
-    //internal class OpenInstanceProxyBuildProxy
-    //{
-    //    private readonly IProxygGenerator generator;
-    //    private readonly Type serviseType;
+    internal class OpenInstanceProxyBuildProxy
+    {
+        private static readonly MethodInfo InstancePorxyMethod = typeof(IProxygGenerator).GetTypeInfo()
+            .GetMethod(nameof(IProxygGenerator.GenerateInstanceProxy), new Type[] { typeof(Type), typeof(IInstanceProvicer), });
 
-    //    public OpenInstanceProxyBuildProxy()
-    //    {
+        private readonly IProxygGenerator generator;
+        private readonly Type serviseType;
+        private readonly Type instanceProducerType;
 
-    //    }
+        public OpenInstanceProxyBuildProxy(IProxygGenerator generator, Type serviseType, Type instanceProducerType)
+        {
+            this.generator = generator;
+            this.serviseType = serviseType;
+            this.instanceProducerType = instanceProducerType;
+        }
 
-    //    public void ResolveUnregisteredType(object sender, UnregisteredTypeEventArgs unregistredTypeArgs)
-    //    {
-    //        if (unregistredTypeArgs.UnregisteredServiceType.GetTypeInfo().IsInterface && this.CheckTypeToIntercept(unregistredTypeArgs.UnregisteredServiceType))
-    //        {
-    //            Expression generator = Expression.Constant(this.generator, typeof(ProxygGenerator));
-    //            Expression interceptor = this.BuildInterceptionExpression((Container)sender, unregistredTypeArgs.UnregisteredServiceType);
-    //            Expression typeOfInstance = Expression.Constant(unregistredTypeArgs.UnregisteredServiceType, typeof(Type));
-    //            Expression crateInstance = Expression.Call(generator, GenerateProxyMethod, typeOfInstance, interceptor);
+        public void ResolveUnregisteredType(object sender, UnregisteredTypeEventArgs unregistredTypeArgs)
+        {
+            if (this.CheckTypeToIntercept(unregistredTypeArgs.UnregisteredServiceType))
+            {
+                Type producerType = this.instanceProducerType.MakeGenericType(typeArguments: unregistredTypeArgs.UnregisteredServiceType.GetTypeInfo().GetGenericArguments());
+                InstanceProducer producer = ((Container)sender).GetRegistration(producerType);
 
-    //            unregistredTypeArgs.Register(Expression.Convert(crateInstance, unregistredTypeArgs.UnregisteredServiceType));
-    //        }
-    //    }
+                Expression typeOfInstance = Expression.Constant(unregistredTypeArgs.UnregisteredServiceType, typeof(Type));
+                Expression generator = Expression.Constant(this.generator, typeof(IProxygGenerator));
+                Expression instanceProvider = Expression.Convert(producer.BuildExpression(), typeof(IInstanceProvicer));
+                Expression crateInstance = Expression.Call(generator, InstancePorxyMethod, typeOfInstance, instanceProvider);
 
-    //    protected bool CheckTypeToIntercept(Type interfaceType)
-    //    {
-    //        return TypeHelper.IsGenericConstructedOf(this.serviseType, interfaceType);
-    //    }
-    //}
+                unregistredTypeArgs.Register(Expression.Convert(crateInstance, unregistredTypeArgs.UnregisteredServiceType));
+            }
+        }
+
+        protected bool CheckTypeToIntercept(Type interfaceType)
+        {
+            return interfaceType.GetTypeInfo().IsInterface && TypeHelper.IsGenericConstructedOf(this.serviseType, interfaceType);
+        }
+    }
 }
