@@ -22,7 +22,7 @@ namespace MassiveDynamicProxyGenerator.SimpleInjector
 
         public static bool IsPublicInterface(Type type)
         {
-            return type.GetTypeInfo().IsPublic || type.GetTypeInfo().IsInterface;
+            return type.GetTypeInfo().IsPublic && type.GetTypeInfo().IsInterface;
         }
     }
 }
