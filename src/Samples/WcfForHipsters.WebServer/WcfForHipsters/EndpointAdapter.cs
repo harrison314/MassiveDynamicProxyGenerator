@@ -42,7 +42,7 @@ namespace WcfForHipsters.WebServer.WcfForHipsters
             }
             catch (Exception ex)
             {
-                throw new FaultException("Pocess call fault see inner exception.", id, ex);
+                throw new FaultException("Process call fault see inner exception.", id, ex);
             }
         }
 
@@ -61,7 +61,7 @@ namespace WcfForHipsters.WebServer.WcfForHipsters
             }
             else
             {
-                throw new InvalidOperationException($"Mehod {method} not found.");
+                throw new InvalidOperationException($"Method {method} not found.");
             }
         }
 
