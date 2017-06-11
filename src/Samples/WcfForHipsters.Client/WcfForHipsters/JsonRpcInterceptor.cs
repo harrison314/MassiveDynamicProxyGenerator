@@ -2,8 +2,10 @@
 using System;
 using System.Collections.Generic;
 using System.Linq;
+using System.Linq.Expressions;
 using System.Net.Http;
 using System.Net.Http.Headers;
+using System.Reflection;
 using System.Text;
 using System.Threading.Tasks;
 
@@ -46,7 +48,24 @@ namespace WcfForHipsters.Client.WcfForHipsters
 
                 if (invocation.ReturnType != typeof(void))
                 {
-                    invocation.ReturnValue = rpcResponse["result"].ToObject(invocation.ReturnType);
+                    if (typeof(Task).GetTypeInfo().IsAssignableFrom(invocation.ReturnType))
+                    {
+                        if (invocation.ReturnType.GetTypeInfo().IsGenericType)
+                        {
+                            Type taskType = invocation.ReturnType.GetTypeInfo().GetGenericArguments()[0];
+                            object resultValue = rpcResponse["result"].ToObject(taskType);
+
+                            invocation.ReturnValue = this.WrapToTask(taskType, resultValue);
+                        }
+                        else
+                        {
+                            invocation.ReturnValue = Task.CompletedTask;
+                        }
+                    }
+                    else
+                    {
+                        invocation.ReturnValue = rpcResponse["result"].ToObject(invocation.ReturnType);
+                    }
                 }
             }
             else
@@ -70,6 +89,15 @@ namespace WcfForHipsters.Client.WcfForHipsters
                     return new ServiseResponse((int)response.StatusCode, responseContent);
                 }
             }
+        }
+
+        private object WrapToTask(Type taskType, object value)
+        {
+            MethodInfo fromResultMethod = typeof(Task).GetTypeInfo().GetMethod(nameof(Task.FromResult)).MakeGenericMethod(taskType);
+
+            Expression inputValue = Expression.Constant(value, taskType);
+
+            return Expression.Lambda<Func<object>>(Expression.Call(fromResultMethod, inputValue)).Compile().Invoke();
         }
     }
 }

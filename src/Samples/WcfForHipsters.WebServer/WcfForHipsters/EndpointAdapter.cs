@@ -42,7 +42,7 @@ namespace WcfForHipsters.WebServer.WcfForHipsters
             }
             catch (Exception ex)
             {
-                throw new FaultException("Pocess call fault see inner exception.", id, ex);
+                throw new FaultException("Process call fault see inner exception.", id, ex);
             }
         }
 
@@ -61,7 +61,7 @@ namespace WcfForHipsters.WebServer.WcfForHipsters
             }
             else
             {
-                throw new InvalidOperationException($"Mehod {method} not found.");
+                throw new InvalidOperationException($"Method {method} not found.");
             }
         }
 
@@ -103,6 +103,26 @@ namespace WcfForHipsters.WebServer.WcfForHipsters
 
                 return Expression.Lambda<Func<T, JToken[], object>>(block, instanceParameter, paramsParameter)
                     .Compile();
+            }
+
+            if (typeof(Task).GetTypeInfo().IsAssignableFrom(methodInfo.ReturnType))
+            {
+                if (methodInfo.ReturnType.GetTypeInfo().IsGenericType)
+                {
+                    MethodInfo genericUnwrap = typeof(UnwrapHelper).GetTypeInfo().GetMethod(nameof(UnwrapHelper.UnwrapGenericTask))
+                         .MakeGenericMethod(methodInfo.ReturnType.GetTypeInfo().GetGenericArguments());
+
+                    Expression waitExpression = Expression.Call(genericUnwrap, callExpresion);
+                    return Expression.Lambda<Func<T, JToken[], object>>(waitExpression, instanceParameter, paramsParameter)
+                    .Compile();
+                }
+                else
+                {
+                    Func<Task, object> waiter = UnwrapHelper.UnwrapTask;
+                    Expression waitExpression = Expression.Invoke(Expression.Constant(waiter, typeof(Func<Task, object>)), callExpresion);
+                    return Expression.Lambda<Func<T, JToken[], object>>(waitExpression, instanceParameter, paramsParameter)
+                    .Compile();
+                }
             }
             else
             {
