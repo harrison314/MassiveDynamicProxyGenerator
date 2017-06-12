@@ -41,6 +41,12 @@ cd $slnPath
 & dotnet restore
 & dotnet pack -c Release -o "$outPath"
 
+$projSimpleInjectorPath = Join-Path $srcPath "MassiveDynamicProxyGenerator.SimpleInjector"
+
+cd $projSimpleInjectorPath
+& dotnet restore
+& dotnet pack -c Release -o "$outPath"
+
 If($RunTests){
 	Write-Host "Start .Net Core tests" -ForegroundColor Green
 
