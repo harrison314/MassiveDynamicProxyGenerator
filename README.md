@@ -135,6 +135,14 @@ _Library for integration MassiveDynamicProxyGenerator to [SimpleInjector](http:/
 _MassiveDynamicProxyGenerator.SimpleInjector_ is library of extensions method for IoC container - Simple Injector.
 Adding methods for register mock implementations, proxys, instance proxies for resolving circular depndencies or lazy initialization and interpetion for decoration instances.
 
+Getting started
+
+In package manager console:
+
+`PM> Install-Package MassiveDynamicProxyGenerator.SimpleInjector -Pre`
+
+Or download [MassiveDynamicProxyGenerator.SimpleInjector](https://www.nuget.org/packages/MassiveDynamicProxyGenerator.SimpleInjector/).
+
 ### Register mock
 
 ```cs
