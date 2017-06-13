@@ -56,6 +56,13 @@ If($RunTests){
 	&dotnet restore
 	&dotnet test
 
+	$testCoreFolder = Join-Path $srcPath "MassiveDynamicProxyGenerator.SimpleInjector.Tests.NetCore"
+
+	cd $testCoreFolder
+
+	&dotnet restore
+	&dotnet test
+
 	cd $lastLocation
 
    # TODO: test other frameworks

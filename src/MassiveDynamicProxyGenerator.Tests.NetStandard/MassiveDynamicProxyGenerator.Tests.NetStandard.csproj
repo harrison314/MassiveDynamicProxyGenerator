@@ -19,7 +19,7 @@
   </PropertyGroup>
 
   <ItemGroup>
-    <Compile Include="..\MassiveDynamicProxyGenerator.Tests\**\*.cs" Exclude="bin\**;obj\**;**\*.xproj;packages\**" />
+    <Compile Include="..\MassiveDynamicProxyGenerator.Tests\**\*.cs" Exclude="bin\**;obj\**;**\*.xproj;packages\**;Properties/AssemblyInfo.cs" />
   </ItemGroup>
 
   <ItemGroup>

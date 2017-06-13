@@ -15,7 +15,8 @@
     <RepositoryUrl>https://github.com/harrison314/MassiveDynamicProxyGenerator</RepositoryUrl>
     <RepositoryType>git</RepositoryType>
     <PackageTags>massive, dynamic, proxy, dynamic proxy, runtime, .net, IoC, SimpleInjector</PackageTags>
-    <Description>TODO</Description>
+    <Description>MassiveDynamicProxyGenerator.SimpleInjector is library of extensions method for IoC container - Simple Injector.
+Adding methods for register mock implementations, proxys, instance proxies for resolving circular depndencies or lazy initialization and interpetion for decoration instances.</Description>
   </PropertyGroup>
 
   <PropertyGroup>
