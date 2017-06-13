@@ -32,7 +32,7 @@ Adding methods for register mock implementations, proxys, instance proxies for r
   </ItemGroup>
 
   <ItemGroup>
-    <PackageReference Include="SimpleInjector" Version="4.0.3" />
+    <PackageReference Include="SimpleInjector" Version="4.0.8" />
     <PackageReference Include="StyleCop.Analyzers" Version="1.0.0" />
   </ItemGroup>
 
