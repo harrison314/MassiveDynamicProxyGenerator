@@ -135,7 +135,7 @@ _Library for integration MassiveDynamicProxyGenerator to [SimpleInjector](http:/
 _MassiveDynamicProxyGenerator.SimpleInjector_ is library of extensions method for IoC container - Simple Injector.
 Adding methods for register mock implementations, proxys, instance proxies for resolving circular depndencies or lazy initialization and interpetion for decoration instances.
 
-### Register mock:
+### Register mock
 
 ```cs
 using MassiveDynamicProxyGenerator.SimpleInjector;
@@ -144,7 +144,7 @@ Container container = new Container();
 container.RegisterMock<IMessageService>();
 ```
 
-### Register proxy instances:
+### Register proxy instances
 
 ```cs
 using MassiveDynamicProxyGenerator.SimpleInjector;
@@ -160,7 +160,7 @@ InterceptorAdapter adapter = new InterceptorAdapter(invodcation =>
 
 container.RegisterProxy(typeof(IMessageService), adapter);
 ```
-### Register decorators using interception:
+### Register decorators using interception
 
 ```cs
 using MassiveDynamicProxyGenerator.SimpleInjector;
@@ -178,7 +178,7 @@ CallableInterceptorAdapter adapter = new CallableInterceptorAdapter((invodcation
 container.RegisterInterceptedDecorator(adapter, t => !t.Name.StartsWith("IType"));
 ```
 
-### Register instance provider:
+### Register instance provider
 
 ```cs
 using MassiveDynamicProxyGenerator.SimpleInjector;
@@ -187,7 +187,7 @@ Container container = new Container();
 container.RegisterInstanceProxy<IMessageService>(() => new MessageService());
 ```
 
-### Dangerous extensions for mock all unregistred types:
+### Dangerous extensions for mock all unregistred types
 
 ```cs
 using MassiveDynamicProxyGenerator.SimpleInjector;
@@ -197,7 +197,7 @@ Container container = new Container();
 container.RegisterAllUnregistredAsMock();
 ```
 
-### Dangerous extension for instance provider:
+### Dangerous extension for instance provider
 
 This extenions using only with cope lifestyle.
 
