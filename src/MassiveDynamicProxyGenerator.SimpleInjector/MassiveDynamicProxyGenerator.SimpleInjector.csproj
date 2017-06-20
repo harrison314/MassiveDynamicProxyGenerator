@@ -1,6 +1,7 @@
 ﻿<Project Sdk="Microsoft.NET.Sdk">
 
   <PropertyGroup>
+    <GenerateDocumentationFile>true</GenerateDocumentationFile>
     <TargetFrameworks>netstandard1.6;net40;net45;net46;net461</TargetFrameworks>
     <DefineConstants>$(DefineConstants);COREFX</DefineConstants>
     <NetStandardImplicitPackageVersion>1.6.0</NetStandardImplicitPackageVersion>
@@ -22,10 +23,9 @@ Adding methods for register mock implementations, proxys, instance proxies for r
   <PropertyGroup>
     <CodeAnalysisRuleSet>..\..\MassiveDynamicProxyGenerator.ruleset</CodeAnalysisRuleSet>
   </PropertyGroup>
-
-  <PropertyGroup Condition="'$(Configuration)|$(TargetFramework)|$(Platform)'=='Debug|netstandard1.6|AnyCPU'">
-    <DocumentationFile>bin\Debug\netstandard1.6\MassiveDynamicProxyGenerator.SimpleInjector.xml</DocumentationFile>
-  </PropertyGroup>
+  <ItemGroup>
+    <AdditionalFiles Include="stylecop.json" />
+  </ItemGroup>
 
   <ItemGroup>
     <None Include="Dangerous\DangerousContainerExtensions.Mock.cs" />
@@ -33,7 +33,7 @@ Adding methods for register mock implementations, proxys, instance proxies for r
 
   <ItemGroup>
     <PackageReference Include="SimpleInjector" Version="4.0.8" />
-    <PackageReference Include="StyleCop.Analyzers" Version="1.0.0" />
+    <PackageReference Include="StyleCop.Analyzers" Version="1.0.0" PrivateAssets="All" />
   </ItemGroup>
 
   <ItemGroup>

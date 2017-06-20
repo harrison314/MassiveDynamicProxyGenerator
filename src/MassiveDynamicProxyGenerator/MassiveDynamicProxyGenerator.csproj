@@ -29,7 +29,9 @@ Add universal async ibterceptor CallableInterceptorAsyncAdapter as abstract clas
   <PropertyGroup>
     <CodeAnalysisRuleSet>..\..\MassiveDynamicProxyGenerator.ruleset</CodeAnalysisRuleSet>
   </PropertyGroup>
-
+  <ItemGroup>
+    <AdditionalFiles Include="stylecop.json" />
+  </ItemGroup>
 
   <ItemGroup Condition=" '$(TargetFramework)' == 'netstandard1.6' ">
     <PackageReference Include="System.Reflection.Emit" Version="4.3.0" />
@@ -57,7 +59,7 @@ Add universal async ibterceptor CallableInterceptorAsyncAdapter as abstract clas
   </ItemGroup>
 
   <ItemGroup>
-    <PackageReference Include="StyleCop.Analyzers" Version="1.0.0" />
+    <PackageReference Include="StyleCop.Analyzers" Version="1.0.0" PrivateAssets="All" />
   </ItemGroup>
 
 </Project>

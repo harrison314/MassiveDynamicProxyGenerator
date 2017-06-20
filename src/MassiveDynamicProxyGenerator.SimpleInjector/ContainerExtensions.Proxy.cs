@@ -64,8 +64,6 @@ namespace MassiveDynamicProxyGenerator.SimpleInjector
                     generator);
 
                 container.AddRegistration(serviseType, registration);
-                //InterceptedProxyBulder builder = new TypeInterceptedProxyBuilder(generator, serviseType, interceptorType);
-                //container.ResolveUnregisteredType += builder.ResolveUnregisteredType;
             }
         }
 
