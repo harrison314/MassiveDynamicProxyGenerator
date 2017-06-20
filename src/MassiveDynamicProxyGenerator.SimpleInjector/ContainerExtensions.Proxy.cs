@@ -48,7 +48,7 @@ namespace MassiveDynamicProxyGenerator.SimpleInjector
                 throw new ArgumentException($"The type parameter {nameof(serviseType)} {serviseType.FullName} must by public interface.");
             }
 
-            ProxygGenerator generator = new ProxygGenerator();
+            IProxygGenerator generator = ProxyGeneratorFactory.Factory.GetInstance();
 
             if (TypeHelper.IsOpenGeneric(serviseType))
             {
@@ -96,7 +96,7 @@ namespace MassiveDynamicProxyGenerator.SimpleInjector
                 throw new ArgumentException($"The type parameter {nameof(serviseType)} {serviseType.FullName} must by public interface.");
             }
 
-            ProxygGenerator generator = new ProxygGenerator();
+            IProxygGenerator generator = ProxyGeneratorFactory.Factory.GetInstance();
 
             if (TypeHelper.IsOpenGeneric(serviseType))
             {
@@ -112,8 +112,6 @@ namespace MassiveDynamicProxyGenerator.SimpleInjector
                     generator);
 
                 container.AddRegistration(serviseType, registration);
-                //InterceptedProxyBulder builder = new InstanceInterceptedProxyBuilder(generator, serviseType, interceptor);
-                //container.ResolveUnregisteredType += builder.ResolveUnregisteredType;
             }
         }
 
@@ -146,7 +144,7 @@ namespace MassiveDynamicProxyGenerator.SimpleInjector
                 throw new ArgumentException($"The type parameter {nameof(serviseType)} {serviseType.FullName} must by public interface.");
             }
 
-            ProxygGenerator generator = new ProxygGenerator();
+            IProxygGenerator generator = ProxyGeneratorFactory.Factory.GetInstance();
 
             if (TypeHelper.IsOpenGeneric(serviseType))
             {
@@ -162,9 +160,6 @@ namespace MassiveDynamicProxyGenerator.SimpleInjector
                     generator);
 
                 container.AddRegistration(serviseType, registration);
-
-                //InterceptedProxyBulder builder = new FuncInterceptedProxyBulder(generator, serviseType, interceptorFactory);
-                //container.ResolveUnregisteredType += builder.ResolveUnregisteredType;
             }
         }
     }

@@ -60,6 +60,7 @@
     <Compile Include="InterceptedpDecoratorTests.cs" />
     <Compile Include="MockTests.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="ProxyGeneratorFactoryTests.cs" />
     <Compile Include="ProxyTests.cs" />
     <Compile Include="Services\GenericInstanceProducer.cs" />
     <Compile Include="Services\GenericService.cs" />

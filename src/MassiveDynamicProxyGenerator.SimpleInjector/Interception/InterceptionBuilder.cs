@@ -19,9 +19,9 @@ namespace MassiveDynamicProxyGenerator.SimpleInjector.Interception
             protected set;
         }
 
-        public InterceptionBuilder(ProxygGenerator generator)
+        public InterceptionBuilder(IProxygGenerator generator)
         {
-            this.GeneratorSourse = Expression.Constant(generator, typeof(ProxygGenerator));
+            this.GeneratorSourse = Expression.Constant(generator, typeof(IProxygGenerator));
         }
 
         public void ReguildExpresion(object sender, ExpressionBuiltEventArgs buildArgs)

@@ -15,9 +15,9 @@ namespace MassiveDynamicProxyGenerator.SimpleInjector.Interception
         protected static readonly MethodInfo GenerateProxyMethod = typeof(IProxygGenerator).GetTypeInfo()
                     .GetMethod(nameof(IProxygGenerator.GenerateProxy), new[] { typeof(Type), typeof(IInterceptor) });
 
-        private readonly ProxygGenerator generator;
+        private readonly IProxygGenerator generator;
 
-        public InterceptedProxyBulder(ProxygGenerator generator)
+        public InterceptedProxyBulder(IProxygGenerator generator)
         {
             this.generator = generator;
         }
@@ -26,7 +26,7 @@ namespace MassiveDynamicProxyGenerator.SimpleInjector.Interception
         {
             if (unregistredTypeArgs.UnregisteredServiceType.GetTypeInfo().IsInterface && this.CheckTypeToIntercept(unregistredTypeArgs.UnregisteredServiceType))
             {
-                Expression generator = Expression.Constant(this.generator, typeof(ProxygGenerator));
+                Expression generator = Expression.Constant(this.generator, typeof(IProxygGenerator));
                 Expression interceptor = this.BuildInterceptionExpression((Container)sender, unregistredTypeArgs.UnregisteredServiceType);
                 Expression typeOfInstance = Expression.Constant(unregistredTypeArgs.UnregisteredServiceType, typeof(Type));
                 Expression crateInstance = Expression.Call(generator, GenerateProxyMethod, typeOfInstance, interceptor);

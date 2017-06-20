@@ -12,6 +12,7 @@ namespace MassiveDynamicProxyGenerator.SimpleInjector
     /// <seealso cref="ProxygGenerator"/>
     /// <seealso cref="ContainerExtensions"/>
     /// <seealso cref="MassiveDynamicProxyGenerator.SimpleInjector.Dangerous.DangerousContainerExtensions"/>
+    /// <seealso cref="ProxyGeneratorFactory"/>
     public interface IProxyGeneratorFactory
     {
         /// <summary>

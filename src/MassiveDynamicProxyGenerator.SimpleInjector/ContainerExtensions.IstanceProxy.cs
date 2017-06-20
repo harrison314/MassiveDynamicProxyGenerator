@@ -37,7 +37,7 @@ namespace MassiveDynamicProxyGenerator.SimpleInjector
                 throw new ArgumentException($"Parameter {nameof(serviceType)} is not public interface.", nameof(serviceType));
             }
 
-            ProxygGenerator generator = new ProxygGenerator();
+            IProxygGenerator generator = ProxyGeneratorFactory.Factory.GetInstance();
 
             container.Register(serviceType, () => generator.GenerateInstanceProxy(serviceType, instanceProvider));
         }
@@ -79,7 +79,7 @@ namespace MassiveDynamicProxyGenerator.SimpleInjector
                 throw new ArgumentException($"Parameter {nameof(serviceType)} is not public interface.", nameof(serviceType));
             }
 
-            ProxygGenerator generator = new ProxygGenerator();
+            IProxygGenerator generator = ProxyGeneratorFactory.Factory.GetInstance();
 
             container.Register(serviceType, () => generator.GenerateInstanceProxy(serviceType, instanceProvider), lifeStyle);
         }
@@ -105,7 +105,7 @@ namespace MassiveDynamicProxyGenerator.SimpleInjector
                 throw new ArgumentException($"Generic parameter {nameof(TService)} is not public interface.", nameof(TService));
             }
 
-            ProxygGenerator generator = new ProxygGenerator();
+            IProxygGenerator generator = ProxyGeneratorFactory.Factory.GetInstance();
             container.Register(typeof(TService), () => generator.GenerateInstanceProxy<TService>(instanceProvider));
         }
 
@@ -140,7 +140,7 @@ namespace MassiveDynamicProxyGenerator.SimpleInjector
                 throw new ArgumentException($"Generic parameter {nameof(TService)} is not public interface.", nameof(TService));
             }
 
-            ProxygGenerator generator = new ProxygGenerator();
+            IProxygGenerator generator = ProxyGeneratorFactory.Factory.GetInstance();
             container.Register(typeof(TService), () => generator.GenerateInstanceProxy<TService>(instanceProvider), lifeStyle);
         }
 
@@ -173,7 +173,7 @@ namespace MassiveDynamicProxyGenerator.SimpleInjector
                 throw new ArgumentException($"Parameter {nameof(serviceType)} is not public interface.", nameof(serviceType));
             }
 
-            ProxygGenerator generator = new ProxygGenerator();
+            IProxygGenerator generator = ProxyGeneratorFactory.Factory.GetInstance();
 
             container.Register(serviceType, () =>
             {
@@ -219,7 +219,7 @@ namespace MassiveDynamicProxyGenerator.SimpleInjector
                 throw new ArgumentException($"Parameter {nameof(serviceType)} is not public interface.", nameof(serviceType));
             }
 
-            ProxygGenerator generator = new ProxygGenerator();
+            IProxygGenerator generator = ProxyGeneratorFactory.Factory.GetInstance();
 
             container.Register(serviceType,
                 () =>
@@ -251,7 +251,7 @@ namespace MassiveDynamicProxyGenerator.SimpleInjector
                 throw new ArgumentException($"Generic parameter {nameof(TService)} is not public interface.", nameof(TService));
             }
 
-            ProxygGenerator generator = new ProxygGenerator();
+            IProxygGenerator generator = ProxyGeneratorFactory.Factory.GetInstance();
             IInstanceProvicer provider = new FuncInstanceProvider(instanceProvider);
             container.Register(typeof(TService), () => generator.GenerateInstanceProxy<TService>(provider));
         }
@@ -287,7 +287,7 @@ namespace MassiveDynamicProxyGenerator.SimpleInjector
                 throw new ArgumentException($"Generic parameter {nameof(TService)} is not public interface.", nameof(TService));
             }
 
-            ProxygGenerator generator = new ProxygGenerator();
+            IProxygGenerator generator = ProxyGeneratorFactory.Factory.GetInstance();
             IInstanceProvicer provider = new FuncInstanceProvider(instanceProvider);
             container.Register(typeof(TService), () => generator.GenerateInstanceProxy<TService>(provider), lifeStyle);
         }

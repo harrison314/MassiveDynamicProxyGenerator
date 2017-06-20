@@ -15,9 +15,9 @@ namespace MassiveDynamicProxyGenerator.SimpleInjector.Registrations
 
         private readonly Type implementationType;
         private readonly Type instanceProviderType;
-        private readonly ProxygGenerator generator;
+        private readonly IProxygGenerator generator;
 
-        public InstanceProxyWithTypeRegistration(Lifestyle lifestyle, Container container, Type implementationType, Type instanceProviderType, ProxygGenerator generator)
+        public InstanceProxyWithTypeRegistration(Lifestyle lifestyle, Container container, Type implementationType, Type instanceProviderType, IProxygGenerator generator)
             : base(lifestyle, container)
         {
             this.implementationType = implementationType;
@@ -36,10 +36,10 @@ namespace MassiveDynamicProxyGenerator.SimpleInjector.Registrations
 
         public override Expression BuildExpression()
         {
-            InstanceProducer producer = this.Container.GetCurrentRegistrations().LastOrDefault(t=>t.ServiceType == this.instanceProviderType);
+            InstanceProducer producer = this.Container.GetCurrentRegistrations().LastOrDefault(t => t.ServiceType == this.instanceProviderType);
             Expression interceptorSourse = (producer != null) ? producer.BuildExpression() : Expression.New(this.instanceProviderType);
 
-            Expression generator = Expression.Constant(this.generator, typeof(ProxygGenerator));
+            Expression generator = Expression.Constant(this.generator, typeof(IProxygGenerator));
             Expression typeOfInstance = Expression.Constant(this.implementationType, typeof(Type));
             Expression crateInstance = Expression.Call(generator, GenerateInstanceProxyMethod, typeOfInstance, interceptorSourse);
 

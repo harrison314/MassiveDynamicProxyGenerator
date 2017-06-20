@@ -25,7 +25,7 @@ namespace MassiveDynamicProxyGenerator.SimpleInjector
                 throw new ArgumentException($"Generic type {typeof(TService).FullName} must by public interface.");
             }
 
-            ProxygGenerator generator = new ProxygGenerator();
+            IProxygGenerator generator = ProxyGeneratorFactory.Factory.GetInstance();
 
 #if NET40
             container.Register(typeof(TService), () => generator.GenerateProxy<TService>(new NullInterceptor()));
@@ -54,7 +54,7 @@ namespace MassiveDynamicProxyGenerator.SimpleInjector
                 throw new ArgumentException($"The type parameter {nameof(mockType)} {mockType.FullName} must by public interface.");
             }
 
-            ProxygGenerator generator = new ProxygGenerator();
+            IProxygGenerator generator = ProxyGeneratorFactory.Factory.GetInstance();
 
             if (TypeHelper.IsOpenGeneric(mockType))
             {

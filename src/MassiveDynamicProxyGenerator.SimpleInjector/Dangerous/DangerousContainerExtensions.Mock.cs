@@ -17,7 +17,7 @@ namespace MassiveDynamicProxyGenerator.SimpleInjector.Dangerous
         /// <param name="container">The container.</param>
         public static void RegisterAllUnregistredAsMock(this Container container)
         {
-            ProxygGenerator generator = new ProxygGenerator();
+            IProxygGenerator generator = ProxyGeneratorFactory.Factory.GetInstance();
 
             container.ResolveUnregisteredType += (sender, arguments) =>
             {
