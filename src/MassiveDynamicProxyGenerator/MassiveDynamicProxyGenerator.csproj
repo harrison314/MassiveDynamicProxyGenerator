@@ -1,7 +1,7 @@
 ﻿<Project Sdk="Microsoft.NET.Sdk">
 
   <PropertyGroup>
-    <TargetFrameworks>netstandard1.6;net40;net45;net46;net461</TargetFrameworks>
+    <TargetFrameworks>netstandard1.4;netstandard1.6;net40;net45;net46;net461</TargetFrameworks>
     <GenerateDocumentationFile>true</GenerateDocumentationFile>
     <AssemblyName>MassiveDynamicProxyGenerator</AssemblyName>
     <PackageId>MassiveDynamicProxyGenerator</PackageId>
@@ -22,8 +22,10 @@
     <RepositoryUrl>https://github.com/harrison314/MassiveDynamicProxyGenerator</RepositoryUrl>
     <RepositoryType>git</RepositoryType>
     <Authors>harrison314</Authors>
-    <PackageReleaseNotes>Change interface IInvocation.
-Add universal async ibterceptor CallableInterceptorAsyncAdapter as abstract class for handle error in async task.</PackageReleaseNotes>
+    <PackageReleaseNotes>
+      Change interface IInvocation.
+      Add universal async ibterceptor CallableInterceptorAsyncAdapter as abstract class for handle error in async task.
+    </PackageReleaseNotes>
   </PropertyGroup>
 
   <PropertyGroup>
@@ -31,6 +33,13 @@ Add universal async ibterceptor CallableInterceptorAsyncAdapter as abstract clas
   </PropertyGroup>
   <ItemGroup>
     <AdditionalFiles Include="stylecop.json" />
+  </ItemGroup>
+
+  <ItemGroup Condition=" '$(TargetFramework)' == 'netstandard1.4' ">
+    <PackageReference Include="System.Reflection.Emit" Version="4.3.0" />
+    <PackageReference Include="System.Dynamic.Runtime" Version="4.3.0" />
+    <PackageReference Include="System.Reflection.TypeExtensions" Version="4.3.0" />
+    <PackageReference Include="System.Reflection.Emit" Version="4.3.0" />
   </ItemGroup>
 
   <ItemGroup Condition=" '$(TargetFramework)' == 'netstandard1.6' ">
