@@ -2,7 +2,7 @@
 
   <PropertyGroup>
     <GenerateDocumentationFile>true</GenerateDocumentationFile>
-    <TargetFrameworks>netstandard1.6;net40;net45;net46;net461</TargetFrameworks>
+    <TargetFrameworks>netstandard1.4;netstandard1.6;net40;net45;net46;net461</TargetFrameworks>
     <DefineConstants>$(DefineConstants);COREFX</DefineConstants>
     <NetStandardImplicitPackageVersion>1.6.0</NetStandardImplicitPackageVersion>
     <PackageTargetFallback Condition=" '$(TargetFramework)' == 'netstandard1.6' ">$(PackageTargetFallback);dnxcore50</PackageTargetFallback>
@@ -31,6 +31,10 @@ Adding methods for register mock implementations, proxys, instance proxies for r
     <None Include="Dangerous\DangerousContainerExtensions.Mock.cs" />
   </ItemGroup>
 
+  <ItemGroup Condition=" '$(TargetFramework)' == 'netstandard1.4' ">
+    <PackageReference Include="System.Reflection.TypeExtensions" Version="4.3.0" />
+  </ItemGroup>
+  
   <ItemGroup>
     <PackageReference Include="SimpleInjector" Version="4.0.8" />
     <PackageReference Include="StyleCop.Analyzers" Version="1.0.0" PrivateAssets="All" />

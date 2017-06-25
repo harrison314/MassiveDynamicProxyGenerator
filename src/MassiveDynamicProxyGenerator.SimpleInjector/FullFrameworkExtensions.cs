@@ -6,7 +6,7 @@ using System.Runtime.CompilerServices;
 
 namespace MassiveDynamicProxyGenerator.SimpleInjector
 {
-#if !NETSTANDARD1_6
+#if !(NETSTANDARD1_6 || NETSTANDARD1_4)
 
     /// <summary>
     /// Extensions for adapt .Net Core API to full framework.

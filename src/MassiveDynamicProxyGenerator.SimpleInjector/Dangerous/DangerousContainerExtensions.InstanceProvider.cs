@@ -112,7 +112,6 @@ namespace MassiveDynamicProxyGenerator.SimpleInjector.Dangerous
             where TService : class
             where TInstanceProvider : IInstanceProvicer
         {
-
             if (lifeStyle == null)
             {
                 throw new ArgumentNullException(nameof(lifeStyle));
