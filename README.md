@@ -16,7 +16,7 @@ Fertures:
 * Proxy instance generator, for control instancing real implementation (e.g. lazy loading).
 
 The following platforms are supported:
-* .Net 4.0, 4.5, 4.6, 4.6.1 and .Net Core 1.0 (NetStandard 1.6)
+* .Net 4.0, 4.5, 4.6, 4.6.1, .Net Core 1.* (NetStandard 1.6) and UWP applications (NetStandard 1.4)
 
 ## Getting started
 
