@@ -139,7 +139,7 @@ Getting started
 
 In package manager console:
 
-`PM> Install-Package MassiveDynamicProxyGenerator.SimpleInjector -Pre`
+`PM> Install-Package MassiveDynamicProxyGenerator.SimpleInjector`
 
 Or download [MassiveDynamicProxyGenerator.SimpleInjector](https://www.nuget.org/packages/MassiveDynamicProxyGenerator.SimpleInjector/).
 
