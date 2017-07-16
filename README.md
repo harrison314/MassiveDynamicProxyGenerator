@@ -130,6 +130,8 @@ Console.WriteLine("Result is {0}", result2);
 
 # MassiveDynamicProxyGenerator.SimpleInjector
 
+[![NuGet Status](http://img.shields.io/nuget/v/MassiveDynamicProxyGenerator.SimpleInjector.svg?style=flat)](https://www.nuget.org/packages/MassiveDynamicProxyGenerator.SimpleInjector/)
+
 _Library for integration MassiveDynamicProxyGenerator to [SimpleInjector](http://simpleinjector.readthedocs.io/en/latest/)._
 
 _MassiveDynamicProxyGenerator.SimpleInjector_ is library of extensions method for IoC container - Simple Injector.
