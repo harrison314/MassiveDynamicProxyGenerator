@@ -444,7 +444,7 @@ namespace MassiveDynamicProxyGenerator
                 fileName = string.Concat(fileName.TrimEnd(), ".dll");
             }
 
-#if NETSTANDARD1_4
+#if NETSTANDARD1_4 || NETSTANDARD1_6 || NETSTANDARD2_0
             throw new NotSupportedException("netstandard 1.4 not support AssemblyBuilder.Save(string)");
 #else
             this.assemblyBuilder.Save(fileName);
@@ -466,7 +466,7 @@ namespace MassiveDynamicProxyGenerator
                 generator.ImplementInterface(interfaceTypes[i]);
             }
 
-#if NETSTANDARD1_6 || NETSTANDARD1_4
+#if NETSTANDARD1_6 || NETSTANDARD1_4 || NETSTANDARD2_0
             TypeInfo proxyType = typeBuilder.CreateTypeInfo();
             return proxyType.AsType();
 #else
@@ -553,7 +553,7 @@ namespace MassiveDynamicProxyGenerator
              ModuleBuilder modBuilder = asmBuilder.DefineDynamicModule("DynamicProxyModule", "Testing.dll");
             */
 
-#if NETSTANDARD1_6 || NETSTANDARD1_4
+#if NETSTANDARD1_6 || NETSTANDARD1_4 || NETSTANDARD2_0
             AssemblyBuilder asmBuilder = AssemblyBuilder.DefineDynamicAssembly(asmName, AssemblyBuilderAccess.Run);
 #else
             AssemblyBuilder asmBuilder = Thread.GetDomain().DefineDynamicAssembly(asmName, AssemblyBuilderAccess.Run);

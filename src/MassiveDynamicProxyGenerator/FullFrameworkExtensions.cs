@@ -7,7 +7,7 @@ using System.Threading.Tasks;
 
 namespace MassiveDynamicProxyGenerator
 {
-#if !(NETSTANDARD1_6 || NETSTANDARD1_4)
+#if !(NETSTANDARD1_6 || NETSTANDARD1_4 || NETSTANDARD2_0)
 
     /// <summary>
     /// Extensions for adapt .Net Core API to full framework.
