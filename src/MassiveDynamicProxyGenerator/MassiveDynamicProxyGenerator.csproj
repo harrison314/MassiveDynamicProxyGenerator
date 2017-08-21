@@ -15,7 +15,7 @@
     <GenerateAssemblyCopyrightAttribute>false</GenerateAssemblyCopyrightAttribute>
     <GenerateAssemblyVersionAttribute>false</GenerateAssemblyVersionAttribute>
     <GenerateAssemblyFileVersionAttribute>false</GenerateAssemblyFileVersionAttribute>
-    <Version>1.2.0.0</Version>
+    <Version>1.2.1.0</Version>
     <PackageTags>massive, dynamic, proxy, dynamic proxy, runtime, .net</PackageTags>
     <PackageLicenseUrl>https://raw.githubusercontent.com/harrison314/MassiveDynamicProxyGenerator/master/LICENSE</PackageLicenseUrl>
     <PackageProjectUrl>https://github.com/harrison314/MassiveDynamicProxyGenerator</PackageProjectUrl>
@@ -23,9 +23,10 @@
     <RepositoryType>git</RepositoryType>
     <Authors>harrison314</Authors>
     <PackageReleaseNotes>
-      Change interface IInvocation.
-      Add universal async ibterceptor CallableInterceptorAsyncAdapter as abstract class for handle error in async task.
-    </PackageReleaseNotes>
+Change interface IInvocation.
+Add universal async ibterceptor CallableInterceptorAsyncAdapter as abstract class for handle error in async task.
+Add support for .Net Stdard 2.0.
+</PackageReleaseNotes>
   </PropertyGroup>
 
   <PropertyGroup>
