@@ -34,5 +34,10 @@ namespace MassiveDynamicProxyGenerator.Microsoft.DependencyInjection
 
             return services;
         }
+
+        public static void AddInterceptedDecorator(this IServiceCollection services, ICallableInterceptor interceptor, Predicate<Type> predicate)
+        {
+
+        }
     }
 }
