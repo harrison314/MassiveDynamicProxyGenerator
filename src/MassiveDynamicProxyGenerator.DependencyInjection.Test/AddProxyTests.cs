@@ -38,6 +38,30 @@ namespace MassiveDynamicProxyGenerator.DependencyInjection.Test
         }
 
         [TestMethod]
+        public void AddProxy_TypeInstance_Register()
+        {
+            ServiceCollection serviceCollection = new ServiceCollection();
+
+            bool isCall = false;
+            InterceptorAdapter interceptor = new InterceptorAdapter(intercept =>
+            {
+                isCall = true;
+                intercept.MethodName.ShouldBe("Send");
+
+            });
+
+            serviceCollection.AddProxy(typeof(IMessageService), interceptor);
+
+            IServiceProvider serviceProvider = serviceCollection.BuildServiceProvider();
+
+            IMessageService typeA = serviceProvider.GetRequiredService<IMessageService>();
+            typeA.ShouldNotBeNull();
+
+            typeA.Send("some@email.com", "body");
+            isCall.ShouldBeTrue("Interceptor can not call.");
+        }
+
+        [TestMethod]
         public void AddProxy_GenericAction_Register()
         {
             ServiceCollection serviceCollection = new ServiceCollection();
@@ -61,12 +85,49 @@ namespace MassiveDynamicProxyGenerator.DependencyInjection.Test
         }
 
         [TestMethod]
+        public void AddProxy_TypeAction_Register()
+        {
+            ServiceCollection serviceCollection = new ServiceCollection();
+
+            bool isCall = false;
+
+            serviceCollection.AddProxy(typeof(IMessageService), intercept =>
+            {
+                isCall = true;
+                intercept.MethodName.ShouldBe("Send");
+
+            });
+
+            IServiceProvider serviceProvider = serviceCollection.BuildServiceProvider();
+
+            IMessageService typeA = serviceProvider.GetRequiredService<IMessageService>();
+            typeA.ShouldNotBeNull();
+
+            typeA.Send("some@email.com", "body");
+            isCall.ShouldBeTrue("Interceptor can not call.");
+        }
+
+        [TestMethod]
         public void AddProxy_GenericWithNullInterceptor_Register()
         {
             ServiceCollection serviceCollection = new ServiceCollection();
 
 
             serviceCollection.AddProxy<IMessageService>();
+
+            IServiceProvider serviceProvider = serviceCollection.BuildServiceProvider();
+
+            IMessageService typeA = serviceProvider.GetRequiredService<IMessageService>();
+            typeA.ShouldNotBeNull();
+        }
+
+        [TestMethod]
+        public void AddProxy_TypedWithNullInterceptor_Register()
+        {
+            ServiceCollection serviceCollection = new ServiceCollection();
+
+
+            serviceCollection.AddProxy(typeof(IMessageService));
 
             IServiceProvider serviceProvider = serviceCollection.BuildServiceProvider();
 
