@@ -110,5 +110,40 @@ namespace MassiveDynamicProxyGenerator.Microsoft.DependencyInjection
 
             return services;
         }
+
+        public static IServiceCollection AddProxy(this IServiceCollection services, Type serviceType, Type interceptorType, params object[] interceptorParams)
+        {
+            if (serviceType == null)
+            {
+                throw new ArgumentNullException(nameof(serviceType));
+            }
+
+            if (interceptorType == null)
+            {
+                throw new ArgumentNullException(nameof(interceptorType));
+            }
+
+            if (!TypeHelper.IsPublicInterface(serviceType))
+            {
+                throw new ArgumentException($"Parameter {nameof(serviceType)} of type '{serviceType.AssemblyQualifiedName}' is not public interface.");
+            }
+
+            if (!typeof(IInterceptor).IsAssignableFrom(interceptorType))
+            {
+                throw new ArgumentException($"Parameter {nameof(interceptorType)} of type '{serviceType.AssemblyQualifiedName}' is IInterceptor.");
+            }
+
+            ProxygGenerator generator = new ProxygGenerator();
+            services.AddTransient(serviceType, t => generator.GenerateProxy(serviceType, (IInterceptor)ActivatorUtilities.CreateInstance(t, interceptorType, interceptorParams)));
+
+            return services;
+        }
+
+        public static IServiceCollection AddProxy<TService, TInterceptor>(this IServiceCollection services, params object[] interceptorParams)
+            where TService : class
+            where TInterceptor : IInterceptor
+        {
+            return services.AddProxy(typeof(TService), typeof(TInterceptor), interceptorParams: interceptorParams);
+        }
     }
 }

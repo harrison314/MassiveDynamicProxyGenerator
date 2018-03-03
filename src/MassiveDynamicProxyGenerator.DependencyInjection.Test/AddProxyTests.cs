@@ -134,5 +134,35 @@ namespace MassiveDynamicProxyGenerator.DependencyInjection.Test
             IMessageService typeA = serviceProvider.GetRequiredService<IMessageService>();
             typeA.ShouldNotBeNull();
         }
+
+        [TestMethod]
+        public void AddProxy_TypedWithInterceptorType_Register()
+        {
+            ServiceCollection serviceCollection = new ServiceCollection();
+            serviceCollection.AddTransient<ITypeA, TypeA>();
+
+            serviceCollection.AddProxy(typeof(IMessageService), typeof(TypeADependInterceptor));
+
+            IServiceProvider serviceProvider = serviceCollection.BuildServiceProvider();
+
+            IMessageService typeA = serviceProvider.GetRequiredService<IMessageService>();
+            typeA.ShouldNotBeNull();
+            typeA.Send("some@email.com", "body");
+        }
+
+        [TestMethod]
+        public void AddProxy_GenericWithInterceptorType_Register()
+        {
+            ServiceCollection serviceCollection = new ServiceCollection();
+            serviceCollection.AddTransient<ITypeA, TypeA>();
+
+            serviceCollection.AddProxy<IMessageService, TypeADependInterceptor>();
+
+            IServiceProvider serviceProvider = serviceCollection.BuildServiceProvider();
+
+            IMessageService typeA = serviceProvider.GetRequiredService<IMessageService>();
+            typeA.ShouldNotBeNull();
+            typeA.Send("some@email.com", "body");
+        }
     }
 }
