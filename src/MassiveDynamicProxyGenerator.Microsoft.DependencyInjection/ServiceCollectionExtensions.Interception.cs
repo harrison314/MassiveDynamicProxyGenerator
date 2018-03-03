@@ -105,6 +105,12 @@ namespace MassiveDynamicProxyGenerator.Microsoft.DependencyInjection
             return services;
         }
 
+        public static IServiceCollection AddInterceptedDecorator<TSetvice>(this IServiceCollection services, ICallableInterceptor interceptor)
+            where TSetvice : class
+        {
+            return services.AddInterceptedDecorator(typeof(TSetvice), interceptor);
+        }
+
         public static IServiceCollection AddInterceptedDecorator(this IServiceCollection services, Type serviceType, Func<IServiceProvider, ICallableInterceptor> interceptorFactory)
         {
             if (serviceType == null) throw new ArgumentNullException(nameof(serviceType));
@@ -136,6 +142,11 @@ namespace MassiveDynamicProxyGenerator.Microsoft.DependencyInjection
             }
 
             return services;
+        }
+
+        public static IServiceCollection AddInterceptedDecorator<TService>(this IServiceCollection services, Func<IServiceProvider, ICallableInterceptor> interceptorFactory)
+        {
+            return services.AddInterceptedDecorator(typeof(TService), interceptorFactory);
         }
 
         public static IServiceCollection AddInterceptedDecorator(this IServiceCollection services, Predicate<Type> predicate, ICallableInterceptor interceptor)
@@ -235,6 +246,12 @@ namespace MassiveDynamicProxyGenerator.Microsoft.DependencyInjection
             }
 
             return services;
+        }
+
+        public static IServiceCollection AddInterceptedDecorator<TInterceptor>(this IServiceCollection services, Predicate<Type> predicate)
+            where TInterceptor : ICallableInterceptor
+        {
+            return services.AddInterceptedDecorator(predicate, typeof(TInterceptor));
         }
 
         private static void CheckInterceptorConstructor(Type interceptorType, List<ServiceDescriptor> descriptors)
