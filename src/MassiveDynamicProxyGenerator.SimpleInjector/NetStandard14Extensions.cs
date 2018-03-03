@@ -23,6 +23,12 @@ namespace MassiveDynamicProxyGenerator.SimpleInjector
         }
 
         [MethodImpl(MethodImplOptions.AggressiveInlining)]
+        public static ConstructorInfo[] GetConstructors(this TypeInfo typeInfo, BindingFlags bindingAttr)
+        {
+            return typeInfo.AsType().GetConstructors(bindingAttr);
+        }
+
+        [MethodImpl(MethodImplOptions.AggressiveInlining)]
         public static ConstructorInfo[] GetConstructors(this TypeInfo typeInfo)
         {
             return typeInfo.AsType().GetConstructors();

@@ -34,7 +34,7 @@ namespace MassiveDynamicProxyGenerator.Microsoft.DependencyInjection
             {
                 int index = services.IndexOf(descriptor);
 
-                //ak ide o otvoreny gynericky typ pouzit IConvertible
+                //TODO: ak ide o otvoreny gynericky typ pouzit IConvertible
                 // a vo vnutri volat ActivatorUtilities a dorobit testy
                 ServiceDescriptor decoratedDescriptor = ServiceDescriptor.Describe(descriptor.ServiceType,
                    provider => ActivatorUtilities.CreateInstance(provider, decoratorType, GetInstanceFromDescriptor(provider, descriptor)),

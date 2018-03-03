@@ -26,5 +26,23 @@ namespace MassiveDynamicProxyGenerator.Microsoft.DependencyInjection
         {
             return type.GetTypeInfo().IsPublic && type.GetTypeInfo().IsInterface;
         }
+
+        public static Type[] GetConstructorRequiredTypes(Type type)
+        {
+            ConstructorInfo[] constructors = type.GetConstructors(BindingFlags.Public | BindingFlags.Instance);
+            if (constructors.Length != 1)
+            {
+                throw new ArgumentException($"Type '{type.AssemblyQualifiedName}' must have only one public constructor.");
+            }
+
+            ParameterInfo[] parameters = constructors[0].GetParameters();
+            Type[] requiredTypes = new Type[parameters.Length];
+            for (int i = 0; i < requiredTypes.Length; i++)
+            {
+                requiredTypes[i] = parameters[i].ParameterType;
+            }
+
+            return requiredTypes;
+        }
     }
 }
