@@ -1,3 +1,59 @@
+1.16.0 / 2016-12-01
+==================
+
+## Additional
+  * Refine cifES and nieES algorithms. Closes #1826
+
+## Build
+  * Include Minified Version in NPM Package
+  * Bump dev-dependencies to latest versions
+
+## Core
+  * Add binding for input with button type. Closes #1891
+  * Support jquery3. Closes #1866
+  * Change jQuery alias 'expr[":"]' to 'expr.pseudos'
+
+## Localisation
+  * Add Urdu translation. Closes #1873.
+
+## Localization
+  * Fixed wrong file-extension for az translation. Closes #1890.
+  * Added missing translation in pt-BR (Closes #1897)
+  * Fixed typo in arabien language file.
+
+## Tests
+  * Upgrade QUnit to 2.0.
+
+## UMD
+  * Better support for CommonJS.
+
+1.15.1 / 2016-07-22
+==================
+
+## Additional
+  * Fix multiple mime-type validation
+  * IBAN require at least 5 chars (Closes #1797, Fixes #1674)
+  * Correct notEqualTo jQuery reference
+
+## Core
+  * Added failing test for #1805
+  * Fix group validation with 3 and more fields
+  * Fix regressions introduced in #1644 and #1657 (Closes #1800)
+  * Update step validation to handle floating points correctly
+  * Fix error when calling $.fn.rules() on a non-form element
+  * Call `errorPlacement` in validator scope
+  * Fixed issue with contenteditable elements in forms where events for single input validation would cause exceptions
+
+## Demo
+  * Add links to Bootstrap and Semantic-UI demos to index.html
+  * Use `.on()` instead of `.validateDelegate()`
+
+## Localization
+  * Added Azeri language
+
+## Tests
+  * Added regression unit tests for PR #1760
+
 1.15.0 / 2016-02-24
 ==================
 
@@ -46,7 +102,7 @@
   * Update Malay translation
   * Included messages from additional methods
   * Improving pt_BR translation and fixing a typo on the 'cifES' key.
-  
+
 1.14.0 / 2015-06-30
 ==================
 
