@@ -1,7 +1,7 @@
 ﻿
 Microsoft Visual Studio Solution File, Format Version 12.00
 # Visual Studio 15
-VisualStudioVersion = 15.0.27130.2003
+VisualStudioVersion = 15.0.27130.2036
 MinimumVisualStudioVersion = 10.0.40219.1
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Solution Items", "Solution Items", "{3BB9BD78-8EA2-4D47-9B8A-0966629700D5}"
 	ProjectSection(SolutionItems) = preProject
@@ -21,8 +21,6 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "ProxyGeneratrorSamples.Net4
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "MassiveDynamicProxyGenerator.Tests.NetStandard", "MassiveDynamicProxyGenerator.Tests.NetStandard\MassiveDynamicProxyGenerator.Tests.NetStandard.csproj", "{D612DB67-6248-4353-8C8F-59CD04920EF7}"
 EndProject
-Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "SampleWebApplication", "Samples\SampleWebApplication\SampleWebApplication.csproj", "{4675F8DF-6D5B-43CF-B429-F53A4896322D}"
-EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "WcfForHipsters.WebServer", "Samples\WcfForHipsters.WebServer\WcfForHipsters.WebServer.csproj", "{768B0EAB-5795-4AE1-A2FD-5359C4E2432A}"
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "WcfForHipsters.Client", "Samples\WcfForHipsters.Client\WcfForHipsters.Client.csproj", "{62E2BCF2-3C4E-4C9F-9008-AF058C5C953D}"
@@ -37,7 +35,7 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "MassiveDynamicProxyGenerato
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "MassiveDynamicProxyGenerator.Microsoft.DependencyInjection", "MassiveDynamicProxyGenerator.Microsoft.DependencyInjection\MassiveDynamicProxyGenerator.Microsoft.DependencyInjection.csproj", "{0709CC41-C97B-4FB7-AE9F-BF7F8B06ABD4}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "MassiveDynamicProxyGenerator.DependencyInjection.Test", "MassiveDynamicProxyGenerator.DependencyInjection.Test\MassiveDynamicProxyGenerator.DependencyInjection.Test.csproj", "{98F3C8C1-F37D-4CF3-98BE-C4975F32F73E}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "MassiveDynamicProxyGenerator.DependencyInjection.Test", "MassiveDynamicProxyGenerator.DependencyInjection.Test\MassiveDynamicProxyGenerator.DependencyInjection.Test.csproj", "{98F3C8C1-F37D-4CF3-98BE-C4975F32F73E}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -61,10 +59,6 @@ Global
 		{D612DB67-6248-4353-8C8F-59CD04920EF7}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{D612DB67-6248-4353-8C8F-59CD04920EF7}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{D612DB67-6248-4353-8C8F-59CD04920EF7}.Release|Any CPU.Build.0 = Release|Any CPU
-		{4675F8DF-6D5B-43CF-B429-F53A4896322D}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
-		{4675F8DF-6D5B-43CF-B429-F53A4896322D}.Debug|Any CPU.Build.0 = Debug|Any CPU
-		{4675F8DF-6D5B-43CF-B429-F53A4896322D}.Release|Any CPU.ActiveCfg = Release|Any CPU
-		{4675F8DF-6D5B-43CF-B429-F53A4896322D}.Release|Any CPU.Build.0 = Release|Any CPU
 		{768B0EAB-5795-4AE1-A2FD-5359C4E2432A}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
 		{768B0EAB-5795-4AE1-A2FD-5359C4E2432A}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{768B0EAB-5795-4AE1-A2FD-5359C4E2432A}.Release|Any CPU.ActiveCfg = Release|Any CPU
@@ -103,7 +97,6 @@ Global
 	EndGlobalSection
 	GlobalSection(NestedProjects) = preSolution
 		{E7F2B2B2-318C-4F2B-BF76-086A230E59FA} = {7558D4C7-EEA6-4B86-8C46-B0639EEE79C8}
-		{4675F8DF-6D5B-43CF-B429-F53A4896322D} = {7558D4C7-EEA6-4B86-8C46-B0639EEE79C8}
 		{768B0EAB-5795-4AE1-A2FD-5359C4E2432A} = {7558D4C7-EEA6-4B86-8C46-B0639EEE79C8}
 		{62E2BCF2-3C4E-4C9F-9008-AF058C5C953D} = {7558D4C7-EEA6-4B86-8C46-B0639EEE79C8}
 	EndGlobalSection
