@@ -13,10 +13,6 @@
   </ItemGroup>
 
   <ItemGroup>
-    <Folder Include="Services\Implementation\" />
-  </ItemGroup>
-
-  <ItemGroup>
     <ProjectReference Include="..\..\MassiveDynamicProxyGenerator.Microsoft.DependencyInjection\MassiveDynamicProxyGenerator.Microsoft.DependencyInjection.csproj" />
     <ProjectReference Include="..\..\MassiveDynamicProxyGenerator\MassiveDynamicProxyGenerator.csproj" />
   </ItemGroup>

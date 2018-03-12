@@ -7,24 +7,38 @@ using Microsoft.AspNetCore.Hosting;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 
+using MassiveDynamicProxyGenerator.Microsoft.DependencyInjection;
+using SampleWebApplication.Services.Contract;
+using SampleWebApplication.Services.Implementation;
+using SampleWebApplication.Services.Interceptors;
+
 namespace SampleWebApplication
 {
     public class Startup
     {
-        public Startup(IConfiguration configuration)
-        {
-            Configuration = configuration;
-        }
-
         public IConfiguration Configuration { get; }
 
-        // This method gets called by the runtime. Use this method to add services to the container.
+        public Startup(IConfiguration configuration)
+        {
+            this.Configuration = configuration;
+        }
+
         public void ConfigureServices(IServiceCollection services)
         {
+            services.AddSingleton<IArticleService, MockArticleService>();
+
+
+            services.AddInterceptedDecorator<IArticleService, PerformaceInterceptor>();
+
+            // services.AddDecorator<IArticleService, ArticleDecoratorService>();
+            // services.AddInterceptedDecorator<IArticleService, ChangeAutorInterceptor>("Ing interceptor");
+
+            services.AddProxy<INotificationServise>();
+            services.AddProxy<ICommonServices, ServiceProviderInterceptor>();
+
             services.AddMvc();
         }
 
-        // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.
         public void Configure(IApplicationBuilder app, IHostingEnvironment env)
         {
             if (env.IsDevelopment())

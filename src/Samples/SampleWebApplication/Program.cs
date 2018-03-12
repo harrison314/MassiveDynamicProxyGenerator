@@ -19,6 +19,12 @@ namespace SampleWebApplication
 
         public static IWebHost BuildWebHost(string[] args) =>
             WebHost.CreateDefaultBuilder(args)
+            .ConfigureLogging(loggerBuilder =>
+            {
+                loggerBuilder.AddFilter((cathegory, _) => cathegory.StartsWith("SampleWebApplication"));
+                loggerBuilder.AddConsole();
+                loggerBuilder.AddDebug();
+            })
                 .UseStartup<Startup>()
                 .Build();
     }
