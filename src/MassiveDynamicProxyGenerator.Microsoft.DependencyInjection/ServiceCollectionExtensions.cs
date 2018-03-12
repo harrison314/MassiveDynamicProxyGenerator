@@ -5,6 +5,9 @@ using System.Text;
 
 namespace MassiveDynamicProxyGenerator.Microsoft.DependencyInjection
 {
+    /// <summary>
+    /// Extensions for <see cref="IServiceCollection"/>.
+    /// </summary>
     public static partial class ServiceCollectionExtensions
     {
         private static List<ServiceDescriptor> GetDescriptors(this IServiceCollection services, Type serviceType)

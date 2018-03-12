@@ -7,6 +7,20 @@ namespace MassiveDynamicProxyGenerator.Microsoft.DependencyInjection
 {
     public static partial class ServiceCollectionExtensions
     {
+        /// <summary>
+        /// Adds the decorator for service of <paramref name="serviceType"/> of type <paramref name="decoratorType"/>.
+        /// </summary>
+        /// <param name="services">The <see cref="IServiceCollection"/> to add the service to.</param>
+        /// <param name="serviceType">Type of the decorated service. Must by public interface.</param>
+        /// <param name="decoratorType">Type of the decorator. Must by nonabstract class.</param>
+        /// <returns>The <see cref="IServiceCollection"/> to add the service to.</returns>
+        /// <exception cref="ArgumentNullException">
+        /// serviceType
+        /// or
+        /// decoratorType
+        /// </exception>
+        /// <exception cref="ArgumentException">
+        /// </exception>
         public static IServiceCollection AddDecorator(this IServiceCollection services, Type serviceType, Type decoratorType)
         {
             if (serviceType == null)
@@ -48,12 +62,19 @@ namespace MassiveDynamicProxyGenerator.Microsoft.DependencyInjection
             return services;
         }
 
-        public static IServiceCollection AddDecorator<TInterface, TServise>(this IServiceCollection services)
-            where TInterface : class
-            where TServise : TInterface
+        /// <summary>
+        /// Adds the decorator for service of <typeparamref name="TService"/> of type <typeparamref name="TDecorator"/>.
+        /// </summary>
+        /// <typeparam name="TService">The type of the intercepted service. Must by public interface.</typeparam>
+        /// <typeparam name="TDecorator">Type of the decorator. Must by nonabstract class.</typeparam>
+        /// <param name="services">The <see cref="IServiceCollection"/> to add the service to.</param>
+        /// <returns>The <see cref="IServiceCollection"/> to add the service to.</returns>
+        public static IServiceCollection AddDecorator<TService, TDecorator>(this IServiceCollection services)
+            where TService : class
+            where TDecorator : TService
 
         {
-            return AddDecorator(services, typeof(TInterface), typeof(TServise));
+            return AddDecorator(services, typeof(TService), typeof(TDecorator));
         }
     }
 }
