@@ -5,9 +5,16 @@ using System.Text;
 
 namespace MassiveDynamicProxyGenerator.Microsoft.DependencyInjection
 {
-    //TODO: implement for non open-generic types!!!!
     public static partial class ServiceCollectionExtensions
     {
+        /// <summary>
+        /// Add intercepted decorator to type <typeparamref name="TServise"/>.
+        /// </summary>
+        /// <typeparam name="TServise">Type of the decorated service. Must by public interface.</typeparam>
+        /// <typeparam name="TInterceptor">Type of interceptor.</typeparam>
+        /// <param name="services">The <see cref="IServiceCollection" /> to add the service to.</param>
+        /// <param name="interceptorParams">Additional interceptor parameters.</param>
+        /// <returns>The <see cref="IServiceCollection" /> to add the service to.</returns>
         public static IServiceCollection AddInterceptedDecorator<TServise, TInterceptor>(this IServiceCollection services, params object[] interceptorParams)
            where TServise : class
            where TInterceptor : ICallableInterceptor
@@ -35,6 +42,20 @@ namespace MassiveDynamicProxyGenerator.Microsoft.DependencyInjection
             return services;
         }
 
+        /// <summary>
+        /// Add intercepted decorator to type <paramref name="serviceType"/> using interceptor type <paramref name="interceptorType"/>.
+        /// </summary>
+        /// <param name="services">The <see cref="IServiceCollection" /> to add the service to.</param>
+        /// <param name="serviceType">Type of the decorated service. Must by public interface.</param>
+        /// <param name="interceptorType">Type of interceptor. Must implement <see cref="ICallableInterceptor"/>.</param>
+        /// <param name="interceptorParams">Additional interceptor params.</param>
+        /// <returns>The <see cref="IServiceCollection" /> to add the service to.</returns>
+        /// <exception cref="ArgumentNullException">
+        /// serviceType
+        /// or
+        /// interceptorType
+        /// </exception>
+        /// <exception cref="ArgumentException"></exception>
         public static IServiceCollection AddInterceptedDecorator(this IServiceCollection services, Type serviceType, Type interceptorType, params object[] interceptorParams)
         {
             if (serviceType == null) throw new ArgumentNullException(nameof(serviceType));
@@ -73,6 +94,19 @@ namespace MassiveDynamicProxyGenerator.Microsoft.DependencyInjection
             return services;
         }
 
+        /// <summary>
+        /// Add intercepted decorator to type <paramref name="serviceType"/> using <paramref name="interceptor"/> instance.
+        /// </summary>
+        /// <param name="services">The <see cref="IServiceCollection" /> to add the service to.</param>
+        /// <param name="serviceType">Type of the decorated service. Must by public interface.</param>
+        /// <param name="interceptor">The interceptor instance.</param>
+        /// <returns>The <see cref="IServiceCollection" /> to add the service to.</returns>
+        /// <exception cref="ArgumentNullException">
+        /// serviceType
+        /// or
+        /// interceptor
+        /// </exception>
+        /// <exception cref="ArgumentException"></exception>
         public static IServiceCollection AddInterceptedDecorator(this IServiceCollection services, Type serviceType, ICallableInterceptor interceptor)
         {
             if (serviceType == null) throw new ArgumentNullException(nameof(serviceType));
@@ -105,12 +139,33 @@ namespace MassiveDynamicProxyGenerator.Microsoft.DependencyInjection
             return services;
         }
 
+        /// <summary>
+        /// Add intercepted decorator to type <typeparamref name="TSetvice"/> using <paramref name="interceptor"/> instance.
+        /// </summary>
+        /// <typeparam name="TSetvice">Type of the decorated service. Must by public interface.</typeparam>
+        /// <param name="services">The <see cref="IServiceCollection" /> to add the service to.</param>
+        /// <param name="interceptor">The interceptor instance.</param>
+        /// <returns>The <see cref="IServiceCollection" /> to add the service to.</returns>
+        /// <exception cref="ArgumentNullException">interceptor</exception>
         public static IServiceCollection AddInterceptedDecorator<TSetvice>(this IServiceCollection services, ICallableInterceptor interceptor)
             where TSetvice : class
         {
             return services.AddInterceptedDecorator(typeof(TSetvice), interceptor);
         }
 
+        /// <summary>
+        /// Add intercepted decorator to type <paramref name="serviceType"/> using factory for interceptor <paramref name="interceptorFactory"/>.
+        /// </summary>
+        /// <param name="services">The <see cref="IServiceCollection" /> to add the service to.</param>
+        /// <param name="serviceType">Type of the decorated service. Must by public interface.</param>
+        /// <param name="interceptorFactory">The interceptor factory.</param>
+        /// <returns>The <see cref="IServiceCollection" /> to add the service to.</returns>
+        /// <exception cref="ArgumentNullException">
+        /// serviceType
+        /// or
+        /// interceptorFactory
+        /// </exception>
+        /// <exception cref="ArgumentException"></exception>
         public static IServiceCollection AddInterceptedDecorator(this IServiceCollection services, Type serviceType, Func<IServiceProvider, ICallableInterceptor> interceptorFactory)
         {
             if (serviceType == null) throw new ArgumentNullException(nameof(serviceType));
@@ -144,11 +199,30 @@ namespace MassiveDynamicProxyGenerator.Microsoft.DependencyInjection
             return services;
         }
 
+        /// <summary>
+        /// Add intercepted decorator to type <typeparamref name="TService"/> using factory for interceptor <paramref name="interceptorFactory"/>.
+        /// </summary>
+        /// <typeparam name="TService">Type of the decorated service. Must by public interface</typeparam>
+        /// <param name="services">The <see cref="IServiceCollection" /> to add the service to.</param>
+        /// <param name="interceptorFactory">The interceptor factory.</param>
+        /// <returns>The <see cref="IServiceCollection" /> to add the service to.</returns>
         public static IServiceCollection AddInterceptedDecorator<TService>(this IServiceCollection services, Func<IServiceProvider, ICallableInterceptor> interceptorFactory)
         {
             return services.AddInterceptedDecorator(typeof(TService), interceptorFactory);
         }
 
+        /// <summary>
+        /// Add intercepted decorator to multiple services identified <paramref name="predicate"/> and intercepted <paramref name="interceptor"/>.
+        /// </summary>
+        /// <param name="services">The <see cref="IServiceCollection" /> to add the service to.</param>
+        /// <param name="predicate">The predicated identified intercepted services.</param>
+        /// <param name="interceptor">The interceptor instance.</param>
+        /// <returns>The <see cref="IServiceCollection" /> to add the service to.</returns>
+        /// <exception cref="ArgumentNullException">
+        /// predicate
+        /// or
+        /// interceptor
+        /// </exception>
         public static IServiceCollection AddInterceptedDecorator(this IServiceCollection services, Predicate<Type> predicate, ICallableInterceptor interceptor)
         {
             if (predicate == null) throw new ArgumentNullException(nameof(predicate));
@@ -179,6 +253,18 @@ namespace MassiveDynamicProxyGenerator.Microsoft.DependencyInjection
             return services;
         }
 
+        /// <summary>
+        /// Add intercepted decorator to multiple services identified <paramref name="predicate"/> and intercepted certed using <paramref name="interceptorFactory"/>.
+        /// </summary>
+        /// <param name="services">The <see cref="IServiceCollection" /> to add the service to.</param>
+        /// <param name="predicate">The predicated identified intercepted services.</param>
+        /// <param name="interceptorFactory">The interceptor factory.</param>
+        /// <returns>The <see cref="IServiceCollection" /> to add the service to.</returns>
+        /// <exception cref="ArgumentNullException">
+        /// predicate
+        /// or
+        /// interceptorFactory
+        /// </exception>
         public static IServiceCollection AddInterceptedDecorator(this IServiceCollection services, Predicate<Type> predicate, Func<IServiceProvider, ICallableInterceptor> interceptorFactory)
         {
             if (predicate == null) throw new ArgumentNullException(nameof(predicate));
@@ -210,6 +296,20 @@ namespace MassiveDynamicProxyGenerator.Microsoft.DependencyInjection
             return services;
         }
 
+        /// <summary>
+        /// Add intercepted decorator to multiple services identified <paramref name="predicate"/> and intercepted using <paramref name="interceptorType"/>.
+        /// </summary>
+        /// <param name="services">The <see cref="IServiceCollection" /> to add the service to.</param>
+        /// <param name="predicate">The predicated identified intercepted services.</param>
+        /// <param name="interceptorType">Type of interceptor. Must by <see cref="ICallableInterceptor"/>.</param>
+        /// <param name="interceptorParams">Additional interceptor parameters.</param>
+        /// <returns>The <see cref="IServiceCollection" /> to add the service to.</returns>
+        /// <exception cref="ArgumentException"></exception>
+        /// <exception cref="ArgumentNullException">
+        /// predicate
+        /// or
+        /// interceptorType
+        /// </exception>
         public static IServiceCollection AddInterceptedDecorator(this IServiceCollection services, Predicate<Type> predicate, Type interceptorType, params object[] interceptorParams)
         {
             if (predicate == null) throw new ArgumentNullException(nameof(predicate));
@@ -248,6 +348,16 @@ namespace MassiveDynamicProxyGenerator.Microsoft.DependencyInjection
             return services;
         }
 
+        /// <summary>
+        /// Add intercepted decorator to multiple services identified <paramref name="predicate"/> and intercepted using <typeparamref name="TInterceptor"/>.
+        /// </summary>
+        /// <typeparam name="TInterceptor">Type of interceptor. Must by <see cref="ICallableInterceptor"/>.</typeparam>
+        /// <param name="services">The <see cref="IServiceCollection" /> to add the service to.</param>
+        /// <param name="predicate">Additional interceptor parameters.</param>
+        /// <returns>The <see cref="IServiceCollection" /> to add the service to.</returns>
+        /// <exception cref="ArgumentNullException">
+        /// predicate
+        /// </exception>
         public static IServiceCollection AddInterceptedDecorator<TInterceptor>(this IServiceCollection services, Predicate<Type> predicate)
             where TInterceptor : ICallableInterceptor
         {

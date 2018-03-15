@@ -7,6 +7,16 @@ namespace MassiveDynamicProxyGenerator.Microsoft.DependencyInjection
 {
     public static partial class ServiceCollectionExtensions
     {
+        /// <summary>
+        /// Add proxy of type <typeparamref name="TService"/> using <paramref name="interceptor"/>.
+        /// </summary>
+        /// <typeparam name="TService">The created service. Must by public interface.</typeparam>
+        /// <param name="services">The <see cref="IServiceCollection" /> to add the service to.</param>
+        /// <param name="interceptor">The interceptor to create proxy.</param>
+        /// <returns>The <see cref="IServiceCollection" /> to add the service to.</returns>
+        /// <exception cref="ArgumentNullException">
+        /// interceptor
+        /// </exception>
         public static IServiceCollection AddProxy<TService>(this IServiceCollection services, IInterceptor interceptor)
            where TService : class
         {
@@ -22,6 +32,19 @@ namespace MassiveDynamicProxyGenerator.Microsoft.DependencyInjection
             return services;
         }
 
+        /// <summary>
+        /// Add proxy of type <paramref name="serviceType"/> using <paramref name="interceptor"/>.
+        /// </summary>
+        /// <param name="services">The <see cref="IServiceCollection" /> to add the service to.</param>
+        /// <param name="serviceType">The created service. Must by public interface.</param>
+        /// <param name="interceptor">The interceptor to create proxy.</param>
+        /// <returns>The <see cref="IServiceCollection" /> to add the service to.</returns>
+        /// <exception cref="ArgumentNullException">
+        /// serviceType
+        /// or
+        /// interceptor
+        /// </exception>
+        /// <exception cref="ArgumentException"></exception>
         public static IServiceCollection AddProxy(this IServiceCollection services, Type serviceType, IInterceptor interceptor)
         {
             if (serviceType == null)
@@ -46,6 +69,16 @@ namespace MassiveDynamicProxyGenerator.Microsoft.DependencyInjection
             return services;
         }
 
+        /// <summary>
+        /// Add proxy of type <typeparamref name="TService"/> using <paramref name="interceptor"/>.
+        /// </summary>
+        /// <typeparam name="TService">The created service. Must by public interface.</typeparam>
+        /// <param name="services">The <see cref="IServiceCollection" /> to add the service to.</param>
+        /// <param name="interceptor">The interceptor to create proxy as <see cref="Action"/>.</param>
+        /// <returns>The <see cref="IServiceCollection" /> to add the service to.</returns>
+        /// <exception cref="ArgumentNullException">
+        /// interceptor
+        /// </exception>
         public static IServiceCollection AddProxy<TService>(this IServiceCollection services, Action<IInvocation> interceptor)
             where TService : class
         {
@@ -61,6 +94,19 @@ namespace MassiveDynamicProxyGenerator.Microsoft.DependencyInjection
             return services;
         }
 
+        /// <summary>
+        /// Add proxy of type <paramref name="serviceType"/> using <paramref name="interceptor"/>.
+        /// </summary>
+        /// <param name="services">The <see cref="IServiceCollection" /> to add the service to.</param>
+        /// <param name="serviceType">The created service. Must by public interface.</param>
+        /// <param name="interceptor">The interceptor to create proxy as <see cref="Action"/>.</param>
+        /// <returns>The <see cref="IServiceCollection" /> to add the service to.</returns>
+        /// <exception cref="ArgumentNullException">
+        /// serviceType
+        /// or
+        /// interceptor
+        /// </exception>
+        /// <exception cref="ArgumentException"></exception>
         public static IServiceCollection AddProxy(this IServiceCollection services, Type serviceType, Action<IInvocation> interceptor)
         {
             if (serviceType == null)
@@ -85,6 +131,13 @@ namespace MassiveDynamicProxyGenerator.Microsoft.DependencyInjection
             return services;
         }
 
+        /// <summary>
+        /// Add null pattern proxy to <typeparamref name="TService"/>.
+        /// </summary>
+        /// <typeparam name="TService">The created service. Must by public interface.</typeparam>
+        /// <param name="services">The <see cref="IServiceCollection" /> to add the service to.</param>
+        /// <returns>The <see cref="IServiceCollection" /> to add the service to.</returns>
+        /// <exception cref="ArgumentException"></exception>
         public static IServiceCollection AddProxy<TService>(this IServiceCollection services)
             where TService : class
         {
@@ -94,6 +147,13 @@ namespace MassiveDynamicProxyGenerator.Microsoft.DependencyInjection
             return services;
         }
 
+        /// <summary>
+        /// Add null pattern proxy to <paramref name="serviceType"/>.
+        /// </summary>
+        /// <param name="services">The <see cref="IServiceCollection" /> to add the service to.</param>
+        /// <param name="serviceType">The created service. Must by public interface.</param>
+        /// <returns>The <see cref="IServiceCollection" /> to add the service to.</returns>
+        /// <exception cref="ArgumentException"></exception>
         public static IServiceCollection AddProxy(this IServiceCollection services, Type serviceType)
         {
             if (serviceType == null)
@@ -111,6 +171,20 @@ namespace MassiveDynamicProxyGenerator.Microsoft.DependencyInjection
             return services;
         }
 
+        /// <summary>
+        /// Add proxy for type <paramref name="serviceType"/> using interceptor of <paramref name="interceptorType"/>.
+        /// </summary>
+        /// <param name="services">The <see cref="IServiceCollection" /> to add the service to.</param>
+        /// <param name="serviceType">The created service. Must by public interface.</param>
+        /// <param name="interceptorType">The interceptor type.</param>
+        /// <param name="interceptorParams">Additional interceptor parameters.</param>
+        /// <returns>The <see cref="IServiceCollection" /> to add the service to.</returns>
+        /// <exception cref="ArgumentNullException">
+        /// serviceType
+        /// or
+        /// interceptorType
+        /// </exception>
+        /// <exception cref="ArgumentException"></exception>
         public static IServiceCollection AddProxy(this IServiceCollection services, Type serviceType, Type interceptorType, params object[] interceptorParams)
         {
             if (serviceType == null)
@@ -139,6 +213,15 @@ namespace MassiveDynamicProxyGenerator.Microsoft.DependencyInjection
             return services;
         }
 
+        /// <summary>
+        /// Add proxy for type <typeparamref name="TService"/> using interceptor of type <typeparamref name="TInterceptor"/>.
+        /// </summary>
+        /// <typeparam name="TService">The created service. Must by public interface.</typeparam>
+        /// <typeparam name="TInterceptor">The interceptor type.</typeparam>
+        /// <param name="services">The <see cref="IServiceCollection" /> to add the service to.</param>
+        /// <param name="interceptorParams">Additional interceptor parameters.</param>
+        /// <returns>The <see cref="IServiceCollection" /> to add the service to.</returns>
+        /// <exception cref="ArgumentException"></exception>
         public static IServiceCollection AddProxy<TService, TInterceptor>(this IServiceCollection services, params object[] interceptorParams)
             where TService : class
             where TInterceptor : IInterceptor
@@ -146,6 +229,19 @@ namespace MassiveDynamicProxyGenerator.Microsoft.DependencyInjection
             return services.AddProxy(typeof(TService), typeof(TInterceptor), interceptorParams: interceptorParams);
         }
 
+        /// <summary>
+        /// Add proxy for type <paramref name="serviceType"/> using interceptor created with <paramref name="interceptorFactory"/>.
+        /// </summary>
+        /// <param name="services">The <see cref="IServiceCollection" /> to add the service to.</param>
+        /// <param name="serviceType">The created service. Must by public interface.</param>
+        /// <param name="interceptorFactory">The interceptor factory.</param>
+        /// <returns>The <see cref="IServiceCollection" /> to add the service to.</returns>
+        /// <exception cref="ArgumentNullException">
+        /// serviceType
+        /// or
+        /// interceptorFactory
+        /// </exception>
+        /// <exception cref="ArgumentException"></exception>
         public static IServiceCollection AddProxy(this IServiceCollection services, Type serviceType, Func<IServiceProvider, IInterceptor> interceptorFactory)
         {
             if (serviceType == null)
@@ -169,6 +265,14 @@ namespace MassiveDynamicProxyGenerator.Microsoft.DependencyInjection
             return services;
         }
 
+        /// <summary>
+        /// Add proxy for type <typeparamref name="TService"/> sing interceptor created with <paramref name="interceptorFactory"/>.
+        /// </summary>
+        /// <typeparam name="TService">The created service. Must by public interface.</typeparam>
+        /// <param name="services">The <see cref="IServiceCollection" /> to add the service to.</param>
+        /// <param name="interceptorFactory">The interceptor factory.</param>
+        /// <returns>The <see cref="IServiceCollection" /> to add the service to.</returns>
+        /// <exception cref="ArgumentException"></exception>
         public static IServiceCollection AddProxy<TService>(this IServiceCollection services, Func<IServiceProvider, IInterceptor> interceptorFactory)
             where TService : class
         {
