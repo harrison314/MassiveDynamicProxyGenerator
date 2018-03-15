@@ -2,6 +2,16 @@
 
   <PropertyGroup>
     <TargetFramework>netstandard2.0</TargetFramework>
+    <Version>1.2.1.0</Version>
+    <Authors>harrison314</Authors>
+    <Company>harrison314</Company>
+    <Description>MassiveDynamicProxyGenerator Microsoft.Extensions.DependencyInjection is intergration MassiveDynamicProxyGenerator to standard IoC container in ASP.NET Core.</Description>
+    <RepositoryUrl>https://github.com/harrison314/MassiveDynamicProxyGenerator</RepositoryUrl>
+    <RepositoryType>git</RepositoryType>
+    <Copyright>Copyright ©  2016</Copyright>
+    <PackageLicenseUrl>https://raw.githubusercontent.com/harrison314/MassiveDynamicProxyGenerator/master/LICENSE</PackageLicenseUrl>
+    <PackageProjectUrl>https://github.com/harrison314/MassiveDynamicProxyGenerator</PackageProjectUrl>
+    <PackageTags>massive, dynamic, proxy, dynamic proxy, runtime, .net, micoroft.extensions, IOC, ASP.NET, MVC</PackageTags>
   </PropertyGroup>
 
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|AnyCPU'">
