@@ -45,8 +45,7 @@ namespace MassiveDynamicProxyGenerator.Microsoft.DependencyInjection
                 throw new ArgumentException($"Parameter {nameof(serviceType)} of type '{serviceType.AssemblyQualifiedName}' is not public interface.");
             }
 
-            ProxygGenerator proxygGenerator = new ProxygGenerator();
-            return serviceCollection.AddSingleton(serviceType, sp => proxygGenerator.GenerateInstanceProxy(serviceType, instanceProvicer));
+            return serviceCollection.AddSingleton(serviceType, sp => MassiveDynamicProxyGeneratorDiSettings.ProxyGeneratorProvider.GetProxyGenerator(sp).GenerateInstanceProxy(serviceType, instanceProvicer));
         }
 
         /// <summary>
@@ -102,10 +101,8 @@ namespace MassiveDynamicProxyGenerator.Microsoft.DependencyInjection
                 throw new ArgumentException($"Parameter {nameof(serviceType)} of type '{serviceType.AssemblyQualifiedName}' is not public interface.");
             }
 
-            ProxygGenerator proxygGenerator = new ProxygGenerator();
-
             ServiceDescriptor descriptor = new ServiceDescriptor(serviceType,
-                sp => proxygGenerator.GenerateInstanceProxy(serviceType, instanceProvicer),
+                sp => MassiveDynamicProxyGeneratorDiSettings.ProxyGeneratorProvider.GetProxyGenerator(sp).GenerateInstanceProxy(serviceType, instanceProvicer),
                 proxyLifetime);
 
             serviceCollection.Add(descriptor);
@@ -169,8 +166,7 @@ namespace MassiveDynamicProxyGenerator.Microsoft.DependencyInjection
                 throw new ArgumentException($"Parameter {nameof(serviceType)} of type '{serviceType.AssemblyQualifiedName}' is not public interface.");
             }
 
-            ProxygGenerator proxygGenerator = new ProxygGenerator();
-            return serviceCollection.AddSingleton(serviceType, sp => proxygGenerator.GenerateInstanceProxy(serviceType, new FuncInstanceProvider(instnaceFactory)));
+            return serviceCollection.AddSingleton(serviceType, sp => MassiveDynamicProxyGeneratorDiSettings.ProxyGeneratorProvider.GetProxyGenerator(sp).GenerateInstanceProxy(serviceType, new FuncInstanceProvider(instnaceFactory)));
         }
 
         /// <summary>
@@ -225,10 +221,9 @@ namespace MassiveDynamicProxyGenerator.Microsoft.DependencyInjection
                 throw new ArgumentException($"Parameter {nameof(serviceType)} of type '{serviceType.AssemblyQualifiedName}' is not public interface.");
             }
 
-            ProxygGenerator proxygGenerator = new ProxygGenerator();
 
             ServiceDescriptor descriptor = new ServiceDescriptor(serviceType,
-                sp => proxygGenerator.GenerateInstanceProxy(serviceType, new FuncInstanceProvider(instanceFactory)),
+                sp => MassiveDynamicProxyGeneratorDiSettings.ProxyGeneratorProvider.GetProxyGenerator(sp).GenerateInstanceProxy(serviceType, new FuncInstanceProvider(instanceFactory)),
                 proxyLifetime);
 
             serviceCollection.Add(descriptor);

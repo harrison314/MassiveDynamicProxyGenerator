@@ -25,9 +25,7 @@ namespace MassiveDynamicProxyGenerator.Microsoft.DependencyInjection
                 throw new ArgumentNullException(nameof(interceptor));
             }
 
-            ProxygGenerator generator = new ProxygGenerator();
-
-            services.AddTransient<TService>(t => generator.GenerateProxy<TService>(interceptor));
+            services.AddTransient<TService>(sp => MassiveDynamicProxyGeneratorDiSettings.ProxyGeneratorProvider.GetProxyGenerator(sp).GenerateProxy<TService>(interceptor));
 
             return services;
         }
@@ -62,9 +60,8 @@ namespace MassiveDynamicProxyGenerator.Microsoft.DependencyInjection
                 throw new ArgumentException($"Parameter {nameof(serviceType)} of type '{serviceType.AssemblyQualifiedName}' is not public interface.");
             }
 
-            ProxygGenerator generator = new ProxygGenerator();
 
-            services.AddTransient(serviceType, t => generator.GenerateProxy(serviceType, interceptor));
+            services.AddTransient(serviceType, sp => MassiveDynamicProxyGeneratorDiSettings.ProxyGeneratorProvider.GetProxyGenerator(sp).GenerateProxy(serviceType, interceptor));
 
             return services;
         }
@@ -87,9 +84,8 @@ namespace MassiveDynamicProxyGenerator.Microsoft.DependencyInjection
                 throw new ArgumentNullException(nameof(interceptor));
             }
 
-            ProxygGenerator generator = new ProxygGenerator();
             IInterceptor realInteceptor = new InterceptorAdapter(invocation => interceptor(invocation));
-            services.AddTransient<TService>(t => generator.GenerateProxy<TService>(realInteceptor));
+            services.AddTransient<TService>(sp => MassiveDynamicProxyGeneratorDiSettings.ProxyGeneratorProvider.GetProxyGenerator(sp).GenerateProxy<TService>(realInteceptor));
 
             return services;
         }
@@ -124,9 +120,8 @@ namespace MassiveDynamicProxyGenerator.Microsoft.DependencyInjection
                 throw new ArgumentException($"Parameter {nameof(serviceType)} of type '{serviceType.AssemblyQualifiedName}' is not public interface.");
             }
 
-            ProxygGenerator generator = new ProxygGenerator();
             IInterceptor realInteceptor = new InterceptorAdapter(invocation => interceptor(invocation));
-            services.AddTransient(serviceType, t => generator.GenerateProxy(serviceType, realInteceptor));
+            services.AddTransient(serviceType, sp => MassiveDynamicProxyGeneratorDiSettings.ProxyGeneratorProvider.GetProxyGenerator(sp).GenerateProxy(serviceType, realInteceptor));
 
             return services;
         }
@@ -141,8 +136,7 @@ namespace MassiveDynamicProxyGenerator.Microsoft.DependencyInjection
         public static IServiceCollection AddProxy<TService>(this IServiceCollection services)
             where TService : class
         {
-            ProxygGenerator generator = new ProxygGenerator();
-            services.AddTransient<TService>(t => generator.GenerateProxy<TService>(NullInterceptor.Instance));
+            services.AddTransient<TService>(sp => MassiveDynamicProxyGeneratorDiSettings.ProxyGeneratorProvider.GetProxyGenerator(sp).GenerateProxy<TService>(NullInterceptor.Instance));
 
             return services;
         }
@@ -165,8 +159,8 @@ namespace MassiveDynamicProxyGenerator.Microsoft.DependencyInjection
             {
                 throw new ArgumentException($"Parameter {nameof(serviceType)} of type '{serviceType.AssemblyQualifiedName}' is not public interface.");
             }
-            ProxygGenerator generator = new ProxygGenerator();
-            services.AddTransient(serviceType, t => generator.GenerateProxy(serviceType, NullInterceptor.Instance));
+
+            services.AddTransient(serviceType, sp => MassiveDynamicProxyGeneratorDiSettings.ProxyGeneratorProvider.GetProxyGenerator(sp).GenerateProxy(serviceType, NullInterceptor.Instance));
 
             return services;
         }
@@ -207,8 +201,8 @@ namespace MassiveDynamicProxyGenerator.Microsoft.DependencyInjection
                 throw new ArgumentException($"Parameter {nameof(interceptorType)} of type '{serviceType.AssemblyQualifiedName}' is IInterceptor.");
             }
 
-            ProxygGenerator generator = new ProxygGenerator();
-            services.AddTransient(serviceType, t => generator.GenerateProxy(serviceType, (IInterceptor)ActivatorUtilities.CreateInstance(t, interceptorType, interceptorParams)));
+
+            services.AddTransient(serviceType, sp => MassiveDynamicProxyGeneratorDiSettings.ProxyGeneratorProvider.GetProxyGenerator(sp).GenerateProxy(serviceType, (IInterceptor)ActivatorUtilities.CreateInstance(sp, interceptorType, interceptorParams)));
 
             return services;
         }
@@ -259,8 +253,7 @@ namespace MassiveDynamicProxyGenerator.Microsoft.DependencyInjection
                 throw new ArgumentException($"Parameter {nameof(serviceType)} of type '{serviceType.AssemblyQualifiedName}' is not public interface.");
             }
 
-            ProxygGenerator generator = new ProxygGenerator();
-            services.AddTransient(serviceType, t => generator.GenerateProxy(serviceType, interceptorFactory.Invoke(t)));
+            services.AddTransient(serviceType, sp => MassiveDynamicProxyGeneratorDiSettings.ProxyGeneratorProvider.GetProxyGenerator(sp).GenerateProxy(serviceType, interceptorFactory.Invoke(sp)));
 
             return services;
         }
