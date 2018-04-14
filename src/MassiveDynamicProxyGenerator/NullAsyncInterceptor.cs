@@ -81,13 +81,13 @@ namespace MassiveDynamicProxyGenerator
                 {
                     Type[] genericTypes = invocation.ReturnType.GetTypeInfo().GenericTypeArguments;
 
-                    invocation.ReturnValue = this.CreatetaskWithDefaultvalue(genericTypes[0]);
+                    invocation.ReturnValue = this.CreatetaskWithDefaultValue(genericTypes[0]);
                     return;
                 }
             }
         }
 
-        private object CreatetaskWithDefaultvalue(Type type)
+        private object CreatetaskWithDefaultValue(Type type)
         {
             MethodInfo methodInfo = typeof(Task).GetTypeInfo().GetMethod(nameof(Task.FromResult), BindingFlags.Static | BindingFlags.Public);
             MethodInfo genericMethodInfo = methodInfo.MakeGenericMethod(type);

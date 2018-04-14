@@ -98,7 +98,7 @@ namespace MassiveDynamicProxyGenerator
             if (!this.isMembersImplements)
             {
                 this.ImplementFields(this.TypeBuilder, interfaceType);
-                this.ImplementsConstructor(this.TypeBuilder, interfaceType);
+                this.ImplementConstructor(this.TypeBuilder, interfaceType);
                 this.isMembersImplements = true;
             }
 
@@ -130,7 +130,7 @@ namespace MassiveDynamicProxyGenerator
         /// </summary>
         /// <param name="typeBuilder">The type builder.</param>
         /// <param name="interfaceType">Type of the interface.</param>
-        protected virtual void ImplementsConstructor(TypeBuilder typeBuilder, Type interfaceType)
+        protected virtual void ImplementConstructor(TypeBuilder typeBuilder, Type interfaceType)
         {
             ConstructorBuilder constructorBuilder = typeBuilder.DefineConstructor(
                 MethodAttributes.Public |
@@ -195,7 +195,7 @@ namespace MassiveDynamicProxyGenerator
         /// <param name="interfaceType">Type of the interface.</param>
         /// <param name="interfaceProperity">The interface properity.</param>
         /// <param name="context">The context.</param>
-        protected virtual void ImplementedProperity(TypeBuilder typeBuilder, Type interfaceType, PropertyInfo interfaceProperity, T context)
+        protected virtual void ImplementProperty(TypeBuilder typeBuilder, Type interfaceType, PropertyInfo interfaceProperity, T context)
         {
             PropertyBuilder properityBuilder = typeBuilder.DefineProperty(interfaceProperity.Name,
                 PropertyAttributes.HasDefault,
@@ -273,7 +273,7 @@ namespace MassiveDynamicProxyGenerator
 
             foreach (PropertyInfo properityInfo in interfaceType.GetTypeInfo().GetProperties(BindingFlags.Public | BindingFlags.Instance))
             {
-                this.ImplementedProperity(this.TypeBuilder, interfaceType, properityInfo, default(T));
+                this.ImplementProperty(this.TypeBuilder, interfaceType, properityInfo, default(T));
             }
         }
     }

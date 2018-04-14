@@ -42,7 +42,7 @@ namespace MassiveDynamicProxyGenerator.TypedInstanceProxy
         /// </summary>
         /// <param name="typeBuilder">The type builder.</param>
         /// <param name="interfaceType">Type of the interface.</param>
-        protected override void ImplementsConstructor(TypeBuilder typeBuilder, Type interfaceType)
+        protected override void ImplementConstructor(TypeBuilder typeBuilder, Type interfaceType)
         {
             ConstructorBuilder constructorBuilder = typeBuilder.DefineConstructor(
                 MethodAttributes.Public |
