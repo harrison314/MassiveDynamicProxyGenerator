@@ -16,15 +16,13 @@ Fertures:
 * Proxy instance generator, for control instancing real implementation (e.g. lazy loading).
 
 The following platforms are supported:
-* .Net 4.0, 4.5, 4.6, 4.6.1, NetStandard 2.0, .Net Core 1.* (NetStandard 1.6) and UWP applications (NetStandard 1.4)
+* .Net 4.0, 4.5, 4.6, 4.6.1, NetStandard 1.6, NetStandard 2.0 and UWP applications (NetStandard 1.4)
 
 ## Getting started
 
 In package manager console:
 
 `PM> Install-Package MassiveDynamicProxyGenerator`
-
-or add package to _project.json_ in .Net Core projects.
 
 ## A Quick Example
 
@@ -137,7 +135,7 @@ _Library for integration MassiveDynamicProxyGenerator to [SimpleInjector](http:/
 _MassiveDynamicProxyGenerator.SimpleInjector_ is library of extensions method for IoC container - Simple Injector.
 Adding methods for register mock implementations, proxys, instance proxies for resolving circular depndencies or lazy initialization and interpetion for decoration instances.
 
-Getting started
+## Getting started
 
 In package manager console:
 
@@ -250,6 +248,174 @@ internal class WeekInstanceProvider : IInstanceProvicer
 }
 
 container.RegisterInstanceProxy<IMessageService>(new WeekInstanceProvider());
+```
+
+# MassiveDynamicProxyGenerator.Microsoft.DependencyInjection
+
+[![NuGet Status](http://img.shields.io/nuget/v/MassiveDynamicProxyGenerator.Microsoft.DependencyInjection.svg?style=flat)](https://www.nuget.org/packages/MassiveDynamicProxyGenerator.Microsoft.DependencyInjection/)
+
+_Library for integration MassiveDynamicProxyGenerator to Asp.Net Core standard [IoC](https://www.nuget.org/packages/Microsoft.Extensions.DependencyInjection/)._
+
+_MassiveDynamicProxyGenerator.Microsoft.DependencyInjection_ is library of extensions method for _Microsoft.Extensions.DependencyInjection_ IoC container. 
+Adding methods for decorators, proxys, instance proxies for resolving circular depndencies or lazy initialization and interpetion for decoration instances.
+
+_Microsoft.Extensions.DependencyInjection_ is simple IoC container, so  _MassiveDynamicProxyGenerator.Microsoft.DependencyInjection_ does just a simple extenion for fetures from _MassiveDynamicProxyGenerator_ library, becose any fetures don't support open generics.
+
+## Getting started
+
+In package manager console:
+
+`PM> Install-Package MassiveDynamicProxyGenerator.Microsoft.DependencyInjection`
+
+Or download [MassiveDynamicProxyGenerator.Microsoft.DependencyInjection](https://www.nuget.org/packages/MassiveDynamicProxyGenerator.Microsoft.DependencyInjection/).
+
+### Add decorators
+This feture unrelated with _MassiveDynamicProxyGenerator_, it is universal adding interface generators.
+
+```cs
+using MassiveDynamicProxyGenerator.Microsoft.DependencyInjection;
+
+public class MessageServiceDecorator : IMessageService
+{
+    public MessageServiceDecorator(IMessageService messageService, ILogger<MessageServiceDecorator> logger)
+    {
+        // ...
+    }
+
+    // ...
+}
+
+public class Startup
+{
+    public IConfiguration Configuration { get; }
+
+    public Startup(IConfiguration configuration)
+    {
+        this.Configuration = configuration;
+    }
+
+    public void ConfigureServices(IServiceCollection services)
+    {
+        services.AddTransient<IMessageService, RealMessageService>();
+        services.AddDecorator<IMessageService, MessageServiceDecorator>();
+        services.AddMvc();
+    }
+
+    public void Configure(IApplicationBuilder app, IHostingEnvironment env)
+    {
+        //...
+    }
+}
+    
+```
+
+### Add Proxy
+```cs
+using MassiveDynamicProxyGenerator.Microsoft.DependencyInjection;
+
+public class Startup
+{
+    public IConfiguration Configuration { get; }
+
+    public Startup(IConfiguration configuration)
+    {
+        this.Configuration = configuration;
+    }
+
+    public void ConfigureServices(IServiceCollection services)
+    {
+        services.Addproxy<IMessageService>(new MyInterceptor());
+        // or
+        services.AddTransient<MyInterceptor>();
+        services.Addproxy<IMessageService, MyInterceptor>();
+        // or
+        services.Addproxy<IMessageService>(typeof(MyInterceptor));
+        // or
+        services.AddTransient<IMessageService>(invocation => {
+            //... any work with invocation
+        });
+        
+        services.AddMvc();
+    }
+
+    public void Configure(IApplicationBuilder app, IHostingEnvironment env)
+    {
+        //...
+    }
+}
+    
+```
+
+### Add Intercepred Decorator
+```cs
+using MassiveDynamicProxyGenerator.Microsoft.DependencyInjection;
+
+public class Startup
+{
+    public IConfiguration Configuration { get; }
+
+    public Startup(IConfiguration configuration)
+    {
+        this.Configuration = configuration;
+    }
+
+    public void ConfigureServices(IServiceCollection services)
+    {
+        services.AddTransient<IMessageService, RealMessageService>();
+
+        services.AddInterceptedDecorator<IMessageService>(new MessageCallableInterceptor());
+        // or
+        services.AddInterceptedDecorator<IMessageService, MessageCallableInterceptor>();
+        // or
+        services.AddInterceptedDecorator(type => type.Name.EndsWith("Service"), 
+            serviceProvider => new LoggingInterceptor(serviceProvider.GetRequiredService<ILogger>()));
+        // or
+        services.AddInterceptedDecorator<IMessageService>(new CallableInterceptorAdapter(invocation =>
+        {
+            // operations before real methd call
+            invocation.Process();
+            // operations after real methd call
+        }));
+
+        services.AddMvc();
+    }
+
+    public void Configure(IApplicationBuilder app, IHostingEnvironment env)
+    {
+        //...
+    }
+}
+    
+```
+
+### Add Instance Proxy
+```cs
+using MassiveDynamicProxyGenerator.Microsoft.DependencyInjection;
+
+public class Startup
+{
+    public IConfiguration Configuration { get; }
+
+    public Startup(IConfiguration configuration)
+    {
+        this.Configuration = configuration;
+    }
+
+    public void ConfigureServices(IServiceCollection services)
+    {
+        services.AddInstanceProxy<IMessageService>(new MessageServiceInstanceProvider());
+        //or 
+        services.AddInstanceProxy<IMessageService>(() => new RealMessageService());
+
+        services.AddMvc();
+    }
+
+    public void Configure(IApplicationBuilder app, IHostingEnvironment env)
+    {
+        //...
+    }
+}
+    
 ```
 
 ## Inscribtion
