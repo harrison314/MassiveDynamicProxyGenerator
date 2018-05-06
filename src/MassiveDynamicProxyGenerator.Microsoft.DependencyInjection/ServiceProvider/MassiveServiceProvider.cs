@@ -9,14 +9,17 @@ namespace MassiveDynamicProxyGenerator.Microsoft.DependencyInjection.ServiceProv
     {
         private readonly IServiceProvider aspServiceProvider;
         private readonly IProxygGenerator proxygGenerator;
+        private readonly IServiceWraperer serviceWraperer;
 
-        protected internal MassiveServiceProvider(IServiceProvider aspServiceProvider, IProxygGenerator proxygGenerator)
+        protected internal MassiveServiceProvider(IServiceProvider aspServiceProvider, IProxygGenerator proxygGenerator, IServiceWraperer serviceWraperer)
         {
             if (aspServiceProvider == null) throw new ArgumentNullException(nameof(aspServiceProvider));
             if (proxygGenerator == null) throw new ArgumentNullException(nameof(proxygGenerator));
+            if (serviceWraperer == null) throw new ArgumentNullException(nameof(serviceWraperer));
 
             this.aspServiceProvider = aspServiceProvider;
             this.proxygGenerator = proxygGenerator;
+            this.serviceWraperer = serviceWraperer;
         }
 
         public object GetService(Type serviceType)
@@ -42,22 +45,17 @@ namespace MassiveDynamicProxyGenerator.Microsoft.DependencyInjection.ServiceProv
                 }
                 else
                 {
-                    return new MassiveScopedServiceFactory(scopeFactory, this.proxygGenerator);
+                    return new MassiveScopedServiceFactory(scopeFactory, this.proxygGenerator, this.serviceWraperer);
                 }
             }
 
             object realInstance = this.GetService(serviceType);
-            return this.ProvideInstance(serviceType, realInstance, this.aspServiceProvider, this.proxygGenerator);
+            return this.serviceWraperer.ProvideInstance(serviceType, realInstance, this.aspServiceProvider, this.proxygGenerator);
         }
 
         public void Dispose()
         {
             this.Dispose(true);
-        }
-
-        protected virtual object ProvideInstance(Type serviceType, object realInstance, IServiceProvider aspServiceProvider, IProxygGenerator proxygGenerator)
-        {
-            return realInstance;
         }
 
         protected virtual void Dispose(bool disposing)
