@@ -7,13 +7,13 @@ using System.Threading.Tasks;
 namespace MassiveDynamicProxyGenerator
 {
     /// <summary>
-    /// Optimal settings for <see cref="ProxygGenerator"/>.
+    /// Optimal settings for <see cref="ProxyGenerator"/>.
     /// </summary>
-    /// <seealso cref="ProxygGenerator"/>
-    public class ProxygGeneratorSettings
+    /// <seealso cref="ProxyGenerator"/>
+    public class ProxyGeneratorSettings
     {
         /// <summary>
-        /// Gets or sets a value indicating whether <see cref="ProxygGenerator"/> use local or global cache.
+        /// Gets or sets a value indicating whether <see cref="ProxyGenerator"/> use local or global cache.
         /// </summary>
         /// <value>
         ///   <c>true</c> if use local cache; otherwise, <c>false</c> use global cache.
@@ -49,9 +49,9 @@ namespace MassiveDynamicProxyGenerator
         }
 
         /// <summary>
-        /// Initializes a new instance of the <see cref="ProxygGeneratorSettings"/> class.
+        /// Initializes a new instance of the <see cref="ProxyGeneratorSettings"/> class.
         /// </summary>
-        public ProxygGeneratorSettings()
+        public ProxyGeneratorSettings()
         {
             this.UseLocalCache = false;
             this.TypeNameCreator = null;

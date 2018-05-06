@@ -18,13 +18,13 @@ namespace MassiveDynamicProxyGenerator.Tests
         {
             Mock<IInstanceProvicer> instanceProviderMock = new Mock<IInstanceProvicer>();
 
-            ProxygGenerator genartor1 = new ProxygGenerator(cfg =>
+            ProxyGenerator genartor1 = new ProxyGenerator(cfg =>
             {
                 cfg.UseLocalCache = true;
                 
             });
 
-            ProxygGenerator genartor2 = new ProxygGenerator(cfg =>
+            ProxyGenerator genartor2 = new ProxyGenerator(cfg =>
             {
                 cfg.UseLocalCache = true;
             });
@@ -42,13 +42,13 @@ namespace MassiveDynamicProxyGenerator.Tests
         {
             Mock<IInterceptor> instanceProviderMock = new Mock<IInterceptor>();
 
-            ProxygGenerator genartor1 = new ProxygGenerator(cfg =>
+            ProxyGenerator genartor1 = new ProxyGenerator(cfg =>
             {
                 cfg.UseLocalCache = true;
 
             });
 
-            ProxygGenerator genartor2 = new ProxygGenerator(cfg =>
+            ProxyGenerator genartor2 = new ProxyGenerator(cfg =>
             {
                 cfg.UseLocalCache = true;
             });
@@ -67,12 +67,12 @@ namespace MassiveDynamicProxyGenerator.Tests
 
             Mock<IInterceptor> instanceProviderMock = new Mock<IInterceptor>();
 
-            ProxygGenerator genartor1 = new ProxygGenerator(cfg =>
+            ProxyGenerator genartor1 = new ProxyGenerator(cfg =>
             {
                 cfg.UseLocalCache = false;
             });
 
-            ProxygGenerator genartor2 = new ProxygGenerator(cfg =>
+            ProxyGenerator genartor2 = new ProxyGenerator(cfg =>
             {
                 cfg.UseLocalCache = false;
             });
@@ -90,13 +90,13 @@ namespace MassiveDynamicProxyGenerator.Tests
         {
             Mock<IInterceptor> instanceProviderMock = new Mock<IInterceptor>();
 
-            ProxygGenerator genartor1 = new ProxygGenerator(cfg =>
+            ProxyGenerator genartor1 = new ProxyGenerator(cfg =>
             {
                 cfg.UseLocalCache = false;
 
             });
 
-            ProxygGenerator genartor2 = new ProxygGenerator(cfg =>
+            ProxyGenerator genartor2 = new ProxyGenerator(cfg =>
             {
                 cfg.UseLocalCache = false;
             });

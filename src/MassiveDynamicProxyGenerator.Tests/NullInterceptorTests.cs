@@ -15,7 +15,7 @@ namespace MassiveDynamicProxyGenerator.Tests
         [TestMethod]
         public void NUllAsyncInterceptor_NoTask_ReturnDefault()
         {
-            ProxygGenerator generator = new ProxygGenerator();
+            ProxyGenerator generator = new ProxyGenerator();
             IReturnTypes instance = generator.GenerateProxy<IReturnTypes>(new NullInterceptor());
 
             instance.ShouldNotBeNull();

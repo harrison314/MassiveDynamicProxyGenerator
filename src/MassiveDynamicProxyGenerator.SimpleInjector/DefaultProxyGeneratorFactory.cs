@@ -12,7 +12,7 @@ namespace MassiveDynamicProxyGenerator.SimpleInjector
 
         public IProxyGenerator GetInstance()
         {
-            return new ProxygGenerator();
+            return new ProxyGenerator();
         }
     }
 }

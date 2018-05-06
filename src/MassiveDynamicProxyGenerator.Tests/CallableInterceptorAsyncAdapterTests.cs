@@ -38,7 +38,7 @@ namespace MassiveDynamicProxyGenerator.Tests
 
             ICallableInterceptor interceptor = new CallableInterceptorAsyncImpl(methodWraper.Object);
 
-            ProxygGenerator generator = new ProxygGenerator();
+            ProxyGenerator generator = new ProxyGenerator();
 
             IAsyncInterface instance = generator.GenerateDecorator<IAsyncInterface>(interceptor, asyncInterfaceMock.Object);
 
@@ -72,7 +72,7 @@ namespace MassiveDynamicProxyGenerator.Tests
 
             ICallableInterceptor interceptor = new CallableInterceptorAsyncImpl(methodWraper.Object);
 
-            ProxygGenerator generator = new ProxygGenerator();
+            ProxyGenerator generator = new ProxyGenerator();
 
             IAsyncInterface instance = generator.GenerateDecorator<IAsyncInterface>(interceptor, asyncInterfaceMock.Object);
 
@@ -101,7 +101,7 @@ namespace MassiveDynamicProxyGenerator.Tests
 
             ICallableInterceptor interceptor = new CallableInterceptorAsyncImpl(methodWraper.Object);
 
-            ProxygGenerator generator = new ProxygGenerator();
+            ProxyGenerator generator = new ProxyGenerator();
 
             IAsyncInterface instance = generator.GenerateDecorator<IAsyncInterface>(interceptor, asyncInterfaceMock.Object);
 
@@ -138,7 +138,7 @@ namespace MassiveDynamicProxyGenerator.Tests
 
             ICallableInterceptor interceptor = new CallableInterceptorAsyncImpl(methodWraper.Object);
 
-            ProxygGenerator generator = new ProxygGenerator();
+            ProxyGenerator generator = new ProxyGenerator();
 
             IAsyncInterface instance = generator.GenerateDecorator<IAsyncInterface>(interceptor, asyncInterfaceMock.Object);
 
@@ -173,7 +173,7 @@ namespace MassiveDynamicProxyGenerator.Tests
 
             ICallableInterceptor interceptor = new CallableInterceptorAsyncImpl(methodWraper.Object);
 
-            ProxygGenerator generator = new ProxygGenerator();
+            ProxyGenerator generator = new ProxyGenerator();
 
             IAsyncInterface instance = generator.GenerateDecorator<IAsyncInterface>(interceptor, asyncInterfaceMock.Object);
 
@@ -204,7 +204,7 @@ namespace MassiveDynamicProxyGenerator.Tests
 
             ICallableInterceptor interceptor = new CallableInterceptorAsyncImpl(methodWraper.Object);
 
-            ProxygGenerator generator = new ProxygGenerator();
+            ProxyGenerator generator = new ProxyGenerator();
 
             IAsyncInterface instance = generator.GenerateDecorator<IAsyncInterface>(interceptor, asyncInterfaceMock.Object);
 
@@ -242,7 +242,7 @@ namespace MassiveDynamicProxyGenerator.Tests
 
             ICallableInterceptor interceptor = new CallableInterceptorAsyncImpl(methodWraper.Object);
 
-            ProxygGenerator generator = new ProxygGenerator();
+            ProxyGenerator generator = new ProxyGenerator();
 
             IAsyncInterface instance = generator.GenerateDecorator<IAsyncInterface>(interceptor, asyncInterfaceMock.Object);
 
@@ -278,7 +278,7 @@ namespace MassiveDynamicProxyGenerator.Tests
 
             ICallableInterceptor interceptor = new CallableInterceptorAsyncImpl(methodWraper.Object);
 
-            ProxygGenerator generator = new ProxygGenerator();
+            ProxyGenerator generator = new ProxyGenerator();
 
             IAsyncInterface instance = generator.GenerateDecorator<IAsyncInterface>(interceptor, asyncInterfaceMock.Object);
 
@@ -310,7 +310,7 @@ namespace MassiveDynamicProxyGenerator.Tests
 
             ICallableInterceptor interceptor = new CallableInterceptorAsyncImpl(methodWraper.Object);
 
-            ProxygGenerator generator = new ProxygGenerator();
+            ProxyGenerator generator = new ProxyGenerator();
 
             IAsyncInterface instance = generator.GenerateDecorator<IAsyncInterface>(interceptor, asyncInterfaceMock.Object);
 
@@ -343,7 +343,7 @@ namespace MassiveDynamicProxyGenerator.Tests
 
             ICallableInterceptor interceptor = new CallableInterceptorAsyncImpl(methodWraper.Object);
 
-            ProxygGenerator generator = new ProxygGenerator();
+            ProxyGenerator generator = new ProxyGenerator();
 
             IAsyncInterface instance = generator.GenerateDecorator<IAsyncInterface>(interceptor, asyncInterfaceMock.Object);
 

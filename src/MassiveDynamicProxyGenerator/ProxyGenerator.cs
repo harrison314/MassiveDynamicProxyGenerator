@@ -16,7 +16,7 @@ namespace MassiveDynamicProxyGenerator
     /// Dynamic proxy generator.
     /// </summary>
     /// <seealso cref="MassiveDynamicProxyGenerator.IProxyGenerator" />
-    public class ProxygGenerator : IProxyGenerator
+    public class ProxyGenerator : IProxyGenerator
     {
         private static int assemblyCount = 1;
         private readonly string assemblyName;
@@ -26,9 +26,9 @@ namespace MassiveDynamicProxyGenerator
         private ModuleBuilder moduleBuilder;
 
         /// <summary>
-        /// Initializes a new instance of the <see cref="ProxygGenerator"/> class.
+        /// Initializes a new instance of the <see cref="ProxyGenerator"/> class.
         /// </summary>
-        public ProxygGenerator()
+        public ProxyGenerator()
         {
             this.assemblyBuilder = null;
             this.moduleBuilder = null;
@@ -39,12 +39,12 @@ namespace MassiveDynamicProxyGenerator
         }
 
         /// <summary>
-        /// Initializes a new instance of the <see cref="ProxygGenerator"/> class.
+        /// Initializes a new instance of the <see cref="ProxyGenerator"/> class.
         /// </summary>
         /// <param name="settings">The settings.</param>
         /// <exception cref="ArgumentNullException">settings</exception>
-        /// <seealso cref="ProxygGeneratorSettings"/>
-        public ProxygGenerator(ProxygGeneratorSettings settings)
+        /// <seealso cref="ProxyGeneratorSettings"/>
+        public ProxyGenerator(ProxyGeneratorSettings settings)
         {
             if (settings == null)
             {
@@ -77,12 +77,12 @@ namespace MassiveDynamicProxyGenerator
         }
 
         /// <summary>
-        /// Initializes a new instance of the <see cref="ProxygGenerator"/> class.
+        /// Initializes a new instance of the <see cref="ProxyGenerator"/> class.
         /// </summary>
         /// <param name="configure">The configure action.</param>
         /// <exception cref="ArgumentNullException">configure</exception>
-        public ProxygGenerator(Action<ProxygGeneratorSettings> configure)
-            : this(SettingsUtils.Apply(configure, new ProxygGeneratorSettings()))
+        public ProxyGenerator(Action<ProxyGeneratorSettings> configure)
+            : this(SettingsUtils.Apply(configure, new ProxyGeneratorSettings()))
         {
             if (configure == null)
             {

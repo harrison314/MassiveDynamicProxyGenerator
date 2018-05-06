@@ -26,7 +26,7 @@ namespace MassiveDynamicProxyGenerator.SimpleInjector.Tests
         [TestMethod]
         public void ProxyGeneratorFactory_OverrideFactory()
         {
-            ProxygGenerator generator = new ProxygGenerator();
+            ProxyGenerator generator = new ProxyGenerator();
 
             ProxyGeneratorFactory.Factory.GetInstance().ShouldNotBeSameAs(generator);
 

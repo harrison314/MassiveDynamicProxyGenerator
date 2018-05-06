@@ -23,7 +23,7 @@ namespace ProxyGeneratrorSamples.Net40
         {
             Console.WriteLine(".... GenerateDecorator for logging ...\n");
 
-            ProxygGenerator generator = new ProxygGenerator();
+            ProxyGenerator generator = new ProxyGenerator();
 
             Calculator realInstance = new Calculator();
             ICallableInterceptor interceptor = new CallableInterceptorAdapter((invocation) =>
@@ -91,7 +91,7 @@ namespace ProxyGeneratrorSamples.Net40
                 invocation.ReturnValue = response["result"].ToObject(invocation.ReturnType);
             });
 
-            ProxygGenerator generator = new ProxygGenerator();
+            ProxyGenerator generator = new ProxyGenerator();
 
             ICalculator calcilator = generator.GenerateProxy<ICalculator>(jsonRpcInterceptor);
 
@@ -117,7 +117,7 @@ namespace ProxyGeneratrorSamples.Net40
                     return new Calculator();
                 }, false);
 
-            ProxygGenerator generator = new ProxygGenerator();
+            ProxyGenerator generator = new ProxyGenerator();
             ICalculator  calculator = generator.GenerateInstanceProxy<ICalculator>(instanceProvider);
 
             Console.WriteLine("Before call Add with 2013 and 6");

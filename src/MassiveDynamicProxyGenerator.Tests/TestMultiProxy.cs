@@ -25,7 +25,7 @@ namespace MassiveDynamicProxyGenerator.Tests
             interceptor.Setup(t => t.Intercept(It.Is<IInvocation>(q => q.Arguments.Length == 0 && q.MethodName == "Dispose")))
                 .Verifiable();
 
-            ProxygGenerator generator = new ProxygGenerator();
+            ProxyGenerator generator = new ProxyGenerator();
 
             INonReturn instance = generator.GenerateProxy<INonReturn>(interceptor.Object, typeof(IDisposable), typeof(IReturnTypes));
             instance.ShouldNotBeNull();
@@ -49,7 +49,7 @@ namespace MassiveDynamicProxyGenerator.Tests
             interceptor.Setup(t => t.Intercept(It.Is<IInvocation>(q => q.Arguments.Length == 0 && q.MethodName == "Dispose")))
                 .Verifiable();
 
-            ProxygGenerator generator = new ProxygGenerator();
+            ProxyGenerator generator = new ProxyGenerator();
 
             object instance = generator.GenerateProxy(interceptor.Object, typeof(INonReturn), typeof(IDisposable), typeof(IReturnTypes));
             instance.ShouldNotBeNull();
@@ -73,7 +73,7 @@ namespace MassiveDynamicProxyGenerator.Tests
             interceptor.Setup(t => t.Intercept(It.Is<IInvocation>(q => q.Arguments.Length == 0 && q.MethodName == "Dispose")))
                 .Verifiable();
 
-            ProxygGenerator generator = new ProxygGenerator();
+            ProxyGenerator generator = new ProxyGenerator();
 
             ICompositeInterface instance = generator.GenerateProxy<ICompositeInterface>(interceptor.Object, typeof(IDisposable), typeof(IReturnTypes));
             instance.ShouldNotBeNull();

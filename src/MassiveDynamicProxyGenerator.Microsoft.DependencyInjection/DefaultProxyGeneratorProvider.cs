@@ -10,7 +10,7 @@ namespace MassiveDynamicProxyGenerator.Microsoft.DependencyInjection
 
         public DefaultProxyGeneratorProvider()
         {
-            this.proxygGenerator = new ProxygGenerator();
+            this.proxygGenerator = new ProxyGenerator();
         }
 
         public IProxyGenerator GetProxyGenerator(IServiceProvider serviceProvider)

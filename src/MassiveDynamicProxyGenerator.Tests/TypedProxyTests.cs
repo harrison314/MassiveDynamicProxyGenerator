@@ -20,7 +20,7 @@ namespace MassiveDynamicProxyGenerator.Tests
             interceptor.Setup(t => t.Intercept(It.Is<IInvocation>(q => q.Arguments.Length == 0 && q.MethodName == "EmptyMethod")))
                 .Verifiable();
 
-            ProxygGenerator generator = new ProxygGenerator();
+            ProxyGenerator generator = new ProxyGenerator();
 
             INonReturn instance = generator.GenerateProxy<INonReturn>(interceptor.Object);
             instance.ShouldNotBeNull();
@@ -39,7 +39,7 @@ namespace MassiveDynamicProxyGenerator.Tests
             && q.MethodName == "OneArgument")))
                 .Verifiable();
 
-            ProxygGenerator generator = new ProxygGenerator();
+            ProxyGenerator generator = new ProxyGenerator();
 
             INonReturn instance = generator.GenerateProxy<INonReturn>(interceptor.Object);
             instance.ShouldNotBeNull();
@@ -59,7 +59,7 @@ namespace MassiveDynamicProxyGenerator.Tests
             && q.MethodName == "OneArgument")))
                 .Verifiable();
 
-            ProxygGenerator generator = new ProxygGenerator();
+            ProxyGenerator generator = new ProxyGenerator();
 
             INonReturn instance = generator.GenerateProxy<INonReturn>(interceptor.Object);
             instance.ShouldNotBeNull();
@@ -79,7 +79,7 @@ namespace MassiveDynamicProxyGenerator.Tests
                     invocation.ReturnValue = 13;
                 })
                 .Verifiable();
-            ProxygGenerator generator = new ProxygGenerator();
+            ProxyGenerator generator = new ProxyGenerator();
 
             IReturnTypes instance = generator.GenerateProxy<IReturnTypes>(interceptor.Object);
             instance.ShouldNotBeNull();
@@ -99,7 +99,7 @@ namespace MassiveDynamicProxyGenerator.Tests
                 })
                 .Verifiable();
 
-            ProxygGenerator generator = new ProxygGenerator();
+            ProxyGenerator generator = new ProxyGenerator();
 
             IReturnTypes instance = generator.GenerateProxy<IReturnTypes>(interceptor.Object);
             instance.ShouldNotBeNull();
@@ -122,7 +122,7 @@ namespace MassiveDynamicProxyGenerator.Tests
                 })
                 .Verifiable();
 
-            ProxygGenerator generator = new ProxygGenerator();
+            ProxyGenerator generator = new ProxyGenerator();
 
             IReturnTypes instance = generator.GenerateProxy<IReturnTypes>(interceptor.Object);
             instance.ShouldNotBeNull();
@@ -138,7 +138,7 @@ namespace MassiveDynamicProxyGenerator.Tests
             interceptor.Setup(t => t.Intercept(It.Is<IInvocation>(p => p.MethodName == "GetVoid")))
                 .Verifiable();
 
-            ProxygGenerator generator = new ProxygGenerator();
+            ProxyGenerator generator = new ProxyGenerator();
 
             IReturnTypes instance = generator.GenerateProxy<IReturnTypes>(interceptor.Object);
             instance.ShouldNotBeNull();
@@ -151,7 +151,7 @@ namespace MassiveDynamicProxyGenerator.Tests
         {
             Mock<IInterceptor> interceptor = new Mock<IInterceptor>(MockBehavior.Strict);
 
-            ProxygGenerator generator = new ProxygGenerator();
+            ProxyGenerator generator = new ProxyGenerator();
 
             IGrapth instance = generator.GenerateProxy<IGrapth>(interceptor.Object);
             instance.ShouldNotBeNull();
@@ -169,7 +169,7 @@ namespace MassiveDynamicProxyGenerator.Tests
             interceptor.Setup(t => t.Intercept(It.IsAny<IInvocation>()))
                 .Verifiable();
 
-            ProxygGenerator generator = new ProxygGenerator();
+            ProxyGenerator generator = new ProxyGenerator();
 
             IGrapth instance = generator.GenerateProxy<IGrapth>(interceptor.Object, true);
             instance.ShouldNotBeNull();
@@ -185,7 +185,7 @@ namespace MassiveDynamicProxyGenerator.Tests
             interceptor.Setup(t => t.Intercept(It.IsAny<IInvocation>()))
                 .Verifiable();
 
-            ProxygGenerator generator = new ProxygGenerator();
+            ProxyGenerator generator = new ProxyGenerator();
 
             IGenericInterface<long> instance = generator.GenerateProxy<IGenericInterface<long>>(interceptor.Object, true);
             instance.ShouldNotBeNull();

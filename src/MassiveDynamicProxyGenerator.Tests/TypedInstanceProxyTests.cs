@@ -25,7 +25,7 @@ namespace MassiveDynamicProxyGenerator.Tests
                 .Returns(realMock.Object)
                 .Verifiable();
 
-            ProxygGenerator generator = new ProxygGenerator();
+            ProxyGenerator generator = new ProxyGenerator();
 
             IReturnTypes instance = generator.GenerateInstanceProxy<IReturnTypes>(instaceprovoder.Object);
             instance.GetLenght("789").ShouldBe(789);
@@ -47,7 +47,7 @@ namespace MassiveDynamicProxyGenerator.Tests
                 .Returns(realMock.Object)
                 .Verifiable();
 
-            ProxygGenerator generator = new ProxygGenerator();
+            ProxyGenerator generator = new ProxyGenerator();
 
             IReturnTypes instance = (IReturnTypes)generator.GenerateInstanceProxy(typeof(IReturnTypes), instaceprovoder.Object);
             instance.GetLenght("789").ShouldBe(789);
@@ -75,7 +75,7 @@ namespace MassiveDynamicProxyGenerator.Tests
                 .Returns(realMock.Object)
                 .Verifiable();
 
-            ProxygGenerator generator = new ProxygGenerator();
+            ProxyGenerator generator = new ProxyGenerator();
 
             IReturnTypes instance = generator.GenerateInstanceProxy<IReturnTypes>(instaceprovoder.Object);
             instance.GetStruct().UsLong.ShouldBe(458L);
@@ -102,7 +102,7 @@ namespace MassiveDynamicProxyGenerator.Tests
                 .Returns(realMock.Object)
                 .Verifiable();
 
-            ProxygGenerator generator = new ProxygGenerator();
+            ProxyGenerator generator = new ProxyGenerator();
 
             IReturnTypes instance = (IReturnTypes)generator.GenerateInstanceProxy(typeof(IReturnTypes), instaceprovoder.Object);
             instance.GetStruct().UsLong.ShouldBe(458L);
@@ -123,7 +123,7 @@ namespace MassiveDynamicProxyGenerator.Tests
                 .Returns(realMock.Object)
                 .Verifiable();
 
-            ProxygGenerator generator = new ProxygGenerator();
+            ProxyGenerator generator = new ProxyGenerator();
 
             IReturnTypes instance = generator.GenerateInstanceProxy<IReturnTypes>(instaceprovoder.Object);
             instance.CreateSb("aaa").ShouldBeSameAs(sb);
@@ -144,7 +144,7 @@ namespace MassiveDynamicProxyGenerator.Tests
                 .Returns(realMock.Object)
                 .Verifiable();
 
-            ProxygGenerator generator = new ProxygGenerator();
+            ProxyGenerator generator = new ProxyGenerator();
 
             IReturnTypes instance = (IReturnTypes)generator.GenerateInstanceProxy(typeof(IReturnTypes), instaceprovoder.Object);
             instance.CreateSb("aaa").ShouldBeSameAs(sb);
@@ -167,7 +167,7 @@ namespace MassiveDynamicProxyGenerator.Tests
                 .Returns(realMock.Object)
                 .Verifiable();
 
-            ProxygGenerator generator = new ProxygGenerator();
+            ProxyGenerator generator = new ProxyGenerator();
 
             INonReturn instance = generator.GenerateInstanceProxy<INonReturn>(instaceProvoder.Object);
             instance.MoreArguments("a", ex, sb, transform);
@@ -195,7 +195,7 @@ namespace MassiveDynamicProxyGenerator.Tests
                 .Returns(realMock.Object)
                 .Verifiable();
 
-            ProxygGenerator generator = new ProxygGenerator();
+            ProxyGenerator generator = new ProxyGenerator();
 
             IGenericInterface<StringBuilder> instance = generator.GenerateInstanceProxy<IGenericInterface<StringBuilder>>(instaceProvoder.Object);
             instance.ShouldNotBeNull();
@@ -227,7 +227,7 @@ namespace MassiveDynamicProxyGenerator.Tests
                 .Returns(realMock.Object)
                 .Verifiable();
 
-            ProxygGenerator generator = new ProxygGenerator();
+            ProxyGenerator generator = new ProxyGenerator();
 
             IGenericInterface<StringBuilder> instance = (IGenericInterface<StringBuilder>)generator.GenerateInstanceProxy(typeof(IGenericInterface<StringBuilder>), instaceProvoder.Object);
             instance.ShouldNotBeNull();

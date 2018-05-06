@@ -16,7 +16,7 @@ namespace MassiveDynamicProxyGenerator.Tests
         [TestMethod]
         public void NUllAsyncInterceptor_NoTask_ReturnDefault()
         {
-            ProxygGenerator generator = new ProxygGenerator();
+            ProxyGenerator generator = new ProxyGenerator();
             IReturnTypes instance = generator.GenerateProxy<IReturnTypes>(new NullAsyncInterceptor());
 
             instance.ShouldNotBeNull();
@@ -29,7 +29,7 @@ namespace MassiveDynamicProxyGenerator.Tests
         [TestMethod]
         public void NUllAsyncInterceptor_NoTask_Void()
         {
-            ProxygGenerator generator = new ProxygGenerator();
+            ProxyGenerator generator = new ProxyGenerator();
             IReturnTypes instance = generator.GenerateProxy<IReturnTypes>(new NullAsyncInterceptor());
 
             instance.ShouldNotBeNull();
@@ -42,7 +42,7 @@ namespace MassiveDynamicProxyGenerator.Tests
         {
             Mock<IGrapth> graphMock = new Mock<IGrapth>(MockBehavior.Strict);
 
-            ProxygGenerator generator = new ProxygGenerator();
+            ProxyGenerator generator = new ProxyGenerator();
             IAsyncInterface instance = generator.GenerateProxy<IAsyncInterface>(new NullAsyncInterceptor());
 
             instance.ShouldNotBeNull();
@@ -58,7 +58,7 @@ namespace MassiveDynamicProxyGenerator.Tests
         {
             Mock<IGrapth> graphMock = new Mock<IGrapth>(MockBehavior.Strict);
 
-            ProxygGenerator generator = new ProxygGenerator();
+            ProxyGenerator generator = new ProxyGenerator();
             IAsyncInterface instance = generator.GenerateProxy<IAsyncInterface>(new NullAsyncInterceptor());
 
             instance.ShouldNotBeNull();

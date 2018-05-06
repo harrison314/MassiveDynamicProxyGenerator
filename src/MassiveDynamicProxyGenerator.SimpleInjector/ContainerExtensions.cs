@@ -9,7 +9,7 @@ namespace MassiveDynamicProxyGenerator.SimpleInjector
     /// Extensions for SimpleInjector <see cref="Container"/> using MassiveDynamicProxyGenerator.
     /// </summary>
     /// <seealso cref="Container"/>
-    /// <seealso cref="ProxygGenerator"/>
+    /// <seealso cref="ProxyGenerator"/>
     public static partial class ContainerExtensions
     {
     }

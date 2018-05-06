@@ -31,7 +31,7 @@ namespace WcfForHipsters.Client.WcfForHipsters
 
             this.Endpoint = endpoint;
 
-            ProxygGenerator proxygenerator = new ProxygGenerator();
+            ProxyGenerator proxygenerator = new ProxyGenerator();
             this.Channal = proxygenerator.GenerateProxy<T>(new JsonRpcInterceptor(endpoint));
         }
 

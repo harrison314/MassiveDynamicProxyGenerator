@@ -9,7 +9,7 @@ namespace MassiveDynamicProxyGenerator.SimpleInjector
     /// for Simple Injector extensions.
     /// </summary>
     /// <seealso cref="IProxyGenerator"/>
-    /// <seealso cref="ProxygGenerator"/>
+    /// <seealso cref="ProxyGenerator"/>
     /// <seealso cref="ContainerExtensions"/>
     /// <seealso cref="MassiveDynamicProxyGenerator.SimpleInjector.Dangerous.DangerousContainerExtensions"/>
     /// <seealso cref="ProxyGeneratorFactory"/>
