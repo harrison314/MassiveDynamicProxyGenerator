@@ -41,7 +41,7 @@ namespace MassiveDynamicProxyGenerator.SimpleInjector
                 throw new ArgumentNullException(nameof(predicate));
             }
 
-            IProxygGenerator generator = ProxyGeneratorFactory.Factory.GetInstance();
+            IProxyGenerator generator = ProxyGeneratorFactory.Factory.GetInstance();
             InterceptionBuilder builder = new TypeInterceptionBuilder(predicate, generator, interceptorType);
             container.ExpressionBuilt += builder.ReguildExpresion;
         }
@@ -69,7 +69,7 @@ namespace MassiveDynamicProxyGenerator.SimpleInjector
                 throw new ArgumentNullException(nameof(predicate));
             }
 
-            IProxygGenerator generator = ProxyGeneratorFactory.Factory.GetInstance();
+            IProxyGenerator generator = ProxyGeneratorFactory.Factory.GetInstance();
             InterceptionBuilder builder = new InstanceInterceptionBuilder(predicate, generator, interceptor);
             container.ExpressionBuilt += builder.ReguildExpresion;
         }
@@ -97,7 +97,7 @@ namespace MassiveDynamicProxyGenerator.SimpleInjector
                 throw new ArgumentNullException(nameof(predicate));
             }
 
-            IProxygGenerator generator = ProxyGeneratorFactory.Factory.GetInstance();
+            IProxyGenerator generator = ProxyGeneratorFactory.Factory.GetInstance();
             InterceptionBuilder builder = new FuncInterceptionBuilder(generator, predicate, interceptorFactory);
             container.ExpressionBuilt += builder.ReguildExpresion;
         }

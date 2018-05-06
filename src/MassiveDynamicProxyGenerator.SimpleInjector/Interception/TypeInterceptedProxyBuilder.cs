@@ -11,7 +11,7 @@ namespace MassiveDynamicProxyGenerator.SimpleInjector.Interception
         private readonly Type serviseType;
         private readonly Type interceptorType;
 
-        public TypeInterceptedProxyBuilder(IProxygGenerator generator, Type serviseType, Type interceptorType)
+        public TypeInterceptedProxyBuilder(IProxyGenerator generator, Type serviseType, Type interceptorType)
             : base(generator)
         {
             this.serviseType = serviseType;

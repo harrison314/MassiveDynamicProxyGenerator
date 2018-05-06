@@ -5,16 +5,16 @@ using System.Text;
 namespace MassiveDynamicProxyGenerator.Microsoft.DependencyInjection
 {
     /// <summary>
-    /// Interface reprsentes provider for <see cref="IProxygGenerator"/>.
+    /// Interface reprsentes provider for <see cref="IProxyGenerator"/>.
     /// </summary>
-    /// <seealso cref="IProxygGenerator"/>
+    /// <seealso cref="IProxyGenerator"/>
     public interface IProxyGeneratorProvider
     {
         /// <summary>
-        /// Get or create <see cref="IProxygGenerator"/> instance.
+        /// Get or create <see cref="IProxyGenerator"/> instance.
         /// </summary>
         /// <param name="serviceProvider">The service provider from IoC.</param>
         /// <returns>Instance of prxy generator.</returns>
-        IProxygGenerator GetProxyGenerator(IServiceProvider serviceProvider);
+        IProxyGenerator GetProxyGenerator(IServiceProvider serviceProvider);
     }
 }

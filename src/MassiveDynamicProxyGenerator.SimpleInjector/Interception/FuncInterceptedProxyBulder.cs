@@ -14,7 +14,7 @@ namespace MassiveDynamicProxyGenerator.SimpleInjector.Interception
         private readonly Type serviceType;
         private readonly Func<IInterceptor> interceptorFactory;
 
-        public FuncInterceptedProxyBulder(IProxygGenerator generator, Type serviceType, Func<IInterceptor> interceptorFactory)
+        public FuncInterceptedProxyBulder(IProxyGenerator generator, Type serviceType, Func<IInterceptor> interceptorFactory)
             : base(generator)
         {
             this.serviceType = serviceType;

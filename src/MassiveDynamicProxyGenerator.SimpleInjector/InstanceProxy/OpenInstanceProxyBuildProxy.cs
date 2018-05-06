@@ -10,14 +10,14 @@ namespace MassiveDynamicProxyGenerator.SimpleInjector.InstanceProxy
 {
     internal class OpenInstanceProxyBuildProxy
     {
-        private static readonly MethodInfo InstancePorxyMethod = typeof(IProxygGenerator).GetTypeInfo()
-            .GetMethod(nameof(IProxygGenerator.GenerateInstanceProxy), new Type[] { typeof(Type), typeof(IInstanceProvicer), });
+        private static readonly MethodInfo InstancePorxyMethod = typeof(IProxyGenerator).GetTypeInfo()
+            .GetMethod(nameof(IProxyGenerator.GenerateInstanceProxy), new Type[] { typeof(Type), typeof(IInstanceProvicer), });
 
-        private readonly IProxygGenerator generator;
+        private readonly IProxyGenerator generator;
         private readonly Type serviseType;
         private readonly Type instanceProducerType;
 
-        public OpenInstanceProxyBuildProxy(IProxygGenerator generator, Type serviseType, Type instanceProducerType)
+        public OpenInstanceProxyBuildProxy(IProxyGenerator generator, Type serviseType, Type instanceProducerType)
         {
             this.generator = generator;
             this.serviseType = serviseType;
@@ -32,7 +32,7 @@ namespace MassiveDynamicProxyGenerator.SimpleInjector.InstanceProxy
                 InstanceProducer producer = ((Container)sender).GetRegistration(producerType);
 
                 Expression typeOfInstance = Expression.Constant(unregistredTypeArgs.UnregisteredServiceType, typeof(Type));
-                Expression generator = Expression.Constant(this.generator, typeof(IProxygGenerator));
+                Expression generator = Expression.Constant(this.generator, typeof(IProxyGenerator));
                 Expression instanceProvider = Expression.Convert(producer.BuildExpression(), typeof(IInstanceProvicer));
                 Expression crateInstance = Expression.Call(generator, InstancePorxyMethod, typeOfInstance, instanceProvider);
 

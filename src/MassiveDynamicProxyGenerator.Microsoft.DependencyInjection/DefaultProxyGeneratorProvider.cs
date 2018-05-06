@@ -6,14 +6,14 @@ namespace MassiveDynamicProxyGenerator.Microsoft.DependencyInjection
 {
     internal class DefaultProxyGeneratorProvider : IProxyGeneratorProvider
     {
-        private readonly IProxygGenerator proxygGenerator;
+        private readonly IProxyGenerator proxygGenerator;
 
         public DefaultProxyGeneratorProvider()
         {
             this.proxygGenerator = new ProxygGenerator();
         }
 
-        public IProxygGenerator GetProxyGenerator(IServiceProvider serviceProvider)
+        public IProxyGenerator GetProxyGenerator(IServiceProvider serviceProvider)
         {
             return this.proxygGenerator;
         }

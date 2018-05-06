@@ -5,10 +5,10 @@ using System.Text;
 namespace MassiveDynamicProxyGenerator.SimpleInjector
 {
     /// <summary>
-    /// Interface representes factory for crate <see cref="IProxygGenerator"/>
+    /// Interface representes factory for crate <see cref="IProxyGenerator"/>
     /// for Simple Injector extensions.
     /// </summary>
-    /// <seealso cref="IProxygGenerator"/>
+    /// <seealso cref="IProxyGenerator"/>
     /// <seealso cref="ProxygGenerator"/>
     /// <seealso cref="ContainerExtensions"/>
     /// <seealso cref="MassiveDynamicProxyGenerator.SimpleInjector.Dangerous.DangerousContainerExtensions"/>
@@ -16,9 +16,9 @@ namespace MassiveDynamicProxyGenerator.SimpleInjector
     public interface IProxyGeneratorFactory
     {
         /// <summary>
-        /// Gets the instance of <see cref="IProxygGenerator"/>.
+        /// Gets the instance of <see cref="IProxyGenerator"/>.
         /// </summary>
-        /// <returns>Instance <see cref="IProxygGenerator"/>.</returns>
-        IProxygGenerator GetInstance();
+        /// <returns>Instance <see cref="IProxyGenerator"/>.</returns>
+        IProxyGenerator GetInstance();
     }
 }

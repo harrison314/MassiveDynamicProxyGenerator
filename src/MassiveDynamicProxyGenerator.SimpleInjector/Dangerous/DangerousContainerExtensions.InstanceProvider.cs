@@ -72,7 +72,7 @@ namespace MassiveDynamicProxyGenerator.SimpleInjector.Dangerous
                 throw new ArgumentException($"Arguments {nameof(serviceType)} and {nameof(instanceProviderType)} must by both concerete types or open generic types. Argument {nameof(instanceProviderType)} is open generic type and {nameof(serviceType)} is not open generic type.");
             }
 
-            IProxygGenerator generator = ProxyGeneratorFactory.Factory.GetInstance();
+            IProxyGenerator generator = ProxyGeneratorFactory.Factory.GetInstance();
 
             if (isServiceTypeOpenGeneric)
             {
@@ -122,7 +122,7 @@ namespace MassiveDynamicProxyGenerator.SimpleInjector.Dangerous
                 throw new ArgumentException($"Generic parameter {nameof(TService)} is not public interface.", nameof(TService));
             }
 
-            IProxygGenerator generator = ProxyGeneratorFactory.Factory.GetInstance();
+            IProxyGenerator generator = ProxyGeneratorFactory.Factory.GetInstance();
             Registration registration = new Registrations.InstanceProxyWithTypeRegistration(container.Options.DefaultLifestyle,
                     container,
                     typeof(TService),

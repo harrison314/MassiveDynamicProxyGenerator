@@ -8,10 +8,10 @@ namespace MassiveDynamicProxyGenerator.Microsoft.DependencyInjection.ServiceProv
     internal class MassiveScopedServiceFactory : IServiceScopeFactory
     {
         private readonly IServiceScopeFactory serviceScopeFactory;
-        private readonly IProxygGenerator proxygGenerator;
+        private readonly IProxyGenerator proxygGenerator;
         private readonly IServiceWraperer serviceWraperer;
 
-        public MassiveScopedServiceFactory(IServiceScopeFactory serviceScopeFactory, IProxygGenerator proxygGenerator, IServiceWraperer serviceWraperer )
+        public MassiveScopedServiceFactory(IServiceScopeFactory serviceScopeFactory, IProxyGenerator proxygGenerator, IServiceWraperer serviceWraperer )
         {
             this.serviceScopeFactory = serviceScopeFactory;
             this.proxygGenerator = proxygGenerator;

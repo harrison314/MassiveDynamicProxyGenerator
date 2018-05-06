@@ -10,14 +10,14 @@ namespace MassiveDynamicProxyGenerator.SimpleInjector.Registrations
 {
     internal class InstanceProxyWithTypeRegistration : Registration
     {
-        protected static readonly MethodInfo GenerateInstanceProxyMethod = typeof(IProxygGenerator).GetTypeInfo()
-                  .GetMethod(nameof(IProxygGenerator.GenerateInstanceProxy), new[] { typeof(Type), typeof(IInstanceProvicer) });
+        protected static readonly MethodInfo GenerateInstanceProxyMethod = typeof(IProxyGenerator).GetTypeInfo()
+                  .GetMethod(nameof(IProxyGenerator.GenerateInstanceProxy), new[] { typeof(Type), typeof(IInstanceProvicer) });
 
         private readonly Type implementationType;
         private readonly Type instanceProviderType;
-        private readonly IProxygGenerator generator;
+        private readonly IProxyGenerator generator;
 
-        public InstanceProxyWithTypeRegistration(Lifestyle lifestyle, Container container, Type implementationType, Type instanceProviderType, IProxygGenerator generator)
+        public InstanceProxyWithTypeRegistration(Lifestyle lifestyle, Container container, Type implementationType, Type instanceProviderType, IProxyGenerator generator)
             : base(lifestyle, container)
         {
             this.implementationType = implementationType;
@@ -39,7 +39,7 @@ namespace MassiveDynamicProxyGenerator.SimpleInjector.Registrations
             InstanceProducer producer = this.Container.GetCurrentRegistrations().LastOrDefault(t => t.ServiceType == this.instanceProviderType);
             Expression interceptorSourse = (producer != null) ? producer.BuildExpression() : Expression.New(this.instanceProviderType);
 
-            Expression generator = Expression.Constant(this.generator, typeof(IProxygGenerator));
+            Expression generator = Expression.Constant(this.generator, typeof(IProxyGenerator));
             Expression typeOfInstance = Expression.Constant(this.implementationType, typeof(Type));
             Expression crateInstance = Expression.Call(generator, GenerateInstanceProxyMethod, typeOfInstance, interceptorSourse);
 

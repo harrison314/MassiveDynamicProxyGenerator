@@ -5,7 +5,7 @@ using System.Text;
 namespace MassiveDynamicProxyGenerator.SimpleInjector
 {
     /// <summary>
-    /// Class representes singlton for generate <see cref="IProxygGenerator"/>.
+    /// Class representes singlton for generate <see cref="IProxyGenerator"/>.
     /// </summary>
     public static class ProxyGeneratorFactory
     {

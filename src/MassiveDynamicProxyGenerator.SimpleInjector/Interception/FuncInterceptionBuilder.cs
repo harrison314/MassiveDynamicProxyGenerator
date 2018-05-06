@@ -14,7 +14,7 @@ namespace MassiveDynamicProxyGenerator.SimpleInjector.Interception
         private readonly Predicate<Type> predicate;
         private readonly Func<ICallableInterceptor> interceptorFactory;
 
-        public FuncInterceptionBuilder(IProxygGenerator generator, Predicate<Type> predicate, Func<ICallableInterceptor> interceptorFactory)
+        public FuncInterceptionBuilder(IProxyGenerator generator, Predicate<Type> predicate, Func<ICallableInterceptor> interceptorFactory)
             : base(generator)
         {
             this.predicate = predicate;

@@ -48,7 +48,7 @@ namespace MassiveDynamicProxyGenerator.SimpleInjector
                 throw new ArgumentException($"The type parameter {nameof(serviseType)} {serviseType.FullName} must by public interface.");
             }
 
-            IProxygGenerator generator = ProxyGeneratorFactory.Factory.GetInstance();
+            IProxyGenerator generator = ProxyGeneratorFactory.Factory.GetInstance();
 
             if (TypeHelper.IsOpenGeneric(serviseType))
             {
@@ -96,7 +96,7 @@ namespace MassiveDynamicProxyGenerator.SimpleInjector
                 throw new ArgumentException($"The type parameter {nameof(serviseType)} {serviseType.FullName} must by public interface.");
             }
 
-            IProxygGenerator generator = ProxyGeneratorFactory.Factory.GetInstance();
+            IProxyGenerator generator = ProxyGeneratorFactory.Factory.GetInstance();
 
             if (TypeHelper.IsOpenGeneric(serviseType))
             {
@@ -144,7 +144,7 @@ namespace MassiveDynamicProxyGenerator.SimpleInjector
                 throw new ArgumentException($"The type parameter {nameof(serviseType)} {serviseType.FullName} must by public interface.");
             }
 
-            IProxygGenerator generator = ProxyGeneratorFactory.Factory.GetInstance();
+            IProxyGenerator generator = ProxyGeneratorFactory.Factory.GetInstance();
 
             if (TypeHelper.IsOpenGeneric(serviseType))
             {

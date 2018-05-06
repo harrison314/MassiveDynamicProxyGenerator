@@ -37,14 +37,14 @@ namespace MassiveDynamicProxyGenerator.SimpleInjector.Tests
 
         private class TestGeneratorFactory : IProxyGeneratorFactory
         {
-            private readonly IProxygGenerator generator;
+            private readonly IProxyGenerator generator;
 
-            public TestGeneratorFactory(IProxygGenerator generator)
+            public TestGeneratorFactory(IProxyGenerator generator)
             {
                 this.generator = generator;
             }
 
-            public IProxygGenerator GetInstance()
+            public IProxyGenerator GetInstance()
             {
                 return this.generator;
             }

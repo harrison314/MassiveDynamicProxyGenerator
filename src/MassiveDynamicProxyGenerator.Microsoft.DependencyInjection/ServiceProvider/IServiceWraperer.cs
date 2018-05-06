@@ -18,6 +18,6 @@ namespace MassiveDynamicProxyGenerator.Microsoft.DependencyInjection.ServiceProv
         /// <param name="aspServiceProvider">The ASP service provider.</param>
         /// <param name="proxyGenerator">The proxyg generator.</param>
         /// <returns>realservice or wrapper</returns>
-        object ProvideInstance(Type serviceType, object realInstance, IServiceProvider aspServiceProvider, IProxygGenerator proxyGenerator);
+        object ProvideInstance(Type serviceType, object realInstance, IServiceProvider aspServiceProvider, IProxyGenerator proxyGenerator);
     }
 }

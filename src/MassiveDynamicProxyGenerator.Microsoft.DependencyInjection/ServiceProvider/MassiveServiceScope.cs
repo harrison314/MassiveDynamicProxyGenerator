@@ -8,7 +8,7 @@ namespace MassiveDynamicProxyGenerator.Microsoft.DependencyInjection.ServiceProv
     internal class MassiveServiceScope : IServiceScope
     {
         private readonly IServiceScope serviceScope;
-        private readonly IProxygGenerator proxygGenerator;
+        private readonly IProxyGenerator proxygGenerator;
         private readonly IServiceWraperer serviceWraperer;
 
         public IServiceProvider ServiceProvider
@@ -27,7 +27,7 @@ namespace MassiveDynamicProxyGenerator.Microsoft.DependencyInjection.ServiceProv
             }
         }
 
-        public MassiveServiceScope(IServiceScope serviceScope, IProxygGenerator proxygGenerator, IServiceWraperer serviceWraperer)
+        public MassiveServiceScope(IServiceScope serviceScope, IProxyGenerator proxygGenerator, IServiceWraperer serviceWraperer)
         {
             this.serviceScope = serviceScope;
             this.proxygGenerator = proxygGenerator;

@@ -48,7 +48,7 @@ namespace MassiveDynamicProxyGenerator.Microsoft.DependencyInjection
         /// <param name="provider">The proxy generator provider as function.</param>
         /// <exception cref="ArgumentNullException">provider</exception>
         /// <seealso cref="IProxyGeneratorProvider"/>
-        public static void SetProxyGeneratorProvider(Func<IServiceProvider, IProxygGenerator> provider)
+        public static void SetProxyGeneratorProvider(Func<IServiceProvider, IProxyGenerator> provider)
         {
             if (provider == null)
             {

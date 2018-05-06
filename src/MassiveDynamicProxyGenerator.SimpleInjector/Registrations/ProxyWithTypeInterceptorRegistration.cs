@@ -9,14 +9,14 @@ namespace MassiveDynamicProxyGenerator.SimpleInjector.Registrations
 {
     internal class ProxyWithTypeInterceptorRegistration : Registration
     {
-        protected static readonly MethodInfo GenerateProxyMethod = typeof(IProxygGenerator).GetTypeInfo()
-                   .GetMethod(nameof(IProxygGenerator.GenerateProxy), new[] { typeof(Type), typeof(IInterceptor) });
+        protected static readonly MethodInfo GenerateProxyMethod = typeof(IProxyGenerator).GetTypeInfo()
+                   .GetMethod(nameof(IProxyGenerator.GenerateProxy), new[] { typeof(Type), typeof(IInterceptor) });
 
         private readonly Type implementationType;
         private readonly Type interceptorType;
-        private readonly IProxygGenerator generator;
+        private readonly IProxyGenerator generator;
 
-        public ProxyWithTypeInterceptorRegistration(Lifestyle lifestyle, Container container, Type implementationType, Type interceptorType, IProxygGenerator generator)
+        public ProxyWithTypeInterceptorRegistration(Lifestyle lifestyle, Container container, Type implementationType, Type interceptorType, IProxyGenerator generator)
             : base(lifestyle, container)
         {
             this.implementationType = implementationType;
@@ -38,7 +38,7 @@ namespace MassiveDynamicProxyGenerator.SimpleInjector.Registrations
             InstanceProducer producer = this.Container.GetRegistration(this.interceptorType, false);
             Expression interceptorSourse = (producer != null) ? producer.BuildExpression() : Expression.New(this.interceptorType);
 
-            Expression generator = Expression.Constant(this.generator, typeof(IProxygGenerator));
+            Expression generator = Expression.Constant(this.generator, typeof(IProxyGenerator));
             Expression typeOfInstance = Expression.Constant(this.implementationType, typeof(Type));
             Expression crateInstance = Expression.Call(generator, GenerateProxyMethod, typeOfInstance, interceptorSourse);
 

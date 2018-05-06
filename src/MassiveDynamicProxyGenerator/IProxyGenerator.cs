@@ -5,7 +5,7 @@ namespace MassiveDynamicProxyGenerator
     /// <summary>
     /// Dynamic proxy generator.
     /// </summary>
-    public interface IProxygGenerator
+    public interface IProxyGenerator
     {
         /// <summary>
         /// Generates the decorator.

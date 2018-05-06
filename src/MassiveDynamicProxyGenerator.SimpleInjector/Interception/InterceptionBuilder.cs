@@ -10,8 +10,8 @@ namespace MassiveDynamicProxyGenerator.SimpleInjector.Interception
     /// </summary>
     internal abstract class InterceptionBuilder
     {
-        protected static readonly MethodInfo CrateInterceptorMethod = typeof(IProxygGenerator).GetTypeInfo()
-                    .GetMethod(nameof(IProxygGenerator.GenerateDecorator), new[] { typeof(Type), typeof(ICallableInterceptor), typeof(object) });
+        protected static readonly MethodInfo CrateInterceptorMethod = typeof(IProxyGenerator).GetTypeInfo()
+                    .GetMethod(nameof(IProxyGenerator.GenerateDecorator), new[] { typeof(Type), typeof(ICallableInterceptor), typeof(object) });
 
         public Expression GeneratorSourse
         {
@@ -19,9 +19,9 @@ namespace MassiveDynamicProxyGenerator.SimpleInjector.Interception
             protected set;
         }
 
-        public InterceptionBuilder(IProxygGenerator generator)
+        public InterceptionBuilder(IProxyGenerator generator)
         {
-            this.GeneratorSourse = Expression.Constant(generator, typeof(IProxygGenerator));
+            this.GeneratorSourse = Expression.Constant(generator, typeof(IProxyGenerator));
         }
 
         public void ReguildExpresion(object sender, ExpressionBuiltEventArgs buildArgs)
