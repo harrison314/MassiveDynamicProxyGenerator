@@ -4,80 +4,29 @@ using System;
 using System.Collections.Generic;
 using System.Text;
 using Microsoft.Extensions.DependencyInjection;
-using static MassiveDynamicProxyGenerator.Microsoft.DependencyInjection.ServiceProvider.Registrations;
 
 namespace MassiveDynamicProxyGenerator.Microsoft.DependencyInjection
 {
     public static partial class ServiceCollectionExtensions
     {
-        private static Registrations EnshureRegistration(IServiceCollection services)
-        {
-            foreach (var register in services)
-            {
-                if (register.ImplementationType == typeof(Registrations))
-                {
-                    return (Registrations)register.ImplementationInstance;
-                }
-            }
-
-            Registrations registration = new Registrations();
-            services.Add(new ServiceDescriptor(typeof(Registrations), registration));
-
-            return registration;
-        }
-
         /// <summary>
-        /// Creates an <see cref="System.IServiceProvider"/> containing services from the provided <see cref="Microsoft.Extensions.DependencyInjection.IServiceCollection"/> with interception.
-        /// </summary>
-        /// <param name="services">The Microsoft.Extensions.DependencyInjection.IServiceCollection containing service descriptors.</param>
-        /// <returns>The <see cref="IServiceProvider"/>.</returns>
-        public static IServiceProvider BuldIntercepedServiceProvider(this IServiceCollection services)
-        {
-            IServiceProvider serviceProvider = services.BuildServiceProvider();
-            Registrations registrations = serviceProvider.GetService(typeof(Registrations)) as Registrations;
-            if (registrations == null || registrations.Count == 0)
-            {
-                return serviceProvider;
-            }
-
-            MassiveServiceProvider massiveServiceProvider = new MassiveServiceProvider(serviceProvider,
-                MassiveDynamicProxyGeneratorDiSettings.ProxyGeneratorProvider.GetProxyGenerator(serviceProvider),
-                registrations);
-
-            return massiveServiceProvider;
-
-        }
-
-        /// <summary>
-        /// Add intercepted decorator to type <typeparamref name="TServise"/>.
+        /// Add intercepted decorator to type <typeparamref name="TServise" />.
         /// </summary>
         /// <typeparam name="TServise">Type of the decorated service. Must by public interface.</typeparam>
         /// <typeparam name="TInterceptor">Type of interceptor.</typeparam>
         /// <param name="services">The <see cref="IServiceCollection" /> to add the service to.</param>
-        /// <param name="interceptorParams">Additional interceptor parameters.</param>
-        /// <returns>The <see cref="IServiceCollection" /> to add the service to.</returns>
-        public static IServiceCollection AddInterceptedDecorator<TServise, TInterceptor>(this IServiceCollection services, params object[] interceptorParams)
+        /// <returns>
+        /// The <see cref="IServiceCollection" /> to add the service to.
+        /// </returns>
+        /// <exception cref="ArgumentException">TServise</exception>
+        public static IServiceCollection AddInterceptedDecorator<TServise, TInterceptor>(this IServiceCollection services)
            where TServise : class
            where TInterceptor : ICallableInterceptor
         {
-            //List<ServiceDescriptor> descriptors = GetDescriptors(services, typeof(TServise));
-            //foreach (ServiceDescriptor descriptor in descriptors)
-            //{
-            //    int index = services.IndexOf(descriptor);
-
-            //    ServiceDescriptor decoratedDescriptor = ServiceDescriptor.Describe(descriptor.ServiceType,
-            //    provider =>
-            //    {
-            //        TServise instance = (TServise)GetInstanceFromDescriptor(provider, descriptor);
-            //        ICallableInterceptor interceptor = (ICallableInterceptor)ActivatorUtilities.CreateInstance(provider, typeof(TInterceptor), interceptorParams);
-            //        return MassiveDynamicProxyGeneratorDiSettings.ProxyGeneratorProvider.GetProxyGenerator(provider).GenerateDecorator<TServise>(interceptor, instance);
-            //    },
-            //    descriptor.Lifetime);
-
-            //    services.Insert(index, decoratedDescriptor);
-
-            //    services.Remove(descriptor);
-            //}
+            if (!TypeHelper.IsPublicInterface(typeof(TServise)))
+            {
+                throw new ArgumentException($"Patameter {nameof(TServise)} of type '{typeof(TServise).AssemblyQualifiedName}' is not public interface.");
+            }
 
             EnshureRegistration(services).Add(typeof(TServise), typeof(TInterceptor));
             return services;
@@ -89,7 +38,6 @@ namespace MassiveDynamicProxyGenerator.Microsoft.DependencyInjection
         /// <param name="services">The <see cref="IServiceCollection" /> to add the service to.</param>
         /// <param name="serviceType">Type of the decorated service. Must by public interface.</param>
         /// <param name="interceptorType">Type of interceptor. Must implement <see cref="ICallableInterceptor"/>.</param>
-        /// <param name="interceptorParams">Additional interceptor params.</param>
         /// <returns>The <see cref="IServiceCollection" /> to add the service to.</returns>
         /// <exception cref="ArgumentNullException">
         /// serviceType
@@ -97,7 +45,7 @@ namespace MassiveDynamicProxyGenerator.Microsoft.DependencyInjection
         /// interceptorType
         /// </exception>
         /// <exception cref="ArgumentException"></exception>
-        public static IServiceCollection AddInterceptedDecorator(this IServiceCollection services, Type serviceType, Type interceptorType, params object[] interceptorParams)
+        public static IServiceCollection AddInterceptedDecorator(this IServiceCollection services, Type serviceType, Type interceptorType)
         {
             if (serviceType == null) throw new ArgumentNullException(nameof(serviceType));
             if (interceptorType == null) throw new ArgumentNullException(nameof(interceptorType));
@@ -112,24 +60,6 @@ namespace MassiveDynamicProxyGenerator.Microsoft.DependencyInjection
                 throw new ArgumentException($"Patameter {nameof(interceptorType)} of type '{interceptorType.AssemblyQualifiedName}' must implement {typeof(ICallableInterceptor).AssemblyQualifiedName}.");
             }
 
-            //List<ServiceDescriptor> descriptors = GetDescriptors(services, serviceType);
-            //foreach (ServiceDescriptor descriptor in descriptors)
-            //{
-            //    int index = services.IndexOf(descriptor);
-
-            //    ServiceDescriptor decoratedDescriptor = ServiceDescriptor.Describe(descriptor.ServiceType,
-            //    provider =>
-            //    {
-            //        object instance = GetInstanceFromDescriptor(provider, descriptor);
-            //        ICallableInterceptor interceptor = (ICallableInterceptor)ActivatorUtilities.CreateInstance(provider, interceptorType, interceptorParams);
-            //        return MassiveDynamicProxyGeneratorDiSettings.ProxyGeneratorProvider.GetProxyGenerator(provider).GenerateDecorator(serviceType, interceptor, instance);
-            //    },
-            //    descriptor.Lifetime);
-
-            //    services.Insert(index, decoratedDescriptor);
-
-            //    services.Remove(descriptor);
-            //}
             EnshureRegistration(services).Add(serviceType, interceptorType);
 
             return services;
@@ -157,24 +87,6 @@ namespace MassiveDynamicProxyGenerator.Microsoft.DependencyInjection
             {
                 throw new ArgumentException($"Patameter {nameof(serviceType)} of type '{serviceType.AssemblyQualifiedName}' is not public interface.");
             }
-
-            //List<ServiceDescriptor> descriptors = GetDescriptors(services, serviceType);
-            //foreach (ServiceDescriptor descriptor in descriptors)
-            //{
-            //    int index = services.IndexOf(descriptor);
-
-            //    ServiceDescriptor decoratedDescriptor = ServiceDescriptor.Describe(descriptor.ServiceType,
-            //    provider =>
-            //    {
-            //        object instance = GetInstanceFromDescriptor(provider, descriptor);
-            //        return MassiveDynamicProxyGeneratorDiSettings.ProxyGeneratorProvider.GetProxyGenerator(provider).GenerateDecorator(serviceType, interceptor, instance);
-            //    },
-            //    descriptor.Lifetime);
-
-            //    services.Insert(index, decoratedDescriptor);
-
-            //    services.Remove(descriptor);
-            //}
 
             EnshureRegistration(services).Add(t => t == serviceType, sp => interceptor); //TODO: open generic parameters
             return services;
@@ -217,25 +129,6 @@ namespace MassiveDynamicProxyGenerator.Microsoft.DependencyInjection
                 throw new ArgumentException($"Patameter {nameof(serviceType)} of type '{serviceType.AssemblyQualifiedName}' is not public interface.");
             }
 
-            //List<ServiceDescriptor> descriptors = GetDescriptors(services, serviceType);
-            //foreach (ServiceDescriptor descriptor in descriptors)
-            //{
-            //    int index = services.IndexOf(descriptor);
-
-            //    ServiceDescriptor decoratedDescriptor = ServiceDescriptor.Describe(descriptor.ServiceType,
-            //    provider =>
-            //    {
-            //        ICallableInterceptor interceptor = interceptorFactory.Invoke(provider);
-            //        object instance = GetInstanceFromDescriptor(provider, descriptor);
-            //        return MassiveDynamicProxyGeneratorDiSettings.ProxyGeneratorProvider.GetProxyGenerator(provider).GenerateDecorator(serviceType, interceptor, instance);
-            //    },
-            //    descriptor.Lifetime);
-
-            //    services.Insert(index, decoratedDescriptor);
-
-            //    services.Remove(descriptor);
-            //}
-
             EnshureRegistration(services).Add(t => t == serviceType, interceptorFactory); //TODO: open generic parameters
 
             return services;
@@ -270,29 +163,7 @@ namespace MassiveDynamicProxyGenerator.Microsoft.DependencyInjection
             if (predicate == null) throw new ArgumentNullException(nameof(predicate));
             if (interceptor == null) throw new ArgumentNullException(nameof(interceptor));
 
-            //List<ServiceDescriptor> descriptors = GetDescriptors(services, predicate);
-            //foreach (ServiceDescriptor descriptor in descriptors)
-            //{
-            //    if (descriptor.ServiceType.IsInterface)
-            //    {
-            //        int index = services.IndexOf(descriptor);
-
-            //        ServiceDescriptor decoratedDescriptor = ServiceDescriptor.Describe(descriptor.ServiceType,
-            //        provider =>
-            //        {
-            //            object instance = GetInstanceFromDescriptor(provider, descriptor);
-            //            return MassiveDynamicProxyGeneratorDiSettings.ProxyGeneratorProvider.GetProxyGenerator(provider).GenerateDecorator(descriptor.ServiceType, interceptor, instance);
-            //        },
-            //        descriptor.Lifetime);
-
-            //        services.Insert(index, decoratedDescriptor);
-
-            //        services.Remove(descriptor);
-            //    }
-            //}
-
             EnshureRegistration(services).Add(predicate, _ => interceptor);
-
 
             return services;
         }
@@ -314,27 +185,6 @@ namespace MassiveDynamicProxyGenerator.Microsoft.DependencyInjection
             if (predicate == null) throw new ArgumentNullException(nameof(predicate));
             if (interceptorFactory == null) throw new ArgumentNullException(nameof(interceptorFactory));
 
-            //List<ServiceDescriptor> descriptors = GetDescriptors(services, predicate);
-            //foreach (ServiceDescriptor descriptor in descriptors)
-            //{
-            //    if (descriptor.ServiceType.IsInterface)
-            //    {
-            //        int index = services.IndexOf(descriptor);
-
-            //        ServiceDescriptor decoratedDescriptor = ServiceDescriptor.Describe(descriptor.ServiceType,
-            //        provider =>
-            //        {
-            //            object instance = GetInstanceFromDescriptor(provider, descriptor);
-            //            ICallableInterceptor interceptor = interceptorFactory.Invoke(provider);
-            //            return MassiveDynamicProxyGeneratorDiSettings.ProxyGeneratorProvider.GetProxyGenerator(provider).GenerateDecorator(descriptor.ServiceType, interceptor, instance);
-            //        },
-            //        descriptor.Lifetime);
-
-            //        services.Insert(index, decoratedDescriptor);
-
-            //        services.Remove(descriptor);
-            //    }
-            //}
             EnshureRegistration(services).Add(predicate, interceptorFactory);
 
             return services;
@@ -363,30 +213,6 @@ namespace MassiveDynamicProxyGenerator.Microsoft.DependencyInjection
             {
                 throw new ArgumentException($"Patameter {nameof(interceptorType)} of type '{interceptorType.AssemblyQualifiedName}' must implement {typeof(ICallableInterceptor).AssemblyQualifiedName}.");
             }
-
-            //List<ServiceDescriptor> descriptors = GetDescriptors(services, predicate);
-            //CheckInterceptorConstructor(interceptorType, descriptors);
-
-            //foreach (ServiceDescriptor descriptor in descriptors)
-            //{
-            //    if (descriptor.ServiceType.IsInterface)
-            //    {
-            //        int index = services.IndexOf(descriptor);
-
-            //        ServiceDescriptor decoratedDescriptor = ServiceDescriptor.Describe(descriptor.ServiceType,
-            //        provider =>
-            //        {
-            //            object instance = GetInstanceFromDescriptor(provider, descriptor);
-            //            ICallableInterceptor interceptor = (ICallableInterceptor)ActivatorUtilities.CreateInstance(provider, interceptorType, interceptorParams);
-            //            return MassiveDynamicProxyGeneratorDiSettings.ProxyGeneratorProvider.GetProxyGenerator(provider).GenerateDecorator(descriptor.ServiceType, interceptor, instance);
-            //        },
-            //        descriptor.Lifetime);
-
-            //        services.Insert(index, decoratedDescriptor);
-
-            //        services.Remove(descriptor);
-            //    }
-            //}
 
             EnshureRegistration(services).Add(predicate, sp => (ICallableInterceptor)ActivatorUtilities.CreateInstance(sp, interceptorType, interceptorParams));
 
@@ -429,6 +255,22 @@ namespace MassiveDynamicProxyGenerator.Microsoft.DependencyInjection
                 string message = $"Interceptor of type '{interceptorType.FullName}' required in constructor types, which is intercepted. Conflict types: {string.Join(Environment.NewLine, conflictTypes)}";
                 throw new ArgumentException(message, nameof(interceptorType));
             }
+        }
+
+        private static Registrations EnshureRegistration(IServiceCollection services)
+        {
+            foreach (var register in services)
+            {
+                if (register.ImplementationType == typeof(Registrations))
+                {
+                    return (Registrations)register.ImplementationInstance;
+                }
+            }
+
+            Registrations registration = new Registrations();
+            services.Add(new ServiceDescriptor(typeof(Registrations), registration));
+
+            return registration;
         }
     }
 }
