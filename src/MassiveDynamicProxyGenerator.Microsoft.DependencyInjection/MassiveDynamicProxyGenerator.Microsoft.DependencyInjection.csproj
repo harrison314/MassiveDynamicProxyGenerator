@@ -4,6 +4,7 @@
     <TargetFramework>netstandard2.0</TargetFramework>
     <Description>MassiveDynamicProxyGenerator Microsoft.Extensions.DependencyInjection is intergration MassiveDynamicProxyGenerator to standard IoC container in ASP.NET Core.</Description>
     <PackageTags>massive, dynamic, proxy, dynamic proxy, runtime, .net, micoroft.extensions, IOC, ASP.NET, MVC</PackageTags>
+    <PackageReleaseNotes>Change interception and decoration.</PackageReleaseNotes>
   </PropertyGroup>
   <Import Project="..\Version.proj" />
 

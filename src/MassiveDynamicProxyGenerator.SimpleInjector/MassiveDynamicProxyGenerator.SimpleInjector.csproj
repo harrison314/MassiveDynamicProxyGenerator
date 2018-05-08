@@ -14,7 +14,8 @@ Adding methods for register mock implementations, proxys, instance proxies for r
   
   <PropertyGroup>
     <CodeAnalysisRuleSet>..\..\MassiveDynamicProxyGenerator.ruleset</CodeAnalysisRuleSet>
-    <PackageReleaseNotes>Add support for .Net Stdard 2.0.</PackageReleaseNotes>
+    <PackageReleaseNotes>Add support for .Net Stdard 2.0.
+Update simple Injector nugets.</PackageReleaseNotes>
     <AssemblyVersion>1.2.2.0</AssemblyVersion>
     <FileVersion>1.2.2.0</FileVersion>
   </PropertyGroup>

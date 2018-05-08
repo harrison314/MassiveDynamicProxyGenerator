@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="utf-8"?>
 <Project>
   <PropertyGroup>
-    <LocalBuildVersion>1.2.2</LocalBuildVersion>
+    <LocalBuildVersion>1.3.0</LocalBuildVersion>
     <LocalBuildRevision>0</LocalBuildRevision>
     <NowYear>$([System.DateTime]::Now.Year.ToString())</NowYear>
   </PropertyGroup>
@@ -14,7 +14,7 @@
 
     <AssemblyVersion>$(LocalBuildVersion).$(LocalBuildRevision)</AssemblyVersion>
     <FileVersion>$(LocalBuildVersion).$(LocalBuildRevision)</FileVersion>
-    <Version>$(LocalBuildVersion).$(LocalBuildRevision)</Version>
+    <Version>$(LocalBuildVersion).$(LocalBuildRevision)-preview1</Version>
 	  <PackageLicenseUrl>https://raw.githubusercontent.com/harrison314/MassiveDynamicProxyGenerator/master/LICENSE</PackageLicenseUrl>
     <PackageProjectUrl>https://github.com/harrison314/MassiveDynamicProxyGenerator</PackageProjectUrl>
     <RepositoryUrl>https://github.com/harrison314/MassiveDynamicProxyGenerator</RepositoryUrl>
