@@ -7,21 +7,7 @@
     <PackageId>MassiveDynamicProxyGenerator</PackageId>
     <NetStandardImplicitPackageVersion>1.6.0</NetStandardImplicitPackageVersion>
     <PackageTargetFallback Condition=" '$(TargetFramework)' == 'netstandard1.6' ">$(PackageTargetFallback);dnxcore50</PackageTargetFallback>
-    <GenerateAssemblyTitleAttribute>false</GenerateAssemblyTitleAttribute>
-    <GenerateAssemblyDescriptionAttribute>false</GenerateAssemblyDescriptionAttribute>
-    <GenerateAssemblyConfigurationAttribute>false</GenerateAssemblyConfigurationAttribute>
-    <GenerateAssemblyCompanyAttribute>false</GenerateAssemblyCompanyAttribute>
-    <GenerateAssemblyProductAttribute>false</GenerateAssemblyProductAttribute>
-    <GenerateAssemblyCopyrightAttribute>false</GenerateAssemblyCopyrightAttribute>
-    <GenerateAssemblyVersionAttribute>false</GenerateAssemblyVersionAttribute>
-    <GenerateAssemblyFileVersionAttribute>false</GenerateAssemblyFileVersionAttribute>
-    <Version>1.2.2.0</Version>
     <PackageTags>massive, dynamic, proxy, dynamic proxy, runtime, .net</PackageTags>
-    <PackageLicenseUrl>https://raw.githubusercontent.com/harrison314/MassiveDynamicProxyGenerator/master/LICENSE</PackageLicenseUrl>
-    <PackageProjectUrl>https://github.com/harrison314/MassiveDynamicProxyGenerator</PackageProjectUrl>
-    <RepositoryUrl>https://github.com/harrison314/MassiveDynamicProxyGenerator</RepositoryUrl>
-    <RepositoryType>git</RepositoryType>
-    <Authors>harrison314</Authors>
     <PackageReleaseNotes>
 Change interface IInvocation.
 Add universal async ibterceptor CallableInterceptorAsyncAdapter as abstract class for handle error in async task.
@@ -29,6 +15,8 @@ Add support for .Net Stdard 2.0.
 </PackageReleaseNotes>
   </PropertyGroup>
 
+  <Import Project="..\Version.proj" />
+  
   <PropertyGroup>
     <CodeAnalysisRuleSet>..\..\MassiveDynamicProxyGenerator.ruleset</CodeAnalysisRuleSet>
   </PropertyGroup>
@@ -75,6 +63,10 @@ Add support for .Net Stdard 2.0.
 
   <ItemGroup>
     <PackageReference Include="StyleCop.Analyzers" Version="1.0.0" PrivateAssets="All" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <Folder Include="Properties\" />
   </ItemGroup>
 
 </Project>

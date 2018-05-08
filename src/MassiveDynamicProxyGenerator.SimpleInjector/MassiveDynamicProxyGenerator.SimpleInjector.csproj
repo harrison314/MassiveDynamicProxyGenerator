@@ -6,20 +6,12 @@
     <DefineConstants>$(DefineConstants);COREFX</DefineConstants>
     <NetStandardImplicitPackageVersion>1.6.0</NetStandardImplicitPackageVersion>
     <PackageTargetFallback Condition=" '$(TargetFramework)' == 'netstandard1.6' ">$(PackageTargetFallback);dnxcore50</PackageTargetFallback>
-    <Version>1.2.2.0</Version>
-    <Authors>harrison314</Authors>
-    <Company>harrison314</Company>
-    <Product>MassiveDynamicProxyGenerator</Product>
-    <Copyright>Copyright ©  2016</Copyright>
-    <PackageLicenseUrl>https://raw.githubusercontent.com/harrison314/MassiveDynamicProxyGenerator/master/LICENSE</PackageLicenseUrl>
-    <PackageProjectUrl>https://github.com/harrison314/MassiveDynamicProxyGenerator</PackageProjectUrl>
-    <RepositoryUrl>https://github.com/harrison314/MassiveDynamicProxyGenerator</RepositoryUrl>
-    <RepositoryType>git</RepositoryType>
     <PackageTags>massive, dynamic, proxy, dynamic proxy, runtime, .net, IoC, SimpleInjector</PackageTags>
     <Description>MassiveDynamicProxyGenerator.SimpleInjector is library of extensions method for IoC container - Simple Injector.
 Adding methods for register mock implementations, proxys, instance proxies for resolving circular depndencies or lazy initialization and interpetion for decoration instances.</Description>
   </PropertyGroup>
-
+  <Import Project="..\Version.proj" />
+  
   <PropertyGroup>
     <CodeAnalysisRuleSet>..\..\MassiveDynamicProxyGenerator.ruleset</CodeAnalysisRuleSet>
     <PackageReleaseNotes>Add support for .Net Stdard 2.0.</PackageReleaseNotes>
