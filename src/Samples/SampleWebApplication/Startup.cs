@@ -38,7 +38,7 @@ namespace SampleWebApplication
 
             services.AddMvc();
 
-            return services.BuldIntercepedServiceProvider();
+            return services.BuildIntercepedServiceProvider();
         }
 
         public void Configure(IApplicationBuilder app, IHostingEnvironment env)

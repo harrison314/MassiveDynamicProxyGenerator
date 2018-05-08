@@ -31,6 +31,11 @@ namespace MassiveDynamicProxyGenerator.Microsoft.DependencyInjection.ServiceProv
                 return this;
             }
 
+            if (serviceType == typeof(IOriginalService<IServiceProvider>))
+            {
+                return new OriginalService<IServiceProvider>(this.aspServiceProvider);
+            }
+
             if (serviceType == typeof(IEnumerable<IServiceProvider>))
             {
                 return new IServiceProvider[] { this };
@@ -47,6 +52,14 @@ namespace MassiveDynamicProxyGenerator.Microsoft.DependencyInjection.ServiceProv
                 {
                     return new MassiveScopedServiceFactory(scopeFactory, this.proxygGenerator, this.serviceWraperer);
                 }
+            }
+
+            if (serviceType.IsGenericType && serviceType.GetGenericTypeDefinition() == typeof(IOriginalService<>))
+            {
+                Type[] genericArguments = serviceType.GetGenericArguments();
+                object instance = this.aspServiceProvider.GetService(genericArguments[0]);
+
+                return OriginalServiceContainer<object>.BuildOriginalService(genericArguments[0], instance);
             }
 
             object realInstance = this.aspServiceProvider.GetService(serviceType);

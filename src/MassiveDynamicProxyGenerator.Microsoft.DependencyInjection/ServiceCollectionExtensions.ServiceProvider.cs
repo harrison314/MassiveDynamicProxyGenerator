@@ -15,7 +15,7 @@ namespace MassiveDynamicProxyGenerator.Microsoft.DependencyInjection
         /// </summary>
         /// <param name="services">The <see cref="Microsoft.Extensions.DependencyInjection.IServiceCollection"/> containing service descriptors.</param>
         /// <returns>The <see cref="IServiceProvider"/>.</returns>
-        public static IServiceProvider BuldIntercepedServiceProvider(this IServiceCollection services)
+        public static IServiceProvider BuildIntercepedServiceProvider(this IServiceCollection services)
         {
             IServiceProvider serviceProvider = services.BuildServiceProvider();
             Registrations registrations = serviceProvider.GetService(typeof(Registrations)) as Registrations;
@@ -37,7 +37,7 @@ namespace MassiveDynamicProxyGenerator.Microsoft.DependencyInjection
         /// <param name="services">The <see cref="Microsoft.Extensions.DependencyInjection.IServiceCollection"/> containing service descriptors.</param>
         /// <param name="validateScopes"><c>true</c> to perform check verifying that scoped services never gets resolved from root provider; otherwise <c>false</c>.</param>
         /// <returns>The <see cref="IServiceProvider"/>.</returns>
-        public static IServiceProvider BuldIntercepedServiceProvider(this IServiceCollection services, bool validateScopes)
+        public static IServiceProvider BuildIntercepedServiceProvider(this IServiceCollection services, bool validateScopes)
         {
             IServiceProvider serviceProvider = services.BuildServiceProvider(validateScopes);
             Registrations registrations = serviceProvider.GetService(typeof(Registrations)) as Registrations;
@@ -61,7 +61,7 @@ namespace MassiveDynamicProxyGenerator.Microsoft.DependencyInjection
         /// <returns>
         /// The <see cref="IServiceProvider" />.
         /// </returns>
-        public static IServiceProvider BuldIntercepedServiceProvider(this IServiceCollection services, ServiceProviderOptions options)
+        public static IServiceProvider BuildIntercepedServiceProvider(this IServiceCollection services, ServiceProviderOptions options)
         {
             if (options == null) throw new ArgumentNullException(nameof(options));
 
@@ -75,6 +75,27 @@ namespace MassiveDynamicProxyGenerator.Microsoft.DependencyInjection
             MassiveServiceProvider massiveServiceProvider = new MassiveServiceProvider(serviceProvider,
                 MassiveDynamicProxyGeneratorDiSettings.ProxyGeneratorProvider.GetProxyGenerator(serviceProvider),
                 registrations);
+
+            return massiveServiceProvider;
+        }
+
+        /// <summary>
+        /// Creates an <see cref="System.IServiceProvider" /> containing services from the provided <see cref="Microsoft.Extensions.DependencyInjection.IServiceCollection" /> with custom service wraperer.
+        /// </summary>
+        /// <param name="services">The <see cref="Microsoft.Extensions.DependencyInjection.IServiceCollection" /> containing service descriptors.</param>
+        /// <param name="serviceWraperer">The service wraperer.</param>
+        /// <returns>
+        /// The <see cref="IServiceProvider" />.
+        /// </returns>
+        /// <exception cref="ArgumentNullException">serviceWraperer</exception>
+        public static IServiceProvider BuildServiceProviderWithWraperer(this IServiceCollection services, IServiceWraperer serviceWraperer)
+        {
+            if (serviceWraperer == null) throw new ArgumentNullException(nameof(serviceWraperer));
+
+            IServiceProvider serviceProvider = services.BuildServiceProvider();
+            MassiveServiceProvider massiveServiceProvider = new MassiveServiceProvider(serviceProvider,
+                MassiveDynamicProxyGeneratorDiSettings.ProxyGeneratorProvider.GetProxyGenerator(serviceProvider),
+                serviceWraperer);
 
             return massiveServiceProvider;
         }
