@@ -49,7 +49,7 @@ namespace MassiveDynamicProxyGenerator.Microsoft.DependencyInjection.ServiceProv
                 }
             }
 
-            object realInstance = this.GetService(serviceType);
+            object realInstance = this.aspServiceProvider.GetService(serviceType);
             return this.serviceWraperer.ProvideInstance(serviceType, realInstance, this.aspServiceProvider, this.proxygGenerator);
         }
 

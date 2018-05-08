@@ -68,7 +68,7 @@ namespace MassiveDynamicProxyGenerator.DependencyInjection.Test
 
             serviceCollection.AddDecorator<ITypeA, DecoratedTypeA>();
 
-            IServiceProvider serviceProvider = serviceCollection.BuildServiceProvider();
+            IServiceProvider serviceProvider = serviceCollection.BuldIntercepedServiceProvider();
 
             ITypeA instance = serviceProvider.GetRequiredService<ITypeA>();
 
@@ -145,7 +145,7 @@ namespace MassiveDynamicProxyGenerator.DependencyInjection.Test
 
             // serviceCollection.AddDecorator(typeof(IGenericService<>), typeof(DecoratedGenericService<>));
 
-            //IServiceProvider serviceProvider = serviceCollection.BuildServiceProvider();
+            //IServiceProvider serviceProvider = serviceCollection.BuldIntercepedServiceProvider();
 
             //IGenericService<int> instance = serviceProvider.GetRequiredService<IGenericService<int>>();
 

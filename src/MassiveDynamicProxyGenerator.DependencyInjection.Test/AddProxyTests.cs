@@ -28,7 +28,7 @@ namespace MassiveDynamicProxyGenerator.DependencyInjection.Test
 
             serviceCollection.AddProxy<IMessageService>(interceptor);
 
-            IServiceProvider serviceProvider = serviceCollection.BuildServiceProvider();
+            IServiceProvider serviceProvider = serviceCollection.BuldIntercepedServiceProvider();
 
             IMessageService typeA = serviceProvider.GetRequiredService<IMessageService>();
             typeA.ShouldNotBeNull();
@@ -52,7 +52,7 @@ namespace MassiveDynamicProxyGenerator.DependencyInjection.Test
 
             serviceCollection.AddProxy(typeof(IMessageService), interceptor);
 
-            IServiceProvider serviceProvider = serviceCollection.BuildServiceProvider();
+            IServiceProvider serviceProvider = serviceCollection.BuldIntercepedServiceProvider();
 
             IMessageService typeA = serviceProvider.GetRequiredService<IMessageService>();
             typeA.ShouldNotBeNull();
@@ -75,7 +75,7 @@ namespace MassiveDynamicProxyGenerator.DependencyInjection.Test
 
             });
 
-            IServiceProvider serviceProvider = serviceCollection.BuildServiceProvider();
+            IServiceProvider serviceProvider = serviceCollection.BuldIntercepedServiceProvider();
 
             IMessageService typeA = serviceProvider.GetRequiredService<IMessageService>();
             typeA.ShouldNotBeNull();
@@ -98,7 +98,7 @@ namespace MassiveDynamicProxyGenerator.DependencyInjection.Test
 
             });
 
-            IServiceProvider serviceProvider = serviceCollection.BuildServiceProvider();
+            IServiceProvider serviceProvider = serviceCollection.BuldIntercepedServiceProvider();
 
             IMessageService typeA = serviceProvider.GetRequiredService<IMessageService>();
             typeA.ShouldNotBeNull();
@@ -115,7 +115,7 @@ namespace MassiveDynamicProxyGenerator.DependencyInjection.Test
 
             serviceCollection.AddProxy<IMessageService>();
 
-            IServiceProvider serviceProvider = serviceCollection.BuildServiceProvider();
+            IServiceProvider serviceProvider = serviceCollection.BuldIntercepedServiceProvider();
 
             IMessageService typeA = serviceProvider.GetRequiredService<IMessageService>();
             typeA.ShouldNotBeNull();
@@ -129,7 +129,7 @@ namespace MassiveDynamicProxyGenerator.DependencyInjection.Test
 
             serviceCollection.AddProxy(typeof(IMessageService));
 
-            IServiceProvider serviceProvider = serviceCollection.BuildServiceProvider();
+            IServiceProvider serviceProvider = serviceCollection.BuldIntercepedServiceProvider();
 
             IMessageService typeA = serviceProvider.GetRequiredService<IMessageService>();
             typeA.ShouldNotBeNull();
@@ -143,7 +143,7 @@ namespace MassiveDynamicProxyGenerator.DependencyInjection.Test
 
             serviceCollection.AddProxy(typeof(IMessageService), typeof(TypeADependInterceptor));
 
-            IServiceProvider serviceProvider = serviceCollection.BuildServiceProvider();
+            IServiceProvider serviceProvider = serviceCollection.BuldIntercepedServiceProvider();
 
             IMessageService typeA = serviceProvider.GetRequiredService<IMessageService>();
             typeA.ShouldNotBeNull();
@@ -158,7 +158,7 @@ namespace MassiveDynamicProxyGenerator.DependencyInjection.Test
 
             serviceCollection.AddProxy<IMessageService, TypeADependInterceptor>();
 
-            IServiceProvider serviceProvider = serviceCollection.BuildServiceProvider();
+            IServiceProvider serviceProvider = serviceCollection.BuldIntercepedServiceProvider();
 
             IMessageService typeA = serviceProvider.GetRequiredService<IMessageService>();
             typeA.ShouldNotBeNull();
@@ -173,7 +173,7 @@ namespace MassiveDynamicProxyGenerator.DependencyInjection.Test
 
             serviceCollection.AddProxy(typeof(IMessageService), sp => NullInterceptor.Instance);
 
-            IServiceProvider serviceProvider = serviceCollection.BuildServiceProvider();
+            IServiceProvider serviceProvider = serviceCollection.BuldIntercepedServiceProvider();
 
             IMessageService typeA = serviceProvider.GetRequiredService<IMessageService>();
             typeA.ShouldNotBeNull();
@@ -188,7 +188,7 @@ namespace MassiveDynamicProxyGenerator.DependencyInjection.Test
 
             serviceCollection.AddProxy<IMessageService>(sp => NullInterceptor.Instance);
 
-            IServiceProvider serviceProvider = serviceCollection.BuildServiceProvider();
+            IServiceProvider serviceProvider = serviceCollection.BuldIntercepedServiceProvider();
 
             IMessageService typeA = serviceProvider.GetRequiredService<IMessageService>();
             typeA.ShouldNotBeNull();

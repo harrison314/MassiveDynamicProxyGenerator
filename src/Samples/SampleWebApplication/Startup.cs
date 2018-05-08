@@ -23,7 +23,7 @@ namespace SampleWebApplication
             this.Configuration = configuration;
         }
 
-        public void ConfigureServices(IServiceCollection services)
+        public IServiceProvider ConfigureServices(IServiceCollection services)
         {
             services.AddSingleton<IArticleService, MockArticleService>();
 
@@ -37,6 +37,8 @@ namespace SampleWebApplication
             services.AddProxy<ICommonServices, ServiceProviderInterceptor>();
 
             services.AddMvc();
+
+            return services.BuldIntercepedServiceProvider();
         }
 
         public void Configure(IApplicationBuilder app, IHostingEnvironment env)

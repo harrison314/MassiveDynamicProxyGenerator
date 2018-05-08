@@ -46,7 +46,7 @@ namespace MassiveDynamicProxyGenerator.DependencyInjection.Test
 
             serviceCollection.AddInterceptedDecorator<IMessageService, InreceptorDependtypeB>();
 
-            IServiceProvider serviceProvider = serviceCollection.BuildServiceProvider();
+            IServiceProvider serviceProvider = serviceCollection.BuldIntercepedServiceProvider();
 
             IMessageService typeA = serviceProvider.GetRequiredService<IMessageService>();
             typeA.ShouldNotBeNull();
@@ -70,7 +70,7 @@ namespace MassiveDynamicProxyGenerator.DependencyInjection.Test
 
             serviceCollection.AddInterceptedDecorator(typeof(IMessageService), typeof(InreceptorDependtypeB));
 
-            IServiceProvider serviceProvider = serviceCollection.BuildServiceProvider();
+            IServiceProvider serviceProvider = serviceCollection.BuldIntercepedServiceProvider();
 
             IMessageService typeA = serviceProvider.GetRequiredService<IMessageService>();
             typeA.ShouldNotBeNull();
@@ -95,7 +95,7 @@ namespace MassiveDynamicProxyGenerator.DependencyInjection.Test
                 invocation.MethodName.ShouldBe("Send");
             }));
 
-            IServiceProvider serviceProvider = serviceCollection.BuildServiceProvider();
+            IServiceProvider serviceProvider = serviceCollection.BuldIntercepedServiceProvider();
 
             IMessageService typeA = serviceProvider.GetRequiredService<IMessageService>();
             typeA.ShouldNotBeNull();
@@ -126,7 +126,7 @@ namespace MassiveDynamicProxyGenerator.DependencyInjection.Test
                 return interceptor;
             });
 
-            IServiceProvider serviceProvider = serviceCollection.BuildServiceProvider();
+            IServiceProvider serviceProvider = serviceCollection.BuldIntercepedServiceProvider();
 
             IMessageService typeA = serviceProvider.GetRequiredService<IMessageService>();
             typeA.ShouldNotBeNull();
@@ -154,7 +154,7 @@ namespace MassiveDynamicProxyGenerator.DependencyInjection.Test
             serviceCollection.AddInterceptedDecorator(type => type.Name.EndsWith("A") || type.Name.EndsWith("C") || type.Name.EndsWith("Service"),
                 typeof(InreceptorDependtypeB));
 
-            IServiceProvider serviceProvider = serviceCollection.BuildServiceProvider();
+            IServiceProvider serviceProvider = serviceCollection.BuldIntercepedServiceProvider();
 
             IMessageService typeA = serviceProvider.GetRequiredService<IMessageService>();
             typeA.ShouldNotBeNull();
@@ -197,7 +197,7 @@ namespace MassiveDynamicProxyGenerator.DependencyInjection.Test
                 return interceptor;
             });
 
-            IServiceProvider serviceProvider = serviceCollection.BuildServiceProvider();
+            IServiceProvider serviceProvider = serviceCollection.BuldIntercepedServiceProvider();
 
             IMessageService typeA = serviceProvider.GetRequiredService<IMessageService>();
             typeA.ShouldNotBeNull();
@@ -234,7 +234,7 @@ namespace MassiveDynamicProxyGenerator.DependencyInjection.Test
 
             serviceCollection.AddInterceptedDecorator(type => type.Name.EndsWith("A") || type.Name.EndsWith("C") || type.Name.EndsWith("Service"), interceptor);
 
-            IServiceProvider serviceProvider = serviceCollection.BuildServiceProvider();
+            IServiceProvider serviceProvider = serviceCollection.BuldIntercepedServiceProvider();
 
             IMessageService typeA = serviceProvider.GetRequiredService<IMessageService>();
             typeA.ShouldNotBeNull();
