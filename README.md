@@ -41,7 +41,7 @@ Client and server using interface __IExampleServise__ as servise contract.
 ### Generate decorator 
 
 ```cs
- ProxygGenerator generator = new ProxygGenerator();
+ ProxyGenerator generator = new ProxyGenerator();
  Calculator realInstance = new Calculator();
  ICallableInterceptor interceptor = new CallableInterceptorAdapter((invocation) =>
  {
@@ -92,7 +92,7 @@ IInterceptor jsonRpcInterceptor = new InterceptorAdapter((invocation, isDynamic)
     invocation.ReturnValue = response["result"].ToObject(invocation.ReturnType);
 });
 
-ProxygGenerator generator = new ProxygGenerator();
+ProxyGenerator generator = new ProxyGenerator();
 
 ICalculator calcilator = generator.GenerateProxy<ICalculator>(jsonRpcInterceptor);
 
@@ -114,7 +114,7 @@ IInstanceProvicer instanceProvider = new LazyInstanceProvider<ICalculator>(
         return new Calculator();
     }, false);
 
-ProxygGenerator generator = new ProxygGenerator();
+ProxyGenerator generator = new ProxyGenerator();
 ICalculator  calculator = generator.GenerateInstanceProxy<ICalculator>(instanceProvider);
 
 Console.WriteLine("Before call Add with 2013 and 6");
