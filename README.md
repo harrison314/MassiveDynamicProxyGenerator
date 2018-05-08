@@ -294,11 +294,13 @@ public class Startup
         this.Configuration = configuration;
     }
 
-    public void ConfigureServices(IServiceCollection services)
+    public IServiceProvider ConfigureServices(IServiceCollection services)
     {
         services.AddTransient<IMessageService, RealMessageService>();
         services.AddDecorator<IMessageService, MessageServiceDecorator>();
         services.AddMvc();
+
+        return services.BuldIntercepedServiceProvider();
     }
 
     public void Configure(IApplicationBuilder app, IHostingEnvironment env)
@@ -322,7 +324,7 @@ public class Startup
         this.Configuration = configuration;
     }
 
-    public void ConfigureServices(IServiceCollection services)
+    public IServiceProvider ConfigureServices(IServiceCollection services)
     {
         services.Addproxy<IMessageService>(new MyInterceptor());
         // or
@@ -336,6 +338,8 @@ public class Startup
         });
         
         services.AddMvc();
+
+        return services.BuldIntercepedServiceProvider();
     }
 
     public void Configure(IApplicationBuilder app, IHostingEnvironment env)
@@ -359,7 +363,7 @@ public class Startup
         this.Configuration = configuration;
     }
 
-    public void ConfigureServices(IServiceCollection services)
+    public IServiceProvider ConfigureServices(IServiceCollection services)
     {
         services.AddTransient<IMessageService, RealMessageService>();
 
@@ -378,6 +382,8 @@ public class Startup
         }));
 
         services.AddMvc();
+
+        return services.BuldIntercepedServiceProvider();
     }
 
     public void Configure(IApplicationBuilder app, IHostingEnvironment env)
@@ -401,13 +407,15 @@ public class Startup
         this.Configuration = configuration;
     }
 
-    public void ConfigureServices(IServiceCollection services)
+    public IServiceProvider ConfigureServices(IServiceCollection services)
     {
         services.AddInstanceProxy<IMessageService>(new MessageServiceInstanceProvider());
         //or 
         services.AddInstanceProxy<IMessageService>(() => new RealMessageService());
 
         services.AddMvc();
+
+        return services.BuldIntercepedServiceProvider();
     }
 
     public void Configure(IApplicationBuilder app, IHostingEnvironment env)
