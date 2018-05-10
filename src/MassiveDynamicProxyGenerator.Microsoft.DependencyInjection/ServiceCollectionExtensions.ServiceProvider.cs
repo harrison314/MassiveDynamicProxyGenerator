@@ -1,5 +1,6 @@
 ﻿using MassiveDynamicProxyGenerator.Microsoft.DependencyInjection.ServiceProvider;
 using Microsoft.Extensions.DependencyInjection;
+using Microsoft.Extensions.DependencyInjection.Extensions;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -17,6 +18,7 @@ namespace MassiveDynamicProxyGenerator.Microsoft.DependencyInjection
         /// <returns>The <see cref="IServiceProvider"/>.</returns>
         public static IServiceProvider BuildIntercepedServiceProvider(this IServiceCollection services)
         {
+            services.TryAddTransient(typeof(IOriginalService<>), typeof(OriginalService<>));
             IServiceProvider serviceProvider = services.BuildServiceProvider();
             Registrations registrations = serviceProvider.GetService(typeof(Registrations)) as Registrations;
             if (registrations == null || registrations.Count == 0)
@@ -39,6 +41,7 @@ namespace MassiveDynamicProxyGenerator.Microsoft.DependencyInjection
         /// <returns>The <see cref="IServiceProvider"/>.</returns>
         public static IServiceProvider BuildIntercepedServiceProvider(this IServiceCollection services, bool validateScopes)
         {
+            services.TryAddTransient(typeof(IOriginalService<>), typeof(OriginalService<>));
             IServiceProvider serviceProvider = services.BuildServiceProvider(validateScopes);
             Registrations registrations = serviceProvider.GetService(typeof(Registrations)) as Registrations;
             if (registrations == null || registrations.Count == 0)
@@ -65,6 +68,7 @@ namespace MassiveDynamicProxyGenerator.Microsoft.DependencyInjection
         {
             if (options == null) throw new ArgumentNullException(nameof(options));
 
+            services.TryAddTransient(typeof(IOriginalService<>), typeof(OriginalService<>));
             IServiceProvider serviceProvider = services.BuildServiceProvider(options);
             Registrations registrations = serviceProvider.GetService(typeof(Registrations)) as Registrations;
             if (registrations == null || registrations.Count == 0)
@@ -92,6 +96,7 @@ namespace MassiveDynamicProxyGenerator.Microsoft.DependencyInjection
         {
             if (serviceWraperer == null) throw new ArgumentNullException(nameof(serviceWraperer));
 
+            services.TryAddTransient(typeof(IOriginalService<>), typeof(OriginalService<>));
             IServiceProvider serviceProvider = services.BuildServiceProvider();
             MassiveServiceProvider massiveServiceProvider = new MassiveServiceProvider(serviceProvider,
                 MassiveDynamicProxyGeneratorDiSettings.ProxyGeneratorProvider.GetProxyGenerator(serviceProvider),
