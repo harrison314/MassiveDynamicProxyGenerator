@@ -21,7 +21,7 @@
     <PackageReference Include="MSTest.TestAdapter" Version="1.1.18" />
     <PackageReference Include="MSTest.TestFramework" Version="1.1.18" />
     <PackageReference Include="Shouldly" Version="2.8.3" />
-    <PackageReference Include="SimpleInjector" Version="4.2.2" />
+    <PackageReference Include="SimpleInjector" Version="4.3.0" />
   </ItemGroup>
   
   <ItemGroup>
