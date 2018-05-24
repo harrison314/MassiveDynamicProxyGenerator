@@ -4,6 +4,7 @@ using System;
 using System.Collections.Generic;
 using System.Text;
 using Microsoft.Extensions.DependencyInjection;
+using Microsoft.Extensions.DependencyInjection.Extensions;
 
 namespace MassiveDynamicProxyGenerator.Microsoft.DependencyInjection
 {
@@ -259,7 +260,7 @@ namespace MassiveDynamicProxyGenerator.Microsoft.DependencyInjection
 
         private static Registrations EnshureRegistration(IServiceCollection services)
         {
-            foreach (var register in services)
+            foreach (ServiceDescriptor register in services)
             {
                 if (register.ImplementationType == typeof(Registrations))
                 {
@@ -269,6 +270,7 @@ namespace MassiveDynamicProxyGenerator.Microsoft.DependencyInjection
 
             Registrations registration = new Registrations();
             services.Add(new ServiceDescriptor(typeof(Registrations), registration));
+            services.TryAddTransient(typeof(IOriginalService<>), typeof(OriginalService<>));
 
             return registration;
         }
