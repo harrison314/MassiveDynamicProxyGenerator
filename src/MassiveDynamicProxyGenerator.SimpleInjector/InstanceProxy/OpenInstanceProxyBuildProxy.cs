@@ -14,13 +14,13 @@ namespace MassiveDynamicProxyGenerator.SimpleInjector.InstanceProxy
             .GetMethod(nameof(IProxyGenerator.GenerateInstanceProxy), new Type[] { typeof(Type), typeof(IInstanceProvicer), });
 
         private readonly IProxyGenerator generator;
-        private readonly Type serviseType;
+        private readonly Type serviceType;
         private readonly Type instanceProducerType;
 
-        public OpenInstanceProxyBuildProxy(IProxyGenerator generator, Type serviseType, Type instanceProducerType)
+        public OpenInstanceProxyBuildProxy(IProxyGenerator generator, Type serviceType, Type instanceProducerType)
         {
             this.generator = generator;
-            this.serviseType = serviseType;
+            this.serviceType = serviceType;
             this.instanceProducerType = instanceProducerType;
         }
 
@@ -42,7 +42,7 @@ namespace MassiveDynamicProxyGenerator.SimpleInjector.InstanceProxy
 
         protected bool CheckTypeToIntercept(Type interfaceType)
         {
-            return interfaceType.GetTypeInfo().IsInterface && TypeHelper.IsGenericConstructedOf(this.serviseType, interfaceType);
+            return interfaceType.GetTypeInfo().IsInterface && TypeHelper.IsGenericConstructedOf(this.serviceType, interfaceType);
         }
     }
 }

@@ -8,16 +8,16 @@ using SimpleInjector;
 namespace MassiveDynamicProxyGenerator.SimpleInjector.Interception
 {
     /// <summary>
-    /// Bulder for prxy interception.
+    /// Builder for proxy interception.
     /// </summary>
-    internal abstract class InterceptedProxyBulder
+    internal abstract class InterceptedProxyBuilder
     {
         protected static readonly MethodInfo GenerateProxyMethod = typeof(IProxyGenerator).GetTypeInfo()
                     .GetMethod(nameof(IProxyGenerator.GenerateProxy), new[] { typeof(Type), typeof(IInterceptor) });
 
         private readonly IProxyGenerator generator;
 
-        public InterceptedProxyBulder(IProxyGenerator generator)
+        public InterceptedProxyBuilder(IProxyGenerator generator)
         {
             this.generator = generator;
         }

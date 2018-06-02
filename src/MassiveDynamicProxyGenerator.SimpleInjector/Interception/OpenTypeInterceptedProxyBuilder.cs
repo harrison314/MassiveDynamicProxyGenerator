@@ -6,15 +6,15 @@ using SimpleInjector;
 
 namespace MassiveDynamicProxyGenerator.SimpleInjector.Interception
 {
-    internal class OpenTypeInterceptedProxyBuilder : InterceptedProxyBulder
+    internal class OpenTypeInterceptedProxyBuilder : InterceptedProxyBuilder
     {
-        private readonly Type serviseType;
+        private readonly Type serviceType;
         private readonly Type interceptorType;
 
-        public OpenTypeInterceptedProxyBuilder(IProxyGenerator generator, Type serviseType, Type interceptorType)
+        public OpenTypeInterceptedProxyBuilder(IProxyGenerator generator, Type serviceType, Type interceptorType)
             : base(generator)
         {
-            this.serviseType = serviseType;
+            this.serviceType = serviceType;
             this.interceptorType = interceptorType;
         }
 
@@ -28,7 +28,7 @@ namespace MassiveDynamicProxyGenerator.SimpleInjector.Interception
 
         protected override bool CheckTypeToIntercept(Type interfaceType)
         {
-            return TypeHelper.IsGenericConstructedOf(this.serviseType, interfaceType);
+            return TypeHelper.IsGenericConstructedOf(this.serviceType, interfaceType);
         }
     }
 }

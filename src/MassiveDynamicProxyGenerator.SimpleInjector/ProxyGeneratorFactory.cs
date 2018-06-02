@@ -5,14 +5,14 @@ using System.Text;
 namespace MassiveDynamicProxyGenerator.SimpleInjector
 {
     /// <summary>
-    /// Class representes singlton for generate <see cref="IProxyGenerator"/>.
+    /// Class represents singleton for generate <see cref="IProxyGenerator"/>.
     /// </summary>
     public static class ProxyGeneratorFactory
     {
         private static IProxyGeneratorFactory factory;
 
         /// <summary>
-        /// Gets the instance offactory.
+        /// Gets the instance of factory.
         /// </summary>
         /// <value>
         /// The instance of factory.

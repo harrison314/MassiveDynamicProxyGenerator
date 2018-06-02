@@ -1,20 +1,20 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Linq.Expressions;
-using System.Text;
 using System.Reflection;
+using System.Text;
 using SimpleInjector;
 
 namespace MassiveDynamicProxyGenerator.SimpleInjector.Interception
 {
-    internal class FuncInterceptedProxyBulder : InterceptedProxyBulder
+    internal class OpenFuncInterceptedProxyBuilder : InterceptedProxyBuilder
     {
         private static readonly MethodInfo InvokeMethod = typeof(Func<IInterceptor>).GetTypeInfo().GetMethod(nameof(Func<IInterceptor>.Invoke));
 
         private readonly Type serviceType;
         private readonly Func<IInterceptor> interceptorFactory;
 
-        public FuncInterceptedProxyBulder(IProxyGenerator generator, Type serviceType, Func<IInterceptor> interceptorFactory)
+        public OpenFuncInterceptedProxyBuilder(IProxyGenerator generator, Type serviceType, Func<IInterceptor> interceptorFactory)
             : base(generator)
         {
             this.serviceType = serviceType;
@@ -28,7 +28,7 @@ namespace MassiveDynamicProxyGenerator.SimpleInjector.Interception
 
         protected override bool CheckTypeToIntercept(Type interfaceType)
         {
-            return this.serviceType == interfaceType;
+            return TypeHelper.IsGenericConstructedOf(this.serviceType, interfaceType);
         }
     }
 }

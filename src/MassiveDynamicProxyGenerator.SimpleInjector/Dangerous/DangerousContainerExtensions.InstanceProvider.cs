@@ -28,7 +28,7 @@ namespace MassiveDynamicProxyGenerator.SimpleInjector.Dangerous
         /// or
         /// Parameter instanceProviderType assignable to IInstanceProvicer.
         /// or
-        /// ArgumentsserviceType and instanceProviderType must by both concerete types or open generic types.
+        /// ArgumentsserviceType and instanceProviderType must by both concrete types or open generic types.
         /// or
         /// Arguments serviceType and instanceProviderType must have the same count of generic arguments.
         /// </exception>
@@ -64,12 +64,12 @@ namespace MassiveDynamicProxyGenerator.SimpleInjector.Dangerous
 
             if (isServiceTypeOpenGeneric == true && isInstanceProviderOpenGeneric == false)
             {
-                throw new ArgumentException($"Arguments {nameof(serviceType)} and {nameof(instanceProviderType)} must by both concerete types or open generic types. Argument {nameof(serviceType)} is open generic type and {nameof(instanceProviderType)} is not open generic type.");
+                throw new ArgumentException($"Arguments {nameof(serviceType)} and {nameof(instanceProviderType)} must by both concrete types or open generic types. Argument {nameof(serviceType)} is open generic type and {nameof(instanceProviderType)} is not open generic type.");
             }
 
             if (isServiceTypeOpenGeneric == false && isInstanceProviderOpenGeneric == true)
             {
-                throw new ArgumentException($"Arguments {nameof(serviceType)} and {nameof(instanceProviderType)} must by both concerete types or open generic types. Argument {nameof(instanceProviderType)} is open generic type and {nameof(serviceType)} is not open generic type.");
+                throw new ArgumentException($"Arguments {nameof(serviceType)} and {nameof(instanceProviderType)} must by both concrete types or open generic types. Argument {nameof(instanceProviderType)} is open generic type and {nameof(serviceType)} is not open generic type.");
             }
 
             IProxyGenerator generator = ProxyGeneratorFactory.Factory.GetInstance();
@@ -105,7 +105,7 @@ namespace MassiveDynamicProxyGenerator.SimpleInjector.Dangerous
         /// <typeparam name="TService">The type of the service.</typeparam>
         /// <typeparam name="TInstanceProvider">The type of the instance provider.</typeparam>
         /// <param name="container">The container.</param>
-        /// <param name="lifeStyle">The service life style - must by scoped or singlton.</param>
+        /// <param name="lifeStyle">The service life style - must by scoped or singleton.</param>
         /// <exception cref="System.ArgumentNullException">lifeStyle</exception>
         /// <exception cref="System.ArgumentException">Generic parameter TService is not public interface.</exception>
         public static void RegisterInstanceProxy<TService, TInstanceProvider>(this Container container, Lifestyle lifeStyle)

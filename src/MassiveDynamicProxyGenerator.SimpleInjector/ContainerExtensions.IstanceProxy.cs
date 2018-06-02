@@ -43,7 +43,7 @@ namespace MassiveDynamicProxyGenerator.SimpleInjector
         }
 
         /// <summary>
-        /// Registers the instance proxy (using isntance).
+        /// Registers the instance proxy (using instance).
         /// </summary>
         /// <param name="container">The container.</param>
         /// <param name="serviceType">Type of the service.</param>
@@ -149,7 +149,7 @@ namespace MassiveDynamicProxyGenerator.SimpleInjector
         /// </summary>
         /// <param name="container">The container.</param>
         /// <param name="serviceType">Type of the service.</param>
-        /// <param name="instanceProvider">The instance provider genrates instance of service type.</param>
+        /// <param name="instanceProvider">The instance provider generates instance of service type.</param>
         /// <exception cref="System.ArgumentNullException">
         /// serviceType
         /// or
@@ -187,7 +187,7 @@ namespace MassiveDynamicProxyGenerator.SimpleInjector
         /// </summary>
         /// <param name="container">The container.</param>
         /// <param name="serviceType">Type of the service.</param>
-        /// <param name="instanceProvider">The instance provider genrates instance of service type.</param>
+        /// <param name="instanceProvider">The instance provider generates instance of service type.</param>
         /// <param name="lifeStyle">The service life style.</param>
         /// <exception cref="System.ArgumentNullException">
         /// serviceType
@@ -235,7 +235,7 @@ namespace MassiveDynamicProxyGenerator.SimpleInjector
         /// </summary>
         /// <typeparam name="TService">The type of the service.</typeparam>
         /// <param name="container">The container.</param>
-        /// <param name="instanceProvider">The instance provider genrates instance of service type.</param>
+        /// <param name="instanceProvider">The instance provider generates instance of service type.</param>
         /// <exception cref="System.ArgumentNullException">instanceProvider</exception>
         /// <exception cref="System.ArgumentException">Generic parameter TService is not public interface.</exception>
         public static void RegisterInstanceProxy<TService>(this Container container, Func<TService> instanceProvider)
@@ -261,7 +261,7 @@ namespace MassiveDynamicProxyGenerator.SimpleInjector
         /// </summary>
         /// <typeparam name="TService">The type of the service.</typeparam>
         /// <param name="container">The container.</param>
-        /// <param name="instanceProvider">The instance provider genrates instance of service type.</param>
+        /// <param name="instanceProvider">The instance provider generates instance of service type.</param>
         /// <param name="lifeStyle">The service life style.</param>
         /// <exception cref="System.ArgumentNullException">
         /// instanceProvider

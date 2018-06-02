@@ -16,7 +16,7 @@ namespace MassiveDynamicProxyGenerator.SimpleInjector
         /// Using interceptor to decorate all types that match the predicate.
         /// </summary>
         /// <param name="container">The container.</param>
-        /// <param name="interceptorType">Type of the interceptor. Registred in container or with default constructor.</param>
+        /// <param name="interceptorType">Type of the interceptor. Registered in container or with default constructor.</param>
         /// <param name="predicate">The predicate.</param>
         /// <exception cref="System.ArgumentNullException">
         /// interceptorType
@@ -33,7 +33,7 @@ namespace MassiveDynamicProxyGenerator.SimpleInjector
 
             if (!typeof(ICallableInterceptor).GetTypeInfo().IsAssignableFrom(interceptorType))
             {
-                throw new ArgumentException($"Type parameter {nameof(interceptorType)} is not asssignable to {typeof(ICallableInterceptor).FullName}.", nameof(interceptorType));
+                throw new ArgumentException($"Type parameter {nameof(interceptorType)} is not assignable to {typeof(ICallableInterceptor).FullName}.", nameof(interceptorType));
             }
 
             if (predicate == null)

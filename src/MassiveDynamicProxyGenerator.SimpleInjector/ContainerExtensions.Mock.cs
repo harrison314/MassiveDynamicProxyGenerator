@@ -12,7 +12,7 @@ namespace MassiveDynamicProxyGenerator.SimpleInjector
     {
         /// <summary>
         /// Registers the mock for service <typeparamref name="TService"/> to container.
-        /// (With defult lifestyle).
+        /// (With default lifestyle).
         /// </summary>
         /// <typeparam name="TService">The type of the service. Must by public interface.</typeparam>
         /// <param name="container">The container.</param>
@@ -35,8 +35,8 @@ namespace MassiveDynamicProxyGenerator.SimpleInjector
         }
 
         /// <summary>
-        /// Registers the mock for service <paramref name="mockType"/> (is posssible use open generic) to container.
-        /// (With defult lifestyle).
+        /// Registers the mock for service <paramref name="mockType"/> (is possible use open generic) to container.
+        /// (With default lifestyle).
         /// </summary>
         /// <param name="container">The container.</param>
         /// <param name="mockType">Type of the mock. Must by public interface.</param>

@@ -11,11 +11,11 @@ namespace MassiveDynamicProxyGenerator.SimpleInjector.Dangerous
     public static partial class DangerousContainerExtensions
     {
         /// <summary>
-        /// Register mocks for all unregistred types in container.
+        /// Register mocks for all unregistered types in container.
         /// This operation use only design mode or tests.
         /// </summary>
         /// <param name="container">The container.</param>
-        public static void RegisterAllUnregistredAsMock(this Container container)
+        public static void RegisterAllUnregisteredAsMock(this Container container)
         {
             IProxyGenerator generator = ProxyGeneratorFactory.Factory.GetInstance();
 

@@ -5,7 +5,7 @@ using System.Text;
 namespace MassiveDynamicProxyGenerator.SimpleInjector
 {
     /// <summary>
-    /// Interface representes factory for crate <see cref="IProxyGenerator"/>
+    /// Interface represents factory for crate <see cref="IProxyGenerator"/>
     /// for Simple Injector extensions.
     /// </summary>
     /// <seealso cref="IProxyGenerator"/>
