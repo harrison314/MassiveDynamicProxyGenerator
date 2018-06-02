@@ -8,7 +8,7 @@ using System.Threading.Tasks;
 namespace MassiveDynamicProxyGenerator.TypedDecorator
 {
     /// <summary>
-    /// Internal interceptor descriptr.
+    /// Internal interceptor descriptor.
     /// </summary>
     internal class CallableInterceptorDescriptor
     {

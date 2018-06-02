@@ -9,7 +9,7 @@ using System.Threading.Tasks;
 namespace MassiveDynamicProxyGenerator.DynamicProxy
 {
     /// <summary>
-    /// Class representes dynamic invocation.
+    /// Class represented dynamic invocation.
     /// </summary>
     /// <seealso cref="MassiveDynamicProxyGenerator.IInvocation" />
     internal class DynamicInvocation : IInvocation
@@ -74,7 +74,7 @@ namespace MassiveDynamicProxyGenerator.DynamicProxy
         /// Gets or sets the name of the intercept method.
         /// </summary>
         /// <value>
-        /// The name of the tntercept method.
+        /// The name of the intercept method.
         /// </value>
         public string MethodName
         {
@@ -151,10 +151,10 @@ namespace MassiveDynamicProxyGenerator.DynamicProxy
         }
 
         /// <summary>
-        /// Gets the <see cref="MethodBase" /> as representation of intecept method. Retusrns <c>null</c>.
+        /// Gets the <see cref="MethodBase" /> as representation of intercept method. Returns <c>null</c>.
         /// </summary>
         /// <returns>
-        /// Allwais <c>null</c>. It's dynamic invocation.
+        /// Always <c>null</c>. It's dynamic invocation.
         /// </returns>
         public MethodBase GetConcreteMethod()
         {

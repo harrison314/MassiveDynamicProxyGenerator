@@ -7,7 +7,7 @@ using System.Threading.Tasks;
 namespace MassiveDynamicProxyGenerator.Utils
 {
     /// <summary>
-    /// Instance representes type request for cahce.
+    /// Instance represented type request for cache.
     /// </summary>
     internal interface ITypeRquest
     {

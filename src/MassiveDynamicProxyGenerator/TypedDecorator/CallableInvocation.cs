@@ -9,7 +9,7 @@ using System.Threading.Tasks;
 namespace MassiveDynamicProxyGenerator.TypedDecorator
 {
     /// <summary>
-    /// Class representes callable invocation.
+    /// Class represented callable invocation.
     /// </summary>
     /// <seealso cref="MassiveDynamicProxyGenerator.ICallableInvocation" />
     public class CallableInvocation : ICallableInvocation
@@ -65,7 +65,7 @@ namespace MassiveDynamicProxyGenerator.TypedDecorator
         /// Gets or sets the name of the intercept method.
         /// </summary>
         /// <value>
-        /// The name of the tntercept method.
+        /// The name of the intercept method.
         /// </value>
         public string MethodName
         {
@@ -167,7 +167,7 @@ namespace MassiveDynamicProxyGenerator.TypedDecorator
         }
 
         /// <summary>
-        /// Gets the <see cref="MethodBase" /> as representation of intecept method.
+        /// Gets the <see cref="MethodBase" /> as representation of intercept method.
         /// </summary>
         /// <returns>
         /// The <see cref="MethodBase" /> of intercept method.

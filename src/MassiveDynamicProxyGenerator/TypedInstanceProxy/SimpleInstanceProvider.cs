@@ -7,7 +7,7 @@ using System.Threading.Tasks;
 namespace MassiveDynamicProxyGenerator.TypedInstanceProxy
 {
     /// <summary>
-    /// Class representes simple instance povider, allwais returns one instance.
+    /// Class represented simple instance provided, avails returns one instance.
     /// </summary>
     /// <typeparam name="T">Type of instance.</typeparam>
     /// <seealso cref="MassiveDynamicProxyGenerator.IInstanceProvicer" />

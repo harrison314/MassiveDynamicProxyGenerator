@@ -43,7 +43,7 @@ namespace MassiveDynamicProxyGenerator.Tests
             Mock<IReturnTypes> parent = new Mock<IReturnTypes>(MockBehavior.Strict);
 
             Mock<ICallableInterceptor> interceptor = new Mock<ICallableInterceptor>(MockBehavior.Strict);
-            interceptor.Setup(t => t.Intercept(It.Is<ICallableInvocation>(q => q.MethodName == nameof(IReturnTypes.GetLenght))))
+            interceptor.Setup(t => t.Intercept(It.Is<ICallableInvocation>(q => q.MethodName == nameof(IReturnTypes.GetLength))))
                 .Callback<ICallableInvocation>(invocation =>
                 {
                 });
@@ -53,7 +53,7 @@ namespace MassiveDynamicProxyGenerator.Tests
 
             instance.ShouldNotBeNull();
 
-            instance.GetLenght("any string").ShouldBe(default(int));
+            instance.GetLength("any string").ShouldBe(default(int));
 
             parent.VerifyAll();
             interceptor.VerifyAll();
@@ -95,7 +95,7 @@ namespace MassiveDynamicProxyGenerator.Tests
             const int newReturnValue = 6;
 
             Mock<IReturnTypes> parent = new Mock<IReturnTypes>(MockBehavior.Strict);
-            parent.Setup(t => t.GetLenght(It.IsNotNull<string>()))
+            parent.Setup(t => t.GetLength(It.IsNotNull<string>()))
                 .Returns(retValue).Verifiable();
 
             Mock<ICallableInterceptor> interceptor = new Mock<ICallableInterceptor>(MockBehavior.Strict);
@@ -112,7 +112,7 @@ namespace MassiveDynamicProxyGenerator.Tests
 
             instance.ShouldNotBeNull();
 
-            instance.GetLenght("any").ShouldBe(newReturnValue);
+            instance.GetLength("any").ShouldBe(newReturnValue);
 
             parent.VerifyAll();
             interceptor.VerifyAll();
@@ -125,7 +125,7 @@ namespace MassiveDynamicProxyGenerator.Tests
             const string parameter = "lorem ipsun dental";
 
             Mock<IReturnTypes> parent = new Mock<IReturnTypes>(MockBehavior.Strict);
-            parent.Setup(t => t.GetLenght(parameter))
+            parent.Setup(t => t.GetLength(parameter))
                 .Returns(retValue).Verifiable();
 
             Mock<ICallableInterceptor> interceptor = new Mock<ICallableInterceptor>(MockBehavior.Strict);
@@ -141,7 +141,7 @@ namespace MassiveDynamicProxyGenerator.Tests
 
             instance.ShouldNotBeNull();
 
-            instance.GetLenght("any").ShouldBe(retValue);
+            instance.GetLength("any").ShouldBe(retValue);
 
             parent.VerifyAll();
             interceptor.VerifyAll();

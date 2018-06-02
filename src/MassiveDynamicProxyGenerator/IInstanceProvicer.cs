@@ -7,7 +7,7 @@ using System.Threading.Tasks;
 namespace MassiveDynamicProxyGenerator
 {
     /// <summary>
-    /// Interface representes instance provider.
+    /// Interface represented instance provider.
     /// </summary>
     /// <seealso cref="System.IDisposable" />
     public interface IInstanceProvicer : IDisposable

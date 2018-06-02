@@ -48,9 +48,9 @@ namespace MassiveDynamicProxyGenerator.Utils
         /// Initializes a new instance of the <see cref="MultyTypeRquest"/> class.
         /// </summary>
         /// <param name="interfaceTypes">The interface types.</param>
-        /// <param name="decoraorType">Type of the decoraor.</param>
+        /// <param name="decoratorType">Type of the decorator.</param>
         /// <exception cref="ArgumentNullException">interfaceTypes</exception>
-        public MultyTypeRquest(Type[] interfaceTypes, TypedDecoratorType decoraorType)
+        public MultyTypeRquest(Type[] interfaceTypes, TypedDecoratorType decoratorType)
         {
             if (interfaceTypes == null)
             {
@@ -61,8 +61,8 @@ namespace MassiveDynamicProxyGenerator.Utils
             Array.Sort<Type>(types, (a, b) => a.AssemblyQualifiedName.CompareTo(b.AssemblyQualifiedName));
 
             this.interfaceTypes = types;
-            this.decoraorType = decoraorType;
-            this.hashCode = this.CalculateHashCode(types, decoraorType);
+            this.decoraorType = decoratorType;
+            this.hashCode = this.CalculateHashCode(types, decoratorType);
         }
 
         /// <summary>

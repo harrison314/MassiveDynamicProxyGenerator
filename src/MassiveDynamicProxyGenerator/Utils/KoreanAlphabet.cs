@@ -7,7 +7,7 @@ using System.Threading.Tasks;
 namespace MassiveDynamicProxyGenerator.Utils
 {
     /// <summary>
-    /// Class representes korean alphabet.
+    /// Class represented korean alphabet.
     /// </summary>
     internal class KoreanAlphabet
     {
@@ -80,15 +80,15 @@ namespace MassiveDynamicProxyGenerator.Utils
         /// <summary>
         /// Generates the random.
         /// </summary>
-        /// <param name="randomSourse">The random sourse.</param>
-        /// <param name="lenght">The lenght.</param>
+        /// <param name="randomSource">The random source.</param>
+        /// <param name="length">The length.</param>
         /// <returns>Text representation.</returns>
-        public static string GenerateRandom(Random randomSourse, int lenght)
+        public static string GenerateRandom(Random randomSource, int length)
         {
-            char[] array = new char[lenght];
-            for (int i = 0; i < lenght; i++)
+            char[] array = new char[length];
+            for (int i = 0; i < length; i++)
             {
-                int index = randomSourse.Next(0, alphabet.Length);
+                int index = randomSource.Next(0, alphabet.Length);
                 array[i] = alphabet[index];
             }
 

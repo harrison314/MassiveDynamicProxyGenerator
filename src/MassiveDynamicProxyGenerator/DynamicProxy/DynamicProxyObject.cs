@@ -10,7 +10,7 @@ using System.Threading.Tasks;
 namespace MassiveDynamicProxyGenerator.DynamicProxy
 {
     /// <summary>
-    /// proxy object for dynmaic interception.
+    /// proxy object for dynamic interception.
     /// </summary>
     /// <seealso cref="System.Dynamic.DynamicObject" />
     internal class DynamicProxyObject : DynamicObject

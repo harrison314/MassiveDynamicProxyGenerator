@@ -57,7 +57,7 @@ namespace MassiveDynamicProxyGenerator.TypedDecorator
         }
 
         /// <summary>
-        /// Implementses the constructor.
+        /// Implements the constructor.
         /// </summary>
         /// <param name="typeBuilder">The type builder.</param>
         /// <param name="interfaceType">Type of the interface.</param>
@@ -109,7 +109,7 @@ namespace MassiveDynamicProxyGenerator.TypedDecorator
         /// <param name="interfaceMethod">The interface method.</param>
         /// <param name="parameters">The parameters.</param>
         /// <param name="interfaceType">Type of the interface.</param>
-        /// <param name="il">The il.</param>
+        /// <param name="il">The IL generator.</param>
         /// <param name="context">The context.</param>
         protected override void GenerateMethod(MethodInfo interfaceMethod, Type[] parameters, Type interfaceType, ILGenerator il, GenerateUnion context)
         {
@@ -121,7 +121,7 @@ namespace MassiveDynamicProxyGenerator.TypedDecorator
             il.Emit(OpCodes.Newobj, this.callableInvocationDescriptor.Constructor);
             il.Emit(OpCodes.Stloc, invocationVar);
 
-            // invocation.Arguments = new object[params.Lenght];
+            // invocation.Arguments = new object[params.Length];
             il.Emit(OpCodes.Ldloc, invocationVar);
             il.Emit(OpCodes.Ldc_I4, parameters.Length);
             il.Emit(OpCodes.Newarr, typeof(object));
@@ -214,13 +214,13 @@ namespace MassiveDynamicProxyGenerator.TypedDecorator
         /// <summary>
         /// Generates the get property.
         /// </summary>
-        /// <param name="interfaceProperity">The interface properity.</param>
+        /// <param name="interfaceProperty">The interface property.</param>
         /// <param name="interfaceType">Type of the interface.</param>
         /// <param name="il">The il.</param>
         /// <param name="context">The context.</param>
-        protected override void GenerateGetProperty(PropertyInfo interfaceProperity, Type interfaceType, ILGenerator il, GenerateUnion context)
+        protected override void GenerateGetProperty(PropertyInfo interfaceProperty, Type interfaceType, ILGenerator il, GenerateUnion context)
         {
-            MethodInfo methodInfo = interfaceProperity.GetGetMethod();
+            MethodInfo methodInfo = interfaceProperty.GetGetMethod();
             Type[] parameters = methodInfo.GetParameters().Select(t => t.ParameterType).ToArray();
             MethodBuilder processMethod = this.ImplementParentCallMethod(this.TypeBuilder, interfaceType, methodInfo);
 

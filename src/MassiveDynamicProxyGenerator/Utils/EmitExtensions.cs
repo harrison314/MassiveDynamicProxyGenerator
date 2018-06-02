@@ -54,7 +54,7 @@ namespace MassiveDynamicProxyGenerator.Utils
         /// <summary>
         /// Emits the box if needed.
         /// </summary>
-        /// <param name="il">The IL genarator.</param>
+        /// <param name="il">The IL generator.</param>
         /// <param name="type">The type.</param>
         /// <exception cref="ArgumentNullException">
         /// il

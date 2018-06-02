@@ -7,7 +7,7 @@ using System.Threading.Tasks;
 namespace MassiveDynamicProxyGenerator
 {
     /// <summary>
-    /// Interface representes callable invocation informations.
+    /// Interface represented callable invocation informations.
     /// </summary>
     /// <seealso cref="MassiveDynamicProxyGenerator.IInvocation" />
     public interface ICallableInvocation : IInvocation

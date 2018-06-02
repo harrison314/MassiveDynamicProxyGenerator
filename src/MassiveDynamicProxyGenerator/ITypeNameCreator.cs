@@ -21,9 +21,9 @@ namespace MassiveDynamicProxyGenerator
         /// Creates the name of the type.
         /// </summary>
         /// <param name="prefix">The name prefix.</param>
-        /// <param name="lenght">The lenght of name.</param>
+        /// <param name="length">The length of name.</param>
         /// <returns>A new name of the type.</returns>
-        string CreateTypeName(string prefix, int lenght);
+        string CreateTypeName(string prefix, int length);
 
         /// <summary>
         /// Creates the name of the method.
@@ -35,8 +35,8 @@ namespace MassiveDynamicProxyGenerator
         /// Creates the name of the method.
         /// </summary>
         /// <param name="prefix">The name prefix.</param>
-        /// <param name="lenght">The lenght of name.</param>
+        /// <param name="length">The length of name.</param>
         /// <returns>A new name of the method.</returns>
-        string CreateMethodName(string prefix, int lenght);
+        string CreateMethodName(string prefix, int length);
     }
 }

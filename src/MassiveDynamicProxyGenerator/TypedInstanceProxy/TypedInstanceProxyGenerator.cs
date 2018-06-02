@@ -38,7 +38,7 @@ namespace MassiveDynamicProxyGenerator.TypedInstanceProxy
         }
 
         /// <summary>
-        /// Implementses the constructor.
+        /// Implements the constructor.
         /// </summary>
         /// <param name="typeBuilder">The type builder.</param>
         /// <param name="interfaceType">Type of the interface.</param>
@@ -67,35 +67,35 @@ namespace MassiveDynamicProxyGenerator.TypedInstanceProxy
         /// <summary>
         /// Generates the get property.
         /// </summary>
-        /// <param name="interfaceProperity">The interface properity.</param>
+        /// <param name="interfaceProperty">The interface property.</param>
         /// <param name="interfaceType">Type of the interface.</param>
-        /// <param name="il">The il.</param>
+        /// <param name="il">The IL generator.</param>
         /// <param name="context">The context.</param>
-        protected override void GenerateGetProperty(PropertyInfo interfaceProperity, Type interfaceType, ILGenerator il, object context)
+        protected override void GenerateGetProperty(PropertyInfo interfaceProperty, Type interfaceType, ILGenerator il, object context)
         {
             il.Emit(OpCodes.Ldarg_0);
             il.Emit(OpCodes.Ldfld, this.instanceProvicerField);
             il.Emit(OpCodes.Callvirt, this.descriptor.GetInstance);
             il.Emit(OpCodes.Castclass, interfaceType);
-            il.Emit(OpCodes.Callvirt, interfaceProperity.GetGetMethod());
+            il.Emit(OpCodes.Callvirt, interfaceProperty.GetGetMethod());
             il.Emit(OpCodes.Ret);
         }
 
         /// <summary>
         /// Generates the set property.
         /// </summary>
-        /// <param name="interfaceProperity">The interface properity.</param>
+        /// <param name="interfaceProperty">The interface property.</param>
         /// <param name="interfaceType">Type of the interface.</param>
-        /// <param name="il">The il.</param>
+        /// <param name="il">The IL generator.</param>
         /// <param name="context">The context.</param>
-        protected override void GenerateSetProperty(PropertyInfo interfaceProperity, Type interfaceType, ILGenerator il, object context)
+        protected override void GenerateSetProperty(PropertyInfo interfaceProperty, Type interfaceType, ILGenerator il, object context)
         {
             il.Emit(OpCodes.Ldarg_0);
             il.Emit(OpCodes.Ldfld, this.instanceProvicerField);
             il.Emit(OpCodes.Callvirt, this.descriptor.GetInstance);
             il.Emit(OpCodes.Castclass, interfaceType);
             il.Emit(OpCodes.Ldarg_1);
-            il.Emit(OpCodes.Callvirt, interfaceProperity.GetSetMethod());
+            il.Emit(OpCodes.Callvirt, interfaceProperty.GetSetMethod());
             il.Emit(OpCodes.Ret);
         }
 
@@ -105,7 +105,7 @@ namespace MassiveDynamicProxyGenerator.TypedInstanceProxy
         /// <param name="interfaceMethod">The interface method.</param>
         /// <param name="parameters">The parameters.</param>
         /// <param name="interfaceType">Type of the interface.</param>
-        /// <param name="il">The il.</param>
+        /// <param name="il">The IL generator.</param>
         /// <param name="context">The context.</param>
         protected override void GenerateMethod(MethodInfo interfaceMethod, Type[] parameters, Type interfaceType, ILGenerator il, object context)
         {

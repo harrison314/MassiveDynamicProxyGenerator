@@ -11,7 +11,7 @@ namespace MassiveDynamicProxyGenerator
     /// <seealso cref="MassiveDynamicProxyGenerator.ITypeNameCreator" />
     public class KoreanTypeNameCreator : ITypeNameCreator
     {
-        private readonly int defaultTypeLenght;
+        private readonly int defaultTypeLength;
         private readonly Random rand;
         private int counter;
 
@@ -20,7 +20,7 @@ namespace MassiveDynamicProxyGenerator
         /// </summary>
         public KoreanTypeNameCreator()
         {
-            this.defaultTypeLenght = 7;
+            this.defaultTypeLength = 7;
             this.counter = 10000;
             this.rand = new Random(DateTime.Now.Millisecond);
         }
@@ -28,11 +28,11 @@ namespace MassiveDynamicProxyGenerator
         /// <summary>
         /// Initializes a new instance of the <see cref="KoreanTypeNameCreator"/> class.
         /// </summary>
-        /// <param name="defaultTypeLenght">The default type lenght.</param>
-        public KoreanTypeNameCreator(int defaultTypeLenght)
+        /// <param name="defaultTypeLength">The default type length.</param>
+        public KoreanTypeNameCreator(int defaultTypeLength)
         {
             // TODO: vynimka
-            this.defaultTypeLenght = defaultTypeLenght;
+            this.defaultTypeLength = defaultTypeLength;
             this.counter = 10000;
             this.rand = new Random(DateTime.Now.Millisecond);
         }
@@ -46,12 +46,12 @@ namespace MassiveDynamicProxyGenerator
         public string CreateMethodName()
         {
             int count = Interlocked.Increment(ref this.counter);
-            StringBuilder sb = new StringBuilder(this.defaultTypeLenght);
+            StringBuilder sb = new StringBuilder(this.defaultTypeLength);
 
             sb.Append(KoreanAlphabet.GenerateString(count));
-            if (this.defaultTypeLenght > sb.Length)
+            if (this.defaultTypeLength > sb.Length)
             {
-                string apendix = KoreanAlphabet.GenerateRandom(this.rand, this.defaultTypeLenght - sb.Length);
+                string apendix = KoreanAlphabet.GenerateRandom(this.rand, this.defaultTypeLength - sb.Length);
                 sb.Append(apendix);
             }
 
@@ -62,32 +62,32 @@ namespace MassiveDynamicProxyGenerator
         /// Creates the name of the method.
         /// </summary>
         /// <param name="prefix">The name prefix.</param>
-        /// <param name="lenght">The lenght of name.</param>
+        /// <param name="length">The length of name.</param>
         /// <returns>
         /// A new name of the method.
         /// </returns>
         /// <exception cref="ArgumentNullException">prefix</exception>
-        /// <exception cref="ArgumentOutOfRangeException">lenght - lenght</exception>
-        public string CreateMethodName(string prefix, int lenght)
+        /// <exception cref="ArgumentOutOfRangeException">length - length</exception>
+        public string CreateMethodName(string prefix, int length)
         {
             if (prefix == null)
             {
                 throw new ArgumentNullException(nameof(prefix));
             }
 
-            if (lenght <= 0)
+            if (length <= 0)
             {
-                throw new ArgumentOutOfRangeException(nameof(lenght), $"Parameter {nameof(lenght)} must by more than zero.");
+                throw new ArgumentOutOfRangeException(nameof(length), $"Parameter {nameof(length)} must by more than zero.");
             }
 
             int count = Interlocked.Increment(ref this.counter);
-            StringBuilder sb = new StringBuilder(prefix.Length + lenght);
+            StringBuilder sb = new StringBuilder(prefix.Length + length);
             sb.Append(prefix);
 
             sb.Append(KoreanAlphabet.GenerateString(count));
-            if (lenght + prefix.Length > sb.Length)
+            if (length + prefix.Length > sb.Length)
             {
-                string apendix = KoreanAlphabet.GenerateRandom(this.rand, (lenght + prefix.Length) - sb.Length);
+                string apendix = KoreanAlphabet.GenerateRandom(this.rand, (length + prefix.Length) - sb.Length);
                 sb.Append(apendix);
             }
 
@@ -103,12 +103,12 @@ namespace MassiveDynamicProxyGenerator
         public string CreateTypeName()
         {
             int count = Interlocked.Increment(ref this.counter);
-            StringBuilder sb = new StringBuilder(this.defaultTypeLenght);
+            StringBuilder sb = new StringBuilder(this.defaultTypeLength);
 
             sb.Append(KoreanAlphabet.GenerateString(count));
-            if (this.defaultTypeLenght > sb.Length)
+            if (this.defaultTypeLength > sb.Length)
             {
-                string apendix = KoreanAlphabet.GenerateRandom(this.rand, this.defaultTypeLenght - sb.Length);
+                string apendix = KoreanAlphabet.GenerateRandom(this.rand, this.defaultTypeLength - sb.Length);
                 sb.Append(apendix);
             }
 
@@ -119,32 +119,32 @@ namespace MassiveDynamicProxyGenerator
         /// Creates the name of the type.
         /// </summary>
         /// <param name="prefix">The name prefix.</param>
-        /// <param name="lenght">The lenght of name.</param>
+        /// <param name="length">The length of name.</param>
         /// <returns>
         /// A new name of the type.
         /// </returns>
         /// <exception cref="ArgumentNullException">prefix</exception>
-        /// <exception cref="ArgumentOutOfRangeException">lenght - lenght</exception>
-        public string CreateTypeName(string prefix, int lenght)
+        /// <exception cref="ArgumentOutOfRangeException">length - length</exception>
+        public string CreateTypeName(string prefix, int length)
         {
             if (prefix == null)
             {
                 throw new ArgumentNullException(nameof(prefix));
             }
 
-            if (lenght <= 0)
+            if (length <= 0)
             {
-                throw new ArgumentOutOfRangeException(nameof(lenght), $"Parameter {nameof(lenght)} must by more than zero.");
+                throw new ArgumentOutOfRangeException(nameof(length), $"Parameter {nameof(length)} must by more than zero.");
             }
 
             int count = Interlocked.Increment(ref this.counter);
-            StringBuilder sb = new StringBuilder(prefix.Length + lenght);
+            StringBuilder sb = new StringBuilder(prefix.Length + length);
             sb.Append(prefix);
 
             sb.Append(KoreanAlphabet.GenerateString(count));
-            if (lenght + prefix.Length > sb.Length)
+            if (length + prefix.Length > sb.Length)
             {
-                string apendix = KoreanAlphabet.GenerateRandom(this.rand, (lenght + prefix.Length) - sb.Length);
+                string apendix = KoreanAlphabet.GenerateRandom(this.rand, (length + prefix.Length) - sb.Length);
                 sb.Append(apendix);
             }
 

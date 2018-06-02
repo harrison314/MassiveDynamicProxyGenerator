@@ -61,14 +61,14 @@ namespace MassiveDynamicProxyGenerator
         /// Called during interception method before invoke real method.
         /// </summary>
         /// <param name="invocation">The invocation informations.</param>
-        /// <returns>Value providet to other method called during interception, default is default value of <typeparamref name="T"/>.</returns>
+        /// <returns>Value provided to other method called during interception, default is default value of <typeparamref name="T"/>.</returns>
         protected virtual T OnEnterInvoke(ICallableInvocation invocation)
         {
             return default(T);
         }
 
         /// <summary>
-        /// Called during interception method after succesfull invoke real method.
+        /// Called during interception method after successful invoke real method.
         /// </summary>
         /// <param name="invocation">The invocation informations.</param>
         /// <param name="invocationData">The internal user data.</param>
@@ -80,7 +80,7 @@ namespace MassiveDynamicProxyGenerator
         /// Called during interception method if real method throw exception.
         /// </summary>
         /// <param name="invocation">The invocation informations.</param>
-        /// <param name="ex">The hrowed exception.</param>
+        /// <param name="ex">The throwed exception.</param>
         /// <param name="invocationData">The internal user data.</param>
         /// <returns>
         /// If return <c>true</c> then interception return default value,

@@ -93,9 +93,9 @@ namespace MassiveDynamicProxyGenerator
         /// <summary>
         /// Generates the proxy instance with interceptor.
         /// </summary>
-        /// <typeparam name="T">Type of inteface for generate proxy.</typeparam>
+        /// <typeparam name="T">Type of interface for generate proxy.</typeparam>
         /// <param name="interceptor">The interceptor.</param>
-        /// <returns>Instance of <typeparamref name="T"/> implament as proxy generator.</returns>
+        /// <returns>Instance of <typeparamref name="T"/> implement as proxy generator.</returns>
         /// <exception cref="ArgumentNullException">interceptor</exception>
         public T GenerateProxy<T>(IInterceptor interceptor)
             where T : class
@@ -106,12 +106,12 @@ namespace MassiveDynamicProxyGenerator
         /// <summary>
         /// Generates the proxy instance with interceptor.
         /// </summary>
-        /// <typeparam name="T">Type of inteface for generate proxy.</typeparam>
+        /// <typeparam name="T">Type of interface for generate proxy.</typeparam>
         /// <param name="interceptor">The interceptor.</param>
-        /// <param name="containsProperies">if set to <c>true</c> contains properies to interception.</param>
-        /// <returns>Instance of <typeparamref name="T"/> implament as proxy generator.</returns>
+        /// <param name="containsProperties">if set to <c>true</c> contains properties to interception.</param>
+        /// <returns>Instance of <typeparamref name="T"/> implement as proxy generator.</returns>
         /// <exception cref="ArgumentNullException">interceptor</exception>
-        public T GenerateProxy<T>(IInterceptor interceptor, bool containsProperies)
+        public T GenerateProxy<T>(IInterceptor interceptor, bool containsProperties)
             where T : class
         {
             if (interceptor == null)
@@ -121,9 +121,9 @@ namespace MassiveDynamicProxyGenerator
 
             Type interfaceType = typeof(T);
 
-            Type proxyType = this.generatedTypeList.EnshureType(interfaceType,
-                containsProperies ? TypedDecoratorType.TypedProxyWithParameters : TypedDecoratorType.TypedProxy,
-                type => this.BuildProxyType(type, containsProperies));
+            Type proxyType = this.generatedTypeList.EnsureType(interfaceType,
+                containsProperties ? TypedDecoratorType.TypedProxyWithParameters : TypedDecoratorType.TypedProxy,
+                type => this.BuildProxyType(type, containsProperties));
 
             return (T)this.CreateTypedProxyInstance(proxyType, interceptor);
         }
@@ -149,14 +149,14 @@ namespace MassiveDynamicProxyGenerator
         /// </summary>
         /// <param name="interfaceType">Type of the interface fo implementation proxy.</param>
         /// <param name="interceptor">The interceptor.</param>
-        /// <param name="containsProperies">if set to <c>true</c> contains properies to interception.</param>
+        /// <param name="containsProperties">if set to <c>true</c> contains properties to interception.</param>
         /// <returns>Instance of implementator of type <paramref name="interfaceType"/>.</returns>
         /// <exception cref="ArgumentNullException">
         /// interfaceType
         /// or
         /// interceptor
         /// </exception>
-        public object GenerateProxy(Type interfaceType, IInterceptor interceptor, bool containsProperies)
+        public object GenerateProxy(Type interfaceType, IInterceptor interceptor, bool containsProperties)
         {
             if (interfaceType == null)
             {
@@ -168,9 +168,9 @@ namespace MassiveDynamicProxyGenerator
                 throw new ArgumentNullException(nameof(interceptor));
             }
 
-            Type proxyType = this.generatedTypeList.EnshureType(interfaceType,
-                containsProperies ? TypedDecoratorType.TypedProxyWithParameters : TypedDecoratorType.TypedProxy,
-                type => this.BuildProxyType(type, containsProperies));
+            Type proxyType = this.generatedTypeList.EnsureType(interfaceType,
+                containsProperties ? TypedDecoratorType.TypedProxyWithParameters : TypedDecoratorType.TypedProxy,
+                type => this.BuildProxyType(type, containsProperties));
 
             return this.CreateTypedProxyInstance(proxyType, interceptor);
         }
@@ -208,7 +208,7 @@ namespace MassiveDynamicProxyGenerator
 
             interfaceTypes[interfaceTypes.Length - 1] = typeof(T);
 
-            Type proxyType = this.generatedTypeList.EnshureType(interfaceTypes, TypedDecoratorType.TypedProxy, this.GenerateType);   // this.GenerateType(interfaceTypes);
+            Type proxyType = this.generatedTypeList.EnsureType(interfaceTypes, TypedDecoratorType.TypedProxy, this.GenerateType);   // this.GenerateType(interfaceTypes);
 
             return (T)this.CreateTypedProxyInstance(proxyType, interceptor);
         }
@@ -244,7 +244,7 @@ namespace MassiveDynamicProxyGenerator
                 throw new ArgumentOutOfRangeException(nameof(additionalTypes)); // TODO: doplnit lepsiu spravu
             }
 
-            Type proxyType = this.generatedTypeList.EnshureType(additionalTypes, TypedDecoratorType.TypedProxy, this.GenerateType);   // this.GenerateType(interfaceTypes);
+            Type proxyType = this.generatedTypeList.EnsureType(additionalTypes, TypedDecoratorType.TypedProxy, this.GenerateType);   // this.GenerateType(interfaceTypes);
 
             return this.CreateTypedProxyInstance(proxyType, interceptor);
         }
@@ -279,7 +279,7 @@ namespace MassiveDynamicProxyGenerator
 
             interfaceTypes[interfaceTypes.Length - 1] = interfaceType;
 
-            Type proxyType = this.generatedTypeList.EnshureType(interfaceTypes, TypedDecoratorType.TypedProxy, this.GenerateType);   // this.GenerateType(interfaceTypes);
+            Type proxyType = this.generatedTypeList.EnsureType(interfaceTypes, TypedDecoratorType.TypedProxy, this.GenerateType);   // this.GenerateType(interfaceTypes);
 
             return this.CreateTypedProxyInstance(proxyType, interceptor);
         }
@@ -301,7 +301,7 @@ namespace MassiveDynamicProxyGenerator
 
             Type interfaceType = typeof(T);
 
-            Type proxyType = this.generatedTypeList.EnshureType(interfaceType,
+            Type proxyType = this.generatedTypeList.EnsureType(interfaceType,
                 TypedDecoratorType.TypedInstancedProxy,
                 this.BuildInstanceProxyType);
 
@@ -331,7 +331,7 @@ namespace MassiveDynamicProxyGenerator
                 throw new ArgumentNullException(nameof(instanceProvider));
             }
 
-            Type instanceProxyType = this.generatedTypeList.EnshureType(proxyType,
+            Type instanceProxyType = this.generatedTypeList.EnsureType(proxyType,
                 TypedDecoratorType.TypedInstancedProxy,
                 this.BuildInstanceProxyType);
 
@@ -364,7 +364,7 @@ namespace MassiveDynamicProxyGenerator
             }
 
             Type interfaceType = typeof(T);
-            Type proxyType = this.generatedTypeList.EnshureType(interfaceType,
+            Type proxyType = this.generatedTypeList.EnsureType(interfaceType,
                 TypedDecoratorType.TypedDecorator,
                 this.BuildDecoratorType);
 
@@ -402,7 +402,7 @@ namespace MassiveDynamicProxyGenerator
                 throw new ArgumentNullException(nameof(parent));
             }
 
-            Type proxyType = this.generatedTypeList.EnshureType(interfaceType,
+            Type proxyType = this.generatedTypeList.EnsureType(interfaceType,
                 TypedDecoratorType.TypedDecorator,
                 this.BuildDecoratorType);
 
@@ -476,10 +476,10 @@ namespace MassiveDynamicProxyGenerator
 
         }
 
-        private Type BuildProxyType(Type interfaceType, bool containsProperies)
+        private Type BuildProxyType(Type interfaceType, bool containsProperties)
         {
             TypeBuilder typeBuilder = this.CreateEmptyType(interfaceType);
-            TypedProxyGenerator generator = new TypedProxyGenerator(typeBuilder, containsProperies);
+            TypedProxyGenerator generator = new TypedProxyGenerator(typeBuilder, containsProperties);
             generator.CheckType(interfaceType);
             generator.ImplementInterface(interfaceType);
             Type proxyType = typeBuilder.CreateType();

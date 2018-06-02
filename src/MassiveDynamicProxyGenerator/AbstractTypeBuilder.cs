@@ -126,7 +126,7 @@ namespace MassiveDynamicProxyGenerator
         }
 
         /// <summary>
-        /// Implementses the constructor.
+        /// Implements the constructor.
         /// </summary>
         /// <param name="typeBuilder">The type builder.</param>
         /// <param name="interfaceType">Type of the interface.</param>
@@ -177,7 +177,7 @@ namespace MassiveDynamicProxyGenerator
         /// <param name="interfaceMethod">The interface method.</param>
         /// <param name="parameters">The parameters.</param>
         /// <param name="interfaceType">Type of the interface.</param>
-        /// <param name="il">The il.</param>
+        /// <param name="il">The IL generator.</param>
         /// <param name="context">The context.</param>
         protected virtual void GenerateMethod(MethodInfo interfaceMethod, Type[] parameters, Type interfaceType, ILGenerator il, T context)
         {
@@ -189,42 +189,42 @@ namespace MassiveDynamicProxyGenerator
         }
 
         /// <summary>
-        /// Implementeds the properity.
+        /// Implements the property.
         /// </summary>
         /// <param name="typeBuilder">The type builder.</param>
         /// <param name="interfaceType">Type of the interface.</param>
-        /// <param name="interfaceProperity">The interface properity.</param>
+        /// <param name="interfaceProperty">The interface property.</param>
         /// <param name="context">The context.</param>
-        protected virtual void ImplementProperty(TypeBuilder typeBuilder, Type interfaceType, PropertyInfo interfaceProperity, T context)
+        protected virtual void ImplementProperty(TypeBuilder typeBuilder, Type interfaceType, PropertyInfo interfaceProperty, T context)
         {
-            PropertyBuilder properityBuilder = typeBuilder.DefineProperty(interfaceProperity.Name,
+            PropertyBuilder properityBuilder = typeBuilder.DefineProperty(interfaceProperty.Name,
                 PropertyAttributes.HasDefault,
-                interfaceProperity.PropertyType,
+                interfaceProperty.PropertyType,
                 null);
 
-            if (interfaceProperity.CanRead)
+            if (interfaceProperty.CanRead)
             {
-                MethodBuilder getMethodBuilder = typeBuilder.DefineMethod(interfaceProperity.GetGetMethod().Name,
+                MethodBuilder getMethodBuilder = typeBuilder.DefineMethod(interfaceProperty.GetGetMethod().Name,
                     MethodAttributes.Public | MethodAttributes.SpecialName | MethodAttributes.HideBySig | MethodAttributes.Virtual,
-                    interfaceProperity.PropertyType,
+                    interfaceProperty.PropertyType,
                     Type.EmptyTypes);
 
-                typeBuilder.DefineMethodOverride(getMethodBuilder, interfaceProperity.GetGetMethod());
+                typeBuilder.DefineMethodOverride(getMethodBuilder, interfaceProperty.GetGetMethod());
                 ILGenerator il = getMethodBuilder.GetILGenerator();
-                this.GenerateGetProperty(interfaceProperity, interfaceType, il, context);
+                this.GenerateGetProperty(interfaceProperty, interfaceType, il, context);
                 properityBuilder.SetGetMethod(getMethodBuilder);
             }
 
-            if (interfaceProperity.CanWrite)
+            if (interfaceProperty.CanWrite)
             {
-                MethodBuilder setMethodBuilder = typeBuilder.DefineMethod(interfaceProperity.GetSetMethod().Name,
+                MethodBuilder setMethodBuilder = typeBuilder.DefineMethod(interfaceProperty.GetSetMethod().Name,
                     MethodAttributes.Public | MethodAttributes.SpecialName | MethodAttributes.HideBySig | MethodAttributes.Virtual,
                     null,
-                    new[] { interfaceProperity.PropertyType });
+                    new[] { interfaceProperty.PropertyType });
 
-                typeBuilder.DefineMethodOverride(setMethodBuilder, interfaceProperity.GetSetMethod());
+                typeBuilder.DefineMethodOverride(setMethodBuilder, interfaceProperty.GetSetMethod());
                 ILGenerator il = setMethodBuilder.GetILGenerator();
-                this.GenerateSetProperty(interfaceProperity, interfaceType, il, context);
+                this.GenerateSetProperty(interfaceProperty, interfaceType, il, context);
                 properityBuilder.SetSetMethod(setMethodBuilder);
             }
         }
@@ -232,11 +232,11 @@ namespace MassiveDynamicProxyGenerator
         /// <summary>
         /// Generates the set property.
         /// </summary>
-        /// <param name="interfaceProperity">The interface properity.</param>
+        /// <param name="interfacePproperty">The interface property.</param>
         /// <param name="interfaceType">Type of the interface.</param>
-        /// <param name="il">The il.</param>
+        /// <param name="il">The IL generator.</param>
         /// <param name="context">The context.</param>
-        protected virtual void GenerateSetProperty(PropertyInfo interfaceProperity, Type interfaceType, ILGenerator il, T context)
+        protected virtual void GenerateSetProperty(PropertyInfo interfacePproperty, Type interfaceType, ILGenerator il, T context)
         {
             ConstructorInfo ci = typeof(NotImplementedException).GetTypeInfo().GetConstructor(new Type[0]);
 
@@ -248,11 +248,11 @@ namespace MassiveDynamicProxyGenerator
         /// <summary>
         /// Generates the get property.
         /// </summary>
-        /// <param name="interfaceProperity">The interface properity.</param>
+        /// <param name="interfacePproperty">The interface property.</param>
         /// <param name="interfaceType">Type of the interface.</param>
-        /// <param name="il">The il.</param>
+        /// <param name="il">The IL generator.</param>
         /// <param name="context">The context.</param>
-        protected virtual void GenerateGetProperty(PropertyInfo interfaceProperity, Type interfaceType, ILGenerator il, T context)
+        protected virtual void GenerateGetProperty(PropertyInfo interfacePproperty, Type interfaceType, ILGenerator il, T context)
         {
             ConstructorInfo ci = typeof(NotImplementedException).GetTypeInfo().GetConstructor(new Type[0]);
 

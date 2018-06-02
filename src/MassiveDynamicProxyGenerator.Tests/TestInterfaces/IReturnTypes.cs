@@ -31,7 +31,7 @@ namespace MassiveDynamicProxyGenerator.Tests.TestInterfaces
     {
         StringBuilder CreateSb(string arg);
 
-        int GetLenght(string arg);
+        int GetLength(string arg);
 
         void GetVoid();
 

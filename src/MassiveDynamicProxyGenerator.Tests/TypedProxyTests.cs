@@ -73,7 +73,7 @@ namespace MassiveDynamicProxyGenerator.Tests
         public void GenerateProxy_ReturnValueType_Succ()
         {
             Mock<IInterceptor> interceptor = new Mock<IInterceptor>(MockBehavior.Strict);
-            interceptor.Setup(t => t.Intercept(It.Is<IInvocation>(p => p.MethodName == "GetLenght")))
+            interceptor.Setup(t => t.Intercept(It.Is<IInvocation>(p => p.MethodName == "GetLength")))
                 .Callback<IInvocation>((invocation) =>
                 {
                     invocation.ReturnValue = 13;
@@ -84,7 +84,7 @@ namespace MassiveDynamicProxyGenerator.Tests
             IReturnTypes instance = generator.GenerateProxy<IReturnTypes>(interceptor.Object);
             instance.ShouldNotBeNull();
 
-            int a = instance.GetLenght("Test");
+            int a = instance.GetLength("Test");
             a.ShouldBe(13);
         }
 

@@ -36,22 +36,22 @@ namespace MassiveDynamicProxyGenerator
         /// Creates the name of the method.
         /// </summary>
         /// <param name="prefix">The name prefix.</param>
-        /// <param name="lenght">The lenght of name.</param>
+        /// <param name="length">The length of name.</param>
         /// <returns>
         /// A new name of the method.
         /// </returns>
         /// <exception cref="ArgumentNullException">prefix</exception>
-        /// <exception cref="ArgumentOutOfRangeException">lenght - lenght</exception>
-        public string CreateMethodName(string prefix, int lenght)
+        /// <exception cref="ArgumentOutOfRangeException">length - length</exception>
+        public string CreateMethodName(string prefix, int length)
         {
             if (prefix == null)
             {
                 throw new ArgumentNullException(nameof(prefix));
             }
 
-            if (lenght <= 0)
+            if (length <= 0)
             {
-                throw new ArgumentOutOfRangeException(nameof(lenght), $"Parameter {nameof(lenght)} must by more than zero.");
+                throw new ArgumentOutOfRangeException(nameof(length), $"Parameter {nameof(length)} must by more than zero.");
             }
 
             string name = string.Concat(prefix, Guid.NewGuid().ToString("D").Replace("-", string.Empty));
@@ -76,22 +76,22 @@ namespace MassiveDynamicProxyGenerator
         /// Creates the name of the type.
         /// </summary>
         /// <param name="prefix">The name prefix.</param>
-        /// <param name="lenght">The lenght of name.</param>
+        /// <param name="length">The length of name.</param>
         /// <returns>
         /// A new name of the type.
         /// </returns>
         /// <exception cref="ArgumentNullException">prefix</exception>
-        /// <exception cref="ArgumentOutOfRangeException">lenght - lenght</exception>
-        public string CreateTypeName(string prefix, int lenght)
+        /// <exception cref="ArgumentOutOfRangeException">length - length</exception>
+        public string CreateTypeName(string prefix, int length)
         {
             if (prefix == null)
             {
                 throw new ArgumentNullException(nameof(prefix));
             }
 
-            if (lenght <= 0)
+            if (length <= 0)
             {
-                throw new ArgumentOutOfRangeException(nameof(lenght), $"Parameter {nameof(lenght)} must by more than zero.");
+                throw new ArgumentOutOfRangeException(nameof(length), $"Parameter {nameof(length)} must by more than zero.");
             }
 
             string name = string.Concat(prefix, Guid.NewGuid().ToString("D").Replace("-", string.Empty));

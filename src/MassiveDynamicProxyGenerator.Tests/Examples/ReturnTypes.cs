@@ -40,7 +40,7 @@ namespace MassiveDynamicProxyGenerator.Tests.Examples
         }
 
 
-        public int GetLenght(string arg)
+        public int GetLength(string arg)
         {
             InvocationExample invocation = new InvocationExample();
             invocation.Arguments = new object[]
@@ -49,7 +49,7 @@ namespace MassiveDynamicProxyGenerator.Tests.Examples
             };
 
             invocation.ReturnValue = null;
-            invocation.MethodName = "GetLenght";
+            invocation.MethodName = "GetLength";
             invocation.OriginalType = typeof(IReturnTypes);
             invocation.ArgumentTypes = new Type[]
             {

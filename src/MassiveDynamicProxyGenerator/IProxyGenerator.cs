@@ -46,9 +46,9 @@ namespace MassiveDynamicProxyGenerator
         /// <summary>
         /// Generates the proxy instance with interceptor.
         /// </summary>
-        /// <param name="interfaceType">Type of the interface fo implementation proxy.</param>
+        /// <param name="interfaceType">Type of the interface for implementation proxy.</param>
         /// <param name="interceptor">The interceptor.</param>
-        /// <returns>Instance of implementator of type <paramref name="interfaceType"/>.</returns>
+        /// <returns>Instance of implementation of type <paramref name="interfaceType"/>.</returns>
         object GenerateProxy(Type interfaceType, IInterceptor interceptor);
 
         /// <summary>
@@ -57,7 +57,7 @@ namespace MassiveDynamicProxyGenerator
         /// <param name="interceptor">The interceptor.</param>
         /// <param name="additionalTypes">The additional interface types.</param>
         /// <returns>
-        /// Instance of prxy class generatet with multiple interfaces.
+        /// Instance of proxy class generated with multiple interfaces.
         /// </returns>
         object GenerateProxy(IInterceptor interceptor, params Type[] additionalTypes);
 
@@ -68,25 +68,25 @@ namespace MassiveDynamicProxyGenerator
         /// <param name="interceptor">The interceptor.</param>
         /// <param name="additionalTypes">The additional interface types.</param>
         /// <returns>
-        /// Instance of prxy class generatet with multiple interfaces.
+        /// Instance of proxy class generated with multiple interfaces.
         /// </returns>
         object GenerateProxy(Type interfaceType, IInterceptor interceptor, params Type[] additionalTypes);
 
         /// <summary>
         /// Generates the proxy instance with interceptor.
         /// </summary>
-        /// <param name="interfaceType">Type of the interface fo implementation proxy.</param>
+        /// <param name="interfaceType">Type of the interface for implementation proxy.</param>
         /// <param name="interceptor">The interceptor.</param>
-        /// <param name="containsProperies">if set to <c>true</c> contains properies to interception.</param>
-        /// <returns>Instance of implementator of type <paramref name="interfaceType"/>.</returns>
-        object GenerateProxy(Type interfaceType, IInterceptor interceptor, bool containsProperies);
+        /// <param name="containsProperties">if set to <c>true</c> contains properties to interception.</param>
+        /// <returns>Instance of implementation of type <paramref name="interfaceType"/>.</returns>
+        object GenerateProxy(Type interfaceType, IInterceptor interceptor, bool containsProperties);
 
         /// <summary>
         /// Generates the proxy instance with interceptor.
         /// </summary>
-        /// <typeparam name="T">Type of inteface for generate proxy.</typeparam>
+        /// <typeparam name="T">Type of interface for generate proxy.</typeparam>
         /// <param name="interceptor">The interceptor.</param>
-        /// <returns>Instance of <typeparamref name="T"/> implament as proxy generator.</returns>
+        /// <returns>Instance of <typeparamref name="T"/> implementation as proxy generator.</returns>
         T GenerateProxy<T>(IInterceptor interceptor)
             where T : class;
 
@@ -96,18 +96,18 @@ namespace MassiveDynamicProxyGenerator
         /// <typeparam name="T">Type of base interface.</typeparam>
         /// <param name="interceptor">The interceptor.</param>
         /// <param name="additionalTypes">The additional interface types.</param>
-        /// <returns>Instance of prxy class generatet with multiple interfaces.</returns>
+        /// <returns>Instance of proxy class generated with multiple interfaces.</returns>
         T GenerateProxy<T>(IInterceptor interceptor, params Type[] additionalTypes)
             where T : class;
 
         /// <summary>
         /// Generates the proxy instance with interceptor.
         /// </summary>
-        /// <typeparam name="T">Type of inteface for generate proxy.</typeparam>
+        /// <typeparam name="T">Type of interface for generate proxy.</typeparam>
         /// <param name="interceptor">The interceptor.</param>
-        /// <param name="containsProperies">if set to <c>true</c> contains properies to interception.</param>
-        /// <returns>Instance of <typeparamref name="T"/> implament as proxy generator.</returns>
-        T GenerateProxy<T>(IInterceptor interceptor, bool containsProperies)
+        /// <param name="containsProperties">if set to <c>true</c> contains properties to interception.</param>
+        /// <returns>Instance of <typeparamref name="T"/> implement as proxy generator.</returns>
+        T GenerateProxy<T>(IInterceptor interceptor, bool containsProperties)
             where T : class;
     }
 }

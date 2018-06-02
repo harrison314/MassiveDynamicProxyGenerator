@@ -64,7 +64,7 @@ namespace MassiveDynamicProxyGenerator.TypedProxy
         /// Gets or sets the name of the intercept method.
         /// </summary>
         /// <value>
-        /// The name of the tntercept method.
+        /// The name of the intercept method.
         /// </value>
         public string MethodName
         {
@@ -158,7 +158,7 @@ namespace MassiveDynamicProxyGenerator.TypedProxy
         }
 
         /// <summary>
-        /// Gets the <see cref="MethodBase" /> as representation of intecept method.
+        /// Gets the <see cref="MethodBase" /> as representation of intercept method.
         /// </summary>
         /// <returns>
         /// The <see cref="MethodBase" /> of intercept method.

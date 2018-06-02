@@ -17,8 +17,8 @@ namespace MassiveDynamicProxyGenerator.Tests
         public void GenerateInstanceProxy_Call_CreateInstance()
         {
             Mock<IReturnTypes> realMock = new Mock<IReturnTypes>(MockBehavior.Strict);
-            realMock.Setup(t => t.GetLenght("789")).Returns(789).Verifiable();
-            realMock.Setup(t => t.GetLenght("456")).Returns(456).Verifiable();
+            realMock.Setup(t => t.GetLength("789")).Returns(789).Verifiable();
+            realMock.Setup(t => t.GetLength("456")).Returns(456).Verifiable();
 
             Mock<IInstanceProvicer> instaceprovoder = new Mock<IInstanceProvicer>(MockBehavior.Strict);
             instaceprovoder.Setup(t => t.GetInstance())
@@ -28,8 +28,8 @@ namespace MassiveDynamicProxyGenerator.Tests
             ProxyGenerator generator = new ProxyGenerator();
 
             IReturnTypes instance = generator.GenerateInstanceProxy<IReturnTypes>(instaceprovoder.Object);
-            instance.GetLenght("789").ShouldBe(789);
-            instance.GetLenght("456").ShouldBe(456);
+            instance.GetLength("789").ShouldBe(789);
+            instance.GetLength("456").ShouldBe(456);
 
             instaceprovoder.VerifyAll();
             realMock.VerifyAll();
@@ -39,8 +39,8 @@ namespace MassiveDynamicProxyGenerator.Tests
         public void GenerateInstanceProxy_CallNonGeneric_CreateInstance()
         {
             Mock<IReturnTypes> realMock = new Mock<IReturnTypes>(MockBehavior.Strict);
-            realMock.Setup(t => t.GetLenght("789")).Returns(789).Verifiable();
-            realMock.Setup(t => t.GetLenght("456")).Returns(456).Verifiable();
+            realMock.Setup(t => t.GetLength("789")).Returns(789).Verifiable();
+            realMock.Setup(t => t.GetLength("456")).Returns(456).Verifiable();
 
             Mock<IInstanceProvicer> instaceprovoder = new Mock<IInstanceProvicer>(MockBehavior.Strict);
             instaceprovoder.Setup(t => t.GetInstance())
@@ -50,8 +50,8 @@ namespace MassiveDynamicProxyGenerator.Tests
             ProxyGenerator generator = new ProxyGenerator();
 
             IReturnTypes instance = (IReturnTypes)generator.GenerateInstanceProxy(typeof(IReturnTypes), instaceprovoder.Object);
-            instance.GetLenght("789").ShouldBe(789);
-            instance.GetLenght("456").ShouldBe(456);
+            instance.GetLength("789").ShouldBe(789);
+            instance.GetLength("456").ShouldBe(456);
 
             instaceprovoder.VerifyAll();
             realMock.VerifyAll();

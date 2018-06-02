@@ -7,7 +7,7 @@ using System.Threading.Tasks;
 namespace MassiveDynamicProxyGenerator
 {
     /// <summary>
-    /// Interface representes callable interceptor.
+    /// Interface represents callable interceptor.
     /// </summary>
     public interface ICallableInterceptor
     {

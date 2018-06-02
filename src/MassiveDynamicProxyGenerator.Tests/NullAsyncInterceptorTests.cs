@@ -22,7 +22,7 @@ namespace MassiveDynamicProxyGenerator.Tests
             instance.ShouldNotBeNull();
 
             instance.CreateSb(string.Empty).ShouldBe(default(StringBuilder));
-            instance.GetLenght(string.Empty).ShouldBe(default(int));
+            instance.GetLength(string.Empty).ShouldBe(default(int));
             instance.GetVoid();
         }
 

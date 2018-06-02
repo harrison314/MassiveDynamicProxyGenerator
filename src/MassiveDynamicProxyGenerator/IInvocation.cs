@@ -8,7 +8,7 @@ using System.Threading.Tasks;
 namespace MassiveDynamicProxyGenerator
 {
     /// <summary>
-    /// Interface representes invocation iformations.
+    /// Interface represented invocation information`s.
     /// </summary>
     public interface IInvocation
     {
@@ -50,7 +50,7 @@ namespace MassiveDynamicProxyGenerator
         /// Gets the name of the intercept method.
         /// </summary>
         /// <value>
-        /// The name of the tntercept method.
+        /// The name of the intercept method.
         /// </value>
         string MethodName
         {
@@ -80,7 +80,7 @@ namespace MassiveDynamicProxyGenerator
         }
 
         /// <summary>
-        /// Gets the <see cref="MethodBase"/> as representation of intecept method.
+        /// Gets the <see cref="MethodBase"/> as representation of intercept method.
         /// </summary>
         /// <returns>The <see cref="MethodBase"/> of intercept method.</returns>
         MethodBase GetConcreteMethod();

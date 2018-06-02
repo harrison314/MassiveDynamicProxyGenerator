@@ -24,10 +24,10 @@ namespace MassiveDynamicProxyGenerator.Utils
         }
 
         /// <summary>
-        /// Enshures the cretion of type.
+        /// Ensures the creation of type.
         /// </summary>
         /// <param name="interfaceType">Type of the interface.</param>
-        /// <param name="decoraorType">Type of the decoraor.</param>
+        /// <param name="decoratorType">Type of the decorator.</param>
         /// <param name="typeFactory">The type factory for type.</param>
         /// <returns>Created type.</returns>
         /// <exception cref="ArgumentNullException">
@@ -35,7 +35,7 @@ namespace MassiveDynamicProxyGenerator.Utils
         /// or
         /// typeFactory
         /// </exception>
-        public Type EnshureType(Type interfaceType, TypedDecoratorType decoraorType, Func<Type, Type> typeFactory)
+        public Type EnsureType(Type interfaceType, TypedDecoratorType decoratorType, Func<Type, Type> typeFactory)
         {
             if (interfaceType == null)
             {
@@ -47,7 +47,7 @@ namespace MassiveDynamicProxyGenerator.Utils
                 throw new ArgumentNullException(nameof(typeFactory));
             }
 
-            TypeRquest request = new TypeRquest(interfaceType, decoraorType);
+            TypeRquest request = new TypeRquest(interfaceType, decoratorType);
             Type returnValue;
 
             lock (this.syncRoot)
@@ -67,10 +67,10 @@ namespace MassiveDynamicProxyGenerator.Utils
         }
 
         /// <summary>
-        /// Enshures the creation of type.
+        /// Ensures the creation of type.
         /// </summary>
         /// <param name="interfaceTypes">The interface types.</param>
-        /// <param name="decoraorType">Type of the decoraor.</param>
+        /// <param name="decoratorType">Type of the decorator.</param>
         /// <param name="typeFactory">The type factory.</param>
         /// <returns>Created type.</returns>
         /// <exception cref="ArgumentNullException">
@@ -78,7 +78,7 @@ namespace MassiveDynamicProxyGenerator.Utils
         /// or
         /// typeFactory
         /// </exception>
-        public Type EnshureType(Type[] interfaceTypes, TypedDecoratorType decoraorType, Func<Type[], Type> typeFactory)
+        public Type EnsureType(Type[] interfaceTypes, TypedDecoratorType decoratorType, Func<Type[], Type> typeFactory)
         {
             if (interfaceTypes == null)
             {
@@ -90,7 +90,7 @@ namespace MassiveDynamicProxyGenerator.Utils
                 throw new ArgumentNullException(nameof(typeFactory));
             }
 
-            MultyTypeRquest request = new MultyTypeRquest(interfaceTypes, decoraorType);
+            MultyTypeRquest request = new MultyTypeRquest(interfaceTypes, decoratorType);
             Type returnValue;
 
             lock (this.syncRoot)

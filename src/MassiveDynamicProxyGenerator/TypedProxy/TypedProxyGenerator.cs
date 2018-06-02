@@ -10,7 +10,7 @@ using MassiveDynamicProxyGenerator.Utils;
 namespace MassiveDynamicProxyGenerator.TypedProxy
 {
     /// <summary>
-    /// Generator fo proxy.
+    /// Generator for proxy.
     /// </summary>
     /// <seealso cref="AbstractTypeBuilder{Object}" />
     internal class TypedProxyGenerator : AbstractTypeBuilder<object>
@@ -49,7 +49,7 @@ namespace MassiveDynamicProxyGenerator.TypedProxy
         }
 
         /// <summary>
-        /// Implementses the constructor.
+        /// Implements the constructor.
         /// </summary>
         /// <param name="typeBuilder">The type builder.</param>
         /// <param name="interfaceType">Type of the interface.</param>
@@ -81,7 +81,7 @@ namespace MassiveDynamicProxyGenerator.TypedProxy
         /// <param name="interfaceMethod">The interface method.</param>
         /// <param name="parameters">The parameters.</param>
         /// <param name="interfaceType">Type of the interface.</param>
-        /// <param name="il">The il.</param>
+        /// <param name="il">The IL generator.</param>
         /// <param name="context">The context.</param>
         protected override void GenerateMethod(MethodInfo interfaceMethod, Type[] parameters, Type interfaceType, ILGenerator il, object context)
         {
@@ -89,7 +89,7 @@ namespace MassiveDynamicProxyGenerator.TypedProxy
             il.Emit(OpCodes.Newobj, this.descriptor.Constructor);
             il.Emit(OpCodes.Stloc, invocationVar);
 
-            // invocation.Arguments = new object[params.Lenght];
+            // invocation.Arguments = new object[params.Length];
             il.Emit(OpCodes.Ldloc, invocationVar);
             il.Emit(OpCodes.Ldc_I4, parameters.Length);
             il.Emit(OpCodes.Newarr, typeof(object));
