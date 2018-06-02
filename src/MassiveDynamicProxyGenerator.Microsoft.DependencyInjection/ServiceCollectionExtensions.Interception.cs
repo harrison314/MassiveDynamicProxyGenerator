@@ -11,25 +11,25 @@ namespace MassiveDynamicProxyGenerator.Microsoft.DependencyInjection
     public static partial class ServiceCollectionExtensions
     {
         /// <summary>
-        /// Add intercepted decorator to type <typeparamref name="TServise" />.
+        /// Add intercepted decorator to type <typeparamref name="TService" />.
         /// </summary>
-        /// <typeparam name="TServise">Type of the decorated service. Must by public interface.</typeparam>
+        /// <typeparam name="TService">Type of the decorated service. Must by public interface.</typeparam>
         /// <typeparam name="TInterceptor">Type of interceptor.</typeparam>
         /// <param name="services">The <see cref="IServiceCollection" /> to add the service to.</param>
         /// <returns>
         /// The <see cref="IServiceCollection" /> to add the service to.
         /// </returns>
-        /// <exception cref="ArgumentException">TServise</exception>
-        public static IServiceCollection AddInterceptedDecorator<TServise, TInterceptor>(this IServiceCollection services)
-           where TServise : class
+        /// <exception cref="ArgumentException">TService</exception>
+        public static IServiceCollection AddInterceptedDecorator<TService, TInterceptor>(this IServiceCollection services)
+           where TService : class
            where TInterceptor : ICallableInterceptor
         {
-            if (!TypeHelper.IsPublicInterface(typeof(TServise)))
+            if (!TypeHelper.IsPublicInterface(typeof(TService)))
             {
-                throw new ArgumentException($"Parameter {nameof(TServise)} of type '{typeof(TServise).AssemblyQualifiedName}' is not public interface.");
+                throw new ArgumentException($"Parameter {nameof(TService)} of type '{typeof(TService).AssemblyQualifiedName}' is not public interface.");
             }
 
-            EnshureRegistration(services).Add(typeof(TServise), typeof(TInterceptor));
+            EnshureRegistration(services).Add(typeof(TService), typeof(TInterceptor));
             return services;
         }
 

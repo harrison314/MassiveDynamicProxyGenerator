@@ -11,9 +11,9 @@ namespace SampleWebApplication.Controllers
     public class ArticleController : Controller
     {
         private readonly IArticleService articleServices;
-        private readonly INotificationServise notificationsService;
+        private readonly INotificationService notificationsService;
 
-        public ArticleController(IArticleService articleServices, INotificationServise notificationService)
+        public ArticleController(IArticleService articleServices, INotificationService notificationService)
         {
             this.articleServices = articleServices;
             this.notificationsService = notificationService;

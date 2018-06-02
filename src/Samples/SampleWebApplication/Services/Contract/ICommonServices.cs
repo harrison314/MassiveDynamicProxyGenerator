@@ -13,7 +13,7 @@ namespace SampleWebApplication.Services.Contract
             get;
         }
 
-        INotificationServise NotificationServise
+        INotificationService NotificationService
         {
             get;
         }

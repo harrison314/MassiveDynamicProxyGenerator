@@ -11,12 +11,12 @@ using WcfForHipsters.WebServer.WcfForHipsters;
 namespace WcfForHipsters.WebServer.Controllers
 {
     [Route("api/[controller]")]
-    public class ExampleServiseController : Controller
+    public class ExampleServiceController : Controller
     {
-        private readonly ILogger<ExampleServiseController> logger;
-        private readonly EndpointAdapter<IExampleServise> serviceAdapter;
+        private readonly ILogger<ExampleServiceController> logger;
+        private readonly EndpointAdapter<IExampleService> serviceAdapter;
 
-        public ExampleServiseController(EndpointAdapter<IExampleServise> serviceAdapter, ILogger<ExampleServiseController> logger)
+        public ExampleServiceController(EndpointAdapter<IExampleService> serviceAdapter, ILogger<ExampleServiceController> logger)
         {
             if (serviceAdapter == null)
             {
@@ -31,11 +31,11 @@ namespace WcfForHipsters.WebServer.Controllers
             this.logger = logger;
         }
 
-        // api/ExampleServise POST
+        // api/ExampleService POST
         [HttpPost]
         public IActionResult Post([FromBody]JObject value)
         {
-            this.logger.LogTrace("Enpoint invoked");
+            this.logger.LogTrace("Endpoint invoked");
             try
             {
                 ResponseBody response = this.serviceAdapter.ProcessCall(value);

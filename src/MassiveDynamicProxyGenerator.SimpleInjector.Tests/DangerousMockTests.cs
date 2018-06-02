@@ -16,7 +16,7 @@ namespace MassiveDynamicProxyGenerator.SimpleInjector.Tests
             Container container = new Container();
             container.Register<IMessageService, MessageService>();
             container.Register<ITestMessager, TestMessager>();
-            container.RegisterAllUnregistredAsMock();
+            container.RegisterAllUnregisteredAsMock();
 
             container.Verify();
 

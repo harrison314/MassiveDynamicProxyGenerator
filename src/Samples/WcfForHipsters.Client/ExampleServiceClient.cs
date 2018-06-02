@@ -7,7 +7,7 @@ using WcfForHipsters.WebServer.Contract;
 
 namespace WcfForHipsters.Client
 {
-    public class ExampleServiceClient : HipsterClientBase<IExampleServise>, IExampleServise
+    public class ExampleServiceClient : HipsterClientBase<IExampleService>, IExampleService
     {
         public ExampleServiceClient(string endpointUrl)
             : base(endpointUrl)

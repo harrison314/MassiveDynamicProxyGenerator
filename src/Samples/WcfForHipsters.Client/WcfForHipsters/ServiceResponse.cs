@@ -5,13 +5,13 @@ using System.Threading.Tasks;
 
 namespace WcfForHipsters.Client.WcfForHipsters
 {
-    internal struct ServiseResponse
+    internal struct ServiceResponse
     {
         public readonly int StatusCode;
 
         public readonly string Content;
 
-        public ServiseResponse(int statusCode, string responseContent) : this()
+        public ServiceResponse(int statusCode, string responseContent) : this()
         {
             this.StatusCode = statusCode;
             this.Content = responseContent;

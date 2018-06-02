@@ -11,7 +11,7 @@ namespace WcfForHipsters.Client
         public static void Main(string[] args)
         {
             // Change url
-            Uri endpoint = new Uri("http://localhost:57106/api/ExampleServise");
+            Uri endpoint = new Uri("http://localhost:57106/api/ExampleService");
 
             ExampleServiceClient client = new ExampleServiceClient(endpoint);
 

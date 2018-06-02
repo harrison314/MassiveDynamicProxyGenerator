@@ -30,13 +30,13 @@ Examples of use MassiveDynamicProxyGenerator.
 
 ### Use for generate proxy stub for JsonRpc client
 
-In samples folder in project __WcfForHipsters.WebServer__ is implement servise endpoint using api controller
-(for example ExampleServiseController) and transform JsonRpc call to method invocation using generic class __EndpointAdapter__.
+In samples folder in project __WcfForHipsters.WebServer__ is implement service endpoint using api controller
+(for example ExampleServiceController) and transform JsonRpc call to method invocation using generic class __EndpointAdapter__.
 
 Client is in project __WcfForHipsters.Client__. Generic class __HipsterClientBase__ , like ClientBase class from Wcf,
 using MassiveDynamicProxyGenerator for generate proxy stub for JsonRpc client.
 
-Client and server using interface __IExampleServise__ as servise contract.
+Client and server using interface __IExampleService__ as service contract.
 
 ### Generate decorator 
 

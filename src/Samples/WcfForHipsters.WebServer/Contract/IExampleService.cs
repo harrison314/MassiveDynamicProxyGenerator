@@ -5,7 +5,7 @@ using System.Threading.Tasks;
 
 namespace WcfForHipsters.WebServer.Contract
 {
-    public interface IExampleServise
+    public interface IExampleService
     {
         int CalCulateAdd(int a, int b, int c);
 

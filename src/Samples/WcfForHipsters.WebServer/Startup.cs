@@ -40,7 +40,7 @@ namespace WcfForHipsters.WebServer
             // Add framework services.
             services.AddApplicationInsightsTelemetry(Configuration);
 
-            services.AddTransient<IExampleServise, ExampleServise>();
+            services.AddTransient<IExampleService, ExampleService>();
             services.AddSingleton(typeof(EndpointAdapter<>));
 
             services.AddMvc();

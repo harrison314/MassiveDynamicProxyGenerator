@@ -33,7 +33,7 @@ namespace SampleWebApplication
             // services.AddDecorator<IArticleService, ArticleDecoratorService>();
             // services.AddInterceptedDecorator<IArticleService, ChangeAutorInterceptor>("Ing interceptor");
 
-            services.AddProxy<INotificationServise>();
+            services.AddProxy<INotificationService>();
             services.AddProxy<ICommonServices, ServiceProviderInterceptor>();
 
             services.AddMvc();

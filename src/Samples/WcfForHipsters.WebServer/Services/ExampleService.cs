@@ -7,11 +7,11 @@ using WcfForHipsters.WebServer.Contract;
 
 namespace WcfForHipsters.WebServer.Services
 {
-    public class ExampleServise : IExampleServise
+    public class ExampleService : IExampleService
     {
-        private ILogger<ExampleServise> logger;
+        private ILogger<ExampleService> logger;
 
-        public ExampleServise(ILogger<ExampleServise> logger)
+        public ExampleService(ILogger<ExampleService> logger)
         {
             this.logger = logger;
         }

@@ -34,7 +34,7 @@ namespace WcfForHipsters.Client.WcfForHipsters
             };
 
             string serialized = Newtonsoft.Json.JsonConvert.SerializeObject(rcpBody, Newtonsoft.Json.Formatting.Indented);
-            ServiseResponse response = this.CallServise(serialized).GetAwaiter().GetResult(); //TODO: to asnc interceptor
+            ServiceResponse response = this.CallService(serialized).GetAwaiter().GetResult(); //TODO: to asnc interceptor
 
             if (response.StatusCode == 200)
             {
@@ -74,7 +74,7 @@ namespace WcfForHipsters.Client.WcfForHipsters
             }
         }
 
-        private async Task<ServiseResponse> CallServise(string serialized)
+        private async Task<ServiceResponse> CallService(string serialized)
         {
             using (HttpClient client = new HttpClient())
             {
@@ -86,7 +86,7 @@ namespace WcfForHipsters.Client.WcfForHipsters
                 {
                     string responseContent = await response.Content.ReadAsStringAsync();
 
-                    return new ServiseResponse((int)response.StatusCode, responseContent);
+                    return new ServiceResponse((int)response.StatusCode, responseContent);
                 }
             }
         }

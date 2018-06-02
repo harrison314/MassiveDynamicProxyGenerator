@@ -17,6 +17,10 @@
   </ItemGroup>
 
   <ItemGroup>
+    <Compile Remove="..\WcfForHipsters.WebServer\Contract\IExampleServise.cs" />
+  </ItemGroup>
+
+  <ItemGroup>
     <ProjectReference Include="..\..\MassiveDynamicProxyGenerator\MassiveDynamicProxyGenerator.csproj" />
   </ItemGroup>
 

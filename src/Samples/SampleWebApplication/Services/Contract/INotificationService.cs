@@ -5,7 +5,7 @@ using System.Threading.Tasks;
 
 namespace SampleWebApplication.Services.Contract
 {
-    public interface INotificationServise
+    public interface INotificationService
     {
         void NotifyRead(string itemName, object id);
 
