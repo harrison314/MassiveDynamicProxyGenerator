@@ -8,7 +8,7 @@ using System.Threading.Tasks;
 
 namespace MassiveDynamicProxyGenerator.Microsoft.DependencyInjection.ServiceProvider
 {
-    internal class Registrations : IServiceWraperer
+    internal class Registrations : IServiceWrapperer
     {
         internal class Registration
         {

@@ -9,9 +9,9 @@ namespace MassiveDynamicProxyGenerator.Microsoft.DependencyInjection.ServiceProv
     {
         private readonly IServiceProvider aspServiceProvider;
         private readonly IProxyGenerator proxygGenerator;
-        private readonly IServiceWraperer serviceWraperer;
+        private readonly IServiceWrapperer serviceWraperer;
 
-        protected internal MassiveServiceProvider(IServiceProvider aspServiceProvider, IProxyGenerator proxygGenerator, IServiceWraperer serviceWraperer)
+        protected internal MassiveServiceProvider(IServiceProvider aspServiceProvider, IProxyGenerator proxygGenerator, IServiceWrapperer serviceWraperer)
         {
             if (aspServiceProvider == null) throw new ArgumentNullException(nameof(aspServiceProvider));
             if (proxygGenerator == null) throw new ArgumentNullException(nameof(proxygGenerator));

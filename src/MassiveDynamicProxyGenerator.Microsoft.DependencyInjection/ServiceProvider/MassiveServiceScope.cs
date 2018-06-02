@@ -9,7 +9,7 @@ namespace MassiveDynamicProxyGenerator.Microsoft.DependencyInjection.ServiceProv
     {
         private readonly IServiceScope serviceScope;
         private readonly IProxyGenerator proxygGenerator;
-        private readonly IServiceWraperer serviceWraperer;
+        private readonly IServiceWrapperer serviceWraperer;
 
         public IServiceProvider ServiceProvider
         {
@@ -27,7 +27,7 @@ namespace MassiveDynamicProxyGenerator.Microsoft.DependencyInjection.ServiceProv
             }
         }
 
-        public MassiveServiceScope(IServiceScope serviceScope, IProxyGenerator proxygGenerator, IServiceWraperer serviceWraperer)
+        public MassiveServiceScope(IServiceScope serviceScope, IProxyGenerator proxygGenerator, IServiceWrapperer serviceWraperer)
         {
             this.serviceScope = serviceScope;
             this.proxygGenerator = proxygGenerator;

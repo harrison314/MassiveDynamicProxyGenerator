@@ -8,11 +8,11 @@ namespace MassiveDynamicProxyGenerator.Microsoft.DependencyInjection
     public static partial class ServiceCollectionExtensions
     {
         /// <summary>
-        /// Adds the instance proxy for service <paramref name="serviceType"/> using <paramref name="instanceProvicer"/>.
+        /// Adds the instance proxy for service <paramref name="serviceType"/> using <paramref name="instanceProvider"/>.
         /// </summary>
         /// <param name="serviceCollection">The <see cref="IServiceCollection"/> to add the service to.</param>
         /// <param name="serviceType">Type of the service to create instance provider. Must by public interface.</param>
-        /// <param name="instanceProvicer">The instance provicer instance.</param>
+        /// <param name="instanceProvider">The instance provider instance.</param>
         /// <returns>The <see cref="IServiceCollection"/> to add the service to.</returns>
         /// <exception cref="ArgumentNullException">
         /// serviceType
@@ -23,16 +23,16 @@ namespace MassiveDynamicProxyGenerator.Microsoft.DependencyInjection
         /// serviceType
         /// </exception>
         /// <seealso cref="IInstanceProvicer"/>
-        public static IServiceCollection AddInstanceProxy(this IServiceCollection serviceCollection, Type serviceType, IInstanceProvicer instanceProvicer)
+        public static IServiceCollection AddInstanceProxy(this IServiceCollection serviceCollection, Type serviceType, IInstanceProvicer instanceProvider)
         {
             if (serviceType == null)
             {
                 throw new ArgumentNullException(nameof(serviceType));
             }
 
-            if (instanceProvicer == null)
+            if (instanceProvider == null)
             {
-                throw new ArgumentNullException(nameof(instanceProvicer));
+                throw new ArgumentNullException(nameof(instanceProvider));
             }
 
             if (TypeHelper.IsOpenGeneric(serviceType))
@@ -45,31 +45,31 @@ namespace MassiveDynamicProxyGenerator.Microsoft.DependencyInjection
                 throw new ArgumentException($"Parameter {nameof(serviceType)} of type '{serviceType.AssemblyQualifiedName}' is not public interface.");
             }
 
-            return serviceCollection.AddSingleton(serviceType, sp => MassiveDynamicProxyGeneratorDiSettings.ProxyGeneratorProvider.GetProxyGenerator(sp).GenerateInstanceProxy(serviceType, instanceProvicer));
+            return serviceCollection.AddSingleton(serviceType, sp => MassiveDynamicProxyGeneratorDiSettings.ProxyGeneratorProvider.GetProxyGenerator(sp).GenerateInstanceProxy(serviceType, instanceProvider));
         }
 
         /// <summary>
-        /// Adds the instance proxy for service <typeparamref name="TService"/> using <paramref name="instanceProvicer"/>.
+        /// Adds the instance proxy for service <typeparamref name="TService"/> using <paramref name="instanceProvider"/>.
         /// </summary>
         /// <typeparam name="TService">Type of the service to create instance provider. Must by public interface.</typeparam>
         /// <param name="serviceCollection">The <see cref="IServiceCollection"/> to add the service to.</param>
-        /// <param name="instanceProvicer">The instance provicer instance.</param>
+        /// <param name="instanceProvider">The instance provider instance.</param>
         /// <returns>The <see cref="IServiceCollection"/> to add the service to.</returns>
         /// <exception cref="ArgumentNullException">instanceProvicer</exception>
         /// <exception cref="ArgumentException"></exception>
         /// <seealso cref="IInstanceProvicer"/>
-        public static IServiceCollection AddInstanceProxy<TService>(this IServiceCollection serviceCollection, IInstanceProvicer instanceProvicer)
+        public static IServiceCollection AddInstanceProxy<TService>(this IServiceCollection serviceCollection, IInstanceProvicer instanceProvider)
             where TService : class
         {
-            return serviceCollection.AddInstanceProxy(typeof(TService), instanceProvicer);
+            return serviceCollection.AddInstanceProxy(typeof(TService), instanceProvider);
         }
 
         /// <summary>
-        /// Adds the instance proxy for service <paramref name="serviceType" /> using <paramref name="instanceProvicer" />.
+        /// Adds the instance proxy for service <paramref name="serviceType" /> using <paramref name="instanceProvider" />.
         /// </summary>
         /// <param name="serviceCollection">The <see cref="IServiceCollection" /> to add the service to.</param>
         /// <param name="serviceType">Type of the service to create instance provider. Must by public interface.</param>
-        /// <param name="instanceProvicer">The instance provicer instance.</param>
+        /// <param name="instanceProvider">The instance provider instance.</param>
         /// <param name="proxyLifetime">The proxy lifetime.</param>
         /// <returns>
         /// The <see cref="IServiceCollection" /> to add the service to.
@@ -79,16 +79,16 @@ namespace MassiveDynamicProxyGenerator.Microsoft.DependencyInjection
         /// instanceProvicer</exception>
         /// <exception cref="ArgumentException">serviceType</exception>
         /// <seealso cref="IInstanceProvicer" />
-        public static IServiceCollection AddInstanceProxy(this IServiceCollection serviceCollection, Type serviceType, IInstanceProvicer instanceProvicer, ServiceLifetime proxyLifetime)
+        public static IServiceCollection AddInstanceProxy(this IServiceCollection serviceCollection, Type serviceType, IInstanceProvicer instanceProvider, ServiceLifetime proxyLifetime)
         {
             if (serviceType == null)
             {
                 throw new ArgumentNullException(nameof(serviceType));
             }
 
-            if (instanceProvicer == null)
+            if (instanceProvider == null)
             {
-                throw new ArgumentNullException(nameof(instanceProvicer));
+                throw new ArgumentNullException(nameof(instanceProvider));
             }
 
             if (TypeHelper.IsOpenGeneric(serviceType))
@@ -102,7 +102,7 @@ namespace MassiveDynamicProxyGenerator.Microsoft.DependencyInjection
             }
 
             ServiceDescriptor descriptor = new ServiceDescriptor(serviceType,
-                sp => MassiveDynamicProxyGeneratorDiSettings.ProxyGeneratorProvider.GetProxyGenerator(sp).GenerateInstanceProxy(serviceType, instanceProvicer),
+                sp => MassiveDynamicProxyGeneratorDiSettings.ProxyGeneratorProvider.GetProxyGenerator(sp).GenerateInstanceProxy(serviceType, instanceProvider),
                 proxyLifetime);
 
             serviceCollection.Add(descriptor);
@@ -110,11 +110,11 @@ namespace MassiveDynamicProxyGenerator.Microsoft.DependencyInjection
         }
 
         /// <summary>
-        /// Adds the instance proxy for service <typeparamref name="TService" /> using <paramref name="instanceProvicer" />.
+        /// Adds the instance proxy for service <typeparamref name="TService" /> using <paramref name="instanceProvider" />.
         /// </summary>
         /// <typeparam name="TService">Type of the service to create instance provider. Must by public interface.</typeparam>
         /// <param name="serviceCollection">The <see cref="IServiceCollection" /> to add the service to.</param>
-        /// <param name="instanceProvicer">The instance provicer instance.</param>
+        /// <param name="instanceProvider">The instance provider instance.</param>
         /// <param name="proxyLifetime">The proxy lifetime.</param>
         /// <returns>
         /// The <see cref="IServiceCollection" /> to add the service to.
@@ -122,18 +122,18 @@ namespace MassiveDynamicProxyGenerator.Microsoft.DependencyInjection
         /// <exception cref="ArgumentException">serviceType</exception>
         /// <exception cref="ArgumentNullException">instanceProvicer</exception>
         /// <seealso cref="IInstanceProvicer" />
-        public static IServiceCollection AddInstanceProxy<TService>(this IServiceCollection serviceCollection, IInstanceProvicer instanceProvicer, ServiceLifetime proxyLifetime)
+        public static IServiceCollection AddInstanceProxy<TService>(this IServiceCollection serviceCollection, IInstanceProvicer instanceProvider, ServiceLifetime proxyLifetime)
               where TService : class
         {
-            return serviceCollection.AddInstanceProxy(typeof(TService), instanceProvicer, proxyLifetime);
+            return serviceCollection.AddInstanceProxy(typeof(TService), instanceProvider, proxyLifetime);
         }
 
         /// <summary>
-        /// Adds the instance proxy for service <paramref name="serviceType" /> using <paramref name="instnaceFactory"/> for create instances of type <paramref name="serviceType" />.
+        /// Adds the instance proxy for service <paramref name="serviceType" /> using <paramref name="instanceFactory"/> for create instances of type <paramref name="serviceType" />.
         /// </summary>
         /// <param name="serviceCollection">The <see cref="IServiceCollection" /> to add the service to.</param>
         /// <param name="serviceType">Type of the service to create instance provider. Must by public interface..</param>
-        /// <param name="instnaceFactory">The instnace factory crates instances of <paramref name="serviceType" />.</param>
+        /// <param name="instanceFactory">The instance factory crates instances of <paramref name="serviceType" />.</param>
         /// <returns>The <see cref="IServiceCollection" /> to add the service to.</returns>
         /// <exception cref="ArgumentNullException">
         /// serviceType
@@ -144,16 +144,16 @@ namespace MassiveDynamicProxyGenerator.Microsoft.DependencyInjection
         /// serviceType
         /// </exception>
         /// <seealso cref="IInstanceProvicer" />
-        public static IServiceCollection AddInstanceProxy(this IServiceCollection serviceCollection, Type serviceType, Func<object> instnaceFactory)
+        public static IServiceCollection AddInstanceProxy(this IServiceCollection serviceCollection, Type serviceType, Func<object> instanceFactory)
         {
             if (serviceType == null)
             {
                 throw new ArgumentNullException(nameof(serviceType));
             }
 
-            if (instnaceFactory == null)
+            if (instanceFactory == null)
             {
-                throw new ArgumentNullException(nameof(instnaceFactory));
+                throw new ArgumentNullException(nameof(instanceFactory));
             }
 
             if (TypeHelper.IsOpenGeneric(serviceType))
@@ -166,7 +166,7 @@ namespace MassiveDynamicProxyGenerator.Microsoft.DependencyInjection
                 throw new ArgumentException($"Parameter {nameof(serviceType)} of type '{serviceType.AssemblyQualifiedName}' is not public interface.");
             }
 
-            return serviceCollection.AddSingleton(serviceType, sp => MassiveDynamicProxyGeneratorDiSettings.ProxyGeneratorProvider.GetProxyGenerator(sp).GenerateInstanceProxy(serviceType, new FuncInstanceProvider(instnaceFactory)));
+            return serviceCollection.AddSingleton(serviceType, sp => MassiveDynamicProxyGeneratorDiSettings.ProxyGeneratorProvider.GetProxyGenerator(sp).GenerateInstanceProxy(serviceType, new FuncInstanceProvider(instanceFactory)));
         }
 
         /// <summary>
@@ -174,14 +174,14 @@ namespace MassiveDynamicProxyGenerator.Microsoft.DependencyInjection
         /// </summary>
         /// <typeparam name="TService">The type of the service.</typeparam>
         /// <param name="serviceCollection">The <see cref="IServiceCollection" /> to add the service to.</param>
-        /// <param name="instaceFactory">The instnace factory crates instances of <typeparamref name="TService"/>.</param>
+        /// <param name="instanceFactory">The instance factory crates instances of <typeparamref name="TService"/>.</param>
         /// <returns>The <see cref="IServiceCollection" /> to add the service to.</returns>
         /// <exception cref="AggregateException"></exception>
         /// <exception cref="ArgumentNullException">instaceFactory</exception>
-        public static IServiceCollection AddInstanceProxy<TService>(this IServiceCollection serviceCollection, Func<TService> instaceFactory)
+        public static IServiceCollection AddInstanceProxy<TService>(this IServiceCollection serviceCollection, Func<TService> instanceFactory)
              where TService : class
         {
-            return serviceCollection.AddInstanceProxy(typeof(TService), instaceFactory);
+            return serviceCollection.AddInstanceProxy(typeof(TService), instanceFactory);
         }
 
         /// <summary>

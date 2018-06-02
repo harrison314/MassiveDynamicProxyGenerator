@@ -87,20 +87,20 @@ namespace MassiveDynamicProxyGenerator.Microsoft.DependencyInjection
         /// Creates an <see cref="System.IServiceProvider" /> containing services from the provided <see cref="Microsoft.Extensions.DependencyInjection.IServiceCollection" /> with custom service wraperer.
         /// </summary>
         /// <param name="services">The <see cref="Microsoft.Extensions.DependencyInjection.IServiceCollection" /> containing service descriptors.</param>
-        /// <param name="serviceWraperer">The service wraperer.</param>
+        /// <param name="serviceWrapperer">The service wrapperer.</param>
         /// <returns>
         /// The <see cref="IServiceProvider" />.
         /// </returns>
         /// <exception cref="ArgumentNullException">serviceWraperer</exception>
-        public static IServiceProvider BuildServiceProviderWithWraperer(this IServiceCollection services, IServiceWraperer serviceWraperer)
+        public static IServiceProvider BuildServiceProviderWithWraperer(this IServiceCollection services, IServiceWrapperer serviceWrapperer)
         {
-            if (serviceWraperer == null) throw new ArgumentNullException(nameof(serviceWraperer));
+            if (serviceWrapperer == null) throw new ArgumentNullException(nameof(serviceWrapperer));
 
             services.TryAddTransient(typeof(IOriginalService<>), typeof(OriginalService<>));
             IServiceProvider serviceProvider = services.BuildServiceProvider();
             MassiveServiceProvider massiveServiceProvider = new MassiveServiceProvider(serviceProvider,
                 MassiveDynamicProxyGeneratorDiSettings.ProxyGeneratorProvider.GetProxyGenerator(serviceProvider),
-                serviceWraperer);
+                serviceWrapperer);
 
             return massiveServiceProvider;
         }

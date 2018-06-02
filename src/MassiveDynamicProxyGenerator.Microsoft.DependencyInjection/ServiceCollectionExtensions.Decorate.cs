@@ -12,7 +12,7 @@ namespace MassiveDynamicProxyGenerator.Microsoft.DependencyInjection
         /// </summary>
         /// <param name="services">The <see cref="IServiceCollection"/> to add the service to.</param>
         /// <param name="serviceType">Type of the decorated service. Must by public interface.</param>
-        /// <param name="decoratorType">Type of the decorator. Must by nonabstract class.</param>
+        /// <param name="decoratorType">Type of the decorator. Must by non-abstract class.</param>
         /// <returns>The <see cref="IServiceCollection"/> to add the service to.</returns>
         /// <exception cref="ArgumentNullException">
         /// serviceType
@@ -66,7 +66,7 @@ namespace MassiveDynamicProxyGenerator.Microsoft.DependencyInjection
         /// Adds the decorator for service of <typeparamref name="TService"/> of type <typeparamref name="TDecorator"/>.
         /// </summary>
         /// <typeparam name="TService">The type of the intercepted service. Must by public interface.</typeparam>
-        /// <typeparam name="TDecorator">Type of the decorator. Must by nonabstract class.</typeparam>
+        /// <typeparam name="TDecorator">Type of the decorator. Must by non-abstract class.</typeparam>
         /// <param name="services">The <see cref="IServiceCollection"/> to add the service to.</param>
         /// <returns>The <see cref="IServiceCollection"/> to add the service to.</returns>
         public static IServiceCollection AddDecorator<TService, TDecorator>(this IServiceCollection services)

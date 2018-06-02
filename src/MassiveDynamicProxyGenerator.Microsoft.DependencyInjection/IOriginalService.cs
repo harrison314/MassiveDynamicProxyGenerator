@@ -5,7 +5,7 @@ using System.Text;
 namespace MassiveDynamicProxyGenerator.Microsoft.DependencyInjection
 {
     /// <summary>
-    /// Interface provide original non-wraped or intercepted service.
+    /// Interface provide original non-wrapped or intercepted service.
     /// </summary>
     /// <typeparam name="T">Type of service.</typeparam>
     public interface IOriginalService<T> where T : class

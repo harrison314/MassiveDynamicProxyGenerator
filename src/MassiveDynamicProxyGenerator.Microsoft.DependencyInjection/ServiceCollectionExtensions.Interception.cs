@@ -26,7 +26,7 @@ namespace MassiveDynamicProxyGenerator.Microsoft.DependencyInjection
         {
             if (!TypeHelper.IsPublicInterface(typeof(TServise)))
             {
-                throw new ArgumentException($"Patameter {nameof(TServise)} of type '{typeof(TServise).AssemblyQualifiedName}' is not public interface.");
+                throw new ArgumentException($"Parameter {nameof(TServise)} of type '{typeof(TServise).AssemblyQualifiedName}' is not public interface.");
             }
 
             EnshureRegistration(services).Add(typeof(TServise), typeof(TInterceptor));
@@ -53,12 +53,12 @@ namespace MassiveDynamicProxyGenerator.Microsoft.DependencyInjection
 
             if (!TypeHelper.IsPublicInterface(serviceType))
             {
-                throw new ArgumentException($"Patameter {nameof(serviceType)} of type '{serviceType.AssemblyQualifiedName}' is not public interface.");
+                throw new ArgumentException($"Parameter {nameof(serviceType)} of type '{serviceType.AssemblyQualifiedName}' is not public interface.");
             }
 
             if (!typeof(ICallableInterceptor).IsAssignableFrom(interceptorType))
             {
-                throw new ArgumentException($"Patameter {nameof(interceptorType)} of type '{interceptorType.AssemblyQualifiedName}' must implement {typeof(ICallableInterceptor).AssemblyQualifiedName}.");
+                throw new ArgumentException($"Parameter {nameof(interceptorType)} of type '{interceptorType.AssemblyQualifiedName}' must implement {typeof(ICallableInterceptor).AssemblyQualifiedName}.");
             }
 
             EnshureRegistration(services).Add(serviceType, interceptorType);
@@ -86,7 +86,7 @@ namespace MassiveDynamicProxyGenerator.Microsoft.DependencyInjection
 
             if (!TypeHelper.IsPublicInterface(serviceType))
             {
-                throw new ArgumentException($"Patameter {nameof(serviceType)} of type '{serviceType.AssemblyQualifiedName}' is not public interface.");
+                throw new ArgumentException($"Parameter {nameof(serviceType)} of type '{serviceType.AssemblyQualifiedName}' is not public interface.");
             }
 
             EnshureRegistration(services).Add(t => t == serviceType, sp => interceptor); //TODO: open generic parameters
@@ -127,7 +127,7 @@ namespace MassiveDynamicProxyGenerator.Microsoft.DependencyInjection
 
             if (!TypeHelper.IsPublicInterface(serviceType))
             {
-                throw new ArgumentException($"Patameter {nameof(serviceType)} of type '{serviceType.AssemblyQualifiedName}' is not public interface.");
+                throw new ArgumentException($"Parameter {nameof(serviceType)} of type '{serviceType.AssemblyQualifiedName}' is not public interface.");
             }
 
             EnshureRegistration(services).Add(t => t == serviceType, interceptorFactory); //TODO: open generic parameters
@@ -170,7 +170,7 @@ namespace MassiveDynamicProxyGenerator.Microsoft.DependencyInjection
         }
 
         /// <summary>
-        /// Add intercepted decorator to multiple services identified <paramref name="predicate"/> and intercepted certed using <paramref name="interceptorFactory"/>.
+        /// Add intercepted decorator to multiple services identified <paramref name="predicate"/> and intercepted created using <paramref name="interceptorFactory"/>.
         /// </summary>
         /// <param name="services">The <see cref="IServiceCollection" /> to add the service to.</param>
         /// <param name="predicate">The predicated identified intercepted services.</param>
@@ -212,7 +212,7 @@ namespace MassiveDynamicProxyGenerator.Microsoft.DependencyInjection
 
             if (!typeof(ICallableInterceptor).IsAssignableFrom(interceptorType))
             {
-                throw new ArgumentException($"Patameter {nameof(interceptorType)} of type '{interceptorType.AssemblyQualifiedName}' must implement {typeof(ICallableInterceptor).AssemblyQualifiedName}.");
+                throw new ArgumentException($"Parameter {nameof(interceptorType)} of type '{interceptorType.AssemblyQualifiedName}' must implement {typeof(ICallableInterceptor).AssemblyQualifiedName}.");
             }
 
             EnshureRegistration(services).Add(predicate, sp => (ICallableInterceptor)ActivatorUtilities.CreateInstance(sp, interceptorType, interceptorParams));
