@@ -58,6 +58,12 @@
     <None Include="app.config" />
     <None Include="packages.config" />
   </ItemGroup>
+  <ItemGroup>
+    <ProjectReference Include="..\..\Src\MassiveDynamicProxyGenerator\MassiveDynamicProxyGenerator.csproj">
+      <Project>{c939087c-21c4-41f2-8452-765a9addccef}</Project>
+      <Name>MassiveDynamicProxyGenerator</Name>
+    </ProjectReference>
+  </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 
        Other similar extension points exist, see Microsoft.Common.targets.
