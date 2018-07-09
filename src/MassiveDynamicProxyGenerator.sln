@@ -14,8 +14,6 @@ Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Solution Items", "Solution 
 EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Samples", "Samples", "{7558D4C7-EEA6-4B86-8C46-B0639EEE79C8}"
 EndProject
-Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "MassiveDynamicProxyGenerator", "MassiveDynamicProxyGenerator\MassiveDynamicProxyGenerator.csproj", "{921B1A81-7B35-4C87-926C-0995792934CF}"
-EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "MassiveDynamicProxyGenerator.Tests", "MassiveDynamicProxyGenerator.Tests\MassiveDynamicProxyGenerator.Tests.csproj", "{2F31B717-F2B5-46F5-9752-B1C584C661AB}"
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "ProxyGeneratrorSamples.Net40", "Samples\ProxyGeneratrorSamples.Net40\ProxyGeneratrorSamples.Net40.csproj", "{E7F2B2B2-318C-4F2B-BF76-086A230E59FA}"
@@ -26,15 +24,11 @@ Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "WcfForHipsters.WebServer", 
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "WcfForHipsters.Client", "Samples\WcfForHipsters.Client\WcfForHipsters.Client.csproj", "{62E2BCF2-3C4E-4C9F-9008-AF058C5C953D}"
 EndProject
-Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "MassiveDynamicProxyGenerator.SimpleInjector", "MassiveDynamicProxyGenerator.SimpleInjector\MassiveDynamicProxyGenerator.SimpleInjector.csproj", "{29DC97E5-2ED4-41E7-B23F-8DA3366DD710}"
-EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "MassiveDynamicProxyGenerator.SimpleInjector.Tests", "MassiveDynamicProxyGenerator.SimpleInjector.Tests\MassiveDynamicProxyGenerator.SimpleInjector.Tests.csproj", "{6C1991B8-F14B-4563-A088-602CE91527E2}"
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "SoliutionItems", "SoliutionItems\SoliutionItems.csproj", "{B33B38AA-1E96-44E3-B8E3-8C4A010B542A}"
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "MassiveDynamicProxyGenerator.SimpleInjector.Tests.NetCore", "MassiveDynamicProxyGenerator.SimpleInjector.Tests.NetCore\MassiveDynamicProxyGenerator.SimpleInjector.Tests.NetCore.csproj", "{C763F194-B431-4D1D-B8CC-BCB13008309F}"
-EndProject
-Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "MassiveDynamicProxyGenerator.Microsoft.DependencyInjection", "MassiveDynamicProxyGenerator.Microsoft.DependencyInjection\MassiveDynamicProxyGenerator.Microsoft.DependencyInjection.csproj", "{0709CC41-C97B-4FB7-AE9F-BF7F8B06ABD4}"
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "MassiveDynamicProxyGenerator.DependencyInjection.Test", "MassiveDynamicProxyGenerator.DependencyInjection.Test\MassiveDynamicProxyGenerator.DependencyInjection.Test.csproj", "{98F3C8C1-F37D-4CF3-98BE-C4975F32F73E}"
 EndProject
@@ -44,16 +38,18 @@ Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Test", "Test", "{36A09A9F-1
 EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Src", "Src", "{FE0D49B9-F67B-47B1-8A35-85676289C86F}"
 EndProject
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "MassiveDynamicProxyGenerator", "Src\MassiveDynamicProxyGenerator\MassiveDynamicProxyGenerator.csproj", "{C939087C-21C4-41F2-8452-765A9ADDCCEF}"
+EndProject
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "MassiveDynamicProxyGenerator.Microsoft.DependencyInjection", "Src\MassiveDynamicProxyGenerator.Microsoft.DependencyInjection\MassiveDynamicProxyGenerator.Microsoft.DependencyInjection.csproj", "{084639DC-CCDA-4268-A5D4-38D21EFFDEDA}"
+EndProject
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "MassiveDynamicProxyGenerator.SimpleInjector", "Src\MassiveDynamicProxyGenerator.SimpleInjector\MassiveDynamicProxyGenerator.SimpleInjector.csproj", "{F618E452-4F3F-4382-B477-6A8ADE7E78A6}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
 		Release|Any CPU = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(ProjectConfigurationPlatforms) = postSolution
-		{921B1A81-7B35-4C87-926C-0995792934CF}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
-		{921B1A81-7B35-4C87-926C-0995792934CF}.Debug|Any CPU.Build.0 = Debug|Any CPU
-		{921B1A81-7B35-4C87-926C-0995792934CF}.Release|Any CPU.ActiveCfg = Release|Any CPU
-		{921B1A81-7B35-4C87-926C-0995792934CF}.Release|Any CPU.Build.0 = Release|Any CPU
 		{2F31B717-F2B5-46F5-9752-B1C584C661AB}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
 		{2F31B717-F2B5-46F5-9752-B1C584C661AB}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{2F31B717-F2B5-46F5-9752-B1C584C661AB}.Release|Any CPU.ActiveCfg = Release|Any CPU
@@ -74,10 +70,6 @@ Global
 		{62E2BCF2-3C4E-4C9F-9008-AF058C5C953D}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{62E2BCF2-3C4E-4C9F-9008-AF058C5C953D}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{62E2BCF2-3C4E-4C9F-9008-AF058C5C953D}.Release|Any CPU.Build.0 = Release|Any CPU
-		{29DC97E5-2ED4-41E7-B23F-8DA3366DD710}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
-		{29DC97E5-2ED4-41E7-B23F-8DA3366DD710}.Debug|Any CPU.Build.0 = Debug|Any CPU
-		{29DC97E5-2ED4-41E7-B23F-8DA3366DD710}.Release|Any CPU.ActiveCfg = Release|Any CPU
-		{29DC97E5-2ED4-41E7-B23F-8DA3366DD710}.Release|Any CPU.Build.0 = Release|Any CPU
 		{6C1991B8-F14B-4563-A088-602CE91527E2}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
 		{6C1991B8-F14B-4563-A088-602CE91527E2}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{6C1991B8-F14B-4563-A088-602CE91527E2}.Release|Any CPU.ActiveCfg = Release|Any CPU
@@ -90,10 +82,6 @@ Global
 		{C763F194-B431-4D1D-B8CC-BCB13008309F}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{C763F194-B431-4D1D-B8CC-BCB13008309F}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{C763F194-B431-4D1D-B8CC-BCB13008309F}.Release|Any CPU.Build.0 = Release|Any CPU
-		{0709CC41-C97B-4FB7-AE9F-BF7F8B06ABD4}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
-		{0709CC41-C97B-4FB7-AE9F-BF7F8B06ABD4}.Debug|Any CPU.Build.0 = Debug|Any CPU
-		{0709CC41-C97B-4FB7-AE9F-BF7F8B06ABD4}.Release|Any CPU.ActiveCfg = Release|Any CPU
-		{0709CC41-C97B-4FB7-AE9F-BF7F8B06ABD4}.Release|Any CPU.Build.0 = Release|Any CPU
 		{98F3C8C1-F37D-4CF3-98BE-C4975F32F73E}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
 		{98F3C8C1-F37D-4CF3-98BE-C4975F32F73E}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{98F3C8C1-F37D-4CF3-98BE-C4975F32F73E}.Release|Any CPU.ActiveCfg = Release|Any CPU
@@ -102,6 +90,18 @@ Global
 		{E923680F-A0C1-41B4-9DB0-F9ED664A79B5}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{E923680F-A0C1-41B4-9DB0-F9ED664A79B5}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{E923680F-A0C1-41B4-9DB0-F9ED664A79B5}.Release|Any CPU.Build.0 = Release|Any CPU
+		{C939087C-21C4-41F2-8452-765A9ADDCCEF}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{C939087C-21C4-41F2-8452-765A9ADDCCEF}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{C939087C-21C4-41F2-8452-765A9ADDCCEF}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{C939087C-21C4-41F2-8452-765A9ADDCCEF}.Release|Any CPU.Build.0 = Release|Any CPU
+		{084639DC-CCDA-4268-A5D4-38D21EFFDEDA}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{084639DC-CCDA-4268-A5D4-38D21EFFDEDA}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{084639DC-CCDA-4268-A5D4-38D21EFFDEDA}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{084639DC-CCDA-4268-A5D4-38D21EFFDEDA}.Release|Any CPU.Build.0 = Release|Any CPU
+		{F618E452-4F3F-4382-B477-6A8ADE7E78A6}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{F618E452-4F3F-4382-B477-6A8ADE7E78A6}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{F618E452-4F3F-4382-B477-6A8ADE7E78A6}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{F618E452-4F3F-4382-B477-6A8ADE7E78A6}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
@@ -111,6 +111,9 @@ Global
 		{768B0EAB-5795-4AE1-A2FD-5359C4E2432A} = {7558D4C7-EEA6-4B86-8C46-B0639EEE79C8}
 		{62E2BCF2-3C4E-4C9F-9008-AF058C5C953D} = {7558D4C7-EEA6-4B86-8C46-B0639EEE79C8}
 		{E923680F-A0C1-41B4-9DB0-F9ED664A79B5} = {7558D4C7-EEA6-4B86-8C46-B0639EEE79C8}
+		{C939087C-21C4-41F2-8452-765A9ADDCCEF} = {FE0D49B9-F67B-47B1-8A35-85676289C86F}
+		{084639DC-CCDA-4268-A5D4-38D21EFFDEDA} = {FE0D49B9-F67B-47B1-8A35-85676289C86F}
+		{F618E452-4F3F-4382-B477-6A8ADE7E78A6} = {FE0D49B9-F67B-47B1-8A35-85676289C86F}
 	EndGlobalSection
 	GlobalSection(ExtensibilityGlobals) = postSolution
 		SolutionGuid = {C023E9F5-5F48-4747-8D20-8782E8DA60DC}

@@ -1,4 +1,4 @@
-<Project Sdk="Microsoft.NET.Sdk">
+﻿<Project Sdk="Microsoft.NET.Sdk">
 
   <PropertyGroup>
     <TargetFramework>netstandard2.0</TargetFramework>
@@ -6,7 +6,7 @@
     <PackageTags>massive, dynamic, proxy, dynamic proxy, runtime, .net, micoroft.extensions, IOC, ASP.NET, MVC</PackageTags>
     <PackageReleaseNotes>Change interception and decoration.</PackageReleaseNotes>
   </PropertyGroup>
-  <Import Project="..\Version.proj" />
+  <Import Project="..\..\Version.proj" />
 
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|AnyCPU'">
     <DocumentationFile>bin\Debug\netstandard2.0\MassiveDynamicProxyGenerator.Microsoft.DependencyInjection.xml</DocumentationFile>

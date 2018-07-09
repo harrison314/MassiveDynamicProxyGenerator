@@ -23,9 +23,5 @@
     <PackageReference Include="Shouldly" Version="2.8.3" />
     <PackageReference Include="SimpleInjector" Version="4.3.0" />
   </ItemGroup>
-  
-  <ItemGroup>
-    <ProjectReference Include="..\MassiveDynamicProxyGenerator.SimpleInjector\MassiveDynamicProxyGenerator.SimpleInjector.csproj" />
-  </ItemGroup>
 
 </Project>

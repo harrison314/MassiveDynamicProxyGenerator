@@ -10,18 +10,18 @@
     <Description>MassiveDynamicProxyGenerator.SimpleInjector is library of extensions method for IoC container - Simple Injector.
 Adding methods for register mock implementations, proxys, instance proxies for resolving circular depndencies or lazy initialization and interpetion for decoration instances.</Description>
   </PropertyGroup>
-  <Import Project="..\Version.proj" />
+  <Import Project="..\..\Version.proj" />
   
   <PropertyGroup>
-    <CodeAnalysisRuleSet>..\..\MassiveDynamicProxyGenerator.ruleset</CodeAnalysisRuleSet>
+    <CodeAnalysisRuleSet>..\..\..\MassiveDynamicProxyGenerator.ruleset</CodeAnalysisRuleSet>
     <PackageReleaseNotes>Add support for .Net Stdard 2.0.
 Update simple Injector nugets.</PackageReleaseNotes>
     <AssemblyVersion>1.2.2.0</AssemblyVersion>
     <FileVersion>1.2.2.0</FileVersion>
   </PropertyGroup>
-  <ItemGroup>
+  <!--<ItemGroup>
     <AdditionalFiles Include="stylecop.json" />
-  </ItemGroup>
+  </ItemGroup>-->
 
   <ItemGroup>
     <None Include="Dangerous\DangerousContainerExtensions.Mock.cs" />

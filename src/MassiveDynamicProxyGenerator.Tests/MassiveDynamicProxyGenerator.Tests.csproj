@@ -93,12 +93,6 @@
   <ItemGroup>
     <None Include="packages.config" />
   </ItemGroup>
-  <ItemGroup>
-    <ProjectReference Include="..\MassiveDynamicProxyGenerator\MassiveDynamicProxyGenerator.csproj">
-      <Project>{921b1a81-7b35-4c87-926c-0995792934cf}</Project>
-      <Name>MassiveDynamicProxyGenerator</Name>
-    </ProjectReference>
-  </ItemGroup>
   <ItemGroup />
   <Choose>
     <When Condition="'$(VisualStudioVersion)' == '10.0' And '$(IsCodedUITest)' == 'True'">

@@ -16,9 +16,4 @@
     <PackageReference Include="Shouldly" Version="3.0.0" />
   </ItemGroup>
 
-  <ItemGroup>
-    <ProjectReference Include="..\MassiveDynamicProxyGenerator.Microsoft.DependencyInjection\MassiveDynamicProxyGenerator.Microsoft.DependencyInjection.csproj" />
-    <ProjectReference Include="..\MassiveDynamicProxyGenerator\MassiveDynamicProxyGenerator.csproj" />
-  </ItemGroup>
-
 </Project>
