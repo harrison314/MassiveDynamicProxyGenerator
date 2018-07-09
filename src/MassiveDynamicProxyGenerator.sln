@@ -40,6 +40,10 @@ Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "MassiveDynamicProxyGenerato
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "SampleWebApplication", "Samples\SampleWebApplication\SampleWebApplication.csproj", "{E923680F-A0C1-41B4-9DB0-F9ED664A79B5}"
 EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Test", "Test", "{36A09A9F-1D1E-40F2-AE7F-7D53BC120971}"
+EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Src", "Src", "{FE0D49B9-F67B-47B1-8A35-85676289C86F}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
