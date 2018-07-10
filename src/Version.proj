@@ -14,7 +14,7 @@
 
     <AssemblyVersion>$(LocalBuildVersion).$(LocalBuildRevision)</AssemblyVersion>
     <FileVersion>$(LocalBuildVersion).$(LocalBuildRevision)</FileVersion>
-    <Version>$(LocalBuildVersion).$(LocalBuildRevision)-preview1</Version>
+    <Version>$(LocalBuildVersion).$(LocalBuildRevision)</Version>
 	  <PackageLicenseUrl>https://raw.githubusercontent.com/harrison314/MassiveDynamicProxyGenerator/master/LICENSE</PackageLicenseUrl>
     <PackageProjectUrl>https://github.com/harrison314/MassiveDynamicProxyGenerator</PackageProjectUrl>
     <RepositoryUrl>https://github.com/harrison314/MassiveDynamicProxyGenerator</RepositoryUrl>
