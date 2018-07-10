@@ -5,6 +5,7 @@
     <GenerateDocumentationFile>true</GenerateDocumentationFile>
     <AssemblyName>MassiveDynamicProxyGenerator</AssemblyName>
     <PackageId>MassiveDynamicProxyGenerator</PackageId>
+    <Title>MassiveDynamic ProxyGenerator</Title>
     <NetStandardImplicitPackageVersion>1.6.0</NetStandardImplicitPackageVersion>
     <PackageTargetFallback Condition=" '$(TargetFramework)' == 'netstandard1.6' ">$(PackageTargetFallback);dnxcore50</PackageTargetFallback>
     <PackageTags>massive, dynamic, proxy, dynamic proxy, runtime, .net</PackageTags>

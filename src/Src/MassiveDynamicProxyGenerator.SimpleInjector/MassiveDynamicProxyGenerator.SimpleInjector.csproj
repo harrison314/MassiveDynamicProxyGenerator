@@ -5,6 +5,7 @@
     <TargetFrameworks>netstandard1.4;netstandard1.6;netstandard2.0;net40;net45;net46;net461</TargetFrameworks>
     <DefineConstants>$(DefineConstants);COREFX</DefineConstants>
     <NetStandardImplicitPackageVersion>1.6.0</NetStandardImplicitPackageVersion>
+    <Title>MassiveDynamic ProxyGenerator SimpleInjector</Title>
     <PackageTargetFallback Condition=" '$(TargetFramework)' == 'netstandard1.6' ">$(PackageTargetFallback);dnxcore50</PackageTargetFallback>
     <PackageTags>massive, dynamic, proxy, dynamic proxy, runtime, .net, IoC, SimpleInjector</PackageTags>
     <Description>MassiveDynamicProxyGenerator.SimpleInjector is library of extensions method for IoC container - Simple Injector.
