@@ -137,9 +137,12 @@ Task("TestNetFull")
         }
     });
 
-Task("Pack")
+Task("Test")
     .IsDependentOn("TestNetStandard")
-    .IsDependentOn("TestNetFull")
+    .IsDependentOn("TestNetFull");
+
+Task("Pack")
+    .IsDependentOn("Test")
     .Does(()=>
     {
         foreach(var projFile in GetFiles("../src/Src/*/*.csproj"))
