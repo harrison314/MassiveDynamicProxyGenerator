@@ -13,7 +13,7 @@ namespace MassiveDynamicProxyGenerator.SimpleInjector.Tests
         public  void Intercept_Default_AnotherType()
         {
             Container container = this.CrateDefaultContaner();
-            container.RegisterSingleton<CallableInterceptorAdapter>(new CallableInterceptorAdapter(invodcation =>
+            container.RegisterInstance<CallableInterceptorAdapter>(new CallableInterceptorAdapter(invodcation =>
             {
                 invodcation.Process();
                 if(invodcation.MethodName == nameof(IMessageService.GetCountOfMessagesInFront))

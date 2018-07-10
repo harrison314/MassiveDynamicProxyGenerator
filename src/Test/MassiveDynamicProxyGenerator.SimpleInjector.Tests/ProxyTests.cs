@@ -13,7 +13,7 @@ namespace MassiveDynamicProxyGenerator.SimpleInjector.Tests
         public void Proxy_TypeInterceptor_Sucess()
         {
             Container container = this.CrateDefaultContaner();
-            container.RegisterSingleton<InterceptorAdapter>(new InterceptorAdapter(invodcation =>
+            container.RegisterInstance<InterceptorAdapter>(new InterceptorAdapter(invodcation =>
             {
                 if (invodcation.MethodName == nameof(IMessageService.GetCountOfMessagesInFront))
                 {
@@ -32,7 +32,7 @@ namespace MassiveDynamicProxyGenerator.SimpleInjector.Tests
         public void Proxy_OpenGenericTypeInterceptor_Sucess()
         {
             Container container = this.CrateDefaultContaner();
-            container.RegisterSingleton<InterceptorAdapter>(new InterceptorAdapter(invodcation =>
+            container.RegisterInstance<InterceptorAdapter>(new InterceptorAdapter(invodcation =>
             {
                 if (invodcation.MethodName == nameof(IGenericService<int>.GetLast))
                 {
