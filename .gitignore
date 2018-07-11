@@ -192,8 +192,6 @@ ModelManifest.xml
 /.vs/config
 /Help
 /src/.vs
-/src/MassiveDynamicProxyGenerator.NetStandard/project.lock.json
-/src/MassiveDynamicProxyGenerator.Tests.NetStandard/project.lock.json
 /BuildScripts/BuildOutput
-/BuildScripts/Artefacts
+/BuildScripts/Artifacts
 /BuildScripts/tools

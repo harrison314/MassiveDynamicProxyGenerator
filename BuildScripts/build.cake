@@ -5,7 +5,7 @@ var configuration = Argument("Configuration", "Release");
 //*****************************************************************************
 // Constants
 
-string artefacts = "./Artefacts";
+string artefacts = "./Artifacts";
 
 // ****************************************************************************
 var netCoreBuildSettings = new DotNetCoreBuildSettings()
@@ -14,12 +14,6 @@ var netCoreBuildSettings = new DotNetCoreBuildSettings()
     NoDependencies = false,
     NoIncremental = true,
     NoRestore = false
-};
-
-var netCoreDotNetCoreTestSettings = new  DotNetCoreTestSettings()
-{
-    //TODO: lcov
-    Configuration = configuration
 };
 
 var netCoreDotNetCorePackSettings = new  DotNetCorePackSettings ()
@@ -115,6 +109,15 @@ Task("TestNetStandard")
     {
         foreach(string projFile in testProjectNetStandrd)
         {
+		   string fileName = System.IO.Path.GetFileNameWithoutExtension(projFile);
+		   var netCoreDotNetCoreTestSettings = new  DotNetCoreTestSettings()
+           {
+               Configuration = configuration,
+			   ArgumentCustomization = args => args.Append("/p:CollectCoverage=true")
+              .Append("/p:CoverletOutputFormat=lcov")
+              .Append("/p:CoverletOutput=../../../BuildScripts/Artifacts/lcov.info")
+           };
+
            DotNetCoreTest(projFile, netCoreDotNetCoreTestSettings);
         }
     });
