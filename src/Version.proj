@@ -5,17 +5,17 @@
     <LocalBuildRevision>0</LocalBuildRevision>
     <NowYear>$([System.DateTime]::Now.Year.ToString())</NowYear>
   </PropertyGroup>
-  
+
   <PropertyGroup>
     <Copyright>Copyright © 2016-$(NowYear) harrison314</Copyright>
     <VersionPrefix>$(LocalBuildVersion)</VersionPrefix>
     <Authors>harrison314</Authors>
-	<Company>harrison314</Company>
+    <Company>harrison314</Company>
 
     <AssemblyVersion>$(LocalBuildVersion).$(LocalBuildRevision)</AssemblyVersion>
     <FileVersion>$(LocalBuildVersion).$(LocalBuildRevision)</FileVersion>
     <Version>$(LocalBuildVersion).$(LocalBuildRevision)</Version>
-	  <PackageLicenseUrl>https://raw.githubusercontent.com/harrison314/MassiveDynamicProxyGenerator/master/LICENSE</PackageLicenseUrl>
+    <PackageLicenseUrl>https://raw.githubusercontent.com/harrison314/MassiveDynamicProxyGenerator/master/LICENSE</PackageLicenseUrl>
     <PackageProjectUrl>https://github.com/harrison314/MassiveDynamicProxyGenerator</PackageProjectUrl>
     <RepositoryUrl>https://github.com/harrison314/MassiveDynamicProxyGenerator</RepositoryUrl>
     <RepositoryType>git</RepositoryType>
