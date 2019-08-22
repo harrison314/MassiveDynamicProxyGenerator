@@ -2,7 +2,7 @@
 
   <PropertyGroup>
     <GenerateDocumentationFile>true</GenerateDocumentationFile>
-    <TargetFrameworks>netstandard1.4;netstandard1.6;netstandard2.0;net40;net45;net46;net461</TargetFrameworks>
+    <TargetFrameworks>netstandard1.4;netstandard1.6;netstandard2.0;net40;net45;net46</TargetFrameworks>
     <DefineConstants>$(DefineConstants);COREFX</DefineConstants>
     <NetStandardImplicitPackageVersion>1.6.0</NetStandardImplicitPackageVersion>
     <Title>MassiveDynamic ProxyGenerator SimpleInjector</Title>
@@ -23,10 +23,6 @@ Update simple Injector nugets.</PackageReleaseNotes>
   <!--<ItemGroup>
     <AdditionalFiles Include="stylecop.json" />
   </ItemGroup>-->
-
-  <ItemGroup>
-    <None Include="Dangerous\DangerousContainerExtensions.Mock.cs" />
-  </ItemGroup>
 
   <ItemGroup Condition=" '$(TargetFramework)' == 'netstandard1.4' ">
     <PackageReference Include="System.Reflection.TypeExtensions" Version="4.3.0" />
