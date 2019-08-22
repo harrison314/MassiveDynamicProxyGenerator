@@ -14,6 +14,7 @@ namespace MassiveDynamicProxyGenerator.DynamicProxy
     /// <seealso cref="MassiveDynamicProxyGenerator.IInvocation" />
     internal class DynamicInvocation : IInvocation
     {
+        private readonly object syncRoot;
         private object[] arguments;
         private Type[] argumentTypes;
         private string methodName;
@@ -51,17 +52,22 @@ namespace MassiveDynamicProxyGenerator.DynamicProxy
             {
                 if (this.argumentTypes == null)
                 {
-                    // TODO: lock
-                    this.argumentTypes = new Type[this.arguments.Length];
-                    for (int i = 0; i < this.arguments.Length; i++)
+                    lock (this.syncRoot)
                     {
-                        if (this.arguments[i] == null)
+                        if (this.argumentTypes == null)
                         {
-                            this.argumentTypes[i] = typeof(object);
-                        }
-                        else
-                        {
-                            this.argumentTypes[i] = this.arguments[i].GetType();
+                            this.argumentTypes = new Type[this.arguments.Length];
+                            for (int i = 0; i < this.arguments.Length; i++)
+                            {
+                                if (this.arguments[i] == null)
+                                {
+                                    this.argumentTypes[i] = typeof(object);
+                                }
+                                else
+                                {
+                                    this.argumentTypes[i] = this.arguments[i].GetType();
+                                }
+                            }
                         }
                     }
                 }
@@ -148,6 +154,7 @@ namespace MassiveDynamicProxyGenerator.DynamicProxy
         {
             this.returnValue = null;
             this.argumentTypes = null;
+            this.syncRoot = new object();
         }
 
         /// <summary>
