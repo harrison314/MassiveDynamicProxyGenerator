@@ -1,4 +1,5 @@
-﻿using System;
+﻿using MassiveDynamicProxyGenerator.Utils;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Reflection;
@@ -123,7 +124,7 @@ namespace MassiveDynamicProxyGenerator.TypedInstanceProxy
 
             for (int i = 0; i < parameters.Length; i++)
             {
-                il.Emit(OpCodes.Ldarg, i + 1);
+                il.EmitLdArg(i + 1);
             }
 
             il.Emit(OpCodes.Callvirt, interfaceMethod);

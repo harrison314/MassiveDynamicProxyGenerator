@@ -98,7 +98,7 @@ namespace MassiveDynamicProxyGenerator.TypedProxy
             {
                 il.Emit(OpCodes.Dup);
                 il.EmitFastInt(i);
-                il.Emit(OpCodes.Ldarg, i + 1);
+                il.EmitLdArg(i + 1);
                 if (parameters[i].GetTypeInfo().IsValueType)
                 {
                     il.Emit(OpCodes.Box, parameters[i]);
