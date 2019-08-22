@@ -279,8 +279,10 @@ namespace MassiveDynamicProxyGenerator.TypedDecorator
                     }
                     else
                     {
-                        // TODO: nekastovat ak je to objekt
-                        il.Emit(OpCodes.Castclass, methodParameters[i].ParameterType);
+                        if (methodParameters[i].ParameterType != typeof(object))
+                        {
+                            il.Emit(OpCodes.Castclass, methodParameters[i].ParameterType);
+                        }
                     }
                 }
 
@@ -317,8 +319,10 @@ namespace MassiveDynamicProxyGenerator.TypedDecorator
                     }
                     else
                     {
-                        // TODO: nekastovat ak je to objekt
-                        il.Emit(OpCodes.Castclass, methodParameters[i].ParameterType);
+                        if (methodParameters[i].ParameterType != typeof(object))
+                        {
+                            il.Emit(OpCodes.Castclass, methodParameters[i].ParameterType);
+                        }
                     }
                 }
 
