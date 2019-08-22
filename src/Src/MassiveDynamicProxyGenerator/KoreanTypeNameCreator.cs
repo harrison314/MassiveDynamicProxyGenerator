@@ -29,9 +29,14 @@ namespace MassiveDynamicProxyGenerator
         /// Initializes a new instance of the <see cref="KoreanTypeNameCreator"/> class.
         /// </summary>
         /// <param name="defaultTypeLength">The default type length.</param>
+        /// <exception cref="ArgumentOutOfRangeException">Parameter defaultTypeLength must by greater than zero.</exception>
         public KoreanTypeNameCreator(int defaultTypeLength)
         {
-            // TODO: vynimka
+            if (defaultTypeLength <= 0)
+            {
+                throw new ArgumentOutOfRangeException(nameof(defaultTypeLength), "Parameter defaultTypeLength must by greater than zero.");
+            }
+
             this.defaultTypeLength = defaultTypeLength;
             this.counter = 10000;
             this.rand = new Random(DateTime.Now.Millisecond);

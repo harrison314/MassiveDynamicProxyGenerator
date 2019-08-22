@@ -226,7 +226,7 @@ namespace MassiveDynamicProxyGenerator
         /// or
         /// additionalTypes
         /// </exception>
-        /// <exception cref="ArgumentOutOfRangeException">additionalTypes</exception>
+        /// <exception cref="ArgumentOutOfRangeException">Parameter defaultTypeLength must by greater than zero.</exception>
         public object GenerateProxy(IInterceptor interceptor, params Type[] additionalTypes)
         {
             if (interceptor == null)
@@ -241,7 +241,7 @@ namespace MassiveDynamicProxyGenerator
 
             if (additionalTypes.Length < 1)
             {
-                throw new ArgumentOutOfRangeException(nameof(additionalTypes)); // TODO: doplnit lepsiu spravu
+                throw new ArgumentOutOfRangeException(nameof(additionalTypes), "Parameter defaultTypeLength must by greater than zero.");
             }
 
             Type proxyType = this.generatedTypeList.EnsureType(additionalTypes, TypedDecoratorType.TypedProxy, this.GenerateType);   // this.GenerateType(interfaceTypes);
