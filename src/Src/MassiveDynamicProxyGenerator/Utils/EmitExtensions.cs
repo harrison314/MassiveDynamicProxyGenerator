@@ -145,5 +145,43 @@ namespace MassiveDynamicProxyGenerator.Utils
                 il.Emit(OpCodes.Ldc_I4, value);
             }
         }
+
+#if !NET40
+        [MethodImpl(MethodImplOptions.AggressiveInlining)]
+#endif
+        public static void EmitLdArg(this ILGenerator il, int value)
+        {
+#if DEBUG
+            if (il == null)
+            {
+                throw new ArgumentNullException(nameof(il));
+            }
+#endif
+
+            switch (value)
+            {
+                case 0:
+                    il.Emit(OpCodes.Ldarg_0);
+                    return;
+                case 1:
+                    il.Emit(OpCodes.Ldarg_1);
+                    return;
+                case 2:
+                    il.Emit(OpCodes.Ldarg_2);
+                    return;
+                case 3:
+                    il.Emit(OpCodes.Ldarg_3);
+                    return;
+            }
+
+            if (value < 128)
+            {
+                il.Emit(OpCodes.Ldarg_S, (sbyte)value);
+            }
+            else
+            {
+                il.Emit(OpCodes.Ldarg, value);
+            }
+        }
     }
 }

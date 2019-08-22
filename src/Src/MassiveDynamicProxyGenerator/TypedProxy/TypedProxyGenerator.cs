@@ -91,13 +91,13 @@ namespace MassiveDynamicProxyGenerator.TypedProxy
 
             // invocation.Arguments = new object[params.Length];
             il.Emit(OpCodes.Ldloc, invocationVar);
-            il.Emit(OpCodes.Ldc_I4, parameters.Length);
+            il.EmitFastInt(parameters.Length);
             il.Emit(OpCodes.Newarr, typeof(object));
 
             for (int i = 0; i < parameters.Length; i++)
             {
                 il.Emit(OpCodes.Dup);
-                il.Emit(OpCodes.Ldc_I4, i);
+                il.EmitFastInt(i);
                 il.Emit(OpCodes.Ldarg, i + 1);
                 if (parameters[i].GetTypeInfo().IsValueType)
                 {
@@ -127,13 +127,13 @@ namespace MassiveDynamicProxyGenerator.TypedProxy
             // invocation.ArgumentTypes = new Type[] { typeof(....), .... };
             il.Emit(OpCodes.Nop);
             il.Emit(OpCodes.Ldloc, invocationVar);
-            il.Emit(OpCodes.Ldc_I4, parameters.Length);
+            il.EmitFastInt(parameters.Length);
             il.Emit(OpCodes.Newarr, typeof(Type));
 
             for (int i = 0; i < parameters.Length; i++)
             {
                 il.Emit(OpCodes.Dup);
-                il.Emit(OpCodes.Ldc_I4, i);
+                il.EmitFastInt(i);
                 il.Emit(OpCodes.Ldtoken, parameters[i]);
                 il.Emit(OpCodes.Call, getTypeFromhandle);
                 il.Emit(OpCodes.Stelem_Ref);

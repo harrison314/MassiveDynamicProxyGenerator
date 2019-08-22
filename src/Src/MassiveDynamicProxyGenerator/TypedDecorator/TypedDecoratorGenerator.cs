@@ -1,4 +1,5 @@
-﻿using System;
+﻿using MassiveDynamicProxyGenerator.Utils;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Reflection;
@@ -123,13 +124,13 @@ namespace MassiveDynamicProxyGenerator.TypedDecorator
 
             // invocation.Arguments = new object[params.Length];
             il.Emit(OpCodes.Ldloc, invocationVar);
-            il.Emit(OpCodes.Ldc_I4, parameters.Length);
+            il.EmitFastInt(parameters.Length);
             il.Emit(OpCodes.Newarr, typeof(object));
 
             for (int i = 0; i < parameters.Length; i++)
             {
                 il.Emit(OpCodes.Dup);
-                il.Emit(OpCodes.Ldc_I4, i);
+                il.EmitFastInt(i);
                 il.Emit(OpCodes.Ldarg, i + 1);
                 if (parameters[i].GetTypeInfo().IsValueType)
                 {
@@ -159,13 +160,13 @@ namespace MassiveDynamicProxyGenerator.TypedDecorator
             // invocation.ArgumentTypes = new Type[] { typeof(....), .... };
             il.Emit(OpCodes.Nop);
             il.Emit(OpCodes.Ldloc, invocationVar);
-            il.Emit(OpCodes.Ldc_I4, parameters.Length);
+            il.EmitFastInt(parameters.Length);
             il.Emit(OpCodes.Newarr, typeof(Type));
 
             for (int i = 0; i < parameters.Length; i++)
             {
                 il.Emit(OpCodes.Dup);
-                il.Emit(OpCodes.Ldc_I4, i);
+                il.EmitFastInt(i);
                 il.Emit(OpCodes.Ldtoken, parameters[i]);
                 il.Emit(OpCodes.Call, getTypeFromhandle);
                 il.Emit(OpCodes.Stelem_Ref);
@@ -269,7 +270,7 @@ namespace MassiveDynamicProxyGenerator.TypedDecorator
                 for (int i = 0; i < methodParameters.Length; i++)
                 {
                     il.Emit(OpCodes.Ldloc, tmpArray);
-                    il.Emit(OpCodes.Ldc_I4, i); // TODO: refaktor
+                    il.EmitFastInt(i);
                     il.Emit(OpCodes.Ldelem_Ref);
 
                     if (methodParameters[i].ParameterType.GetTypeInfo().IsValueType)
@@ -307,7 +308,7 @@ namespace MassiveDynamicProxyGenerator.TypedDecorator
                 for (int i = 0; i < methodParameters.Length; i++)
                 {
                     il.Emit(OpCodes.Ldloc, tmpArray);
-                    il.Emit(OpCodes.Ldc_I4, i); // TODO: refaktor
+                    il.EmitFastInt(i);
                     il.Emit(OpCodes.Ldelem_Ref);
 
                     if (methodParameters[i].ParameterType.GetTypeInfo().IsValueType)

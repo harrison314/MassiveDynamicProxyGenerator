@@ -548,7 +548,7 @@ namespace MassiveDynamicProxyGenerator
             asmName.Version = new Version(1, 0, 0, 0);
 
             /*
-             TODO: pre debug
+             TODO: for debug
              AssemblyBuilder asmBuilder = Thread.GetDomain().DefineDynamicAssembly(asmName, AssemblyBuilderAccess.RunAndSave, @"C:\Users\harrison\Documents\Visual Studio 2015\Projects\MassiveDynamicProxyGenerator\MassiveDynamicProxyGenerator\bin\Debug");
              ModuleBuilder modBuilder = asmBuilder.DefineDynamicModule("DynamicProxyModule", "Testing.dll");
             */
