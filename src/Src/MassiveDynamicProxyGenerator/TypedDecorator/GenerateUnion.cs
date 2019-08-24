@@ -31,10 +31,12 @@ namespace MassiveDynamicProxyGenerator.TypedDecorator
         /// <exception cref="ArgumentNullException">methodInfo</exception>
         public GenerateUnion(MethodInfo methodInfo)
         {
+#if DEBUG
             if (methodInfo == null)
             {
                 throw new ArgumentNullException(nameof(methodInfo));
             }
+#endif
 
             this.ProcessMethod = methodInfo;
         }
