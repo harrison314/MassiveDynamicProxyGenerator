@@ -52,8 +52,7 @@ namespace MassiveDynamicProxyGenerator.DynamicProxy
             invocation.ReturnType = binder.ReturnType;
             invocation.ReturnType = BindingType(binder);
 
-            // TODO: refactor to another interception
-            this.interceptor.Intercept(invocation);
+            // TODO: refactor to another interception this.interceptor.Intercept(invocation);
 
             result = invocation.ReturnValue;
 

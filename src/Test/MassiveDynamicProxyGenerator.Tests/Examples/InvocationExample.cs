@@ -55,5 +55,10 @@ namespace MassiveDynamicProxyGenerator.Tests.Examples
         {
             throw new NotImplementedException();
         }
+
+        public void Process(object instance)
+        {
+            throw new NotImplementedException();
+        }
     }
 }

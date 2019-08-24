@@ -14,6 +14,7 @@ namespace MassiveDynamicProxyGenerator.TypedProxy
     /// <seealso cref="MassiveDynamicProxyGenerator.IInvocation" />
     public class TypedProxyInvocation : IInvocation
     {
+        private readonly Action<IInvocation, object> processAction;
         private bool isReturnValueInitialized;
         private object[] arguments;
         private Type[] argumentTypes;
@@ -151,10 +152,12 @@ namespace MassiveDynamicProxyGenerator.TypedProxy
         /// <summary>
         /// Initializes a new instance of the <see cref="TypedProxyInvocation"/> class.
         /// </summary>
-        public TypedProxyInvocation()
+        /// <param name="processAction">Method invocation action.</param>
+        public TypedProxyInvocation(Action<IInvocation, object> processAction)
         {
             this.returnValue = null;
             this.isReturnValueInitialized = false;
+            this.processAction = processAction;
         }
 
         /// <summary>
@@ -168,6 +171,27 @@ namespace MassiveDynamicProxyGenerator.TypedProxy
             MethodInfo info = this.originalType.GetTypeInfo().GetMethod(this.methodName, this.argumentTypes);
 
             return info;
+        }
+
+        /// <summary>
+        /// Processes intercept method on <paramref name="instance"/>.
+        /// </summary>
+        /// <param name="instance">Instance of object when by call method.</param>
+        /// <exception cref="ArgumentNullException">instance</exception>
+        /// <exception cref="ArgumentException">Parameter instance must by type right type.</exception>
+        public void Process(object instance)
+        {
+            if (instance == null)
+            {
+                throw new ArgumentNullException(nameof(instance));
+            }
+
+            if (!this.originalType.GetTypeInfo().IsAssignableFrom(instance.GetType()))
+            {
+                throw new ArgumentException($"Parameter instance must by type {this.originalType.FullName}.", nameof(instance));
+            }
+
+            this.processAction.Invoke(this, instance);
         }
     }
 }

@@ -9,8 +9,8 @@ namespace MassiveDynamicProxyGenerator
     /// <summary>
     /// Interface represented callable invocation informations.
     /// </summary>
-    /// <seealso cref="MassiveDynamicProxyGenerator.IInvocation" />
-    public interface ICallableInvocation : IInvocation
+    /// <seealso cref="ICommonInvocation" />
+    public interface ICallableInvocation : ICommonInvocation
     {
         /// <summary>
         /// Processes intercept method.

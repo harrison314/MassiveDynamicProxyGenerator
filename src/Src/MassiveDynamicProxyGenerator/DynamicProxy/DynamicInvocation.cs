@@ -11,8 +11,8 @@ namespace MassiveDynamicProxyGenerator.DynamicProxy
     /// <summary>
     /// Class represented dynamic invocation.
     /// </summary>
-    /// <seealso cref="MassiveDynamicProxyGenerator.IInvocation" />
-    internal class DynamicInvocation : IInvocation
+    /// <seealso cref="ICommonInvocation" />
+    internal class DynamicInvocation : ICommonInvocation
     {
         private readonly object syncRoot;
         private object[] arguments;

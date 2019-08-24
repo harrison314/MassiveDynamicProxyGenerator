@@ -118,7 +118,7 @@ namespace MassiveDynamicProxyGenerator.TypedProxy
             this.MethodName = typeInfo.GetProperty(nameof(IInvocation.MethodName));
             this.OriginalType = typeInfo.GetProperty(nameof(IInvocation.OriginalType));
             this.ReturnType = typeInfo.GetProperty(nameof(IInvocation.ReturnType));
-            this.Constructor = typeInfo.GetConstructor(new Type[0]);
+            this.Constructor = typeInfo.GetConstructors().Single();
         }
 
         /// <summary>
@@ -127,7 +127,7 @@ namespace MassiveDynamicProxyGenerator.TypedProxy
         /// <typeparam name="T">Type of invocation descriptor.</typeparam>
         /// <returns>Instance of invocation descriptor.</returns>
         public static InvocationDescriptor Create<T>()
-            where T : IInvocation, new()
+            where T : IInvocation
         {
             InvocationDescriptor descriptor = new InvocationDescriptor(typeof(T));
             return descriptor;

@@ -195,5 +195,57 @@ namespace MassiveDynamicProxyGenerator.Tests
             instance.Value = 45;
             instance.Value.ShouldBe(default(long));
         }
+
+        [TestMethod]
+        public void GenerateProxy_CallProcess_RetVoid()
+        {
+            Mock<IReturnTypes> realObject = new Mock<IReturnTypes>(MockBehavior.Strict);
+            realObject.Setup(t => t.GetVoid()).Verifiable();
+
+            Mock<IInterceptor> interceptor = new Mock<IInterceptor>(MockBehavior.Strict);
+            interceptor.Setup(t => t.Intercept(It.Is<IInvocation>(p => p.MethodName == "GetVoid")))
+                .Callback<IInvocation>((a) =>
+                {
+                    a.Process(realObject.Object);
+                })
+                .Verifiable();
+
+            ProxyGenerator generator = new ProxyGenerator();
+
+            IReturnTypes instance = generator.GenerateProxy<IReturnTypes>(interceptor.Object);
+            instance.ShouldNotBeNull();
+
+            instance.GetVoid();
+
+            realObject.VerifyAll();
+        }
+
+        [TestMethod]
+        public void GenerateProxy_CallProcess_CreateInstance()
+        {
+            Mock<IReturnTypes> realObject = new Mock<IReturnTypes>(MockBehavior.Strict);
+            realObject.Setup(t => t.CreateSb(It.IsAny<string>()))
+                .Returns(()=> new StringBuilder("Nanana"))
+                .Verifiable();
+
+            Mock<IInterceptor> interceptor = new Mock<IInterceptor>(MockBehavior.Strict);
+            interceptor.Setup(t => t.Intercept(It.Is<IInvocation>(p => p.MethodName == "CreateSb")))
+                .Callback<IInvocation>((a) =>
+                {
+                    a.Process(realObject.Object);
+                })
+                .Verifiable();
+
+            ProxyGenerator generator = new ProxyGenerator();
+
+            IReturnTypes instance = generator.GenerateProxy<IReturnTypes>(interceptor.Object);
+            instance.ShouldNotBeNull();
+
+            StringBuilder sb = instance.CreateSb("Test");
+            sb.ShouldNotBeNull();
+            sb.ToString().ShouldBe("Nanana");
+
+            realObject.VerifyAll();
+        }
     }
 }

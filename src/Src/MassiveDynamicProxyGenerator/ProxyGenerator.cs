@@ -454,7 +454,7 @@ namespace MassiveDynamicProxyGenerator
         private Type GenerateType(Type[] interfaceTypes)
         {
             TypeBuilder typeBuilder = this.CreateEmptyType(interfaceTypes);
-            TypedProxyGenerator generator = new TypedProxyGenerator(typeBuilder, true);
+            TypedProxyGenerator generator = new TypedProxyGenerator(typeBuilder, this.typeNameCreator, true);
 
             for (int i = 0; i < interfaceTypes.Length; i++)
             {
@@ -479,7 +479,7 @@ namespace MassiveDynamicProxyGenerator
         private Type BuildProxyType(Type interfaceType, bool containsProperties)
         {
             TypeBuilder typeBuilder = this.CreateEmptyType(interfaceType);
-            TypedProxyGenerator generator = new TypedProxyGenerator(typeBuilder, containsProperties);
+            TypedProxyGenerator generator = new TypedProxyGenerator(typeBuilder, this.typeNameCreator, containsProperties);
             generator.CheckType(interfaceType);
             generator.ImplementInterface(interfaceType);
             Type proxyType = typeBuilder.CreateType();
