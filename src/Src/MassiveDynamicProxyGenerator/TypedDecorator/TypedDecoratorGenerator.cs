@@ -18,7 +18,7 @@ namespace MassiveDynamicProxyGenerator.TypedDecorator
         private readonly ITypeNameCreator typeNameGenerator;
         private readonly CallableInterceptorDescriptor callableInterceptorDescriptor;
         private readonly CallableInvocationDescriptor callableInvocationDescriptor;
-        private readonly Type actionType;
+        private readonly ConstructorInfo actionConstructor;
 
         private FieldBuilder interceptorField;
         private FieldBuilder parentField;
@@ -41,7 +41,7 @@ namespace MassiveDynamicProxyGenerator.TypedDecorator
             this.callableInterceptorDescriptor = new CallableInterceptorDescriptor();
             this.callableInvocationDescriptor = new CallableInvocationDescriptor();
 
-            this.actionType = typeof(Action<ICallableInvocation>);
+            this.actionConstructor = typeof(Action<ICallableInvocation>).GetTypeInfo().GetConstructors().First();
         }
 
         /// <summary>
@@ -117,7 +117,7 @@ namespace MassiveDynamicProxyGenerator.TypedDecorator
             LocalBuilder invocationVar = il.DeclareLocal(this.callableInvocationDescriptor.Type);
             il.Emit(OpCodes.Ldarg_0);
             il.Emit(OpCodes.Ldftn, context.ProcessMethod);
-            il.Emit(OpCodes.Newobj, this.actionType.GetTypeInfo().GetConstructors().First());
+            il.Emit(OpCodes.Newobj, this.actionConstructor);
 
             il.Emit(OpCodes.Newobj, this.callableInvocationDescriptor.Constructor);
             il.Emit(OpCodes.Stloc, invocationVar);
