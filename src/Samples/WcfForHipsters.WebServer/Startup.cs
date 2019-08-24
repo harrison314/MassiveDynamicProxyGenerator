@@ -15,21 +15,9 @@ namespace WcfForHipsters.WebServer
 {
     public class Startup
     {
-        public Startup(IHostingEnvironment env)
+        public Startup(IConfigurationRoot configuration)
         {
-            var builder = new ConfigurationBuilder()
-                .SetBasePath(env.ContentRootPath)
-                .AddJsonFile("appsettings.json", optional: true, reloadOnChange: true)
-                .AddJsonFile($"appsettings.{env.EnvironmentName}.json", optional: true);
-
-            if (env.IsEnvironment("Development"))
-            {
-                // This will push telemetry data through Application Insights pipeline faster, allowing you to view results immediately.
-                builder.AddApplicationInsightsSettings(developerMode: true);
-            }
-
-            builder.AddEnvironmentVariables();
-            Configuration = builder.Build();
+            this.Configuration = configuration;
         }
 
         public IConfigurationRoot Configuration { get; }
@@ -37,9 +25,6 @@ namespace WcfForHipsters.WebServer
         // This method gets called by the runtime. Use this method to add services to the container
         public void ConfigureServices(IServiceCollection services)
         {
-            // Add framework services.
-            services.AddApplicationInsightsTelemetry(Configuration);
-
             services.AddTransient<IExampleService, ExampleService>();
             services.AddSingleton(typeof(EndpointAdapter<>));
 
@@ -47,15 +32,20 @@ namespace WcfForHipsters.WebServer
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline
-        public void Configure(IApplicationBuilder app, IHostingEnvironment env, ILoggerFactory loggerFactory)
+        public void Configure(IApplicationBuilder app, IHostingEnvironment env)
         {
-            loggerFactory.AddConsole(Configuration.GetSection("Logging"));
-            loggerFactory.AddDebug();
+            if (env.IsDevelopment())
+            {
+                app.UseDeveloperExceptionPage();
+            }
+            else
+            {
+                // The default HSTS value is 30 days. You may want to change this for production scenarios, see https://aka.ms/aspnetcore-hsts.
 
-            app.UseApplicationInsightsRequestTelemetry();
+                app.UseHsts();
+            }
 
-            app.UseApplicationInsightsExceptionTelemetry();
-
+            app.UseStaticFiles();
             app.UseMvc();
         }
     }
