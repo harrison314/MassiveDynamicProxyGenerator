@@ -14,7 +14,8 @@ Change interface IInvocation.
 Add universal async ibterceptor CallableInterceptorAsyncAdapter as abstract class for handle error in async task.
 Add support for .Net Stdard 2.0.
 
-Fix typo error ProxygGenerator -&gt; ProxyGenerator.</PackageReleaseNotes>
+Fix typo error ProxygGenerator -&gt; ProxyGenerator.
+Add Process method to IInvocation.</PackageReleaseNotes>
   </PropertyGroup>
 
   <Import Project="..\..\Version.proj" />
@@ -22,6 +23,7 @@ Fix typo error ProxygGenerator -&gt; ProxyGenerator.</PackageReleaseNotes>
   <PropertyGroup>
     <CodeAnalysisRuleSet>..\..\..\MassiveDynamicProxyGenerator.ruleset</CodeAnalysisRuleSet>
     <Description>Massive Dynamic Proxy Generator is a library for generating lightweight .NET proxies on the fly at runtime. Proxy objects allow calls to members of an object to be intercepted without modifying the code of the class. Both classes and interfaces can be proxied, however only virtual members can be intercepted.</Description>
+    <PackageLicenseUrl />
   </PropertyGroup>
   <!--<ItemGroup>
     <AdditionalFiles Include="stylecop.json" />
