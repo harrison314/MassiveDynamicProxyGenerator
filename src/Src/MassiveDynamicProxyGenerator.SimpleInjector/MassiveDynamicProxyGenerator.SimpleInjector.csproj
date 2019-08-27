@@ -3,10 +3,10 @@
   <PropertyGroup>
     <GenerateDocumentationFile>true</GenerateDocumentationFile>
     <TargetFrameworks>netstandard1.4;netstandard1.6;netstandard2.0;net40;net45;net46</TargetFrameworks>
-    <DefineConstants>$(DefineConstants);COREFX</DefineConstants>
-    <NetStandardImplicitPackageVersion>1.6.0</NetStandardImplicitPackageVersion>
+    <DefineConstants Condition="'$(TargetFramework)' == 'netstandard1.6'">$(DefineConstants);COREFX</DefineConstants>
+    <NetStandardImplicitPackageVersion Condition="'$(TargetFramework)' == 'netstandard1.6'">1.6.0</NetStandardImplicitPackageVersion>
     <Title>MassiveDynamic ProxyGenerator SimpleInjector</Title>
-    <PackageTargetFallback Condition=" '$(TargetFramework)' == 'netstandard1.6' ">$(PackageTargetFallback);dnxcore50</PackageTargetFallback>
+    <PackageTargetFallback Condition="'$(TargetFramework)' == 'netstandard1.6'">$(PackageTargetFallback);dnxcore50</PackageTargetFallback>
     <PackageTags>massive, dynamic, proxy, dynamic proxy, runtime, .net, IoC, SimpleInjector</PackageTags>
     <Description>MassiveDynamicProxyGenerator.SimpleInjector is library of extensions method for IoC container - Simple Injector.
 Adding methods for register mock implementations, proxys, instance proxies for resolving circular depndencies or lazy initialization and interpetion for decoration instances.</Description>
@@ -17,19 +17,14 @@ Adding methods for register mock implementations, proxys, instance proxies for r
     <CodeAnalysisRuleSet>..\..\..\MassiveDynamicProxyGenerator.ruleset</CodeAnalysisRuleSet>
     <PackageReleaseNotes>Add support for .Net Stdard 2.0.
 Update simple Injector nugets.</PackageReleaseNotes>
-    <AssemblyVersion>1.2.2.0</AssemblyVersion>
-    <FileVersion>1.2.2.0</FileVersion>
   </PropertyGroup>
-  <!--<ItemGroup>
-    <AdditionalFiles Include="stylecop.json" />
-  </ItemGroup>-->
 
   <ItemGroup Condition=" '$(TargetFramework)' == 'netstandard1.4' ">
     <PackageReference Include="System.Reflection.TypeExtensions" Version="4.3.0" />
   </ItemGroup>
   
   <ItemGroup>
-    <PackageReference Include="SimpleInjector" Version="4.3.0" />
+    <PackageReference Include="SimpleInjector" Version="4.6.2" />
     <PackageReference Include="StyleCop.Analyzers" Version="1.0.2" PrivateAssets="All" />
   </ItemGroup>
 
