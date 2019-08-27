@@ -135,7 +135,9 @@ Task("TestNetFull")
            MSTest(System.IO.Path.Combine(folder, dllName), new MSTestSettings()
            {
                NoIsolation = false,
-               WorkingDirectory = folder
+               WorkingDirectory = folder,
+               // Fix Cake problem 
+               ToolPath = @"C:\Program Files (x86)\Microsoft Visual Studio\2019\Community\Common7\IDE\MSTest.exe" 
            });
         }
     });
