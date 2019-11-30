@@ -88,6 +88,7 @@
     <Compile Include="TestInterfaces\ICompositeInterface.cs" />
     <Compile Include="TestInterfaces\IGenericInterface.cs" />
     <Compile Include="TestInterfaces\IGrapth.cs" />
+    <Compile Include="TestInterfaces\IInterfaceWithDefaultMethod.cs" />
     <Compile Include="TestInterfaces\IMethodWraper.cs" />
     <Compile Include="TestInterfaces\INonReturn.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />

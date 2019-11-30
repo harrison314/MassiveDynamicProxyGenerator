@@ -225,7 +225,7 @@ namespace MassiveDynamicProxyGenerator.Tests
         {
             Mock<IReturnTypes> realObject = new Mock<IReturnTypes>(MockBehavior.Strict);
             realObject.Setup(t => t.CreateSb(It.IsAny<string>()))
-                .Returns(()=> new StringBuilder("Nanana"))
+                .Returns(() => new StringBuilder("Nanana"))
                 .Verifiable();
 
             Mock<IInterceptor> interceptor = new Mock<IInterceptor>(MockBehavior.Strict);
@@ -246,6 +246,29 @@ namespace MassiveDynamicProxyGenerator.Tests
             sb.ToString().ShouldBe("Nanana");
 
             realObject.VerifyAll();
+        }
+
+        [TestMethod]
+        public void GenerateProxy_ImplicitInterface_CreateInstance()
+        {
+            Mock<IInterceptor> interceptor = new Mock<IInterceptor>(MockBehavior.Strict);
+            interceptor.Setup(t => t.Intercept(It.IsAny<IInvocation>()))
+                .Callback<IInvocation>((a) =>
+                {
+                    a.ReturnValue = 42;
+                })
+                .Verifiable();
+
+            ProxyGenerator generator = new ProxyGenerator();
+
+            IInterfaceWithDefaultMethod instance = generator.GenerateProxy<IInterfaceWithDefaultMethod>(interceptor.Object);
+            instance.ShouldNotBeNull();
+
+            int size = instance.GetAize();
+            size.ShouldBe(42);
+
+            int shqare = instance.GetSquare();
+            shqare.ShouldBe(42);
         }
     }
 }
