@@ -7,7 +7,7 @@ namespace PerformaceExamples
     {
         public static void Main(string[] args)
         {
-            _ = BenchmarkRunner.Run<DynamicProxyBenchmark>();
+            _ = BenchmarkRunner.Run<DecoratorBenchmark>();
         }
     }
 }
