@@ -78,8 +78,7 @@ namespace MassiveDynamicProxyGenerator
 
             if (!interfaceType.GetTypeInfo().IsInterface)
             {
-                string message = string.Format("Type {0} is not interface.", interfaceType.FullName);
-                throw new InvalidOperationException(message);
+                throw new InvalidOperationException($"Type {interfaceType.FullName} is not interface.");
             }
         }
 
@@ -138,10 +137,10 @@ namespace MassiveDynamicProxyGenerator
                 MethodAttributes.SpecialName |
                 MethodAttributes.RTSpecialName,
                 CallingConventions.Standard,
-                new Type[] { });
+                Type.EmptyTypes);
 
             ILGenerator il = constructorBuilder.GetILGenerator();
-            ConstructorInfo conObj = typeof(object).GetTypeInfo().GetConstructor(new Type[0]);
+            ConstructorInfo conObj = typeof(object).GetTypeInfo().GetConstructor(Type.EmptyTypes);
             il.Emit(OpCodes.Ldarg_0);
             il.Emit(OpCodes.Call, conObj);
             il.Emit(OpCodes.Nop);
@@ -181,7 +180,7 @@ namespace MassiveDynamicProxyGenerator
         /// <param name="context">The context.</param>
         protected virtual void GenerateMethod(MethodInfo interfaceMethod, Type[] parameters, Type interfaceType, ILGenerator il, T context)
         {
-            ConstructorInfo ci = typeof(NotImplementedException).GetTypeInfo().GetConstructor(new Type[0]);
+            ConstructorInfo ci = typeof(NotImplementedException).GetTypeInfo().GetConstructor(Type.EmptyTypes);
 
             il.Emit(OpCodes.Nop);
             il.Emit(OpCodes.Newobj, ci);
@@ -220,7 +219,7 @@ namespace MassiveDynamicProxyGenerator
                 MethodBuilder setMethodBuilder = typeBuilder.DefineMethod(interfaceProperty.GetSetMethod().Name,
                     MethodAttributes.Public | MethodAttributes.SpecialName | MethodAttributes.HideBySig | MethodAttributes.Virtual,
                     null,
-                    new[] { interfaceProperty.PropertyType });
+                    new Type[] { interfaceProperty.PropertyType });
 
                 typeBuilder.DefineMethodOverride(setMethodBuilder, interfaceProperty.GetSetMethod());
                 ILGenerator il = setMethodBuilder.GetILGenerator();
@@ -238,7 +237,7 @@ namespace MassiveDynamicProxyGenerator
         /// <param name="context">The context.</param>
         protected virtual void GenerateSetProperty(PropertyInfo interfacePproperty, Type interfaceType, ILGenerator il, T context)
         {
-            ConstructorInfo ci = typeof(NotImplementedException).GetTypeInfo().GetConstructor(new Type[0]);
+            ConstructorInfo ci = typeof(NotImplementedException).GetTypeInfo().GetConstructor(Type.EmptyTypes);
 
             il.Emit(OpCodes.Nop);
             il.Emit(OpCodes.Newobj, ci);
@@ -254,7 +253,7 @@ namespace MassiveDynamicProxyGenerator
         /// <param name="context">The context.</param>
         protected virtual void GenerateGetProperty(PropertyInfo interfacePproperty, Type interfaceType, ILGenerator il, T context)
         {
-            ConstructorInfo ci = typeof(NotImplementedException).GetTypeInfo().GetConstructor(new Type[0]);
+            ConstructorInfo ci = typeof(NotImplementedException).GetTypeInfo().GetConstructor(Type.EmptyTypes);
 
             il.Emit(OpCodes.Nop);
             il.Emit(OpCodes.Newobj, ci);
@@ -267,13 +266,13 @@ namespace MassiveDynamicProxyGenerator
             {
                 if (!methodInfo.IsSpecialName)
                 {
-                    this.ImplementMethod(this.TypeBuilder, interfaceType, methodInfo, default(T));
+                    this.ImplementMethod(this.TypeBuilder, interfaceType, methodInfo, default);
                 }
             }
 
             foreach (PropertyInfo properityInfo in interfaceType.GetTypeInfo().GetProperties(BindingFlags.Public | BindingFlags.Instance))
             {
-                this.ImplementProperty(this.TypeBuilder, interfaceType, properityInfo, default(T));
+                this.ImplementProperty(this.TypeBuilder, interfaceType, properityInfo, default);
             }
         }
     }

@@ -55,8 +55,8 @@ namespace MassiveDynamicProxyGenerator.TypedInstanceProxy
         public InstanceProvicerDescriptor()
         {
             this.Type = typeof(IInstanceProvicer);
-            this.Dispose = this.Type.GetTypeInfo().GetMethod(nameof(IInstanceProvicer.Dispose), new Type[0]);
-            this.GetInstance = this.Type.GetTypeInfo().GetMethod(nameof(IInstanceProvicer.GetInstance), new Type[0]);
+            this.Dispose = this.Type.GetTypeInfo().GetMethod(nameof(IInstanceProvicer.Dispose), Type.EmptyTypes);
+            this.GetInstance = this.Type.GetTypeInfo().GetMethod(nameof(IInstanceProvicer.GetInstance), Type.EmptyTypes);
         }
     }
 }

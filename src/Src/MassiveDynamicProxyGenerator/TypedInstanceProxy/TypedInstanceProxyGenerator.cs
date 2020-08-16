@@ -54,7 +54,7 @@ namespace MassiveDynamicProxyGenerator.TypedInstanceProxy
                 new Type[] { this.descriptor.Type });
 
             ILGenerator il = constructorBuilder.GetILGenerator();
-            ConstructorInfo conObj = typeof(object).GetTypeInfo().GetConstructor(new Type[0]);
+            ConstructorInfo conObj = typeof(object).GetTypeInfo().GetConstructor(Type.EmptyTypes);
             il.Emit(OpCodes.Ldarg_0);
             il.Emit(OpCodes.Call, conObj);
             il.Emit(OpCodes.Nop);
