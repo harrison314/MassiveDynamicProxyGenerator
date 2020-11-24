@@ -10,6 +10,7 @@ using Microsoft.Extensions.Logging;
 using WcfForHipsters.WebServer.WcfForHipsters;
 using WcfForHipsters.WebServer.Contract;
 using WcfForHipsters.WebServer.Services;
+using Microsoft.Extensions.Hosting;
 
 namespace WcfForHipsters.WebServer
 {
@@ -28,11 +29,11 @@ namespace WcfForHipsters.WebServer
             services.AddTransient<IExampleService, ExampleService>();
             services.AddSingleton(typeof(EndpointAdapter<>));
 
-            services.AddMvc();
+            services.AddControllers();
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline
-        public void Configure(IApplicationBuilder app, IHostingEnvironment env)
+        public void Configure(IApplicationBuilder app, IWebHostEnvironment env)
         {
             if (env.IsDevelopment())
             {
@@ -46,7 +47,16 @@ namespace WcfForHipsters.WebServer
             }
 
             app.UseStaticFiles();
-            app.UseMvc();
+            app.UseHttpsRedirection();
+
+            app.UseRouting();
+
+            app.UseAuthorization();
+
+            app.UseEndpoints(endpoints =>
+            {
+                endpoints.MapControllers();
+            });
         }
     }
 }

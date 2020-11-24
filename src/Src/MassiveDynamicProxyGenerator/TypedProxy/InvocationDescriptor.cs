@@ -153,7 +153,7 @@ namespace MassiveDynamicProxyGenerator.TypedProxy
                 throw new ArgumentNullException($"Type {type.FullName} is not {nameof(IInvocation)}.");
             }
 
-            if (type.GetTypeInfo().GetConstructor(new Type[0]) == null)
+            if (type.GetTypeInfo().GetConstructor(Type.EmptyTypes) == null)
             {
                 throw new ArgumentNullException($"Type {type.FullName} is must have nonparametric public constructor.");
             }

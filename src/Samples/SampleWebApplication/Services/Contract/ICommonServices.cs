@@ -8,7 +8,7 @@ namespace SampleWebApplication.Services.Contract
 {
     public interface ICommonServices
     {
-        IHostingEnvironment HostingEnvironment
+        IWebHostEnvironment HostingEnvironment
         {
             get;
         }

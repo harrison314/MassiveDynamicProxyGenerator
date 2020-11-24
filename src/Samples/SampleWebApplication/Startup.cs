@@ -11,6 +11,7 @@ using MassiveDynamicProxyGenerator.Microsoft.DependencyInjection;
 using SampleWebApplication.Services.Contract;
 using SampleWebApplication.Services.Implementation;
 using SampleWebApplication.Services.Interceptors;
+using Microsoft.Extensions.Hosting;
 
 namespace SampleWebApplication
 {
@@ -36,12 +37,12 @@ namespace SampleWebApplication
             services.AddProxy<INotificationService>();
             services.AddProxy<ICommonServices, ServiceProviderInterceptor>();
 
-            services.AddMvc();
+            services.AddControllers();
 
             return services.BuildIntercepedServiceProvider();
         }
 
-        public void Configure(IApplicationBuilder app, IHostingEnvironment env)
+        public void Configure(IApplicationBuilder app, IWebHostEnvironment env)
         {
             if (env.IsDevelopment())
             {
@@ -54,11 +55,15 @@ namespace SampleWebApplication
 
             app.UseStaticFiles();
 
-            app.UseMvc(routes =>
+            app.UseHttpsRedirection();
+
+            app.UseRouting();
+
+            app.UseAuthorization();
+
+            app.UseEndpoints(endpoints =>
             {
-                routes.MapRoute(
-                    name: "default",
-                    template: "{controller=Home}/{action=Index}/{id?}");
+                endpoints.MapControllers();
             });
         }
     }
