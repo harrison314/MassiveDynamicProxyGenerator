@@ -67,11 +67,13 @@ Add Process method to IInvocation.</PackageReleaseNotes>
   </ItemGroup>
 
   <ItemGroup>
-    <PackageReference Include="StyleCop.Analyzers" Version="1.0.2" PrivateAssets="All" />
+    <Compile Remove="Properties\**" />
+    <EmbeddedResource Remove="Properties\**" />
+    <None Remove="Properties\**" />
   </ItemGroup>
 
   <ItemGroup>
-    <Folder Include="Properties\" />
+    <PackageReference Include="StyleCop.Analyzers" Version="1.0.2" PrivateAssets="All" />
   </ItemGroup>
 
 </Project>

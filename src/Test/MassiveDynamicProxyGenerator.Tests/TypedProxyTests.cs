@@ -248,6 +248,7 @@ namespace MassiveDynamicProxyGenerator.Tests
             realObject.VerifyAll();
         }
 
+#if NETSTANDARD || NETCOREAPP
         [TestMethod]
         public void GenerateProxy_ImplicitInterface_CreateInstance()
         {
@@ -270,5 +271,7 @@ namespace MassiveDynamicProxyGenerator.Tests
             int shqare = instance.GetSquare();
             shqare.ShouldBe(42);
         }
+
+#endif
     }
 }

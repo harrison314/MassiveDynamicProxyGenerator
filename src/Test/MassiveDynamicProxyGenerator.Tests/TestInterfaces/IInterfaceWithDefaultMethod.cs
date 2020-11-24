@@ -10,10 +10,12 @@ namespace MassiveDynamicProxyGenerator.Tests.TestInterfaces
     {
         int GetAize();
 
+#if NETSTANDARD || NETCOREAPP
         int GetSquare()
         {
             int size = this.GetSquare();
             return size * size;
         }
+#endif
     }
 }

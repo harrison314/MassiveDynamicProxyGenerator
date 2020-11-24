@@ -33,7 +33,7 @@ namespace WcfForHipsters.WebServer.Controllers
 
         // api/ExampleService POST
         [HttpPost]
-        public IActionResult Post([FromBody]JObject value)
+        public IActionResult Post([FromBody] JObject value)
         {
             this.logger.LogTrace("Endpoint invoked");
             try
