@@ -7,7 +7,7 @@ namespace MassiveDynamicProxyGenerator
     /// </summary>
     internal static class DefaultInstances
     {
-        private static object syncRoot = new object();
+        private static readonly object syncRoot = new object();
 
         private static ITypeNameCreator typeNameCreator = null;
         private static GeneratedTypeList typedList = null;

@@ -34,7 +34,7 @@ namespace MassiveDynamicProxyGenerator
             this.moduleBuilder = null;
             this.typeNameCreator = DefaultInstances.TypeNameCreator;
             int number = Interlocked.Increment(ref assemblyCount);
-            this.assemblyName = string.Format(CultureInfo.InvariantCulture, "MassiveDynamic.DynamicProxys{0}", number);
+            this.assemblyName = string.Concat("MassiveDynamic.DynamicProxys", number.ToString(CultureInfo.InvariantCulture));
             this.generatedTypeList = DefaultInstances.TypedList;
         }
 
@@ -68,7 +68,7 @@ namespace MassiveDynamicProxyGenerator
             if (string.IsNullOrEmpty(settings.AssemblyName))
             {
                 int number = Interlocked.Increment(ref assemblyCount);
-                this.assemblyName = string.Format(CultureInfo.InvariantCulture, "MassiveDynamic.DynamicProxys{0}", number);
+                this.assemblyName = string.Concat("MassiveDynamic.DynamicProxys", number.ToString(CultureInfo.InvariantCulture));
             }
             else
             {

@@ -78,8 +78,7 @@ namespace MassiveDynamicProxyGenerator
 
             if (!interfaceType.GetTypeInfo().IsInterface)
             {
-                string message = string.Format("Type {0} is not interface.", interfaceType.FullName);
-                throw new InvalidOperationException(message);
+                throw new InvalidOperationException($"Type {interfaceType.FullName} is not interface.");
             }
         }
 
@@ -138,7 +137,7 @@ namespace MassiveDynamicProxyGenerator
                 MethodAttributes.SpecialName |
                 MethodAttributes.RTSpecialName,
                 CallingConventions.Standard,
-                new Type[] { });
+                Type.EmptyTypes);
 
             ILGenerator il = constructorBuilder.GetILGenerator();
             ConstructorInfo conObj = typeof(object).GetTypeInfo().GetConstructor(Type.EmptyTypes);
@@ -220,7 +219,7 @@ namespace MassiveDynamicProxyGenerator
                 MethodBuilder setMethodBuilder = typeBuilder.DefineMethod(interfaceProperty.GetSetMethod().Name,
                     MethodAttributes.Public | MethodAttributes.SpecialName | MethodAttributes.HideBySig | MethodAttributes.Virtual,
                     null,
-                    new[] { interfaceProperty.PropertyType });
+                    new Type[] { interfaceProperty.PropertyType });
 
                 typeBuilder.DefineMethodOverride(setMethodBuilder, interfaceProperty.GetSetMethod());
                 ILGenerator il = setMethodBuilder.GetILGenerator();
@@ -267,13 +266,13 @@ namespace MassiveDynamicProxyGenerator
             {
                 if (!methodInfo.IsSpecialName)
                 {
-                    this.ImplementMethod(this.TypeBuilder, interfaceType, methodInfo, default(T));
+                    this.ImplementMethod(this.TypeBuilder, interfaceType, methodInfo, default);
                 }
             }
 
             foreach (PropertyInfo properityInfo in interfaceType.GetTypeInfo().GetProperties(BindingFlags.Public | BindingFlags.Instance))
             {
-                this.ImplementProperty(this.TypeBuilder, interfaceType, properityInfo, default(T));
+                this.ImplementProperty(this.TypeBuilder, interfaceType, properityInfo, default);
             }
         }
     }

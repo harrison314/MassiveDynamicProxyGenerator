@@ -150,14 +150,12 @@ namespace MassiveDynamicProxyGenerator.TypedProxy
 
             if (!typeof(IInvocation).GetTypeInfo().IsAssignableFrom(type))
             {
-                string message = string.Format("Type {0} is not {1}", type.FullName, nameof(IInvocation));
-                throw new ArgumentNullException(message);
+                throw new ArgumentNullException($"Type {type.FullName} is not {nameof(IInvocation)}.");
             }
 
             if (type.GetTypeInfo().GetConstructor(Type.EmptyTypes) == null)
             {
-                string message = string.Format("Type {0} is must have nonparametric public constructor.", type.FullName);
-                throw new ArgumentNullException(message);
+                throw new ArgumentNullException($"Type {type.FullName} is must have nonparametric public constructor.");
             }
 
             InvocationDescriptor descriptor = new InvocationDescriptor(type);
