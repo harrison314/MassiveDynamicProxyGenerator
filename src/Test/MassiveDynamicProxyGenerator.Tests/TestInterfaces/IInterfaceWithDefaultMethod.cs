@@ -16,5 +16,6 @@ namespace MassiveDynamicProxyGenerator.Tests.TestInterfaces
             int size = this.GetSquare();
             return size * size;
         }
+#endif
     }
 }
