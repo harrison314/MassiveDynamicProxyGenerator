@@ -1,3 +1,4 @@
+#addin nuget:?package=Cake.Git&version=0.21.0
 
 var target = Argument("target", "Default");
 var configuration = Argument("Configuration", "Release");
@@ -8,6 +9,19 @@ var configuration = Argument("Configuration", "Release");
 string artefacts = "./Artifacts";
 
 // ****************************************************************************
+
+void UpdateSettings(DotNetCoreSettings settings)
+{
+    if (settings.EnvironmentVariables == null)
+    {
+        settings.EnvironmentVariables = new Dictionary<string, string>();
+    }
+
+    var branch = GitBranchCurrent("..");
+    //settings.EnvironmentVariables.Add("RepositoryBranch", branch.FriendlyName);
+    settings.EnvironmentVariables.Add("RepositoryCommit", branch.Tip.Sha);
+}
+
 var netCoreBuildSettings = new DotNetCoreBuildSettings()
 {
     Configuration = configuration,
@@ -16,7 +30,7 @@ var netCoreBuildSettings = new DotNetCoreBuildSettings()
     NoRestore = false
 };
 
-var netCoreDotNetCorePackSettings = new  DotNetCorePackSettings ()
+var netCoreDotNetCorePackSettings = new  DotNetCorePackSettings()
 {
     Configuration = configuration,
     OutputDirectory = artefacts,
@@ -150,6 +164,7 @@ Task("Pack")
     .IsDependentOn("Test")
     .Does(()=>
     {
+        UpdateSettings(netCoreDotNetCorePackSettings);
         foreach(var projFile in GetFiles("../src/Src/*/*.csproj"))
          {
             DotNetCorePack(projFile.ToString(), netCoreDotNetCorePackSettings);
