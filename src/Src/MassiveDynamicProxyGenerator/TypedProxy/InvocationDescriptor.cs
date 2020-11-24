@@ -154,7 +154,7 @@ namespace MassiveDynamicProxyGenerator.TypedProxy
                 throw new ArgumentNullException(message);
             }
 
-            if (type.GetTypeInfo().GetConstructor(new Type[0]) == null)
+            if (type.GetTypeInfo().GetConstructor(Type.EmptyTypes) == null)
             {
                 string message = string.Format("Type {0} is must have nonparametric public constructor.", type.FullName);
                 throw new ArgumentNullException(message);

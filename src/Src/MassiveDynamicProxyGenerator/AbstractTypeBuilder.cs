@@ -141,7 +141,7 @@ namespace MassiveDynamicProxyGenerator
                 new Type[] { });
 
             ILGenerator il = constructorBuilder.GetILGenerator();
-            ConstructorInfo conObj = typeof(object).GetTypeInfo().GetConstructor(new Type[0]);
+            ConstructorInfo conObj = typeof(object).GetTypeInfo().GetConstructor(Type.EmptyTypes);
             il.Emit(OpCodes.Ldarg_0);
             il.Emit(OpCodes.Call, conObj);
             il.Emit(OpCodes.Nop);
@@ -181,7 +181,7 @@ namespace MassiveDynamicProxyGenerator
         /// <param name="context">The context.</param>
         protected virtual void GenerateMethod(MethodInfo interfaceMethod, Type[] parameters, Type interfaceType, ILGenerator il, T context)
         {
-            ConstructorInfo ci = typeof(NotImplementedException).GetTypeInfo().GetConstructor(new Type[0]);
+            ConstructorInfo ci = typeof(NotImplementedException).GetTypeInfo().GetConstructor(Type.EmptyTypes);
 
             il.Emit(OpCodes.Nop);
             il.Emit(OpCodes.Newobj, ci);
@@ -238,7 +238,7 @@ namespace MassiveDynamicProxyGenerator
         /// <param name="context">The context.</param>
         protected virtual void GenerateSetProperty(PropertyInfo interfacePproperty, Type interfaceType, ILGenerator il, T context)
         {
-            ConstructorInfo ci = typeof(NotImplementedException).GetTypeInfo().GetConstructor(new Type[0]);
+            ConstructorInfo ci = typeof(NotImplementedException).GetTypeInfo().GetConstructor(Type.EmptyTypes);
 
             il.Emit(OpCodes.Nop);
             il.Emit(OpCodes.Newobj, ci);
@@ -254,7 +254,7 @@ namespace MassiveDynamicProxyGenerator
         /// <param name="context">The context.</param>
         protected virtual void GenerateGetProperty(PropertyInfo interfacePproperty, Type interfaceType, ILGenerator il, T context)
         {
-            ConstructorInfo ci = typeof(NotImplementedException).GetTypeInfo().GetConstructor(new Type[0]);
+            ConstructorInfo ci = typeof(NotImplementedException).GetTypeInfo().GetConstructor(Type.EmptyTypes);
 
             il.Emit(OpCodes.Nop);
             il.Emit(OpCodes.Newobj, ci);
