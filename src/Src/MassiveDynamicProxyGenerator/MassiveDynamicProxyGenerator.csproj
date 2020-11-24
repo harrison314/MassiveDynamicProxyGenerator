@@ -9,13 +9,8 @@
     <NetStandardImplicitPackageVersion>1.6.0</NetStandardImplicitPackageVersion>
     <PackageTargetFallback Condition=" '$(TargetFramework)' == 'netstandard1.6' ">$(PackageTargetFallback);dnxcore50</PackageTargetFallback>
     <PackageTags>massive, dynamic, proxy, dynamic proxy, runtime, .net</PackageTags>
-    <PackageReleaseNotes>
-Change interface IInvocation.
-Add universal async ibterceptor CallableInterceptorAsyncAdapter as abstract class for handle error in async task.
-Add support for .Net Stdard 2.0.
-
-Fix typo error ProxygGenerator -&gt; ProxyGenerator.
-Add Process method to IInvocation.</PackageReleaseNotes>
+    <PackageReleaseNotes>Add support for .Net 5.0.
+A few minor internal improvements.</PackageReleaseNotes>
   </PropertyGroup>
 
   <Import Project="..\..\Version.proj" />
@@ -24,6 +19,7 @@ Add Process method to IInvocation.</PackageReleaseNotes>
     <CodeAnalysisRuleSet>..\..\..\MassiveDynamicProxyGenerator.ruleset</CodeAnalysisRuleSet>
     <Description>Massive Dynamic Proxy Generator is a library for generating lightweight .NET proxies on the fly at runtime. Proxy objects allow calls to members of an object to be intercepted without modifying the code of the class. Both classes and interfaces can be proxied, however only virtual members can be intercepted.</Description>
     <PackageLicenseUrl />
+    <PackageLicenseExpression>MIT</PackageLicenseExpression>
   </PropertyGroup>
   <!--<ItemGroup>
     <AdditionalFiles Include="stylecop.json" />
