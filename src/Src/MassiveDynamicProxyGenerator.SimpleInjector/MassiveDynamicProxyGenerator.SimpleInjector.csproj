@@ -17,6 +17,7 @@ Adding methods for register mock implementations, proxys, instance proxies for r
     <CodeAnalysisRuleSet>..\..\..\MassiveDynamicProxyGenerator.ruleset</CodeAnalysisRuleSet>
     <PackageReleaseNotes>Update simple Injector nuget to version 5. And drop support to .NET Framework 4.0.</PackageReleaseNotes>
     <PackageLicenseExpression>MIT</PackageLicenseExpression>
+    <PackageIcon>NugetIcon.png</PackageIcon>
   </PropertyGroup>
 
   <ItemGroup Condition=" '$(TargetFramework)' == 'netstandard1.4' ">
@@ -30,6 +31,13 @@ Adding methods for register mock implementations, proxys, instance proxies for r
 
   <ItemGroup>
     <ProjectReference Include="..\MassiveDynamicProxyGenerator\MassiveDynamicProxyGenerator.csproj" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <None Include="..\..\img\NugetIcon.png">
+      <Pack>True</Pack>
+      <PackagePath></PackagePath>
+    </None>
   </ItemGroup>
 
 </Project>

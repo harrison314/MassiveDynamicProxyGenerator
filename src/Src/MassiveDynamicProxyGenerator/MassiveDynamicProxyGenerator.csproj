@@ -20,6 +20,7 @@ A few minor internal improvements.</PackageReleaseNotes>
     <Description>Massive Dynamic Proxy Generator is a library for generating lightweight .NET proxies on the fly at runtime. Proxy objects allow calls to members of an object to be intercepted without modifying the code of the class. Both classes and interfaces can be proxied, however only virtual members can be intercepted.</Description>
     <PackageLicenseUrl />
     <PackageLicenseExpression>MIT</PackageLicenseExpression>
+    <PackageIcon>NugetIcon.png</PackageIcon>
   </PropertyGroup>
   <!--<ItemGroup>
     <AdditionalFiles Include="stylecop.json" />
@@ -66,6 +67,10 @@ A few minor internal improvements.</PackageReleaseNotes>
     <Compile Remove="Properties\**" />
     <EmbeddedResource Remove="Properties\**" />
     <None Remove="Properties\**" />
+    <None Include="..\..\img\NugetIcon.png">
+      <Pack>True</Pack>
+      <PackagePath></PackagePath>
+    </None>
   </ItemGroup>
 
   <ItemGroup>
