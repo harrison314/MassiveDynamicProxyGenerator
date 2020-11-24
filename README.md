@@ -16,13 +16,16 @@ Fertures:
 * Proxy instance generator, for control instancing real implementation (e.g. lazy loading).
 
 The following platforms are supported:
-* .Net 4.0, 4.5, 4.6, 4.6.1, NetStandard 1.6, NetStandard 2.0 and UWP applications (NetStandard 1.4)
+* .Net Framework 4.0, 4.5, 4.6, 4.6.1, NetStandard 1.6, NetStandard 2.0 and UWP applications (NetStandard 1.4), .Net 5.0
 
 ## Getting started
 
 In package manager console:
 
 `PM> Install-Package MassiveDynamicProxyGenerator`
+
+Or
+`dotnet add package MassiveDynamicProxyGenerator`
 
 ## A Quick Example
 
@@ -140,6 +143,10 @@ Adding methods for register mock implementations, proxys, instance proxies for r
 In package manager console:
 
 `PM> Install-Package MassiveDynamicProxyGenerator.SimpleInjector`
+
+Or
+
+`dotnet add package MassiveDynamicProxyGenerator.SimpleInjector`
 
 Or download [MassiveDynamicProxyGenerator.SimpleInjector](https://www.nuget.org/packages/MassiveDynamicProxyGenerator.SimpleInjector/).
 
@@ -266,6 +273,10 @@ _Microsoft.Extensions.DependencyInjection_ is simple IoC container, so  _Massive
 In package manager console:
 
 `PM> Install-Package MassiveDynamicProxyGenerator.Microsoft.DependencyInjection`
+
+Or
+
+`dotnet add package MassiveDynamicProxyGenerator.Microsoft.DependencyInjection`
 
 Or download [MassiveDynamicProxyGenerator.Microsoft.DependencyInjection](https://www.nuget.org/packages/MassiveDynamicProxyGenerator.Microsoft.DependencyInjection/).
 
