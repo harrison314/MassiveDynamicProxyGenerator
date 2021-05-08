@@ -1,4 +1,5 @@
-#addin nuget:?package=Cake.Git&version=0.21.0
+#addin nuget:?package=Cake.Git&version=1.0.1
+#tool "nuget:?package=nuget.commandline&version=5.9.1"
 
 var target = Argument("target", "Default");
 var configuration = Argument("Configuration", "Release");
