@@ -97,13 +97,13 @@ IInterceptor jsonRpcInterceptor = new InterceptorAdapter((invocation, isDynamic)
 
 ProxyGenerator generator = new ProxyGenerator();
 
-ICalculator calcilator = generator.GenerateProxy<ICalculator>(jsonRpcInterceptor);
+ICalculator calculator = generator.GenerateProxy<ICalculator>(jsonRpcInterceptor);
 
-int resultModulo = calcilator.Modulo(15, 4);
+int resultModulo = calculator.Modulo(15, 4);
 
 Console.WriteLine("Modulo 15 and 4 is {0}", resultModulo);
 
-int resultProduct = calcilator.Product(8, 486);
+int resultProduct = calculator.Product(8, 486);
 
 Console.WriteLine("Product 8 and 486 is {0}", resultProduct);
 ```
@@ -214,7 +214,7 @@ container.RegisterAllUnregistredAsMock();
 
 ### Dangerous extension for instance provider
 
-This extenions using only with cope lifestyle.
+This extensions using only with cope lifestyle.
 
 ```cs
 using MassiveDynamicProxyGenerator.SimpleInjector;
@@ -266,7 +266,7 @@ _Library for integration MassiveDynamicProxyGenerator to Asp.Net Core standard [
 _MassiveDynamicProxyGenerator.Microsoft.DependencyInjection_ is library of extensions method for _Microsoft.Extensions.DependencyInjection_ IoC container. 
 Adding methods for decorators, proxys, instance proxies for resolving circular depndencies or lazy initialization and interpetion for decoration instances.
 
-_Microsoft.Extensions.DependencyInjection_ is simple IoC container, so  _MassiveDynamicProxyGenerator.Microsoft.DependencyInjection_ does just a simple extenion for fetures from _MassiveDynamicProxyGenerator_ library, becose any fetures don't support open generics.
+_Microsoft.Extensions.DependencyInjection_ is simple IoC container, so  _MassiveDynamicProxyGenerator.Microsoft.DependencyInjection_ does just a simple extenion for fetures from _MassiveDynamicProxyGenerator_ library, because any fetures don't support open generics.
 
 ## Getting started
 
@@ -281,7 +281,7 @@ Or
 Or download [MassiveDynamicProxyGenerator.Microsoft.DependencyInjection](https://www.nuget.org/packages/MassiveDynamicProxyGenerator.Microsoft.DependencyInjection/).
 
 ### Add decorators
-This feture unrelated with _MassiveDynamicProxyGenerator_, it is universal adding interface generators.
+This feature unrelated with _MassiveDynamicProxyGenerator_, it is universal adding interface generators.
 
 ```cs
 using MassiveDynamicProxyGenerator.Microsoft.DependencyInjection;
@@ -311,7 +311,7 @@ public class Startup
         services.AddDecorator<IMessageService, MessageServiceDecorator>();
         services.AddMvc();
 
-        return services.BuldIntercepedServiceProvider();
+        return services.BuildIntercepedServiceProvider();
     }
 
     public void Configure(IApplicationBuilder app, IHostingEnvironment env)
@@ -337,12 +337,12 @@ public class Startup
 
     public IServiceProvider ConfigureServices(IServiceCollection services)
     {
-        services.Addproxy<IMessageService>(new MyInterceptor());
+        services.AddProxy<IMessageService>(new MyInterceptor());
         // or
         services.AddTransient<MyInterceptor>();
-        services.Addproxy<IMessageService, MyInterceptor>();
+        services.AddProxy<IMessageService, MyInterceptor>();
         // or
-        services.Addproxy<IMessageService>(typeof(MyInterceptor));
+        services.AddProxy<IMessageService>(typeof(MyInterceptor));
         // or
         services.AddTransient<IMessageService>(invocation => {
             //... any work with invocation
@@ -350,7 +350,7 @@ public class Startup
         
         services.AddMvc();
 
-        return services.BuldIntercepedServiceProvider();
+        return services.BuildIntercepedServiceProvider();
     }
 
     public void Configure(IApplicationBuilder app, IHostingEnvironment env)
@@ -394,7 +394,7 @@ public class Startup
 
         services.AddMvc();
 
-        return services.BuldIntercepedServiceProvider();
+        return services.BuildIntercepedServiceProvider();
     }
 
     public void Configure(IApplicationBuilder app, IHostingEnvironment env)
@@ -426,7 +426,7 @@ public class Startup
 
         services.AddMvc();
 
-        return services.BuldIntercepedServiceProvider();
+        return services.BuildIntercepedServiceProvider();
     }
 
     public void Configure(IApplicationBuilder app, IHostingEnvironment env)
