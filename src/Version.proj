@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="utf-8"?>
 <Project>
   <PropertyGroup>
-    <LocalBuildVersion>1.5.0</LocalBuildVersion>
+    <LocalBuildVersion>1.6.0</LocalBuildVersion>
     <LocalBuildRevision>0</LocalBuildRevision>
     <NowYear>$([System.DateTime]::Now.Year.ToString())</NowYear>
   </PropertyGroup>
