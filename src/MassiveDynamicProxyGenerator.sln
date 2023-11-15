@@ -1,7 +1,7 @@
 ﻿
 Microsoft Visual Studio Solution File, Format Version 12.00
-# Visual Studio Version 16
-VisualStudioVersion = 16.0.29519.87
+# Visual Studio Version 17
+VisualStudioVersion = 17.8.34309.116
 MinimumVisualStudioVersion = 10.0.40219.1
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Solution Items", "Solution Items", "{3BB9BD78-8EA2-4D47-9B8A-0966629700D5}"
 	ProjectSection(SolutionItems) = preProject
@@ -19,19 +19,13 @@ Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "WcfForHipsters.WebServer", 
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "WcfForHipsters.Client", "Samples\WcfForHipsters.Client\WcfForHipsters.Client.csproj", "{62E2BCF2-3C4E-4C9F-9008-AF058C5C953D}"
 EndProject
-Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "SampleWebApplication", "Samples\SampleWebApplication\SampleWebApplication.csproj", "{E923680F-A0C1-41B4-9DB0-F9ED664A79B5}"
-EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Test", "Test", "{36A09A9F-1D1E-40F2-AE7F-7D53BC120971}"
 EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Src", "Src", "{FE0D49B9-F67B-47B1-8A35-85676289C86F}"
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "MassiveDynamicProxyGenerator", "Src\MassiveDynamicProxyGenerator\MassiveDynamicProxyGenerator.csproj", "{C939087C-21C4-41F2-8452-765A9ADDCCEF}"
 EndProject
-Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "MassiveDynamicProxyGenerator.Microsoft.DependencyInjection", "Src\MassiveDynamicProxyGenerator.Microsoft.DependencyInjection\MassiveDynamicProxyGenerator.Microsoft.DependencyInjection.csproj", "{084639DC-CCDA-4268-A5D4-38D21EFFDEDA}"
-EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "MassiveDynamicProxyGenerator.SimpleInjector", "Src\MassiveDynamicProxyGenerator.SimpleInjector\MassiveDynamicProxyGenerator.SimpleInjector.csproj", "{F618E452-4F3F-4382-B477-6A8ADE7E78A6}"
-EndProject
-Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "MassiveDynamicProxyGenerator.DependencyInjection.Test", "Test\MassiveDynamicProxyGenerator.DependencyInjection.Test\MassiveDynamicProxyGenerator.DependencyInjection.Test.csproj", "{62EF33A4-2ACD-4FCE-8F14-BE195D461A86}"
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "MassiveDynamicProxyGenerator.SimpleInjector.Tests", "Test\MassiveDynamicProxyGenerator.SimpleInjector.Tests\MassiveDynamicProxyGenerator.SimpleInjector.Tests.csproj", "{6C1991B8-F14B-4563-A088-602CE91527E2}"
 EndProject
@@ -41,7 +35,7 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "MassiveDynamicProxyGenerato
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "MassiveDynamicProxyGenerator.Tests.NetStandard", "Test\MassiveDynamicProxyGenerator.Tests.NetStandard\MassiveDynamicProxyGenerator.Tests.NetStandard.csproj", "{CE21DE73-0F14-4709-9EF2-BF86F0C5C8D1}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "PerformaceExamples", "Samples\PerformaceExamples\PerformaceExamples.csproj", "{1B953228-9796-42BD-AB0E-2D2703A3D20D}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "PerformaceExamples", "Samples\PerformaceExamples\PerformaceExamples.csproj", "{1B953228-9796-42BD-AB0E-2D2703A3D20D}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -61,26 +55,14 @@ Global
 		{62E2BCF2-3C4E-4C9F-9008-AF058C5C953D}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{62E2BCF2-3C4E-4C9F-9008-AF058C5C953D}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{62E2BCF2-3C4E-4C9F-9008-AF058C5C953D}.Release|Any CPU.Build.0 = Release|Any CPU
-		{E923680F-A0C1-41B4-9DB0-F9ED664A79B5}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
-		{E923680F-A0C1-41B4-9DB0-F9ED664A79B5}.Debug|Any CPU.Build.0 = Debug|Any CPU
-		{E923680F-A0C1-41B4-9DB0-F9ED664A79B5}.Release|Any CPU.ActiveCfg = Release|Any CPU
-		{E923680F-A0C1-41B4-9DB0-F9ED664A79B5}.Release|Any CPU.Build.0 = Release|Any CPU
 		{C939087C-21C4-41F2-8452-765A9ADDCCEF}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
 		{C939087C-21C4-41F2-8452-765A9ADDCCEF}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{C939087C-21C4-41F2-8452-765A9ADDCCEF}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{C939087C-21C4-41F2-8452-765A9ADDCCEF}.Release|Any CPU.Build.0 = Release|Any CPU
-		{084639DC-CCDA-4268-A5D4-38D21EFFDEDA}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
-		{084639DC-CCDA-4268-A5D4-38D21EFFDEDA}.Debug|Any CPU.Build.0 = Debug|Any CPU
-		{084639DC-CCDA-4268-A5D4-38D21EFFDEDA}.Release|Any CPU.ActiveCfg = Release|Any CPU
-		{084639DC-CCDA-4268-A5D4-38D21EFFDEDA}.Release|Any CPU.Build.0 = Release|Any CPU
 		{F618E452-4F3F-4382-B477-6A8ADE7E78A6}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
 		{F618E452-4F3F-4382-B477-6A8ADE7E78A6}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{F618E452-4F3F-4382-B477-6A8ADE7E78A6}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{F618E452-4F3F-4382-B477-6A8ADE7E78A6}.Release|Any CPU.Build.0 = Release|Any CPU
-		{62EF33A4-2ACD-4FCE-8F14-BE195D461A86}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
-		{62EF33A4-2ACD-4FCE-8F14-BE195D461A86}.Debug|Any CPU.Build.0 = Debug|Any CPU
-		{62EF33A4-2ACD-4FCE-8F14-BE195D461A86}.Release|Any CPU.ActiveCfg = Release|Any CPU
-		{62EF33A4-2ACD-4FCE-8F14-BE195D461A86}.Release|Any CPU.Build.0 = Release|Any CPU
 		{6C1991B8-F14B-4563-A088-602CE91527E2}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
 		{6C1991B8-F14B-4563-A088-602CE91527E2}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{6C1991B8-F14B-4563-A088-602CE91527E2}.Release|Any CPU.ActiveCfg = Release|Any CPU
@@ -109,11 +91,8 @@ Global
 		{E7F2B2B2-318C-4F2B-BF76-086A230E59FA} = {7558D4C7-EEA6-4B86-8C46-B0639EEE79C8}
 		{768B0EAB-5795-4AE1-A2FD-5359C4E2432A} = {7558D4C7-EEA6-4B86-8C46-B0639EEE79C8}
 		{62E2BCF2-3C4E-4C9F-9008-AF058C5C953D} = {7558D4C7-EEA6-4B86-8C46-B0639EEE79C8}
-		{E923680F-A0C1-41B4-9DB0-F9ED664A79B5} = {7558D4C7-EEA6-4B86-8C46-B0639EEE79C8}
 		{C939087C-21C4-41F2-8452-765A9ADDCCEF} = {FE0D49B9-F67B-47B1-8A35-85676289C86F}
-		{084639DC-CCDA-4268-A5D4-38D21EFFDEDA} = {FE0D49B9-F67B-47B1-8A35-85676289C86F}
 		{F618E452-4F3F-4382-B477-6A8ADE7E78A6} = {FE0D49B9-F67B-47B1-8A35-85676289C86F}
-		{62EF33A4-2ACD-4FCE-8F14-BE195D461A86} = {36A09A9F-1D1E-40F2-AE7F-7D53BC120971}
 		{6C1991B8-F14B-4563-A088-602CE91527E2} = {36A09A9F-1D1E-40F2-AE7F-7D53BC120971}
 		{6732312A-409E-46C8-98A6-6BB231572ABE} = {36A09A9F-1D1E-40F2-AE7F-7D53BC120971}
 		{2F31B717-F2B5-46F5-9752-B1C584C661AB} = {36A09A9F-1D1E-40F2-AE7F-7D53BC120971}
