@@ -7,7 +7,7 @@
     <PackageId>MassiveDynamicProxyGenerator</PackageId>
     <Title>MassiveDynamic ProxyGenerator</Title>
     <PackageTags>massive, dynamic, proxy, dynamic proxy, runtime, .net</PackageTags>
-    <PackageReleaseNotes>Add support for .Net 6.0.
+    <PackageReleaseNotes>Add support for .NET 6.0 and .NET 8.0
 A few minor internal improvements.</PackageReleaseNotes>
   </PropertyGroup>
 

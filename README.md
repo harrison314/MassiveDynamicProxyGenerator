@@ -16,7 +16,7 @@ Fertures:
 * Proxy instance generator, for control instancing real implementation (e.g. lazy loading).
 
 The following platforms are supported:
-* .Net Framework 4.8, NetStandard 2.0 and .Net 6.0
+* .Net Framework 4.8, NetStandard 2.0, .Net 6.0 and .Net 8.0
 
 ## Getting started
 
@@ -258,6 +258,7 @@ container.RegisterInstanceProxy<IMessageService>(new WeekInstanceProvider());
 ```
 
 # MassiveDynamicProxyGenerator.Microsoft.DependencyInjection
+**This library is obsolute.**
 
 [![NuGet Status](http://img.shields.io/nuget/v/MassiveDynamicProxyGenerator.Microsoft.DependencyInjection.svg?style=flat)](https://www.nuget.org/packages/MassiveDynamicProxyGenerator.Microsoft.DependencyInjection/)
 
