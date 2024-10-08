@@ -48,7 +48,7 @@ A few minor internal improvements.</PackageReleaseNotes>
 
   <PropertyGroup Condition=" '$(TargetFramework)' == 'net48' ">
     <SignAssembly>True</SignAssembly>
-    <AssemblyOriginatorKeyFile>C:\Data\Programovanie\Repos\MassiveDynamicProxyGenerator\MassiveDynamicProxyGenerator.snk</AssemblyOriginatorKeyFile>
+    <AssemblyOriginatorKeyFile>..\..\..\MassiveDynamicProxyGenerator.snk</AssemblyOriginatorKeyFile>
   </PropertyGroup>
 
 </Project>

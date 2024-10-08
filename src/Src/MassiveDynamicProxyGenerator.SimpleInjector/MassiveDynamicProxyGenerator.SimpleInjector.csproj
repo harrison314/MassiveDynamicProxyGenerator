@@ -39,4 +39,9 @@ Adding methods for register mock implementations, proxys, instance proxies for r
     </None>
   </ItemGroup>
 
+  <PropertyGroup Condition=" '$(TargetFramework)' == 'net48' ">
+    <SignAssembly>True</SignAssembly>
+    <AssemblyOriginatorKeyFile>..\..\..\MassiveDynamicProxyGenerator.snk</AssemblyOriginatorKeyFile>
+  </PropertyGroup>
+
 </Project>
