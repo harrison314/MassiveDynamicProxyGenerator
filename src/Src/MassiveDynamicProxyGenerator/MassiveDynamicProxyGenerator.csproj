@@ -46,4 +46,9 @@ A few minor internal improvements.</PackageReleaseNotes>
     <PackageReference Include="StyleCop.Analyzers" Version="1.0.2" PrivateAssets="All" />
   </ItemGroup>
 
+  <PropertyGroup Condition=" '$(TargetFramework)' == 'net48' ">
+    <SignAssembly>True</SignAssembly>
+    <AssemblyOriginatorKeyFile>C:\Data\Programovanie\Repos\MassiveDynamicProxyGenerator\MassiveDynamicProxyGenerator.snk</AssemblyOriginatorKeyFile>
+  </PropertyGroup>
+
 </Project>
